@@ -349,7 +349,6 @@ class InventoryStore {
             sku: prod.sku,
             category: prod.category,
             unit: prod.unit,
-            currentStock: prod.stocks[branchId] ?? 0,
             requiredQty: qty,
             unitCost: prod.unitCost,
             estimatedAmount: qty * prod.unitCost

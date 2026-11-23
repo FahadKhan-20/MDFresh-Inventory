@@ -6,7 +6,6 @@ import { showToast } from '../utils/toast.js';
 
 let activeCategoryFilter = 'All'; // 'All', 'Fruits', 'Vegetables'
 let filterOnlyRequired = false;
-let filterOnlyLowStock = false;
 let searchQuery = '';
 
 export function renderDailyStockCheckView() {
@@ -33,11 +32,6 @@ export function renderDailyStockCheckView() {
     if (filterOnlyRequired) {
       const qty = draft[p.id] || 0;
       if (qty <= 0) return false;
-    }
-    // Filter only low stock
-    if (filterOnlyLowStock) {
-      const curStock = p.stocks[currentBranchId] || 0;
-      if (curStock > p.reorderLevel) return false;
     }
     return true;
   });
@@ -129,14 +123,6 @@ export function renderDailyStockCheckView() {
           ${icon('check', 'icon-sm')} Show Only Required
         </button>
 
-        <button 
-          id="btnToggleOnlyLowStock" 
-          class="btn ${filterOnlyLowStock ? 'btn-danger' : 'btn-secondary'} btn-sm"
-          style="font-weight: 700;"
-        >
-          ${icon('alertTriangle', 'icon-sm')} Low Stock Only
-        </button>
-
         <!-- MANUAL ADD PRODUCT BUTTON -->
         <button 
           id="btnOpenAddProductFast" 
@@ -184,25 +170,22 @@ export function renderDailyStockCheckView() {
           <table class="custom-table" id="stockCheckFastTable">
             <thead>
               <tr>
-                <th style="width: 32%;">PRODUCT</th>
-                <th style="width: 15%;">UNIT</th>
-                <th style="width: 22%;">CURRENT STOCK</th>
-                <th style="width: 31%;">REQUIRED TO BUY</th>
+                <th style="width: 48%;">PRODUCT</th>
+                <th style="width: 18%;">UNIT</th>
+                <th style="width: 34%;">REQUIRED TO BUY</th>
               </tr>
             </thead>
             <tbody>
               ${filteredProducts.length === 0 ? `
                 <tr>
-                  <td colspan="4" style="text-align: center; padding: 48px; color: var(--md-text-muted);">
+                  <td colspan="3" style="text-align: center; padding: 48px; color: var(--md-text-muted);">
                     <div style="font-size: 2rem; margin-bottom: 8px;">🔍</div>
                     <div style="font-weight: 700; font-size: 1rem; color: var(--md-text-main);">No matching products found</div>
                     <div style="font-size: 0.82rem; margin-top: 4px;">Try adjusting your search query or reset the filters.</div>
                   </td>
                 </tr>
               ` : filteredProducts.map((p, index) => {
-                const currentStock = p.stocks[currentBranchId] ?? 0;
                 const reqQty = draft[p.id] !== undefined ? draft[p.id] : 0;
-                const isLow = currentStock <= p.reorderLevel;
 
                 return `
                   <tr data-product-id="${p.id}" class="${reqQty > 0 ? 'row-required-highlight' : ''}">
@@ -217,15 +200,6 @@ export function renderDailyStockCheckView() {
                     </td>
                     <td>
                       <span class="pill pill-unit" style="font-weight: 700;">${p.unit}</span>
-                    </td>
-                    <td>
-                      <div style="display: flex; align-items: center; gap: 8px;">
-                        <span style="font-size: 1.15rem; font-weight: 800; color: ${isLow ? 'var(--status-danger-text)' : 'var(--md-text-main)'};">
-                          ${currentStock}
-                        </span>
-                        <span style="font-size: 0.82rem; color: var(--md-text-muted); font-weight: 600;">${p.unit}</span>
-                        ${isLow ? `<span class="pill pill-low" style="padding: 1px 6px; font-size: 0.7rem;">Low</span>` : ''}
-                      </div>
                     </td>
                     <td>
                       <!-- FAST NUMERIC INPUT: User ONLY enters numbers; Unit is automatic! -->
@@ -258,9 +232,7 @@ export function renderDailyStockCheckView() {
     <!-- Mobile Stock Check Cards (Touch Targets & Next button) -->
     <div class="mobile-stock-cards" style="margin-bottom: 90px;">
       ${filteredProducts.map((p, index) => {
-        const currentStock = p.stocks[currentBranchId] ?? 0;
         const reqQty = draft[p.id] !== undefined ? draft[p.id] : 0;
-        const isLow = currentStock <= p.reorderLevel;
 
         return `
           <div class="mobile-stock-card" data-product-id="${p.id}">
@@ -276,14 +248,7 @@ export function renderDailyStockCheckView() {
             </div>
 
             <div class="mobile-card-row">
-              <span class="mobile-card-label">Current Stock</span>
-              <span class="mobile-card-val" style="color: ${isLow ? 'var(--status-danger-text)' : 'inherit'};">
-                ${currentStock} ${p.unit} ${isLow ? '(Low)' : ''}
-              </span>
-            </div>
-
-            <div class="mobile-card-row">
-              <span class="mobile-card-label">Required</span>
+              <span class="mobile-card-label">Required to Buy</span>
               <div class="fast-qty-wrapper ${reqQty > 0 ? 'has-value' : ''}" style="width: 150px;">
                 <input 
                   type="number"
@@ -360,7 +325,7 @@ export function renderDailyStockCheckView() {
                   <span style="font-size: 1.25rem;">${item.category === 'Fruits' ? '🍎' : '🥦'}</span>
                   <div>
                     <div style="font-weight: 800; font-size: 0.92rem; color: var(--md-text-main);">${item.productName}</div>
-                    <div style="font-size: 0.74rem; color: var(--md-text-muted); font-family: monospace;">${item.sku} &bull; Current Stock: ${item.currentStock} ${item.unit}</div>
+                    <div style="font-size: 0.74rem; color: var(--md-text-muted); font-family: monospace;">${item.sku} &bull; ${item.category}</div>
                   </div>
                 </div>
                 <div style="text-align: right;">
@@ -467,19 +432,14 @@ export function renderDailyStockCheckView() {
 
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
               <div>
-                <label style="display:block; font-size: 0.78rem; font-weight: 700; margin-bottom: 4px;">Current Stock (${currentBranch.name})</label>
-                <input type="number" id="fapCurrentStock" min="0" value="0" style="width:100%; padding:9px 12px; border:1px solid var(--md-border); border-radius:var(--radius-md); font-size:0.95rem; font-weight:700; outline:none;" />
+                <label style="display:block; font-size: 0.78rem; font-weight: 700; margin-bottom: 4px;">Est. Unit Rate (₹)</label>
+                <input type="number" id="fapUnitCost" min="1" value="650" style="width:100%; padding:9px 12px; border:1px solid var(--md-border); border-radius:var(--radius-md); font-size:0.95rem; font-weight:700; outline:none;" />
               </div>
 
               <div>
                 <label style="display:block; font-size: 0.78rem; font-weight: 700; margin-bottom: 4px;">Reorder Level</label>
                 <input type="number" id="fapReorderLevel" min="1" value="4" style="width:100%; padding:9px 12px; border:1px solid var(--md-border); border-radius:var(--radius-md); font-size:0.95rem; font-weight:700; outline:none;" />
               </div>
-            </div>
-
-            <div>
-              <label style="display:block; font-size: 0.78rem; font-weight: 700; margin-bottom: 4px;">Est. Unit Rate (₹)</label>
-              <input type="number" id="fapUnitCost" min="1" value="650" style="width:100%; padding:9px 12px; border:1px solid var(--md-border); border-radius:var(--radius-md); font-size:0.95rem; font-weight:700; outline:none;" />
             </div>
           </div>
 
@@ -697,14 +657,6 @@ function filterStockCheckDOM(query) {
   if (btnToggleOnlyRequired) {
     btnToggleOnlyRequired.addEventListener('click', () => {
       filterOnlyRequired = !filterOnlyRequired;
-      store.notify();
-    });
-  }
-
-  const btnToggleOnlyLowStock = document.getElementById('btnToggleOnlyLowStock');
-  if (btnToggleOnlyLowStock) {
-    btnToggleOnlyLowStock.addEventListener('click', () => {
-      filterOnlyLowStock = !filterOnlyLowStock;
       store.notify();
     });
   }
@@ -985,8 +937,8 @@ function filterStockCheckDOM(query) {
       const name = document.getElementById('fapName').value.trim();
       const category = document.getElementById('fapCategory').value;
       const unit = document.getElementById('fapUnit').value;
-      const initialStock = document.getElementById('fapCurrentStock').value;
-      const reorderLevel = document.getElementById('fapReorderLevel').value;
+      const initialStock = 0;
+      const reorderLevel = document.getElementById('fapReorderLevel') ? document.getElementById('fapReorderLevel').value : 4;
       const unitCost = document.getElementById('fapUnitCost').value;
 
       if (!name) return;
