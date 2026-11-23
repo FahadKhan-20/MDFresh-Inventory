@@ -418,7 +418,8 @@ assert(store.activeView === 'receiving', '12.1 Staff can access receiving portal
 assert(store.authModalOpen === false, '12.2 Auth modal is closed for receiving');
 
 // 12.3 Branch incoming orders available
-const incomingASP = store.getBranchIncomingOrder('BR001');
+const testPOId = store.latestDispatchPOId || (store.purchaseOrders[0] ? store.purchaseOrders[0].id : null);
+const incomingASP = store.getBranchIncomingOrder('BR001', testPOId);
 assert(incomingASP.length > 0, `12.3 Incoming items retrieved for Annasandra Palya (count: ${incomingASP.length})`);
 assert(incomingASP[0].orderedQty > 0, '12.4 First item has positive ordered quantity');
 
@@ -432,7 +433,7 @@ testRecvMap[firstItem.productId] = Math.max(0, firstItem.orderedQty - 2);
 // More stock: ordered + 3
 testRecvMap[secondItem.productId] = secondItem.orderedQty + 3;
 
-const recvResult = store.receiveBranchStock('PO-20261003-0001', 'BR001', testRecvMap);
+const recvResult = store.receiveBranchStock(testPOId, 'BR001', testRecvMap);
 assert(recvResult.success === true, '12.5 receiveBranchStock successfully processes receiving');
 assert(recvResult.report.shortageCount >= 1, '12.6 Discrepancy report detects shortage (less stock)');
 assert(recvResult.report.surplusCount >= 1, '12.7 Discrepancy report detects surplus (more stock)');
@@ -443,6 +444,90 @@ assert(store.receivingHistory.length >= 1, '12.9 Receiving record stored in rece
 const grnBlob = generateGoodsReceivingPDF(recvResult.report);
 assert(grnBlob !== undefined, '12.10 Goods Inward PDF generated as Blob');
 assert(grnBlob.type === 'application/pdf', '12.11 Goods Inward PDF blob type is application/pdf');
+
+// -------------------------------------------------------------
+// POINT 13: END-TO-END WORKFLOW: STOCK CHECK PDF DOWNLOAD -> STOCK RECEIVING PORTAL SYNC
+// -------------------------------------------------------------
+console.log('\n\x1b[36m▶ TEST SUITE 13: Daily Stock Check PDF Download to Stock Receiving Portal Sync\x1b[0m');
+
+// 13.1 Simulate user entering daily stock check requirements across multiple branches
+store.updateRequiredQuantity('BR001', 'PRD001', 15); // Annasandra Palya: 15 Apples
+store.updateRequiredQuantity('BR001', 'PRD002', 20); // Annasandra Palya: 20 Tomatoes
+store.updateRequiredQuantity('BR002', 'PRD001', 10); // Kodihalli: 10 Apples
+store.updateRequiredQuantity('BR002', 'PRD003', 25); // Kodihalli: 25 Potatoes
+store.updateRequiredQuantity('BR003', 'PRD004', 18); // LBS Nagar: 18 Onions
+store.updateRequiredQuantity('BR004', 'PRD002', 30); // Basavanagar: 30 Tomatoes
+
+// Verify consolidated demand captured
+const preProcurement = store.getConsolidatedProcurement();
+assert(preProcurement.length >= 4, `13.1 Consolidated procurement contains items with demand (count: ${preProcurement.length})`);
+
+// 13.2 Trigger Daily Stock Check PDF Manifest download & finalization
+const syncPdfData = {
+  date: store.getLiveDateTimeString(new Date(), true),
+  branches: store.branches,
+  consolidatedItems: store.getConsolidatedProcurement(),
+  branchRequirements: store.getAllBranchesRequirements()
+};
+const masterPdfBlob = generateMasterManifestPDF(syncPdfData);
+assert(masterPdfBlob !== undefined && masterPdfBlob.type === 'application/pdf', '13.2 Master manifest PDF successfully generated');
+
+const manifestResult = store.finalizeOrderAndResetForNextDay({ source: 'DAILY_STOCK_CHECK_MASTER_PDF' });
+assert(manifestResult !== null, '13.3 finalizeOrderAndResetForNextDay executed successfully');
+
+// 13.4 Verify newly created dispatch PO in store
+assert(store.latestDispatchPOId !== null, `13.4 latestDispatchPOId is set (got: ${store.latestDispatchPOId})`);
+assert(store.latestDispatchPOId.startsWith('DISPATCH-'), '13.5 latestDispatchPOId has DISPATCH- prefix');
+const latestPO = store.purchaseOrders[0];
+assert(latestPO.id === store.latestDispatchPOId, '13.6 Latest purchase order matches latestDispatchPOId');
+assert(latestPO.source === 'DAILY_STOCK_CHECK_MASTER_PDF', '13.7 Dispatch PO source is DAILY_STOCK_CHECK_MASTER_PDF');
+assert(latestPO.status === 'Incoming Delivery', '13.8 Dispatch PO status is Incoming Delivery');
+
+// 13.5 Verify daily stock check was reset to 0 for next day
+assert(store.isReadyForNextDay === true, '13.9 isReadyForNextDay flag is true');
+assert(store.getBranchStockCheck('BR001')['PRD001'] === 0, '13.10 BR001 PRD001 reset to 0');
+assert(store.getBranchStockCheck('BR002')['PRD003'] === 0, '13.11 BR002 PRD003 reset to 0');
+
+// 13.6 Verify Stock Receiving Portal receives the exact ordered items for each branch
+const br1Incoming = store.getBranchIncomingOrder('BR001');
+const br1Apples = br1Incoming.find(i => i.productId === 'PRD001');
+const br1Tomatoes = br1Incoming.find(i => i.productId === 'PRD002');
+assert(br1Apples && br1Apples.orderedQty === 15, `13.12 BR001 incoming apples orderedQty is 15 (got: ${br1Apples?.orderedQty})`);
+assert(br1Tomatoes && br1Tomatoes.orderedQty === 20, `13.13 BR001 incoming tomatoes orderedQty is 20 (got: ${br1Tomatoes?.orderedQty})`);
+
+const br2Incoming = store.getBranchIncomingOrder('BR002');
+const br2Apples = br2Incoming.find(i => i.productId === 'PRD001');
+const br2Potatoes = br2Incoming.find(i => i.productId === 'PRD003');
+assert(br2Apples && br2Apples.orderedQty === 10, `13.14 BR002 incoming apples orderedQty is 10 (got: ${br2Apples?.orderedQty})`);
+assert(br2Potatoes && br2Potatoes.orderedQty === 25, `13.15 BR002 incoming potatoes orderedQty is 25 (got: ${br2Potatoes?.orderedQty})`);
+
+const br3Incoming = store.getBranchIncomingOrder('BR003');
+const br3Onions = br3Incoming.find(i => i.productId === 'PRD004');
+assert(br3Onions && br3Onions.orderedQty === 18, `13.16 BR003 incoming onions orderedQty is 18 (got: ${br3Onions?.orderedQty})`);
+
+const br4Incoming = store.getBranchIncomingOrder('BR004');
+const br4Tomatoes = br4Incoming.find(i => i.productId === 'PRD002');
+assert(br4Tomatoes && br4Tomatoes.orderedQty === 30, `13.17 BR004 incoming tomatoes orderedQty is 30 (got: ${br4Tomatoes?.orderedQty})`);
+
+// 13.7 Verify Dockside Receiving with Variances (Arriving truck delivers more / less)
+// At Annasandra Palya (BR001): Apples delivered 13 (-2 shortage), Tomatoes delivered 24 (+4 surplus)
+const initialBR1AppleStock = store.products.find(p => p.id === 'PRD001').stocks['BR001'] || 0;
+const syncRecvResult = store.receiveBranchStock(store.latestDispatchPOId, 'BR001', {
+  PRD001: 13,
+  PRD002: 24
+});
+assert(syncRecvResult.success === true, '13.18 Dockside unloading verification completed successfully');
+assert(syncRecvResult.report.shortageCount === 1, '13.19 Shortage of apples detected');
+assert(syncRecvResult.report.surplusCount === 1, '13.20 Surplus of tomatoes detected');
+assert(syncRecvResult.report.status === 'VARIANCE (MORE & LESS)', '13.21 Report status flagged as VARIANCE (MORE & LESS)');
+
+// 13.8 Verify Physical stock credited accurately
+const finalBR1AppleStock = store.products.find(p => p.id === 'PRD001').stocks['BR001'];
+assert(finalBR1AppleStock === initialBR1AppleStock + 13, `13.22 BR001 physical stock credited with 13 units (from ${initialBR1AppleStock} to ${finalBR1AppleStock})`);
+
+// 13.9 Verify Goods Inward Note PDF generated from synced receiving
+const syncGrnBlob = generateGoodsReceivingPDF(syncRecvResult.report);
+assert(syncGrnBlob !== undefined && syncGrnBlob.type === 'application/pdf', '13.23 GRN PDF generated for synced dispatch');
 
 // -------------------------------------------------------------
 // SUMMARY REPORT

@@ -107,6 +107,7 @@ class InventoryStore {
     this.finalizedOrders = [];
     this.isReadyForNextDay = false;
     this.lastFinalizedTimestamp = null;
+    this.latestDispatchPOId = null;
 
     // Morning Stock Receiving Drafts per branch & History
     this.receivingDrafts = {
@@ -460,6 +461,56 @@ class InventoryStore {
     }
     if (totalQty > 0 || consolidated.length > 0) {
       this.finalizedOrders.unshift(manifestRecord);
+
+      // Create Incoming Delivery Dispatch PO for Dockside Receiving Portal
+      const dispatchPOId = `DISPATCH-${todayNum}-${refNum}`;
+      const dispatchPO = {
+        id: dispatchPOId,
+        poNumber: `DSP-${todayNum}-${refNum}`,
+        supplierName: 'APMC Central Mandi Delivery',
+        date: dateStr,
+        time: timeStr,
+        timestamp: this.getLiveDateTimeString(now, true),
+        source: options.source || 'DAILY_STOCK_CHECK_PDF',
+        manifestReference: refCode,
+        totalAmount: totalCost,
+        totalUnits: totalQty,
+        status: 'Incoming Delivery',
+        timeline: [
+          { step: 'Stock Check', status: 'completed', timestamp: timeStr },
+          { step: 'PDF Exported & Finalized', status: 'completed', timestamp: 'Just now' },
+          { step: 'APMC Procured', status: 'completed', timestamp: 'Ready' },
+          { step: 'In Transit to Branches', status: 'active', timestamp: 'Arriving Morning' },
+          { step: 'Dockside Receiving', status: 'pending', timestamp: 'Morning Unloading' }
+        ],
+        items: consolidated.map(item => ({
+          productId: item.product.id,
+          productName: item.product.name,
+          sku: item.product.sku,
+          category: item.product.category,
+          unit: item.unit,
+          rate: item.unitCost,
+          totalQty: item.totalQty,
+          amount: item.totalEstCost,
+          allocations: item.branches.map(b => ({
+            branchId: b.branchId,
+            branch: b.branchName,
+            qty: b.qty,
+            received: b.qty
+          }))
+        }))
+      };
+
+      this.purchaseOrders.unshift(dispatchPO);
+      this.latestDispatchPOId = dispatchPOId;
+
+      // Clear receiving drafts so staff starts with fresh delivery counts matching the PDF dispatch
+      this.receivingDrafts = {
+        BR001: {},
+        BR002: {},
+        BR003: {},
+        BR004: {}
+      };
     }
 
     // 1. Mark existing active requirements as FINALIZED so they don't leak into tomorrow
@@ -519,8 +570,7 @@ class InventoryStore {
       let totalQty = 0;
 
       this.branches.forEach(b => {
-        const draft = this.getBranchStockCheck(b.id);
-        const qty = draft[prod.id] || 0;
+        const qty = this.getBranchRequiredQty(b.id, prod.id);
         if (qty > 0) {
           branchReqs.push({
             branchId: b.id,
@@ -603,8 +653,9 @@ class InventoryStore {
     const branch = this.branches.find(b => b.id === branchId) || this.branches[0];
     let items = [];
 
-    // Find PO or delivery source
-    const po = (poId && this.purchaseOrders.find(p => p.id === poId)) || this.purchaseOrders[0];
+    // Find PO or delivery source: prioritize passed poId, or latestDispatchPOId, or top PO
+    const targetPOId = poId || this.latestDispatchPOId || (this.purchaseOrders[0] ? this.purchaseOrders[0].id : null);
+    const po = targetPOId ? this.purchaseOrders.find(p => p.id === targetPOId) : this.purchaseOrders[0];
     if (po && po.items && po.items.length > 0) {
       po.items.forEach(it => {
         const alloc = (it.allocations || []).find(a => a.branchId === branchId || a.branch === branch.name || (a.branch && a.branch.includes(branch.code)));
@@ -633,24 +684,26 @@ class InventoryStore {
       const branchReqs = manifest.branchBreakdown ? manifest.branchBreakdown[branchId] : [];
       (branchReqs || []).forEach(it => {
         const prod = this.products.find(p => p.id === it.productId || p.name === it.productName);
-        items.push({
-          productId: it.productId || (prod ? prod.id : `PRD-${Date.now()}`),
-          productName: it.productName,
-          sku: it.sku || (prod ? prod.sku : ''),
-          image: prod ? prod.image : '📦',
-          category: prod ? prod.category : 'General',
-          unit: it.unit,
-          orderedQty: it.qty,
-          receivedQty: (this.receivingDrafts[branchId] && this.receivingDrafts[branchId][it.productId] !== undefined)
-            ? this.receivingDrafts[branchId][it.productId]
-            : it.qty,
-          unitCost: prod ? prod.unitCost : 0
-        });
+        if (it.qty > 0) {
+          items.push({
+            productId: it.productId || (prod ? prod.id : `PRD-${Date.now()}`),
+            productName: it.productName,
+            sku: it.sku || (prod ? prod.sku : ''),
+            image: prod ? prod.image : '📦',
+            category: prod ? prod.category : 'General',
+            unit: it.unit,
+            orderedQty: it.qty,
+            receivedQty: (this.receivingDrafts[branchId] && this.receivingDrafts[branchId][it.productId] !== undefined)
+              ? this.receivingDrafts[branchId][it.productId]
+              : it.qty,
+            unitCost: prod ? prod.unitCost : 0
+          });
+        }
       });
     }
 
-    // If still empty, provide realistic morning dispatch items for this branch
-    if (items.length === 0) {
+    // If still empty and no POs exist, provide fallback items for demo purposes
+    if (items.length === 0 && this.purchaseOrders.length === 0) {
       const defaultProducts = this.products.slice(0, 10);
       items = defaultProducts.map((p, idx) => {
         const ord = [8, 12, 6, 15, 10, 5, 20, 7, 9, 14][idx % 10];
@@ -758,7 +811,8 @@ class InventoryStore {
     this.receivingHistory.unshift(report);
 
     // Also update PO allocations if matching PO exists
-    const po = this.purchaseOrders.find(p => p.id === poId);
+    const targetPOId = poId || this.latestDispatchPOId || (this.purchaseOrders[0] ? this.purchaseOrders[0].id : null);
+    const po = targetPOId ? this.purchaseOrders.find(p => p.id === targetPOId) : null;
     if (po && po.items) {
       po.items.forEach(it => {
         const alloc = (it.allocations || []).find(a => a.branchId === branchId || a.branch === branch.name);
@@ -893,16 +947,16 @@ class InventoryStore {
   // Get requirement for a specific branch & product
   getBranchRequiredQty(branchId, productId) {
     const draft = this.getBranchStockCheck(branchId);
-    if (draft[productId] !== undefined) {
+    if (draft[productId] !== undefined && draft[productId] > 0) {
       return draft[productId];
     }
     // Also check submitted active requirements
     const reqs = this.requirements.filter(r => r.branchId === branchId && (r.status === 'PENDING APPROVAL' || r.status === 'APPROVED'));
     for (const r of reqs) {
       const it = r.items.find(i => i.productId === productId);
-      if (it && it.qty !== undefined) return it.qty;
+      if (it && it.qty !== undefined && it.qty > 0) return it.qty;
     }
-    return 0;
+    return (draft[productId] !== undefined) ? draft[productId] : 0;
   }
 
   // Set requirement directly for any branch in matrix

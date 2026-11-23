@@ -91,6 +91,28 @@ export function renderDailyStockCheckView() {
       </div>
     </div>
 
+    <!-- Next Day Ready & Stock Receiving Sync Banner -->
+    ${store.isReadyForNextDay ? `
+      <div style="background: linear-gradient(135deg, #ECFDF5 0%, #E6F7EF 100%); border: 1.5px solid #10B981; border-radius: var(--radius-md); padding: 12px 18px; margin-bottom: 16px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; box-shadow: 0 2px 6px rgba(16, 185, 129, 0.08);">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <div style="width: 36px; height: 36px; border-radius: 50%; background: #0D8244; color: white; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; font-weight: 800; flex-shrink: 0;">✓</div>
+          <div>
+            <div style="font-weight: 800; font-size: 0.95rem; color: #064E3B;">
+              Daily Order Finalized &amp; PDF Exported — System Reset to 0 for Tomorrow
+            </div>
+            <div style="font-size: 0.8rem; color: #047857; margin-top: 2px;">
+              Incoming delivery dispatch updated in the <strong>Stock Receiving Portal</strong> for morning dockside unloading.
+            </div>
+          </div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <button class="btn btn-primary btn-sm" id="btnGoToReceivingFromStockCheck" style="font-weight: 800; background: #0D8244;">
+            🚚 Open Stock Receiving Portal →
+          </button>
+        </div>
+      </div>
+    ` : ''}
+
     <!-- Filters & Action Bar -->
     <div class="filter-bar">
       <!-- Search Input -->
@@ -476,7 +498,7 @@ export function renderDailyStockCheckView() {
           <div style="background: #EBF8F1; border: 1.5px solid #A7E0BE; border-radius: var(--radius-md); padding: 10px 14px; margin-bottom: 16px; display: flex; align-items: center; gap: 10px;">
             <span style="font-size: 1.25rem;">✨</span>
             <div style="font-size: 0.82rem; color: #064E3B; font-weight: 600;">
-              <strong>Automatic Next-Day Preparation:</strong> Downloading any manifest finalizes today's procurement list and automatically resets every product requirement to <strong>0</strong> across all branches, leaving the system clean and ready for tomorrow morning.
+              <strong>Automatic Next-Day Preparation &amp; Receiving Portal Sync:</strong> Downloading any manifest finalizes today's procurement list, updates the <strong>Stock Receiving Portal</strong> with the morning incoming order for each branch, and resets requirements to <strong>0</strong> across all branches.
             </div>
           </div>
 
@@ -889,6 +911,13 @@ function filterStockCheckDOM(query) {
     });
   }
 
+  const btnGoReceiving = document.getElementById('btnGoToReceivingFromStockCheck');
+  if (btnGoReceiving) {
+    btnGoReceiving.addEventListener('click', () => {
+      store.setView('receiving');
+    });
+  }
+
   const btnStickyGoMatrix = document.getElementById('btnStickyGoToMatrix');
   if (btnStickyGoMatrix) {
     btnStickyGoMatrix.addEventListener('click', () => {
@@ -1004,7 +1033,7 @@ function filterStockCheckDOM(query) {
       downloadBlob(blob, `MD_Fresh_Master_Manifest_${getFileDate()}.pdf`);
       store.finalizeOrderAndResetForNextDay({ source: 'DAILY_STOCK_CHECK_MASTER_PDF' });
       if (pdfModal) pdfModal.classList.remove('open');
-      showToast('Master Manifest PDF downloaded! All products have been reset to 0 for next day.', 'success');
+      showToast('Master Manifest PDF downloaded! Incoming dispatch updated in Stock Receiving Portal & reset for tomorrow.', 'success');
     });
   }
 
@@ -1017,7 +1046,7 @@ function filterStockCheckDOM(query) {
       downloadBlob(blob, `MD_Fresh_Combined_Total_${getFileDate()}.pdf`);
       store.finalizeOrderAndResetForNextDay({ source: 'DAILY_STOCK_CHECK_COMBINED_PDF' });
       if (pdfModal) pdfModal.classList.remove('open');
-      showToast('Combined Wholesale Buyer PDF downloaded! All products reset to 0 for next day.', 'success');
+      showToast('Combined Wholesale Buyer PDF downloaded! Incoming dispatch updated in Stock Receiving Portal & reset for tomorrow.', 'success');
     });
   }
 
@@ -1030,7 +1059,7 @@ function filterStockCheckDOM(query) {
       downloadBlob(blob, `MD_Fresh_Branch_Headlined_${getFileDate()}.pdf`);
       store.finalizeOrderAndResetForNextDay({ source: 'DAILY_STOCK_CHECK_BRANCH_PDF' });
       if (pdfModal) pdfModal.classList.remove('open');
-      showToast('Branch Dispatch List PDF downloaded! All products reset to 0 for next day.', 'success');
+      showToast('Branch Dispatch List PDF downloaded! Incoming dispatch updated in Stock Receiving Portal & reset for tomorrow.', 'success');
     });
   }
 }

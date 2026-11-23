@@ -7,6 +7,7 @@ import { showToast } from '../utils/toast.js';
 
 let selectedBranchId = null;
 let selectedPOId = null;
+let lastKnownDispatchPOId = null;
 let extraItemsMap = {}; // { [branchId]: [ { productId, productName, sku, image, category, unit, unitCost } ] }
 
 export function renderReceivingView() {
@@ -15,8 +16,12 @@ export function renderReceivingView() {
 
   const branch = store.branches.find(b => b.id === currentBranchId) || store.branches[0];
 
-  // Active delivery/PO
+  // Active delivery/PO: Automatically track newly generated dispatch POs from daily stock check PDF
   const poList = store.purchaseOrders;
+  if (!selectedPOId || (store.latestDispatchPOId && store.latestDispatchPOId !== lastKnownDispatchPOId)) {
+    selectedPOId = store.latestDispatchPOId || (poList[0] ? poList[0].id : null);
+    lastKnownDispatchPOId = store.latestDispatchPOId;
+  }
   const currentPO = (selectedPOId && poList.find(p => p.id === selectedPOId)) || poList[0];
   selectedPOId = currentPO ? currentPO.id : null;
 
@@ -124,6 +129,31 @@ export function renderReceivingView() {
       }).join('')}
     </div>
 
+    <!-- Synced Delivery Dispatch Banner -->
+    ${currentPO && (currentPO.source?.includes('DAILY_STOCK_CHECK') || currentPO.manifestReference) ? `
+      <div style="background: linear-gradient(135deg, #ECFDF5 0%, #E6F7EF 100%); border: 1.5px solid #10B981; border-radius: var(--radius-md); padding: 12px 18px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; box-shadow: 0 2px 6px rgba(16, 185, 129, 0.08);">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <div style="width: 38px; height: 38px; background: #0D8244; color: white; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.3rem;">
+            🚛
+          </div>
+          <div>
+            <div style="font-size: 0.94rem; font-weight: 800; color: #064E3B; display: flex; align-items: center; gap: 8px;">
+              <span>Morning Mandi Dispatch Synced from Daily Stock Check</span>
+              <span class="pill" style="background: #0D8244; color: white; font-size: 0.7rem; font-weight: 800; padding: 2px 8px;">ACTIVE DISPATCH</span>
+            </div>
+            <div style="font-size: 0.78rem; color: #047857; margin-top: 2px;">
+              Manifest Ref: <strong>${currentPO.manifestReference || currentPO.id}</strong> &bull; Generated: ${currentPO.date} at ${currentPO.time} &bull; Exact branch requirements loaded ready for dock unloading.
+            </div>
+          </div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <span class="pill pill-healthy" style="font-weight: 800; font-size: 0.8rem; padding: 5px 12px;">
+            ✓ Stock Check Synced
+          </span>
+        </div>
+      </div>
+    ` : ''}
+
     <!-- Delivery Source Bar -->
     <div style="background: white; border: 1px solid var(--md-border); border-radius: var(--radius-md); padding: 14px 18px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;">
       <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
@@ -131,7 +161,7 @@ export function renderReceivingView() {
         <select id="receivingDispatchSelect" style="padding: 6px 12px; border: 1.5px solid var(--md-border-strong); border-radius: var(--radius-sm); font-family: monospace; font-weight: 800; font-size: 0.88rem; color: var(--md-primary); outline: none;">
           ${poList.map(p => `
             <option value="${p.id}" ${p.id === selectedPOId ? 'selected' : ''}>
-              ${p.id} &bull; ${p.supplierName} (${p.date})
+              ${p.id} &bull; ${p.supplierName} (${p.date})${p.source?.includes('DAILY_STOCK_CHECK') ? ' [Daily Stock Check Manifest]' : ''}
             </option>
           `).join('')}
         </select>
@@ -243,7 +273,19 @@ export function renderReceivingView() {
               </tr>
             </thead>
             <tbody>
-              ${receivingRows.map((row, idx) => {
+              ${receivingRows.length === 0 ? `
+                <tr>
+                  <td colspan="5" style="text-align: center; padding: 48px 20px;">
+                    <div style="font-size: 2.2rem; margin-bottom: 8px;">📦</div>
+                    <div style="font-weight: 800; font-size: 1.05rem; color: var(--md-secondary-dark);">
+                      No Scheduled Deliveries for ${branch.name} in this Dispatch
+                    </div>
+                    <div style="font-size: 0.85rem; color: var(--md-text-muted); margin-top: 4px;">
+                      0 crates were ordered for ${branch.name} in this Daily Stock Check manifest.
+                    </div>
+                  </td>
+                </tr>
+              ` : receivingRows.map((row, idx) => {
                 let diffBadge = '';
                 if (row.difference < 0) {
                   diffBadge = `
@@ -543,7 +585,7 @@ export function setupReceivingEvents() {
 
   // 6. Direct Input Changes
   document.querySelectorAll('.receiving-stepper-input').forEach(input => {
-    input.addEventListener('input', (e) => {
+    input.addEventListener('change', (e) => {
       const pId = e.currentTarget.getAttribute('data-product-id');
       const val = Math.max(0, parseInt(e.currentTarget.value, 10) || 0);
       if (!store.receivingDrafts[currentBranchId]) store.receivingDrafts[currentBranchId] = {};
