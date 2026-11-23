@@ -356,6 +356,57 @@ views.forEach((v, i) => {
 });
 
 // -------------------------------------------------------------
+// POINT 11: FINALIZE ORDER, PDF DOWNLOAD & NEXT-DAY RESET TO 0
+// -------------------------------------------------------------
+console.log('\n\x1b[36m▶ TEST SUITE 11: Finalize Order, PDF Download & Next-Day Reset to 0 Workflow\x1b[0m');
+
+// Verify active demand exists before finalize
+const demandBefore = store.getConsolidatedProcurement();
+assert(demandBefore.length > 0, '11.1 Active product requirements exist before finalization');
+
+// Execute finalize and reset for next day
+const manifestSnapshot = store.finalizeOrderAndResetForNextDay({ source: 'BACKTEST_VERIFICATION' });
+
+assert(manifestSnapshot !== null, '11.2 finalizeOrderAndResetForNextDay creates manifest snapshot');
+assert(manifestSnapshot.totalUnits > 0, '11.3 Snapshot captured historical order volume');
+assert(store.finalizedOrders.length >= 1, '11.4 Manifest record stored in finalizedOrders history');
+
+// Verify every product across every branch is now 0
+const allBranchesReqsAfter = store.getAllBranchesRequirements();
+let remainingBranchUnits = 0;
+store.branches.forEach(b => {
+  remainingBranchUnits += (allBranchesReqsAfter[b.id] || []).reduce((sum, item) => sum + item.qty, 0);
+});
+assert(remainingBranchUnits === 0, '11.5 All branch requirement quantities reset to 0 in allBranchesRequirements');
+
+// Verify consolidated procurement is empty (0 demand)
+const consolidatedAfter = store.getConsolidatedProcurement();
+assert(consolidatedAfter.length === 0, '11.6 Consolidated procurement list has 0 pending demand items');
+
+// Verify combined matrix returns 0 for all products
+const matrixAfter = store.getCombinedRequirementsMatrix(false);
+const totalMatrixUnits = matrixAfter.reduce((sum, row) => sum + row.totalQty, 0);
+assert(totalMatrixUnits === 0, `11.7 Every product totalQty across matrix is strictly 0 (got: ${totalMatrixUnits})`);
+
+// Verify individual branch draft inputs are 0
+let nonZeroDraftCount = 0;
+store.branches.forEach(b => {
+  const d = store.getBranchStockCheck(b.id);
+  Object.values(d).forEach(qty => {
+    if (qty > 0) nonZeroDraftCount++;
+  });
+});
+assert(nonZeroDraftCount === 0, '11.8 All branch draft input inputs are reset to 0');
+
+// Verify active status flag
+assert(store.isReadyForNextDay === true, '11.9 isReadyForNextDay flag is true');
+
+// Verify starting next day's stock check
+store.updateRequiredQuantity('BR001', 'PRD001', 12);
+assert(store.isReadyForNextDay === false, '11.10 Entering new stock check count sets isReadyForNextDay back to false');
+assert(store.getBranchStockCheck('BR001')['PRD001'] === 12, '11.11 Next day quantity (12) successfully accepted');
+
+// -------------------------------------------------------------
 // SUMMARY REPORT
 // -------------------------------------------------------------
 console.log('\n============================================================');

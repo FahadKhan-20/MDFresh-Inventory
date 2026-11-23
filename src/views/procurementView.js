@@ -2,6 +2,7 @@
 import { store } from '../utils/store.js';
 import { icon } from '../utils/icons.js';
 import { generateMasterManifestPDF, downloadBlob } from '../utils/pdfGenerator.js';
+import { showToast } from '../utils/toast.js';
 
 let isConsolidatedMode = false;
 
@@ -246,14 +247,19 @@ export function setupProcurementEvents() {
   const btnDownloadPdf = document.getElementById('btnDownloadProcurementPdf');
   if (btnDownloadPdf) {
     btnDownloadPdf.addEventListener('click', () => {
+      const liveDate = store.getLiveDateString();
+      const liveTimestamp = store.getLiveDateTimeString(new Date(), true);
       const data = {
-        date: '02 Oct 2026',
+        date: liveTimestamp,
         branches: store.branches,
         consolidatedItems: store.getConsolidatedProcurement(),
         branchRequirements: store.getAllBranchesRequirements()
       };
       const blob = generateMasterManifestPDF(data);
-      downloadBlob(blob, 'MD_Fresh_Master_Manifest_02Oct2026.pdf');
+      const filenameDate = liveDate.replace(/ /g, '_');
+      downloadBlob(blob, `MD_Fresh_Master_Manifest_${filenameDate}.pdf`);
+      store.finalizeOrderAndResetForNextDay({ source: 'PROCUREMENT_PDF_EXPORT' });
+      showToast('Procurement Manifest PDF downloaded! All products have been reset to 0 for next day.', 'success');
     });
   }
 
@@ -281,8 +287,10 @@ export function setupProcurementEvents() {
     btnCreateUnifiedPO.addEventListener('click', () => {
       const items = store.getConsolidatedProcurement();
       const newPO = store.createPurchaseOrderFromConsolidated(items, 'SUP001');
+      store.finalizeOrderAndResetForNextDay({ source: 'PROCUREMENT_PO_CREATED' });
       if (newPoReferenceId) newPoReferenceId.textContent = newPO.id;
       if (poBackdrop) poBackdrop.classList.add('open');
+      showToast('Consolidated PO created! All product requirements reset to 0 for tomorrow.', 'success');
     });
   }
 

@@ -103,6 +103,11 @@ class InventoryStore {
       BR004: { PRD001: 2, PRD002: 3, PRD003: 4, PRD004: 5, PRD005: 6, PRD006: 7, PRD007: 1, PRD008: 2, PRD009: 3, PRD010: 4, PRD013: 7, PRD017: 4, PRD021: 1, PRD022: 5, PRD023: 2, PRD025: 6, PRD027: 3, PRD028: 7, PRD031: 4, PRD043: 1, PRD045: 5, PRD070: 2, PRD071: 6, PRD076: 3, PRD077: 7, PRD086: 4, PRD088: 1, PRD114: 5, PRD183: 2 }
     };
 
+    // Finalized orders archive & next-day state
+    this.finalizedOrders = [];
+    this.isReadyForNextDay = false;
+    this.lastFinalizedTimestamp = null;
+
     // Live Real-Time Date & Time Tracking
     this.matrixLastRecorded = new Date();
     this.branchLastRecorded = {
@@ -323,6 +328,9 @@ class InventoryStore {
     this.stockCheckDrafts[branchId][productId] = val;
     this.matrixLastRecorded = new Date();
     this.branchLastRecorded[branchId] = new Date();
+    if (val > 0) {
+      this.isReadyForNextDay = false;
+    }
     if (shouldNotify) {
       this.notify();
     }
@@ -386,10 +394,17 @@ class InventoryStore {
     this.branchLastRecorded[branchId] = now;
     this.requirements.unshift(newReq);
 
+    // Reset this branch's active input drafts to 0 so inputs become clean 0
+    if (this.stockCheckDrafts[branchId]) {
+      this.products.forEach(p => {
+        this.stockCheckDrafts[branchId][p.id] = 0;
+      });
+    }
+
     this.notifications.unshift({
       id: `NOTIF-${Date.now()}`,
       title: 'Stock Requirement Submitted',
-      message: `${reference} recorded for ${branch.name} (${items.length} items at ${newReq.time}).`,
+      message: `${reference} recorded for ${branch.name} (${items.length} items at ${newReq.time}). Draft inputs reset to 0 for next count.`,
       type: 'info',
       time: 'Just now',
       unread: true,
@@ -398,6 +413,87 @@ class InventoryStore {
 
     this.notify();
     return newReq;
+  }
+
+  // Finalizes the current day's order manifest, archives it, and resets ALL products to 0 across all 4 branches
+  finalizeOrderAndResetForNextDay(options = {}) {
+    const now = new Date();
+    const dateStr = this.getLiveDateString(now);
+    const timeStr = this.getLiveTimeString(now, true);
+
+    // Snapshot consolidated procurement demand before reset
+    const consolidated = this.getConsolidatedProcurement();
+    const allBranchesReqs = this.getAllBranchesRequirements();
+    const totalQty = consolidated.reduce((sum, item) => sum + item.totalQty, 0);
+    const totalCost = consolidated.reduce((sum, item) => sum + item.totalEstCost, 0);
+
+    const refNum = (this.finalizedOrders.length + 1).toString().padStart(3, '0');
+    const todayNum = `${now.getFullYear()}${(now.getMonth() + 1).toString().padStart(2, '0')}${now.getDate().toString().padStart(2, '0')}`;
+    const refCode = `MF-FINAL-${todayNum}-${refNum}`;
+
+    const manifestRecord = {
+      id: `MANIFEST-${Date.now()}`,
+      reference: refCode,
+      date: dateStr,
+      time: timeStr,
+      timestamp: this.getLiveDateTimeString(now, true),
+      finalizedBy: this.currentUser?.name || 'Authorized Manager',
+      totalProducts: consolidated.length,
+      totalUnits: totalQty,
+      totalEstCost: totalCost,
+      source: options.source || 'ORDER_FINALIZATION',
+      branches: this.branches.map(b => b.name),
+      items: consolidated,
+      branchBreakdown: allBranchesReqs
+    };
+
+    if (!this.finalizedOrders) {
+      this.finalizedOrders = [];
+    }
+    if (totalQty > 0 || consolidated.length > 0) {
+      this.finalizedOrders.unshift(manifestRecord);
+    }
+
+    // 1. Mark existing active requirements as FINALIZED so they don't leak into tomorrow
+    this.requirements.forEach(req => {
+      if (req.status !== 'REJECTED') {
+        req.status = 'FINALIZED';
+      }
+    });
+
+    // 2. Reset EVERY product in EVERY branch draft to 0
+    this.branches.forEach(b => {
+      if (!this.stockCheckDrafts[b.id]) {
+        this.stockCheckDrafts[b.id] = {};
+      }
+      this.products.forEach(p => {
+        this.stockCheckDrafts[b.id][p.id] = 0;
+      });
+      this.branchLastRecorded[b.id] = now;
+    });
+
+    // 3. Update next-day readiness state
+    this.isReadyForNextDay = true;
+    this.lastFinalizedTimestamp = now;
+    this.matrixLastRecorded = now;
+
+    // 4. Add notification to drawer
+    this.notifications.unshift({
+      id: `NOTIF-${Date.now()}`,
+      title: 'Order Finalized & System Reset',
+      message: `Daily order (${totalQty} units across ${consolidated.length} products) finalized & PDF exported. Every product demand reset to 0. Ready for next day!`,
+      type: 'success',
+      time: 'Just now',
+      unread: true
+    });
+
+    this.notify();
+    return manifestRecord;
+  }
+
+  // Alias for manual reset
+  resetAllRequirementsToZero() {
+    return this.finalizeOrderAndResetForNextDay({ source: 'MANUAL_RESET' });
   }
 
   updateRequirementStatus(reqId, newStatus) {
@@ -598,8 +694,8 @@ class InventoryStore {
         }
       }
 
-      // Check any submitted requirement manifests
-      this.requirements.filter(r => r.branchId === branch.id).forEach(req => {
+      // Check any submitted active requirement manifests
+      this.requirements.filter(r => r.branchId === branch.id && (r.status === 'PENDING APPROVAL' || r.status === 'APPROVED')).forEach(req => {
         req.items.forEach(it => {
           if (!branchItems.some(bi => bi.productName === it.productName)) {
             branchItems.push({
@@ -624,8 +720,8 @@ class InventoryStore {
     if (draft[productId] !== undefined) {
       return draft[productId];
     }
-    // Also check submitted requirements
-    const reqs = this.requirements.filter(r => r.branchId === branchId && r.status !== 'REJECTED');
+    // Also check submitted active requirements
+    const reqs = this.requirements.filter(r => r.branchId === branchId && (r.status === 'PENDING APPROVAL' || r.status === 'APPROVED'));
     for (const r of reqs) {
       const it = r.items.find(i => i.productId === productId);
       if (it && it.qty !== undefined) return it.qty;
@@ -640,6 +736,9 @@ class InventoryStore {
     }
     const parsed = Math.max(0, parseInt(qty, 10) || 0);
     this.stockCheckDrafts[branchId][productId] = parsed;
+    if (parsed > 0) {
+      this.isReadyForNextDay = false;
+    }
     this.notify();
   }
 

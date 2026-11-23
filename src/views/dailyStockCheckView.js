@@ -2,6 +2,7 @@
 import { store } from '../utils/store.js';
 import { icon } from '../utils/icons.js';
 import { generateMasterManifestPDF, generateCombinedListOnlyPDF, generateBranchHeadlinedPDF, downloadBlob } from '../utils/pdfGenerator.js';
+import { showToast } from '../utils/toast.js';
 
 let activeCategoryFilter = 'All'; // 'All', 'Fruits', 'Vegetables'
 let filterOnlyRequired = false;
@@ -511,6 +512,14 @@ export function renderDailyStockCheckView() {
         </div>
 
         <div class="modal-body" style="padding: 20px 24px;">
+          <!-- Automatic Reset Notice -->
+          <div style="background: #EBF8F1; border: 1.5px solid #A7E0BE; border-radius: var(--radius-md); padding: 10px 14px; margin-bottom: 16px; display: flex; align-items: center; gap: 10px;">
+            <span style="font-size: 1.25rem;">✨</span>
+            <div style="font-size: 0.82rem; color: #064E3B; font-weight: 600;">
+              <strong>Automatic Next-Day Preparation:</strong> Downloading any manifest finalizes today's procurement list and automatically resets every product requirement to <strong>0</strong> across all branches, leaving the system clean and ready for tomorrow morning.
+            </div>
+          </div>
+
           <!-- 3 Download Action Cards -->
           <div style="display: grid; grid-template-columns: 1fr; gap: 12px; margin-bottom: 20px;">
             
@@ -1041,6 +1050,9 @@ function filterStockCheckDOM(query) {
       const data = getPdfData();
       const blob = generateMasterManifestPDF(data);
       downloadBlob(blob, `MD_Fresh_Master_Manifest_${getFileDate()}.pdf`);
+      store.finalizeOrderAndResetForNextDay({ source: 'DAILY_STOCK_CHECK_MASTER_PDF' });
+      if (pdfModal) pdfModal.classList.remove('open');
+      showToast('Master Manifest PDF downloaded! All products have been reset to 0 for next day.', 'success');
     });
   }
 
@@ -1051,6 +1063,9 @@ function filterStockCheckDOM(query) {
       const data = getPdfData();
       const blob = generateCombinedListOnlyPDF(data);
       downloadBlob(blob, `MD_Fresh_Combined_Total_${getFileDate()}.pdf`);
+      store.finalizeOrderAndResetForNextDay({ source: 'DAILY_STOCK_CHECK_COMBINED_PDF' });
+      if (pdfModal) pdfModal.classList.remove('open');
+      showToast('Combined Wholesale Buyer PDF downloaded! All products reset to 0 for next day.', 'success');
     });
   }
 
@@ -1061,6 +1076,9 @@ function filterStockCheckDOM(query) {
       const data = getPdfData();
       const blob = generateBranchHeadlinedPDF(data);
       downloadBlob(blob, `MD_Fresh_Branch_Headlined_${getFileDate()}.pdf`);
+      store.finalizeOrderAndResetForNextDay({ source: 'DAILY_STOCK_CHECK_BRANCH_PDF' });
+      if (pdfModal) pdfModal.classList.remove('open');
+      showToast('Branch Dispatch List PDF downloaded! All products reset to 0 for next day.', 'success');
     });
   }
 }

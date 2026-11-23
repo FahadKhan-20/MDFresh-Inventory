@@ -3,6 +3,7 @@
 import { store } from '../utils/store.js';
 import { icon } from '../utils/icons.js';
 import { generateMasterManifestPDF, downloadBlob } from '../utils/pdfGenerator.js';
+import { showToast } from '../utils/toast.js';
 
 let reqViewMode = 'matrix'; // 'matrix' (default tabular form) or 'cards'
 let matrixMobileLayout = 'cards'; // 'cards' (mobile cards grid) or 'table' (swipeable table)
@@ -85,6 +86,9 @@ export function renderRequirementsView() {
 
       <!-- Action Buttons & PDF Download (Optional) -->
       <div class="req-action-buttons">
+        <button class="btn req-btn-action" id="btnFinalizeAndResetForNextDay" style="font-weight: 800; background: #0D8244; color: white; border: none; box-shadow: var(--shadow-sm);" title="Finalize today's order, export PDF, and reset all product quantities to 0 for next day">
+          ✨ Finalize & Reset for Next Day
+        </button>
         <button class="btn btn-secondary req-btn-action" id="btnDownloadReqPdf" style="font-weight: 800; border: 1.5px solid #B7E4C4; background: #E8F6ED; color: #0D8244;" title="Download local PDF manifest for phone or PC">
           📥 Download PDF (Optional)
         </button>
@@ -223,6 +227,26 @@ export function renderRequirementsView() {
 
     <!-- MAIN VIEW CONTENT -->
     ${reqViewMode === 'matrix' ? `
+      <!-- Next-Day Ready Status Banner -->
+      ${(store.isReadyForNextDay || totalGrandUnits === 0) ? `
+        <div class="next-day-ready-banner" style="background: linear-gradient(135deg, #EBF8F1, #E0F2E9); border: 1.5px solid #A7E0BE; border-radius: var(--radius-md); padding: 14px 18px; margin-bottom: 16px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <div style="width: 36px; height: 36px; border-radius: 50%; background: #0D8244; color: white; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; font-weight: 800; flex-shrink: 0;">✓</div>
+            <div>
+              <div style="font-weight: 800; font-size: 0.95rem; color: #064E3B;">
+                System Ready for Next Day — All Products Reset to 0
+              </div>
+              <div style="font-size: 0.8rem; color: #0D8244; margin-top: 2px;">
+                Today's order manifest was reviewed, exported to PDF, and finalized. All 4 branches start fresh with 0 requirements for tomorrow's morning count.
+              </div>
+            </div>
+          </div>
+          <button class="btn btn-secondary btn-sm" id="btnStartTomorrowStock" style="font-weight: 700; background: white; border: 1.5px solid #A7E0BE; color: #064E3B;">
+            Start Entering Tomorrow's Stock ➔
+          </button>
+        </div>
+      ` : ''}
+
       <!-- Live Real-Time Tracking Header for the Table -->
       <div class="matrix-live-header">
         <div class="matrix-live-title">
@@ -260,9 +284,13 @@ export function renderRequirementsView() {
       <div class="mobile-matrix-cards ${matrixMobileLayout === 'table' ? 'force-hide' : ''}">
         ${filteredMatrix.length === 0 ? `
           <div style="text-align: center; padding: 48px 16px; background: white; border-radius: var(--radius-lg); border: 1px solid var(--md-border); margin-top: 10px;">
-            <div style="font-size: 2.2rem; margin-bottom: 8px;">🔍</div>
-            <div style="font-weight: 800; font-size: 1.05rem; color: var(--md-text-main);">No matching requirements found</div>
-            <div style="font-size: 0.82rem; color: var(--md-text-muted); margin-top: 4px;">Try unchecking "Show Only Items with Demand" or clear the search query.</div>
+            <div style="font-size: 2.2rem; margin-bottom: 8px;">${store.isReadyForNextDay || totalGrandUnits === 0 ? '✨' : '🔍'}</div>
+            <div style="font-weight: 800; font-size: 1.05rem; color: var(--md-text-main);">
+              ${store.isReadyForNextDay || totalGrandUnits === 0 ? 'All Products Reset to 0 — Ready for Next Day' : 'No matching requirements found'}
+            </div>
+            <div style="font-size: 0.84rem; color: var(--md-text-muted); margin-top: 6px;">
+              ${store.isReadyForNextDay || totalGrandUnits === 0 ? 'Today\'s order was finalized. Uncheck "Show Only Items with Demand" above to start entering tomorrow\'s stock numbers.' : 'Try unchecking "Show Only Items with Demand" or clear the search query.'}
+            </div>
           </div>
         ` : `
           <div class="matrix-cards-list">
@@ -394,9 +422,13 @@ export function renderRequirementsView() {
               ${filteredMatrix.length === 0 ? `
                 <tr>
                   <td colspan="8" style="text-align: center; padding: 48px; color: var(--md-text-muted);">
-                    <div style="font-size: 2rem; margin-bottom: 8px;">🔍</div>
-                    <div style="font-weight: 800; font-size: 1.05rem; color: var(--md-text-main);">No matching requirements found</div>
-                    <div style="font-size: 0.82rem; margin-top: 4px;">Try unchecking "Show Only Items with Demand" or clear the search query.</div>
+                    <div style="font-size: 2.2rem; margin-bottom: 8px;">${store.isReadyForNextDay || totalGrandUnits === 0 ? '✨' : '🔍'}</div>
+                    <div style="font-weight: 800; font-size: 1.05rem; color: var(--md-text-main);">
+                      ${store.isReadyForNextDay || totalGrandUnits === 0 ? 'All Products Reset to 0 — Ready for Next Day' : 'No matching requirements found'}
+                    </div>
+                    <div style="font-size: 0.84rem; margin-top: 6px;">
+                      ${store.isReadyForNextDay || totalGrandUnits === 0 ? 'Today\'s order was finalized. Uncheck "Show Only Items with Demand" above to start entering tomorrow\'s stock numbers.' : 'Try unchecking "Show Only Items with Demand" or clear the search query.'}
+                    </div>
                   </td>
                 </tr>
               ` : filteredMatrix.map((row, idx) => {
@@ -782,7 +814,37 @@ function filterMatrixDOM(query) {
     });
   }
 
-  // Optional PDF download
+  // Start tomorrow's stock entry button
+  const btnStartTomorrow = document.getElementById('btnStartTomorrowStock');
+  if (btnStartTomorrow) {
+    btnStartTomorrow.addEventListener('click', () => {
+      matrixOnlyWithDemand = false;
+      store.isReadyForNextDay = false;
+      store.notify();
+    });
+  }
+
+  // Finalize Order & Reset for Next Day button
+  const btnFinalizeNextDay = document.getElementById('btnFinalizeAndResetForNextDay');
+  if (btnFinalizeNextDay) {
+    btnFinalizeNextDay.addEventListener('click', () => {
+      const liveDate = store.getLiveDateString();
+      const liveTimestamp = store.getLiveDateTimeString(new Date(), true);
+      const data = {
+        date: liveTimestamp,
+        branches: store.branches,
+        consolidatedItems: store.getConsolidatedProcurement(),
+        branchRequirements: store.getAllBranchesRequirements()
+      };
+      const blob = generateMasterManifestPDF(data);
+      const filenameDate = liveDate.replace(/ /g, '_');
+      downloadBlob(blob, `MD_Fresh_Master_Manifest_${filenameDate}.pdf`);
+      store.finalizeOrderAndResetForNextDay({ source: 'REQUIREMENTS_PAGE_FINALIZE' });
+      showToast('Daily order finalized & PDF generated! All products reset to 0 for tomorrow.', 'success');
+    });
+  }
+
+  // Optional PDF download & automatic reset
   const btnDlReq = document.getElementById('btnDownloadReqPdf');
   if (btnDlReq) {
     btnDlReq.addEventListener('click', () => {
@@ -797,6 +859,8 @@ function filterMatrixDOM(query) {
       const blob = generateMasterManifestPDF(data);
       const filenameDate = liveDate.replace(/ /g, '_');
       downloadBlob(blob, `MD_Fresh_Master_Manifest_${filenameDate}.pdf`);
+      store.finalizeOrderAndResetForNextDay({ source: 'REQUIREMENTS_PAGE_PDF' });
+      showToast('Master Manifest PDF downloaded! All products have been reset to 0 for next day.', 'success');
     });
   }
 
