@@ -108,6 +108,15 @@ class InventoryStore {
     this.isReadyForNextDay = false;
     this.lastFinalizedTimestamp = null;
 
+    // Morning Stock Receiving Drafts per branch & History
+    this.receivingDrafts = {
+      BR001: {},
+      BR002: {},
+      BR003: {},
+      BR004: {}
+    };
+    this.receivingHistory = [];
+
     // Live Real-Time Date & Time Tracking
     this.matrixLastRecorded = new Date();
     this.branchLastRecorded = {
@@ -241,7 +250,7 @@ class InventoryStore {
     this.isAuthorized = false;
     this.currentUser.role = 'Store Staff';
     this.pendingView = null;
-    const isStaffAllowed = this.activeView === 'stock-check' || this.activeView === 'requirements';
+    const isStaffAllowed = this.activeView === 'stock-check' || this.activeView === 'requirements' || this.activeView === 'receiving';
     if (!isStaffAllowed) {
       this.activeView = 'stock-check';
     }
@@ -263,7 +272,7 @@ class InventoryStore {
   }
 
   setView(viewName) {
-    const isStaffAllowed = viewName === 'stock-check' || viewName === 'requirements';
+    const isStaffAllowed = viewName === 'stock-check' || viewName === 'requirements' || viewName === 'receiving';
     if (!isStaffAllowed && !this.isAuthorized) {
       this.openAuthModal(viewName);
       return;
@@ -589,31 +598,199 @@ class InventoryStore {
     return newPO;
   }
 
-  receiveBranchStock(poId, branchId, receivedMap) {
-    const po = this.purchaseOrders.find(p => p.id === poId);
-    if (!po) return false;
-
+  // Retrieve incoming order items for a specific branch during morning unloading
+  getBranchIncomingOrder(branchId, poId = null) {
     const branch = this.branches.find(b => b.id === branchId) || this.branches[0];
-    let anyDifference = false;
+    let items = [];
 
-    po.items.forEach(item => {
-      const alloc = item.allocations.find(a => a.branchId === branchId || a.branch === branch.name);
-      if (alloc) {
-        const receivedQty = receivedMap[item.productId] !== undefined ? receivedMap[item.productId] : alloc.qty;
-        alloc.received = receivedQty;
-        if (receivedQty !== alloc.qty) anyDifference = true;
-
-        const prod = this.products.find(p => p.id === item.productId);
-        if (prod) {
-          prod.stocks[branch.id] = (prod.stocks[branch.id] || 0) + receivedQty;
-          prod.lastUpdated = 'Just now';
+    // Find PO or delivery source
+    const po = (poId && this.purchaseOrders.find(p => p.id === poId)) || this.purchaseOrders[0];
+    if (po && po.items && po.items.length > 0) {
+      po.items.forEach(it => {
+        const alloc = (it.allocations || []).find(a => a.branchId === branchId || a.branch === branch.name || (a.branch && a.branch.includes(branch.code)));
+        if (alloc && alloc.qty > 0) {
+          const prod = this.products.find(p => p.id === it.productId);
+          items.push({
+            productId: it.productId,
+            productName: it.productName || (prod ? prod.name : 'Unknown Product'),
+            sku: prod ? prod.sku : it.productId,
+            image: prod ? prod.image : '📦',
+            category: prod ? prod.category : 'General',
+            unit: it.unit || (prod ? prod.unit : 'Units'),
+            orderedQty: alloc.qty,
+            receivedQty: (this.receivingDrafts[branchId] && this.receivingDrafts[branchId][it.productId] !== undefined)
+              ? this.receivingDrafts[branchId][it.productId]
+              : (alloc.received !== undefined ? alloc.received : alloc.qty),
+            unitCost: it.rate || (prod ? prod.unitCost : 0)
+          });
         }
+      });
+    }
+
+    // If still empty, check if finalized order manifest has allocations
+    if (items.length === 0 && this.finalizedOrders && this.finalizedOrders.length > 0) {
+      const manifest = this.finalizedOrders[0];
+      const branchReqs = manifest.branchBreakdown ? manifest.branchBreakdown[branchId] : [];
+      (branchReqs || []).forEach(it => {
+        const prod = this.products.find(p => p.id === it.productId || p.name === it.productName);
+        items.push({
+          productId: it.productId || (prod ? prod.id : `PRD-${Date.now()}`),
+          productName: it.productName,
+          sku: it.sku || (prod ? prod.sku : ''),
+          image: prod ? prod.image : '📦',
+          category: prod ? prod.category : 'General',
+          unit: it.unit,
+          orderedQty: it.qty,
+          receivedQty: (this.receivingDrafts[branchId] && this.receivingDrafts[branchId][it.productId] !== undefined)
+            ? this.receivingDrafts[branchId][it.productId]
+            : it.qty,
+          unitCost: prod ? prod.unitCost : 0
+        });
+      });
+    }
+
+    // If still empty, provide realistic morning dispatch items for this branch
+    if (items.length === 0) {
+      const defaultProducts = this.products.slice(0, 10);
+      items = defaultProducts.map((p, idx) => {
+        const ord = [8, 12, 6, 15, 10, 5, 20, 7, 9, 14][idx % 10];
+        return {
+          productId: p.id,
+          productName: p.name,
+          sku: p.sku,
+          image: p.image,
+          category: p.category,
+          unit: p.unit,
+          orderedQty: ord,
+          receivedQty: (this.receivingDrafts[branchId] && this.receivingDrafts[branchId][p.id] !== undefined)
+            ? this.receivingDrafts[branchId][p.id]
+            : ord,
+          unitCost: p.unitCost
+        };
+      });
+    }
+
+    return items;
+  }
+
+  receiveBranchStock(poId, branchId, receivedMap, extraItems = []) {
+    const branch = this.branches.find(b => b.id === branchId) || this.branches[0];
+    const incomingItems = this.getBranchIncomingOrder(branchId, poId);
+
+    // Merge any extra/unscheduled items delivered
+    extraItems.forEach(extra => {
+      if (!incomingItems.some(it => it.productId === extra.productId)) {
+        incomingItems.push({
+          productId: extra.productId,
+          productName: extra.productName,
+          sku: extra.sku,
+          image: extra.image || '📦',
+          category: extra.category || 'General',
+          unit: extra.unit || 'Units',
+          orderedQty: 0,
+          unitCost: extra.unitCost || 0
+        });
       }
     });
 
-    const statusText = anyDifference ? 'PARTIALLY RECEIVED' : 'FULLY RECEIVED';
+    let totalOrdered = 0;
+    let totalReceived = 0;
+    let surplusCount = 0;
+    let shortageCount = 0;
+    let exactCount = 0;
+    const verifiedItems = [];
+
+    incomingItems.forEach(item => {
+      const rec = receivedMap[item.productId] !== undefined ? Math.max(0, parseInt(receivedMap[item.productId], 10) || 0) : item.orderedQty;
+      const diff = rec - item.orderedQty;
+      totalOrdered += item.orderedQty;
+      totalReceived += rec;
+
+      if (diff > 0) surplusCount++;
+      else if (diff < 0) shortageCount++;
+      else exactCount++;
+
+      // Credit received stock to this branch
+      const prod = this.products.find(p => p.id === item.productId);
+      if (prod) {
+        prod.stocks[branch.id] = (prod.stocks[branch.id] || 0) + rec;
+        prod.lastUpdated = 'Just now';
+      }
+
+      verifiedItems.push({
+        productId: item.productId,
+        productName: item.productName,
+        unit: item.unit,
+        ordered: item.orderedQty,
+        received: rec,
+        difference: diff,
+        status: diff === 0 ? 'EXACT' : diff > 0 ? 'SURPLUS' : 'SHORTAGE'
+      });
+    });
+
+    const now = new Date();
+    const grnRef = `GRN-${now.getFullYear()}${(now.getMonth() + 1).toString().padStart(2, '0')}${now.getDate().toString().padStart(2, '0')}-${(this.receivingHistory.length + 1).toString().padStart(4, '0')}`;
+
+    const report = {
+      id: `RECV-${Date.now()}`,
+      grn: grnRef,
+      branchId: branch.id,
+      branchName: branch.name,
+      branchCode: branch.code,
+      date: this.getLiveDateString(now),
+      time: this.getLiveTimeString(now, true),
+      timestamp: this.getLiveDateTimeString(now, true),
+      receivedBy: this.currentUser?.name || 'Store Staff',
+      totalOrdered,
+      totalReceived,
+      surplusCount,
+      shortageCount,
+      exactCount,
+      status: (shortageCount > 0 && surplusCount > 0) ? 'VARIANCE (MORE & LESS)' :
+              shortageCount > 0 ? 'DEFICIT (LESS STOCK)' :
+              surplusCount > 0 ? 'SURPLUS (MORE STOCK)' : 'EXACT VERIFIED',
+      items: verifiedItems
+    };
+
+    if (!this.receivingHistory) {
+      this.receivingHistory = [];
+    }
+    this.receivingHistory.unshift(report);
+
+    // Also update PO allocations if matching PO exists
+    const po = this.purchaseOrders.find(p => p.id === poId);
+    if (po && po.items) {
+      po.items.forEach(it => {
+        const alloc = (it.allocations || []).find(a => a.branchId === branchId || a.branch === branch.name);
+        if (alloc && receivedMap[it.productId] !== undefined) {
+          alloc.received = receivedMap[it.productId];
+        }
+      });
+    }
+
+    // Add audit log
+    this.auditLogs.unshift({
+      id: `LOG-${Date.now()}`,
+      timestamp: this.getLiveDateTimeString(now, true),
+      user: this.currentUser?.name || 'Store Staff',
+      role: this.currentUser?.role || 'Store Staff',
+      action: 'STOCK_UNLOADING_RECEIVE',
+      details: `${grnRef}: Received ${totalReceived} units at ${branch.name} (${shortageCount} shortages, ${surplusCount} surplus)`
+    });
+
+    // Add notification
+    this.notifications.unshift({
+      id: `NOTIF-${Date.now()}`,
+      title: 'Morning Stock Unloading Confirmed',
+      message: `${branch.name}: ${totalReceived} units inwarded (${report.status}). GRN: ${grnRef}.`,
+      type: shortageCount > 0 ? 'warning' : 'success',
+      time: 'Just now',
+      unread: true,
+      branch: branch.name
+    });
+
     this.notify();
-    return { success: true, status: statusText };
+    return { success: true, status: report.status, report };
   }
 
   // Add new product manually to catalog

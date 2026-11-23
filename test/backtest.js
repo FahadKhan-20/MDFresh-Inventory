@@ -1,7 +1,7 @@
 // Comprehensive Point-by-Point Backtesting Suite for MD Fresh Inventory
 import { store } from '../src/utils/store.js';
 import { INITIAL_PRODUCTS, INITIAL_BRANCHES } from '../src/data/mockData.js';
-import { generateMasterManifestPDF, generateCombinedListOnlyPDF, generateBranchHeadlinedPDF } from '../src/utils/pdfGenerator.js';
+import { generateMasterManifestPDF, generateCombinedListOnlyPDF, generateBranchHeadlinedPDF, generateGoodsReceivingPDF } from '../src/utils/pdfGenerator.js';
 import fs from 'fs';
 import path from 'path';
 
@@ -405,6 +405,44 @@ assert(store.isReadyForNextDay === true, '11.9 isReadyForNextDay flag is true');
 store.updateRequiredQuantity('BR001', 'PRD001', 12);
 assert(store.isReadyForNextDay === false, '11.10 Entering new stock check count sets isReadyForNextDay back to false');
 assert(store.getBranchStockCheck('BR001')['PRD001'] === 12, '11.11 Next day quantity (12) successfully accepted');
+
+// -------------------------------------------------------------
+// POINT 12: MORNING STOCK RECEIVING & VARIANCE TRACKING PORTAL
+// -------------------------------------------------------------
+console.log('\n\x1b[36m▶ TEST SUITE 12: Morning Stock Receiving & Variance Tracking Portal\x1b[0m');
+
+// 12.1 Staff can access receiving view without PIN lock
+store.lockAuthorization();
+store.setView('receiving');
+assert(store.activeView === 'receiving', '12.1 Staff can access receiving portal without PIN prompt');
+assert(store.authModalOpen === false, '12.2 Auth modal is closed for receiving');
+
+// 12.3 Branch incoming orders available
+const incomingASP = store.getBranchIncomingOrder('BR001');
+assert(incomingASP.length > 0, `12.3 Incoming items retrieved for Annasandra Palya (count: ${incomingASP.length})`);
+assert(incomingASP[0].orderedQty > 0, '12.4 First item has positive ordered quantity');
+
+// 12.5 Test receiving with both shortage (less) and surplus (more)
+const testRecvMap = {};
+const firstItem = incomingASP[0];
+const secondItem = incomingASP[1] || incomingASP[0];
+
+// Less stock: ordered - 2
+testRecvMap[firstItem.productId] = Math.max(0, firstItem.orderedQty - 2);
+// More stock: ordered + 3
+testRecvMap[secondItem.productId] = secondItem.orderedQty + 3;
+
+const recvResult = store.receiveBranchStock('PO-20261003-0001', 'BR001', testRecvMap);
+assert(recvResult.success === true, '12.5 receiveBranchStock successfully processes receiving');
+assert(recvResult.report.shortageCount >= 1, '12.6 Discrepancy report detects shortage (less stock)');
+assert(recvResult.report.surplusCount >= 1, '12.7 Discrepancy report detects surplus (more stock)');
+assert(recvResult.report.grn.startsWith('GRN-'), '12.8 Official GRN reference number generated');
+assert(store.receivingHistory.length >= 1, '12.9 Receiving record stored in receivingHistory');
+
+// 12.10 Test Goods Inward PDF generation
+const grnBlob = generateGoodsReceivingPDF(recvResult.report);
+assert(grnBlob !== undefined, '12.10 Goods Inward PDF generated as Blob');
+assert(grnBlob.type === 'application/pdf', '12.11 Goods Inward PDF blob type is application/pdf');
 
 // -------------------------------------------------------------
 // SUMMARY REPORT

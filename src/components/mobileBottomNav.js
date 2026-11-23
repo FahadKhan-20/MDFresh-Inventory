@@ -19,9 +19,14 @@ export function renderMobileBottomNav() {
         <span style="font-weight: 800;">Stock Check</span>
       </button>
 
-      <button class="mobile-nav-btn ${activeView === 'inventory' ? 'active' : ''}" data-mobile-nav="inventory">
-        ${icon('inventory', 'icon-sm')}
-        <span>Inventory</span>
+      <button class="mobile-nav-btn ${activeView === 'receiving' ? 'active' : ''}" data-mobile-nav="receiving">
+        ${icon('receiving', 'icon-sm')}
+        <span style="font-weight: 700;">Unloading</span>
+      </button>
+
+      <button class="mobile-nav-btn ${activeView === 'requirements' ? 'active' : ''}" data-mobile-nav="requirements">
+        ${icon('layers', 'icon-sm')}
+        <span>Matrix</span>
       </button>
 
       <button class="mobile-nav-btn ${activeView === 'procurement' ? 'active' : ''}" data-mobile-nav="procurement">

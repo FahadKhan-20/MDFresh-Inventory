@@ -8,14 +8,14 @@ export function renderSidebar() {
   const isMobileOpen = store.mobileNavOpen;
   const isAuth = store.isAuthorized;
 
-  // Navigation items: Only first two (Daily Stock Check, All Branches Matrix) are unlocked for Staff.
-  // All other features require Manager & Owner PIN authorization.
+  // Navigation items: Daily Stock Check, All Branches Matrix, and Stock Receiving (Unloading) are unlocked for Staff.
+  // Administrative and financial features require Manager & Owner PIN authorization.
   const navItems = [
     { id: 'stock-check', label: 'Daily Stock Check', iconName: 'stockCheck', highlight: true, locked: false },
     { id: 'requirements', label: 'All Branches Matrix', iconName: 'layers', locked: false },
+    { id: 'receiving', label: 'Stock Receiving (Unloading)', iconName: 'receiving', highlight: true, locked: false },
     { id: 'procurement', label: 'Procurement (Mandi)', iconName: 'procurement', locked: !isAuth },
     { id: 'purchase-orders', label: 'Purchase Orders', iconName: 'purchaseOrders', locked: !isAuth },
-    { id: 'receiving', label: 'Receiving', iconName: 'receiving', locked: !isAuth },
     { id: 'inventory', label: 'Inventory Catalog', iconName: 'inventory', locked: !isAuth },
     { id: 'branches', label: 'Branches (4)', iconName: 'branches', locked: !isAuth },
     { id: 'reports', label: 'Reports & Analytics', iconName: 'reports', locked: !isAuth }

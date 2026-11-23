@@ -451,3 +451,66 @@ export function generateBranchHeadlinedPDF(data) {
 
   return pdf.build();
 }
+
+// Generate Goods Inward & Variance Note (GRN) PDF
+export function generateGoodsReceivingPDF(data) {
+  const { grn, branchName, branchCode, date, time, receivedBy, totalOrdered, totalReceived, items } = data;
+  const pdf = new SimplePDFBuilder();
+
+  // Header banner
+  pdf.addRect(40, pdf.currentY - 45, 515, 45, { fillColor: [0.06, 0.31, 0.23] });
+  pdf.addText('MD FRESH', 55, pdf.currentY - 22, { fontSize: 16, bold: true, color: [1, 1, 1] });
+  pdf.addText('GOODS INWARD & VARIANCE RECEIPT (GRN)', 55, pdf.currentY - 36, { fontSize: 8.5, color: [0.85, 0.95, 0.88] });
+
+  pdf.addText(`GRN: ${grn || 'GRN-OFFICIAL'}`, 380, pdf.currentY - 20, { fontSize: 9, bold: true, color: [1, 1, 1] });
+  pdf.addText(`DATE: ${date || ''} ${time || ''}`, 380, pdf.currentY - 32, { fontSize: 7.5, color: [0.85, 0.95, 0.88] });
+  pdf.currentY -= 65;
+
+  // Branch & Staff metadata bar
+  pdf.addRect(40, pdf.currentY - 22, 515, 22, { fillColor: [0.93, 0.96, 0.93] });
+  pdf.addText(`BRANCH: ${branchName} (${branchCode})`, 48, pdf.currentY - 15, { fontSize: 9.5, bold: true, color: [0.03, 0.31, 0.16] });
+  pdf.addText(`RECEIVED BY: ${receivedBy || 'Store Staff'}`, 380, pdf.currentY - 15, { fontSize: 8.5, bold: true, color: [0.03, 0.31, 0.16] });
+  pdf.currentY -= 32;
+
+  // Table header
+  pdf.addRect(40, pdf.currentY - 20, 515, 20, { fillColor: [0.1, 0.35, 0.2] });
+  pdf.addText('SL', 45, pdf.currentY - 13, { fontSize: 8, bold: true, color: [1, 1, 1] });
+  pdf.addText('PRODUCT / ITEM', 70, pdf.currentY - 13, { fontSize: 8, bold: true, color: [1, 1, 1] });
+  pdf.addText('UNIT', 230, pdf.currentY - 13, { fontSize: 8, bold: true, color: [1, 1, 1] });
+  pdf.addText('ORDERED', 290, pdf.currentY - 13, { fontSize: 8, bold: true, color: [1, 1, 1] });
+  pdf.addText('RECEIVED', 360, pdf.currentY - 13, { fontSize: 8, bold: true, color: [1, 1, 1] });
+  pdf.addText('DIFFERENCE', 430, pdf.currentY - 13, { fontSize: 8, bold: true, color: [1, 1, 1] });
+  pdf.addText('STATUS', 500, pdf.currentY - 13, { fontSize: 8, bold: true, color: [1, 1, 1] });
+  pdf.currentY -= 24;
+
+  (items || []).forEach((it, idx) => {
+    pdf.ensureSpace(18);
+    const diff = it.difference;
+    const diffStr = diff > 0 ? `+${diff}` : `${diff}`;
+    const statusStr = diff === 0 ? 'EXACT' : diff > 0 ? 'SURPLUS' : 'SHORTAGE';
+    const rowColor = diff < 0 ? [0.85, 0.2, 0.2] : diff > 0 ? [0.1, 0.4, 0.8] : [0.05, 0.51, 0.27];
+
+    pdf.addText(`${idx + 1}`, 45, pdf.currentY - 10, { fontSize: 8, color: [0.4, 0.4, 0.4] });
+    pdf.addText(it.productName, 70, pdf.currentY - 10, { fontSize: 8.5, bold: true });
+    pdf.addText(it.unit, 230, pdf.currentY - 10, { fontSize: 8, color: [0.35, 0.35, 0.35] });
+    pdf.addText(`${it.ordered}`, 290, pdf.currentY - 10, { fontSize: 8.5 });
+    pdf.addText(`${it.received}`, 360, pdf.currentY - 10, { fontSize: 9, bold: true });
+    pdf.addText(diffStr, 430, pdf.currentY - 10, { fontSize: 8.5, bold: true, color: rowColor });
+    pdf.addText(statusStr, 500, pdf.currentY - 10, { fontSize: 7.5, bold: true, color: rowColor });
+
+    pdf.addLine(42, pdf.currentY - 13, 550, pdf.currentY - 13, { color: [0.9, 0.9, 0.9] });
+    pdf.currentY -= 16;
+  });
+
+  // Footer summary
+  pdf.ensureSpace(45);
+  pdf.currentY -= 10;
+  pdf.addRect(40, pdf.currentY - 30, 515, 30, { fillColor: [0.96, 0.97, 0.96] });
+  pdf.addText(`TOTAL ORDERED: ${totalOrdered} UNITS`, 55, pdf.currentY - 18, { fontSize: 8.5, bold: true, color: [0.2, 0.2, 0.2] });
+  pdf.addText(`TOTAL RECEIVED: ${totalReceived} UNITS`, 220, pdf.currentY - 18, { fontSize: 9, bold: true, color: [0.05, 0.51, 0.27] });
+  const netDiff = totalReceived - totalOrdered;
+  const netStr = netDiff > 0 ? `+${netDiff} Units (Surplus)` : netDiff < 0 ? `${netDiff} Units (Deficit)` : '0 (Balanced)';
+  pdf.addText(`NET VARIANCE: ${netStr}`, 380, pdf.currentY - 18, { fontSize: 8.5, bold: true, color: netDiff !== 0 ? [0.8, 0.2, 0.2] : [0.05, 0.51, 0.27] });
+
+  return pdf.build();
+}
