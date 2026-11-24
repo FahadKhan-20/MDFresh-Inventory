@@ -482,16 +482,6 @@ export function renderDailyStockCheckView() {
                 >
                   +
                 </button>
-
-                <button 
-                  type="button" 
-                  class="btn-clear-stock-item-mobile" 
-                  data-product-id="${p.id}" 
-                  title="Delete requirement" 
-                  style="background: #FEF2F2; color: #DC2626; border: 1.5px solid #FCA5A5; border-radius: 6px; padding: 0 8px; font-size: 0.72rem; font-weight: 800; cursor: pointer; display: ${reqQty > 0 ? 'inline-flex' : 'none'}; align-items: center; gap: 3px; height: 32px;"
-                >
-                  ${icon('trash', 'icon-xs')} Delete
-                </button>
               </div>
             </div>
 
@@ -1096,9 +1086,7 @@ function filterStockCheckDOM(query) {
         if (clearBtn) clearBtn.style.display = numVal > 0 ? 'inline-flex' : 'none';
       }
 
-      // Also sync mobile delete button & value if present
-      const mBtn = document.querySelector(`.btn-clear-stock-item-mobile[data-product-id="${pId}"]`);
-      if (mBtn) mBtn.style.display = numVal > 0 ? 'inline-flex' : 'none';
+      // Also sync mobile value if present
       const mInp = document.querySelector(`.fast-stock-input-mobile[data-product-id="${pId}"]`);
       if (mInp && mInp.value !== e.target.value) mInp.value = e.target.value;
 
@@ -1178,12 +1166,6 @@ function filterStockCheckDOM(query) {
         }
       }
 
-      const card = e.target.closest('.mobile-stock-card');
-      if (card) {
-        const clearBtn = card.querySelector('.btn-clear-stock-item-mobile');
-        if (clearBtn) clearBtn.style.display = numVal > 0 ? 'inline-flex' : 'none';
-      }
-
       // Also sync desktop button & value
       const dBtn = document.querySelector(`.btn-clear-stock-item[data-product-id="${pId}"]`);
       if (dBtn) dBtn.style.display = numVal > 0 ? 'inline-flex' : 'none';
@@ -1200,11 +1182,6 @@ function filterStockCheckDOM(query) {
         store.updateRequiredQuantity(currentBranchId, pId, 0, false);
         const wrapper = e.target.closest('.fast-qty-wrapper');
         if (wrapper) wrapper.classList.remove('has-value');
-        const card = e.target.closest('.mobile-stock-card');
-        if (card) {
-          const clearBtn = card.querySelector('.btn-clear-stock-item-mobile');
-          if (clearBtn) clearBtn.style.display = 'none';
-        }
         updateLiveCheckSummary();
       }
     });
@@ -1244,11 +1221,6 @@ function filterStockCheckDOM(query) {
         if (numVal > 0) mWrapper.classList.add('has-value');
         else mWrapper.classList.remove('has-value');
       }
-      const card = mobileInput.closest('.mobile-stock-card');
-      if (card) {
-        const mClearBtn = card.querySelector('.btn-clear-stock-item-mobile');
-        if (mClearBtn) mClearBtn.style.display = numVal > 0 ? 'inline-flex' : 'none';
-      }
     }
 
     updateLiveCheckSummary();
@@ -1278,8 +1250,8 @@ function filterStockCheckDOM(query) {
     });
   });
 
-  // Handle manual deletion/clearing of requirement (reset to 0) directly from desktop row or mobile card
-  document.querySelectorAll('.btn-clear-stock-item, .btn-clear-stock-item-mobile').forEach(btn => {
+  // Handle manual deletion/clearing of requirement (reset to 0) directly from desktop row
+  document.querySelectorAll('.btn-clear-stock-item').forEach(btn => {
     btn.addEventListener('click', (e) => {
       e.preventDefault();
       e.stopPropagation();
@@ -1387,9 +1359,6 @@ function filterStockCheckDOM(query) {
           mInp.value = '0';
           const w = mInp.closest('.fast-qty-wrapper');
           if (w) w.classList.remove('has-value');
-          const mCard = mInp.closest('.mobile-stock-card');
-          const mBtn = mCard?.querySelector('.btn-clear-stock-item-mobile');
-          if (mBtn) mBtn.style.display = 'none';
         }
 
         populateReviewModal();

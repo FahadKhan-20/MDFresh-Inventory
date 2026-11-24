@@ -985,6 +985,9 @@ const currentZero = store.getBranchRequiredQty('BR001', 'PRD005');
 store.updateRequiredQuantity('BR001', 'PRD005', Math.max(0, currentZero - 1));
 assert(store.getBranchRequiredQty('BR001', 'PRD005') === 0, "21.9 Stepper clamped at 0 without becoming negative");
 
+// Test 21.10: Redundant inline delete button removed from mobile card stepper row
+assert(!stockCheckHtml.includes('btn-clear-stock-item-mobile'), "21.10 Mobile stock cards omit redundant inline delete button in stepper row");
+
 // -------------------------------------------------------------
 // POINT 22: 4-BRANCH SUBMISSION PDF GUARDRAIL
 // -------------------------------------------------------------
