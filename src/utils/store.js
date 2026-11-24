@@ -351,7 +351,7 @@ class InventoryStore {
     }
     if (branchId === "BR004") {
       const idx = seq ? seq.indexOf(productId) : BASAVANAGAR_SEQUENCE.indexOf(productId);
-      if (idx !== -1) return idx < 38 ? "Fruits" : "Vegetables";
+      if (idx !== -1) return idx < 40 ? "Fruits" : "Vegetables";
     }
     const prod = this.products.find(p => p.id === productId);
     return prod ? prod.category : "General";
@@ -745,7 +745,8 @@ class InventoryStore {
     if (po && po.items && po.items.length > 0) {
       po.items.forEach(it => {
         const alloc = (it.allocations || []).find(a => a.branchId === branchId || a.branch === branch.name || (a.branch && a.branch.includes(branch.code)));
-        if (alloc && alloc.qty > 0) {
+        const allocQty = alloc ? (alloc.qty !== undefined ? alloc.qty : (alloc.allocated !== undefined ? alloc.allocated : 0)) : 0;
+        if (alloc && allocQty > 0) {
           const prod = this.products.find(p => p.id === it.productId);
           items.push({
             productId: it.productId,
@@ -754,10 +755,10 @@ class InventoryStore {
             image: prod ? prod.image : '📦',
             category: prod ? prod.category : 'General',
             unit: it.unit || (prod ? prod.unit : 'Units'),
-            orderedQty: alloc.qty,
+            orderedQty: allocQty,
             receivedQty: (this.receivingDrafts[branchId] && this.receivingDrafts[branchId][it.productId] !== undefined)
               ? this.receivingDrafts[branchId][it.productId]
-              : (alloc.received !== undefined ? alloc.received : alloc.qty),
+              : (alloc && alloc.received !== undefined ? alloc.received : (alloc ? alloc.qty : 0)),
             unitCost: it.rate || (prod ? prod.unitCost : 0)
           });
         }

@@ -126,16 +126,16 @@ export function renderDailyStockCheckView() {
           <span style="font-size: 1.3rem;">📋</span>
           <div>
             <div style="font-weight: 800; font-size: 0.92rem; color: #166534; display: flex; align-items: center; gap: 8px;">
-              <span>Annasandrapalya Branch Standard Sequence Active (100 Produce Items: 62 Veg &bull; 38 Fruits)</span>
+              <span>Annasandrapalya Branch Standard Sequence Active (102 Produce Items: 62 Veg &bull; 40 Fruits)</span>
               <span class="pill" style="background: #166534; color: white; font-size: 0.7rem; font-weight: 800; padding: 2px 8px;">ANNASANDRAPALYA SEQUENCE</span>
             </div>
             <div style="font-size: 0.78rem; color: #15803D; margin-top: 2px;">
-              Direct morning store audit sequence: <strong>Vegetables (#1 Beans to #62 Tomato Nati)</strong> &bull; <strong>Fruits (#63 Watermelon to #100 Misri Apple)</strong>.
+              Direct morning store audit sequence: <strong>Vegetables (#1 Beans to #62 Tomato Nati)</strong> &bull; <strong>Fruits (#63 Watermelon Normal to #102 Misri Apple)</strong>.
             </div>
           </div>
         </div>
         <div style="font-size: 0.8rem; font-weight: 700; color: #166534;">
-          Ordered strictly #1 Beans to #100 Misri Apple
+          Ordered strictly #1 Beans to #102 Misri Apple
         </div>
       </div>
     ` : ""}
@@ -145,7 +145,7 @@ export function renderDailyStockCheckView() {
           <span style="font-size: 1.3rem;">📋</span>
           <div>
             <div style="font-weight: 800; font-size: 0.92rem; color: #166534; display: flex; align-items: center; gap: 8px;">
-              <span>Basavanagar Branch Standard Sequence Active (101 Produce Items: 38 Fruits &bull; 63 Veg)</span>
+              <span>Basavanagar Branch Standard Sequence Active (104 Produce Items: 40 Fruits &bull; 64 Veg)</span>
               <span class="pill" style="background: #166534; color: white; font-size: 0.7rem; font-weight: 800; padding: 2px 8px;">BASAVANAGAR SEQUENCE</span>
             </div>
             <div style="font-size: 0.78rem; color: #15803D; margin-top: 2px;">
@@ -154,7 +154,7 @@ export function renderDailyStockCheckView() {
           </div>
         </div>
         <div style="font-size: 0.8rem; font-weight: 700; color: #166534;">
-          Ordered strictly #1 Watermelon to #101 Tomato Farm
+          Ordered strictly #1 Watermelon Normal to #104 Tomato Farm
         </div>
       </div>
     ` : ""}
@@ -164,16 +164,16 @@ export function renderDailyStockCheckView() {
           <span style="font-size: 1.3rem;">📋</span>
           <div>
             <div style="font-weight: 800; font-size: 0.92rem; color: #166534; display: flex; align-items: center; gap: 8px;">
-              <span>LB Shastri Nagar Branch Standard Sequence Active (102 Produce Items: 62 Veg &bull; 40 Fruits)</span>
+              <span>LB Shastri Nagar Branch Standard Sequence Active (103 Produce Items: 62 Veg &bull; 41 Fruits)</span>
               <span class="pill" style="background: #166534; color: white; font-size: 0.7rem; font-weight: 800; padding: 2px 8px;">LBS NAGAR SEQUENCE</span>
             </div>
             <div style="font-size: 0.78rem; color: #15803D; margin-top: 2px;">
-              Direct morning store audit sequence: <strong>Vegetables (#1 Beans to #62 Tomato Nati)</strong> &bull; <strong>Fruits (#63 Robusta to #102 Watermellon)</strong>.
+              Direct morning store audit sequence: <strong>Vegetables (#1 Beans to #62 Tomato Nati)</strong> &bull; <strong>Fruits (#63 Robusta to #103 Watermelon Stripes)</strong>.
             </div>
           </div>
         </div>
         <div style="font-size: 0.8rem; font-weight: 700; color: #166534;">
-          Ordered strictly #1 Beans to #102 Watermellon
+          Ordered strictly #1 Beans to #103 Watermelon Stripes
         </div>
       </div>
     ` : ""}
@@ -183,7 +183,7 @@ export function renderDailyStockCheckView() {
           <span style="font-size: 1.3rem;">📋</span>
           <div>
             <div style="font-weight: 800; font-size: 0.92rem; color: #166534; display: flex; align-items: center; gap: 8px;">
-              <span>Kodihalli Branch Standard Sequence Active (93 Produce Items)</span>
+              <span>Kodihalli Branch Standard Sequence Active (94 Produce Items)</span>
               <span class="pill" style="background: #166534; color: white; font-size: 0.7rem; font-weight: 800; padding: 2px 8px;">KODIHALLI SEQUENCE</span>
             </div>
             <div style="font-size: 0.78rem; color: #15803D; margin-top: 2px;">
@@ -192,7 +192,7 @@ export function renderDailyStockCheckView() {
           </div>
         </div>
         <div style="font-size: 0.8rem; font-weight: 700; color: #166534;">
-          Ordered strictly #1 Cucumber to #93 Mangoes
+          Ordered strictly #1 Cucumber to #94 Mangoes
         </div>
       </div>
     ` : ""}

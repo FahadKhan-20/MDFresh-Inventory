@@ -343,8 +343,8 @@ export const INITIAL_PRODUCTS = [
   },
   {
     "id": "PRD014",
-    "name": "Brinjal Mysore",
-    "originalPluName": "BRNJAL MYSOR",
+    "name": "Small Brinjal Green",
+    "originalPluName": "SMALL BRINJAL GREEN",
     "variety": "Round / Long",
     "sku": "VEG-014",
     "category": "Vegetables",
@@ -363,8 +363,8 @@ export const INITIAL_PRODUCTS = [
   },
   {
     "id": "PRD015",
-    "name": "Brinjal Green",
-    "originalPluName": "BRINJAL GREEN",
+    "name": "Long Brinjal Green",
+    "originalPluName": "LONG BRINJAL GREEN",
     "variety": "Round / Long",
     "sku": "VEG-015",
     "category": "Vegetables",
@@ -383,8 +383,8 @@ export const INITIAL_PRODUCTS = [
   },
   {
     "id": "PRD016",
-    "name": "Brinjal Bhartha",
-    "originalPluName": "BRINJAL BARTHA",
+    "name": "Bharta Green",
+    "originalPluName": "BHARTA GREEN",
     "variety": "Round / Long",
     "sku": "VEG-016",
     "category": "Vegetables",
@@ -743,8 +743,8 @@ export const INITIAL_PRODUCTS = [
   },
   {
     "id": "PRD034",
-    "name": "Arbi (Colocasia)",
-    "originalPluName": "ARAVI",
+    "name": "Arvi",
+    "originalPluName": "ARVI",
     "variety": "Aravi Root",
     "sku": "VEG-034",
     "category": "Vegetables",
@@ -1223,8 +1223,8 @@ export const INITIAL_PRODUCTS = [
   },
   {
     "id": "PRD058",
-    "name": "Bajji Chilli (Bhavnagri)",
-    "originalPluName": "BAJJI CHILI",
+    "name": "Bhajji Chilly",
+    "originalPluName": "BHAJJI CHILLY",
     "variety": "Spicy Fresh",
     "sku": "VEG-058",
     "category": "Vegetables",
@@ -1823,8 +1823,8 @@ export const INITIAL_PRODUCTS = [
   },
   {
     "id": "PRD088",
-    "name": "Watermelon Big Dark",
-    "originalPluName": "WTRMELON BIG",
+    "name": "Watermelon Normal",
+    "originalPluName": "WATERMELON NORMAL",
     "variety": "Sweet Striped",
     "sku": "FRU-088",
     "category": "Fruits",
@@ -1843,8 +1843,8 @@ export const INITIAL_PRODUCTS = [
   },
   {
     "id": "PRD089",
-    "name": "Watermelon Kiran",
-    "originalPluName": "WTRMELON KIRAN",
+    "name": "Watermelon Stripes",
+    "originalPluName": "WATERMELON STRIPES",
     "variety": "Sweet Striped",
     "sku": "FRU-089",
     "category": "Fruits",
@@ -2003,8 +2003,8 @@ export const INITIAL_PRODUCTS = [
   },
   {
     "id": "PRD097",
-    "name": "Muskmelon",
-    "originalPluName": "MUSKMELON",
+    "name": "Muskmelon Farm",
+    "originalPluName": "MUSKMELON FARM",
     "variety": "Kharbuja Golden",
     "sku": "FRU-097",
     "category": "Fruits",
@@ -2143,8 +2143,8 @@ export const INITIAL_PRODUCTS = [
   },
   {
     "id": "PRD104",
-    "name": "Orange Nagpur Sweet",
-    "originalPluName": "ORANGE",
+    "name": "Madrin",
+    "originalPluName": "MADRIN",
     "variety": "Juicy Table",
     "sku": "FRU-104",
     "category": "Fruits",
@@ -3463,7 +3463,7 @@ export const INITIAL_PRODUCTS = [
   },
   {
     "id": "PRD170",
-    "name": "Sem Beans",
+    "name": "Sem",
     "originalPluName": "SEM",
     "variety": "Country Flat Beans",
     "sku": "VEG-170",
@@ -3523,8 +3523,8 @@ export const INITIAL_PRODUCTS = [
   },
   {
     "id": "PRD173",
-    "name": "Dragon Fruit (Pitaya)",
-    "originalPluName": "DARAYGAN FURUT",
+    "name": "Dragon Fruit Red",
+    "originalPluName": "DRAGON FRUIT RED",
     "variety": "Red Flesh Sweet",
     "sku": "FRU-173",
     "category": "Fruits",
@@ -3823,8 +3823,8 @@ export const INITIAL_PRODUCTS = [
   },
   {
     "id": "PRD188",
-    "name": "Rampuri Brinjal",
-    "originalPluName": "RAMPURI BRINJAL",
+    "name": "Small Brinjal Purple",
+    "originalPluName": "SMALL BRINJAL PURPLE",
     "variety": "Striped Green Round",
     "sku": "VEG-188",
     "category": "Vegetables",
@@ -3843,8 +3843,8 @@ export const INITIAL_PRODUCTS = [
   },
   {
     "id": "PRD189",
-    "name": "L Brinjal Purple",
-    "originalPluName": "L BRINJAL PURPLE",
+    "name": "Long Brinjal Purple",
+    "originalPluName": "LONG BRINJAL PURPLE",
     "variety": "Long Glossy Purple",
     "sku": "VEG-189",
     "category": "Vegetables",
@@ -4023,8 +4023,8 @@ export const INITIAL_PRODUCTS = [
   },
   {
     "id": "PRD198",
-    "name": "Wht Dragon",
-    "originalPluName": "WHT DRAGON",
+    "name": "Dragon Fruit White",
+    "originalPluName": "DRAGON FRUIT WHITE",
     "variety": "White Flesh Pitaya",
     "sku": "FRU-198",
     "category": "Fruits",
@@ -4163,8 +4163,8 @@ export const INITIAL_PRODUCTS = [
   },
   {
     "id": "PRD205",
-    "name": "Bharta Green",
-    "originalPluName": "BHARTA GREEN",
+    "name": "Bharta Black",
+    "originalPluName": "BHARTA BLACK",
     "variety": "Large Round Green Eggplant",
     "sku": "VEG-205",
     "category": "Vegetables",
@@ -4203,8 +4203,8 @@ export const INITIAL_PRODUCTS = [
   },
   {
     "id": "PRD207",
-    "name": "Bhaggi",
-    "originalPluName": "BHAGGI",
+    "name": "Bhajji Chilly",
+    "originalPluName": "BHAJJI CHILLY",
     "variety": "Fresh Amaranth Leafy Greens",
     "sku": "VEG-207",
     "category": "Vegetables",
@@ -4418,6 +4418,26 @@ export const INITIAL_PRODUCTS = [
       "BR002": 3,
       "BR003": 4,
       "BR004": 5
+    },
+    "lastUpdated": "Just now"
+  },
+  {
+    "id": "PRD218",
+    "name": "Muskmelon Nati",
+    "originalPluName": "MUSKMELON NATI",
+    "variety": "Local Sweet Striped Kharbuja",
+    "sku": "FRU-218",
+    "category": "Fruits",
+    "unit": "Crates",
+    "reorderLevel": 5,
+    "unitCost": 650,
+    "supplierName": "ABC Fruit Market",
+    "image": "🍈",
+    "stocks": {
+      "BR001": 3,
+      "BR002": 4,
+      "BR003": 5,
+      "BR004": 3
     },
     "lastUpdated": "Just now"
   }
@@ -4916,1559 +4936,1753 @@ export const INITIAL_REQUIREMENTS = [
 
 export const INITIAL_PURCHASE_ORDERS = [
   {
-    id: 'PO-20261003-0001',
-    supplierName: 'K.R. Market Veg Syndicate',
-    date: '03 Oct 2026',
-    time: '09:30 AM',
-    totalAmount: 34500,
-    items: [
+    "id": "PO-20261003-0001",
+    "supplierName": "K.R. Market Veg Syndicate",
+    "date": "03 Oct 2026",
+    "time": "09:30 AM",
+    "totalAmount": 34500,
+    "items": [
       {
-        productId: 'PRD001',
-        productName: 'Onion',
-        qty: 12,
-        unit: 'Bags',
-        rate: 1350,
-        amount: 16200,
-        allocations: [
-          { branch: 'ANNASANDRAPALYA', branchId: 'BR001', qty: 3, received: 3 },
-          { branch: 'KODIHALLI', branchId: 'BR002', qty: 4, received: 4 },
-          { branch: 'LBS NAGAR', branchId: 'BR003', qty: 3, received: 3 },
-          { branch: 'BASAVANAGAR', branchId: 'BR004', qty: 2, received: 2 }
+        "productId": "PRD001",
+        "productName": "Onion",
+        "qty": 12,
+        "unit": "Bags",
+        "rate": 1350,
+        "amount": 16200,
+        "allocations": [
+          {
+            "branch": "ANNASANDRAPALYA",
+            "branchId": "BR001",
+            "qty": 3,
+            "received": 3
+          },
+          {
+            "branch": "KODIHALLI",
+            "branchId": "BR002",
+            "qty": 4,
+            "received": 4
+          },
+          {
+            "branch": "LBS NAGAR",
+            "branchId": "BR003",
+            "qty": 3,
+            "received": 3
+          },
+          {
+            "branch": "BASAVANAGAR",
+            "branchId": "BR004",
+            "qty": 2,
+            "received": 2
+          }
         ]
       },
       {
-        productId: 'PRD002',
-        productName: 'Potato',
-        qty: 10,
-        unit: 'Bags',
-        rate: 1150,
-        amount: 11500,
-        allocations: [
-          { branch: 'ANNASANDRAPALYA', branchId: 'BR001', qty: 3, received: 3 },
-          { branch: 'KODIHALLI', branchId: 'BR002', qty: 3, received: 3 },
-          { branch: 'LBS NAGAR', branchId: 'BR003', qty: 2, received: 2 },
-          { branch: 'BASAVANAGAR', branchId: 'BR004', qty: 2, received: 2 }
+        "productId": "PRD002",
+        "productName": "Potato",
+        "qty": 10,
+        "unit": "Bags",
+        "rate": 1150,
+        "amount": 11500,
+        "allocations": [
+          {
+            "branch": "ANNASANDRAPALYA",
+            "branchId": "BR001",
+            "qty": 3,
+            "received": 3
+          },
+          {
+            "branch": "KODIHALLI",
+            "branchId": "BR002",
+            "qty": 3,
+            "received": 3
+          },
+          {
+            "branch": "LBS NAGAR",
+            "branchId": "BR003",
+            "qty": 2,
+            "received": 2
+          },
+          {
+            "branch": "BASAVANAGAR",
+            "branchId": "BR004",
+            "qty": 2,
+            "received": 2
+          }
         ]
       },
       {
-        productId: 'PRD003',
-        productName: 'Tomato',
-        qty: 12,
-        unit: 'Crates',
-        rate: 550,
-        amount: 6600,
-        allocations: [
-          { branch: 'ANNASANDRAPALYA', branchId: 'BR001', qty: 4, received: 4 },
-          { branch: 'KODIHALLI', branchId: 'BR002', qty: 3, received: 3 },
-          { branch: 'LBS NAGAR', branchId: 'BR003', qty: 3, received: 3 },
-          { branch: 'BASAVANAGAR', branchId: 'BR004', qty: 2, received: 2 }
+        "productId": "PRD003",
+        "productName": "Tomato",
+        "qty": 12,
+        "unit": "Crates",
+        "rate": 550,
+        "amount": 6600,
+        "allocations": [
+          {
+            "branch": "ANNASANDRAPALYA",
+            "branchId": "BR001",
+            "qty": 4,
+            "received": 4
+          },
+          {
+            "branch": "KODIHALLI",
+            "branchId": "BR002",
+            "qty": 3,
+            "received": 3
+          },
+          {
+            "branch": "LBS NAGAR",
+            "branchId": "BR003",
+            "qty": 3,
+            "received": 3
+          },
+          {
+            "branch": "BASAVANAGAR",
+            "branchId": "BR004",
+            "qty": 2,
+            "received": 2
+          }
         ]
       }
     ],
-    timeline: [
-      { step: 'Requirement', status: 'completed', timestamp: '08:45 AM' },
-      { step: 'Approved', status: 'completed', timestamp: '09:00 AM' },
-      { step: 'Purchase Order', status: 'completed', timestamp: '09:30 AM' },
-      { step: 'Purchasing', status: 'active', timestamp: '10:15 AM' },
-      { step: 'Dispatched', status: 'pending', timestamp: 'Est. 12:30 PM' },
-      { step: 'Received', status: 'pending', timestamp: 'Est. 02:00 PM' }
+    "timeline": [
+      {
+        "step": "Requirement",
+        "status": "completed",
+        "timestamp": "08:45 AM"
+      },
+      {
+        "step": "Approved",
+        "status": "completed",
+        "timestamp": "09:00 AM"
+      },
+      {
+        "step": "Purchase Order",
+        "status": "completed",
+        "timestamp": "09:30 AM"
+      },
+      {
+        "step": "Purchasing",
+        "status": "active",
+        "timestamp": "10:15 AM"
+      },
+      {
+        "step": "Dispatched",
+        "status": "pending",
+        "timestamp": "Est. 12:30 PM"
+      },
+      {
+        "step": "Received",
+        "status": "pending",
+        "timestamp": "Est. 02:00 PM"
+      }
     ],
-    status: 'Purchasing'
+    "status": "Purchasing"
   },
   {
     "id": "PO-20261003-KDH01",
     "supplierName": "K.R. Market & APMC Fruit-Veg Terminal",
     "date": "03 Oct 2026",
     "time": "06:45 AM",
-    "totalAmount": 298299,
+    "totalAmount": 670987,
     "source": "DAILY_STOCK_CHECK_KODIHALLI_DISPATCH",
     "manifestReference": "KDH-MORNING-DISPATCH-01",
     "items": [
       {
         "productId": "PRD023",
         "productName": "Cucumber Local",
-        "qty": 4,
         "unit": "Crates",
-        "rate": 450,
-        "amount": 1800,
+        "totalQuantity": 3,
+        "unitPrice": 450,
+        "totalCost": 1350,
         "allocations": [
           {
-            "branch": "KODIHALLI",
             "branchId": "BR002",
-            "qty": 4,
-            "received": 4
+            "branch": "Kodihalli",
+            "qty": 3,
+          "allocated": 3,
+          "received": 3
           }
         ]
       },
       {
         "productId": "PRD004",
         "productName": "Carrot",
-        "qty": 6,
         "unit": "Bags",
-        "rate": 850,
-        "amount": 5100,
+        "totalQuantity": 10,
+        "unitPrice": 850,
+        "totalCost": 8500,
         "allocations": [
           {
-            "branch": "KODIHALLI",
             "branchId": "BR002",
-            "qty": 6,
-            "received": 6
+            "branch": "Kodihalli",
+            "qty": 10,
+          "allocated": 10,
+          "received": 10
           }
         ]
       },
       {
         "productId": "PRD019",
         "productName": "Lauki (Bottle Gourd)",
-        "qty": 3,
         "unit": "Bags",
-        "rate": 400,
-        "amount": 1200,
+        "totalQuantity": 17,
+        "unitPrice": 400,
+        "totalCost": 6800,
         "allocations": [
           {
-            "branch": "KODIHALLI",
             "branchId": "BR002",
-            "qty": 3,
-            "received": 3
+            "branch": "Kodihalli",
+            "qty": 17,
+          "allocated": 17,
+          "received": 17
           }
         ]
       },
       {
         "productId": "PRD021",
         "productName": "Capsicum Green",
-        "qty": 5,
         "unit": "Crates",
-        "rate": 700,
-        "amount": 3500,
+        "totalQuantity": 9,
+        "unitPrice": 700,
+        "totalCost": 6300,
         "allocations": [
           {
-            "branch": "KODIHALLI",
             "branchId": "BR002",
-            "qty": 5,
-            "received": 5
+            "branch": "Kodihalli",
+            "qty": 9,
+          "allocated": 9,
+          "received": 9
           }
         ]
       },
       {
         "productId": "PRD032",
         "productName": "Cauliflower",
-        "qty": 2,
         "unit": "Crates",
-        "rate": 600,
-        "amount": 1200,
+        "totalQuantity": 16,
+        "unitPrice": 600,
+        "totalCost": 9600,
         "allocations": [
           {
-            "branch": "KODIHALLI",
             "branchId": "BR002",
-            "qty": 2,
-            "received": 2
+            "branch": "Kodihalli",
+            "qty": 16,
+          "allocated": 16,
+          "received": 16
           }
         ]
       },
       {
         "productId": "PRD022",
         "productName": "Cabbage Green",
-        "qty": 7,
         "unit": "Bags",
-        "rate": 420,
-        "amount": 2940,
+        "totalQuantity": 8,
+        "unitPrice": 420,
+        "totalCost": 3360,
         "allocations": [
           {
-            "branch": "KODIHALLI",
             "branchId": "BR002",
-            "qty": 7,
-            "received": 7
+            "branch": "Kodihalli",
+            "qty": 8,
+          "allocated": 8,
+          "received": 8
           }
         ]
       },
       {
         "productId": "PRD005",
         "productName": "Green Beans",
-        "qty": 4,
         "unit": "Bags",
-        "rate": 900,
-        "amount": 3600,
+        "totalQuantity": 15,
+        "unitPrice": 900,
+        "totalCost": 13500,
         "allocations": [
           {
-            "branch": "KODIHALLI",
             "branchId": "BR002",
-            "qty": 4,
-            "received": 4
+            "branch": "Kodihalli",
+            "qty": 15,
+          "allocated": 15,
+          "received": 15
           }
         ]
       },
       {
         "productId": "PRD006",
         "productName": "Ladies Finger",
-        "qty": 5,
         "unit": "Crates",
-        "rate": 650,
-        "amount": 3250,
+        "totalQuantity": 7,
+        "unitPrice": 650,
+        "totalCost": 4550,
         "allocations": [
           {
-            "branch": "KODIHALLI",
             "branchId": "BR002",
-            "qty": 5,
-            "received": 5
+            "branch": "Kodihalli",
+            "qty": 7,
+          "allocated": 7,
+          "received": 7
           }
         ]
       },
       {
         "productId": "PRD012",
         "productName": "Radish White",
-        "qty": 3,
         "unit": "Bags",
-        "rate": 480,
-        "amount": 1440,
+        "totalQuantity": 14,
+        "unitPrice": 480,
+        "totalCost": 6720,
         "allocations": [
           {
-            "branch": "KODIHALLI",
             "branchId": "BR002",
-            "qty": 3,
-            "received": 3
+            "branch": "Kodihalli",
+            "qty": 14,
+          "allocated": 14,
+          "received": 14
           }
         ]
       },
       {
         "productId": "PRD057",
         "productName": "Beetroot",
-        "qty": 4,
         "unit": "Bags",
-        "rate": 750,
-        "amount": 3000,
+        "totalQuantity": 6,
+        "unitPrice": 750,
+        "totalCost": 4500,
         "allocations": [
           {
-            "branch": "KODIHALLI",
             "branchId": "BR002",
-            "qty": 4,
-            "received": 4
+            "branch": "Kodihalli",
+            "qty": 6,
+          "allocated": 6,
+          "received": 6
           }
         ]
       },
       {
         "productId": "PRD049",
         "productName": "Ridge Gourd (Hirekayi)",
-        "qty": 2,
         "unit": "Bags",
-        "rate": 500,
-        "amount": 1000,
+        "totalQuantity": 13,
+        "unitPrice": 500,
+        "totalCost": 6500,
         "allocations": [
           {
-            "branch": "KODIHALLI",
             "branchId": "BR002",
-            "qty": 2,
-            "received": 2
+            "branch": "Kodihalli",
+            "qty": 13,
+          "allocated": 13,
+          "received": 13
           }
         ]
       },
       {
         "productId": "PRD187",
         "productName": "Akash Chilli",
-        "qty": 8,
         "unit": "Kg",
-        "rate": 60,
-        "amount": 480,
+        "totalQuantity": 5,
+        "unitPrice": 60,
+        "totalCost": 300,
         "allocations": [
           {
-            "branch": "KODIHALLI",
             "branchId": "BR002",
-            "qty": 8,
-            "received": 8
+            "branch": "Kodihalli",
+            "qty": 5,
+          "allocated": 5,
+          "received": 5
           }
         ]
       },
       {
         "productId": "PRD008",
         "productName": "Long Beans",
-        "qty": 3,
         "unit": "Kg",
-        "rate": 50,
-        "amount": 150,
+        "totalQuantity": 12,
+        "unitPrice": 50,
+        "totalCost": 600,
         "allocations": [
           {
-            "branch": "KODIHALLI",
             "branchId": "BR002",
-            "qty": 3,
-            "received": 3
+            "branch": "Kodihalli",
+            "qty": 12,
+          "allocated": 12,
+          "received": 12
           }
         ]
       },
       {
         "productId": "PRD014",
-        "productName": "Brinjal Mysore",
-        "qty": 5,
+        "productName": "Small Brinjal Green",
         "unit": "Crates",
-        "rate": 480,
-        "amount": 2400,
+        "totalQuantity": 4,
+        "unitPrice": 480,
+        "totalCost": 1920,
         "allocations": [
           {
-            "branch": "KODIHALLI",
             "branchId": "BR002",
-            "qty": 5,
-            "received": 5
+            "branch": "Kodihalli",
+            "qty": 4,
+          "allocated": 4,
+          "received": 4
           }
         ]
       },
       {
         "productId": "PRD188",
-        "productName": "Rampuri Brinjal",
-        "qty": 4,
+        "productName": "Small Brinjal Purple",
         "unit": "Crates",
-        "rate": 500,
-        "amount": 2000,
+        "totalQuantity": 11,
+        "unitPrice": 500,
+        "totalCost": 5500,
         "allocations": [
           {
-            "branch": "KODIHALLI",
             "branchId": "BR002",
-            "qty": 4,
-            "received": 4
+            "branch": "Kodihalli",
+            "qty": 11,
+          "allocated": 11,
+          "received": 11
           }
         ]
       },
       {
         "productId": "PRD015",
-        "productName": "Brinjal Green",
-        "qty": 6,
+        "productName": "Long Brinjal Green",
         "unit": "Crates",
-        "rate": 480,
-        "amount": 2880,
+        "totalQuantity": 3,
+        "unitPrice": 480,
+        "totalCost": 1440,
         "allocations": [
           {
-            "branch": "KODIHALLI",
             "branchId": "BR002",
-            "qty": 6,
-            "received": 6
+            "branch": "Kodihalli",
+            "qty": 3,
+          "allocated": 3,
+          "received": 3
           }
         ]
       },
       {
         "productId": "PRD189",
-        "productName": "L Brinjal Purple",
-        "qty": 3,
+        "productName": "Long Brinjal Purple",
         "unit": "Crates",
-        "rate": 520,
-        "amount": 1560,
+        "totalQuantity": 10,
+        "unitPrice": 520,
+        "totalCost": 5200,
         "allocations": [
           {
-            "branch": "KODIHALLI",
             "branchId": "BR002",
-            "qty": 3,
-            "received": 3
+            "branch": "Kodihalli",
+            "qty": 10,
+          "allocated": 10,
+          "received": 10
           }
         ]
       },
       {
-        "productId": "PRD016",
-        "productName": "Brinjal Bhartha",
-        "qty": 4,
+        "productId": "PRD205",
+        "productName": "Bharta Black",
         "unit": "Crates",
-        "rate": 480,
-        "amount": 1920,
+        "totalQuantity": 17,
+        "unitPrice": 550,
+        "totalCost": 9350,
         "allocations": [
           {
-            "branch": "KODIHALLI",
             "branchId": "BR002",
-            "qty": 4,
-            "received": 4
+            "branch": "Kodihalli",
+            "qty": 17,
+          "allocated": 17,
+          "received": 17
           }
         ]
       },
       {
         "productId": "PRD190",
         "productName": "Bengali Bharta",
-        "qty": 5,
         "unit": "Crates",
-        "rate": 550,
-        "amount": 2750,
+        "totalQuantity": 9,
+        "unitPrice": 550,
+        "totalCost": 4950,
         "allocations": [
           {
-            "branch": "KODIHALLI",
             "branchId": "BR002",
-            "qty": 5,
-            "received": 5
+            "branch": "Kodihalli",
+            "qty": 9,
+          "allocated": 9,
+          "received": 9
           }
         ]
       },
       {
         "productId": "PRD191",
         "productName": "Totapuri",
-        "qty": 6,
         "unit": "Crates",
-        "rate": 600,
-        "amount": 3600,
+        "totalQuantity": 16,
+        "unitPrice": 600,
+        "totalCost": 9600,
         "allocations": [
           {
-            "branch": "KODIHALLI",
             "branchId": "BR002",
-            "qty": 6,
-            "received": 6
+            "branch": "Kodihalli",
+            "qty": 16,
+          "allocated": 16,
+          "received": 16
           }
         ]
       },
       {
         "productId": "PRD125",
         "productName": "Parval (Pointed Gourd)",
-        "qty": 4,
         "unit": "Crates",
-        "rate": 650,
-        "amount": 2600,
+        "totalQuantity": 8,
+        "unitPrice": 650,
+        "totalCost": 5200,
         "allocations": [
           {
-            "branch": "KODIHALLI",
             "branchId": "BR002",
-            "qty": 4,
-            "received": 4
+            "branch": "Kodihalli",
+            "qty": 8,
+          "allocated": 8,
+          "received": 8
           }
         ]
       },
       {
         "productId": "PRD192",
         "productName": "Big Chilli",
-        "qty": 6,
         "unit": "Crates",
-        "rate": 620,
-        "amount": 3720,
+        "totalQuantity": 15,
+        "unitPrice": 620,
+        "totalCost": 9300,
         "allocations": [
           {
-            "branch": "KODIHALLI",
             "branchId": "BR002",
-            "qty": 6,
-            "received": 6
+            "branch": "Kodihalli",
+            "qty": 15,
+          "allocated": 15,
+          "received": 15
           }
         ]
       },
       {
         "productId": "PRD058",
-        "productName": "Bajji Chilli (Bhavnagri)",
-        "qty": 3,
+        "productName": "Bhajji Chilly",
         "unit": "Crates",
-        "rate": 650,
-        "amount": 1950,
+        "totalQuantity": 7,
+        "unitPrice": 650,
+        "totalCost": 4550,
         "allocations": [
           {
-            "branch": "KODIHALLI",
             "branchId": "BR002",
-            "qty": 3,
-            "received": 3
+            "branch": "Kodihalli",
+            "qty": 7,
+          "allocated": 7,
+          "received": 7
           }
         ]
       },
       {
         "productId": "PRD170",
-        "productName": "Sem Beans",
-        "qty": 5,
+        "productName": "Sem",
         "unit": "Kg",
-        "rate": 55,
-        "amount": 275,
+        "totalQuantity": 14,
+        "unitPrice": 55,
+        "totalCost": 770,
         "allocations": [
           {
-            "branch": "KODIHALLI",
             "branchId": "BR002",
-            "qty": 5,
-            "received": 5
+            "branch": "Kodihalli",
+            "qty": 14,
+          "allocated": 14,
+          "received": 14
           }
         ]
       },
       {
         "productId": "PRD053",
         "productName": "Avarakkai",
-        "qty": 2,
         "unit": "Kg",
-        "rate": 55,
-        "amount": 110,
+        "totalQuantity": 6,
+        "unitPrice": 55,
+        "totalCost": 330,
         "allocations": [
           {
-            "branch": "KODIHALLI",
             "branchId": "BR002",
-            "qty": 2,
-            "received": 2
+            "branch": "Kodihalli",
+            "qty": 6,
+          "allocated": 6,
+          "received": 6
           }
         ]
       },
       {
         "productId": "PRD009",
         "productName": "Green Peas",
-        "qty": 7,
         "unit": "Bags",
-        "rate": 1400,
-        "amount": 9800,
+        "totalQuantity": 13,
+        "unitPrice": 1400,
+        "totalCost": 18200,
         "allocations": [
           {
-            "branch": "KODIHALLI",
             "branchId": "BR002",
-            "qty": 7,
-            "received": 7
+            "branch": "Kodihalli",
+            "qty": 13,
+          "allocated": 13,
+          "received": 13
           }
         ]
       },
       {
         "productId": "PRD169",
         "productName": "Matki Falli (Moth Pods)",
-        "qty": 4,
         "unit": "Kg",
-        "rate": 65,
-        "amount": 260,
+        "totalQuantity": 5,
+        "unitPrice": 65,
+        "totalCost": 325,
         "allocations": [
           {
-            "branch": "KODIHALLI",
             "branchId": "BR002",
-            "qty": 4,
-            "received": 4
+            "branch": "Kodihalli",
+            "qty": 5,
+          "allocated": 5,
+          "received": 5
           }
         ]
       },
       {
         "productId": "PRD183",
         "productName": "Small Karela (S.Karela)",
-        "qty": 5,
         "unit": "Crates",
-        "rate": 600,
-        "amount": 3000,
+        "totalQuantity": 12,
+        "unitPrice": 600,
+        "totalCost": 7200,
         "allocations": [
           {
-            "branch": "KODIHALLI",
             "branchId": "BR002",
-            "qty": 5,
-            "received": 5
+            "branch": "Kodihalli",
+            "qty": 12,
+          "allocated": 12,
+          "received": 12
           }
         ]
       },
       {
         "productId": "PRD020",
         "productName": "Bitter Gourd",
-        "qty": 3,
         "unit": "Crates",
-        "rate": 600,
-        "amount": 1800,
+        "totalQuantity": 4,
+        "unitPrice": 600,
+        "totalCost": 2400,
         "allocations": [
           {
-            "branch": "KODIHALLI",
             "branchId": "BR002",
-            "qty": 3,
-            "received": 3
+            "branch": "Kodihalli",
+            "qty": 4,
+          "allocated": 4,
+          "received": 4
           }
         ]
       },
       {
         "productId": "PRD017",
         "productName": "Amla",
-        "qty": 4,
         "unit": "Kg",
-        "rate": 60,
-        "amount": 240,
+        "totalQuantity": 11,
+        "unitPrice": 60,
+        "totalCost": 660,
         "allocations": [
           {
-            "branch": "KODIHALLI",
             "branchId": "BR002",
-            "qty": 4,
-            "received": 4
+            "branch": "Kodihalli",
+            "qty": 11,
+          "allocated": 11,
+          "received": 11
           }
         ]
       },
       {
         "productId": "PRD037",
         "productName": "Kovakkai / Kundru (Tindora)",
-        "qty": 2,
         "unit": "Crates",
-        "rate": 550,
-        "amount": 1100,
+        "totalQuantity": 3,
+        "unitPrice": 550,
+        "totalCost": 1650,
         "allocations": [
           {
-            "branch": "KODIHALLI",
             "branchId": "BR002",
-            "qty": 2,
-            "received": 2
+            "branch": "Kodihalli",
+            "qty": 3,
+          "allocated": 3,
+          "received": 3
           }
         ]
       },
       {
         "productId": "PRD011",
         "productName": "Nookkol",
-        "qty": 8,
         "unit": "Bags",
-        "rate": 520,
-        "amount": 4160,
+        "totalQuantity": 10,
+        "unitPrice": 520,
+        "totalCost": 5200,
         "allocations": [
           {
-            "branch": "KODIHALLI",
             "branchId": "BR002",
-            "qty": 8,
-            "received": 8
+            "branch": "Kodihalli",
+            "qty": 10,
+          "allocated": 10,
+          "received": 10
           }
         ]
       },
       {
         "productId": "PRD010",
         "productName": "Chow Chow",
-        "qty": 3,
         "unit": "Bags",
-        "rate": 450,
-        "amount": 1350,
+        "totalQuantity": 17,
+        "unitPrice": 450,
+        "totalCost": 7650,
         "allocations": [
           {
-            "branch": "KODIHALLI",
             "branchId": "BR002",
-            "qty": 3,
-            "received": 3
+            "branch": "Kodihalli",
+            "qty": 17,
+          "allocated": 17,
+          "received": 17
           }
         ]
       },
       {
         "productId": "PRD030",
         "productName": "Raw Green Papaya",
-        "qty": 5,
         "unit": "Crates",
-        "rate": 650,
-        "amount": 3250,
+        "totalQuantity": 9,
+        "unitPrice": 650,
+        "totalCost": 5850,
         "allocations": [
           {
-            "branch": "KODIHALLI",
             "branchId": "BR002",
-            "qty": 5,
-            "received": 5
+            "branch": "Kodihalli",
+            "qty": 9,
+          "allocated": 9,
+          "received": 9
           }
         ]
       },
       {
         "productId": "PRD024",
         "productName": "Raw Banana (Cooking)",
-        "qty": 4,
         "unit": "Bunches",
-        "rate": 350,
-        "amount": 1400,
+        "totalQuantity": 16,
+        "unitPrice": 350,
+        "totalCost": 5600,
         "allocations": [
           {
-            "branch": "KODIHALLI",
             "branchId": "BR002",
-            "qty": 4,
-            "received": 4
+            "branch": "Kodihalli",
+            "qty": 16,
+          "allocated": 16,
+          "received": 16
           }
         ]
       },
       {
         "productId": "PRD038",
         "productName": "Snake Gourd (Padavalakai)",
-        "qty": 6,
         "unit": "Bags",
-        "rate": 420,
-        "amount": 2520,
+        "totalQuantity": 8,
+        "unitPrice": 420,
+        "totalCost": 3360,
         "allocations": [
           {
-            "branch": "KODIHALLI",
             "branchId": "BR002",
-            "qty": 6,
-            "received": 6
+            "branch": "Kodihalli",
+            "qty": 8,
+          "allocated": 8,
+          "received": 8
           }
         ]
       },
       {
         "productId": "PRD193",
         "productName": "Kandrela",
-        "qty": 3,
         "unit": "Kg",
-        "rate": 90,
-        "amount": 270,
+        "totalQuantity": 15,
+        "unitPrice": 90,
+        "totalCost": 1350,
         "allocations": [
           {
-            "branch": "KODIHALLI",
             "branchId": "BR002",
-            "qty": 3,
-            "received": 3
+            "branch": "Kodihalli",
+            "qty": 15,
+          "allocated": 15,
+          "received": 15
           }
         ]
       },
       {
         "productId": "PRD145",
         "productName": "B GUARD WIT",
-        "qty": 4,
         "unit": "Kg",
-        "rate": 45,
-        "amount": 180,
+        "totalQuantity": 7,
+        "unitPrice": 45,
+        "totalCost": 315,
         "allocations": [
           {
-            "branch": "KODIHALLI",
             "branchId": "BR002",
-            "qty": 4,
-            "received": 4
+            "branch": "Kodihalli",
+            "qty": 7,
+          "allocated": 7,
+          "received": 7
           }
         ]
       },
       {
         "productId": "PRD171",
         "productName": "Ballar Falli (Avarekalu)",
-        "qty": 5,
         "unit": "Kg",
-        "rate": 55,
-        "amount": 275,
+        "totalQuantity": 14,
+        "unitPrice": 55,
+        "totalCost": 770,
         "allocations": [
           {
-            "branch": "KODIHALLI",
             "branchId": "BR002",
-            "qty": 5,
-            "received": 5
+            "branch": "Kodihalli",
+            "qty": 14,
+          "allocated": 14,
+          "received": 14
           }
         ]
       },
       {
         "productId": "PRD018",
         "productName": "Avarakkai",
-        "qty": 6,
         "unit": "Kg",
-        "rate": 55,
-        "amount": 330,
+        "totalQuantity": 6,
+        "unitPrice": 55,
+        "totalCost": 330,
         "allocations": [
           {
-            "branch": "KODIHALLI",
             "branchId": "BR002",
+            "branch": "Kodihalli",
             "qty": 6,
-            "received": 6
+          "allocated": 6,
+          "received": 6
           }
         ]
       },
       {
         "productId": "PRD156",
         "productName": "Turmeric Raw (Haldi)",
-        "qty": 4,
         "unit": "Kg",
-        "rate": 90,
-        "amount": 360,
+        "totalQuantity": 13,
+        "unitPrice": 90,
+        "totalCost": 1170,
         "allocations": [
           {
-            "branch": "KODIHALLI",
             "branchId": "BR002",
-            "qty": 4,
-            "received": 4
+            "branch": "Kodihalli",
+            "qty": 13,
+          "allocated": 13,
+          "received": 13
           }
         ]
       },
       {
         "productId": "PRD029",
         "productName": "Drumstick",
-        "qty": 6,
         "unit": "Bags",
-        "rate": 550,
-        "amount": 3300,
+        "totalQuantity": 5,
+        "unitPrice": 550,
+        "totalCost": 2750,
         "allocations": [
           {
-            "branch": "KODIHALLI",
             "branchId": "BR002",
-            "qty": 6,
-            "received": 6
+            "branch": "Kodihalli",
+            "qty": 5,
+          "allocated": 5,
+          "received": 5
           }
         ]
       },
       {
         "productId": "PRD031",
         "productName": "Lemon Standard",
-        "qty": 3,
         "unit": "Bags",
-        "rate": 650,
-        "amount": 1950,
+        "totalQuantity": 12,
+        "unitPrice": 650,
+        "totalCost": 7800,
         "allocations": [
           {
-            "branch": "KODIHALLI",
             "branchId": "BR002",
-            "qty": 3,
-            "received": 3
+            "branch": "Kodihalli",
+            "qty": 12,
+          "allocated": 12,
+          "received": 12
           }
         ]
       },
       {
         "productId": "PRD034",
-        "productName": "Arbi (Colocasia)",
-        "qty": 5,
+        "productName": "Arvi",
         "unit": "Bags",
-        "rate": 750,
-        "amount": 3750,
+        "totalQuantity": 4,
+        "unitPrice": 750,
+        "totalCost": 3000,
         "allocations": [
           {
-            "branch": "KODIHALLI",
             "branchId": "BR002",
-            "qty": 5,
-            "received": 5
+            "branch": "Kodihalli",
+            "qty": 4,
+          "allocated": 4,
+          "received": 4
           }
         ]
       },
       {
         "productId": "PRD045",
         "productName": "Coriander (Kothmir)",
-        "qty": 2,
         "unit": "Bunches",
-        "rate": 25,
-        "amount": 50,
+        "totalQuantity": 11,
+        "unitPrice": 25,
+        "totalCost": 275,
         "allocations": [
           {
-            "branch": "KODIHALLI",
             "branchId": "BR002",
-            "qty": 2,
-            "received": 2
+            "branch": "Kodihalli",
+            "qty": 11,
+          "allocated": 11,
+          "received": 11
           }
         ]
       },
       {
         "productId": "PRD194",
         "productName": "Naati",
-        "qty": 7,
         "unit": "Bunches",
-        "rate": 15,
-        "amount": 105,
+        "totalQuantity": 3,
+        "unitPrice": 15,
+        "totalCost": 45,
         "allocations": [
           {
-            "branch": "KODIHALLI",
             "branchId": "BR002",
-            "qty": 7,
-            "received": 7
+            "branch": "Kodihalli",
+            "qty": 3,
+          "allocated": 3,
+          "received": 3
           }
         ]
       },
       {
         "productId": "PRD042",
         "productName": "Pudina (Mint)",
-        "qty": 4,
         "unit": "Bunches",
-        "rate": 25,
-        "amount": 100,
+        "totalQuantity": 10,
+        "unitPrice": 25,
+        "totalCost": 250,
         "allocations": [
           {
-            "branch": "KODIHALLI",
             "branchId": "BR002",
-            "qty": 4,
-            "received": 4
+            "branch": "Kodihalli",
+            "qty": 10,
+          "allocated": 10,
+          "received": 10
           }
         ]
       },
       {
         "productId": "PRD041",
         "productName": "Curry Leaf",
-        "qty": 5,
         "unit": "Bunches",
-        "rate": 25,
-        "amount": 125,
+        "totalQuantity": 17,
+        "unitPrice": 25,
+        "totalCost": 425,
         "allocations": [
           {
-            "branch": "KODIHALLI",
             "branchId": "BR002",
-            "qty": 5,
-            "received": 5
+            "branch": "Kodihalli",
+            "qty": 17,
+          "allocated": 17,
+          "received": 17
           }
         ]
       },
       {
         "productId": "PRD043",
         "productName": "Palak (Spinach)",
-        "qty": 3,
         "unit": "Bunches",
-        "rate": 25,
-        "amount": 75,
+        "totalQuantity": 9,
+        "unitPrice": 25,
+        "totalCost": 225,
         "allocations": [
           {
-            "branch": "KODIHALLI",
             "branchId": "BR002",
-            "qty": 3,
-            "received": 3
+            "branch": "Kodihalli",
+            "qty": 9,
+          "allocated": 9,
+          "received": 9
           }
         ]
       },
       {
         "productId": "PRD044",
         "productName": "Methi (Fenugreek)",
-        "qty": 4,
         "unit": "Bunches",
-        "rate": 25,
-        "amount": 100,
+        "totalQuantity": 16,
+        "unitPrice": 25,
+        "totalCost": 400,
         "allocations": [
           {
-            "branch": "KODIHALLI",
             "branchId": "BR002",
-            "qty": 4,
-            "received": 4
+            "branch": "Kodihalli",
+            "qty": 16,
+          "allocated": 16,
+          "received": 16
           }
         ]
       },
       {
         "productId": "PRD046",
         "productName": "Spring Onion",
-        "qty": 2,
         "unit": "Bunches",
-        "rate": 28,
-        "amount": 56,
+        "totalQuantity": 8,
+        "unitPrice": 28,
+        "totalCost": 224,
         "allocations": [
           {
-            "branch": "KODIHALLI",
             "branchId": "BR002",
-            "qty": 2,
-            "received": 2
+            "branch": "Kodihalli",
+            "qty": 8,
+          "allocated": 8,
+          "received": 8
           }
         ]
       },
       {
         "productId": "PRD195",
         "productName": "Sabakki",
-        "qty": 8,
         "unit": "Bunches",
-        "rate": 15,
-        "amount": 120,
+        "totalQuantity": 15,
+        "unitPrice": 15,
+        "totalCost": 225,
         "allocations": [
           {
-            "branch": "KODIHALLI",
             "branchId": "BR002",
-            "qty": 8,
-            "received": 8
+            "branch": "Kodihalli",
+            "qty": 15,
+          "allocated": 15,
+          "received": 15
           }
         ]
       },
       {
         "productId": "PRD143",
         "productName": "S POTATO",
-        "qty": 3,
         "unit": "Kg",
-        "rate": 45,
-        "amount": 135,
+        "totalQuantity": 7,
+        "unitPrice": 45,
+        "totalCost": 315,
         "allocations": [
           {
-            "branch": "KODIHALLI",
             "branchId": "BR002",
-            "qty": 3,
-            "received": 3
+            "branch": "Kodihalli",
+            "qty": 7,
+          "allocated": 7,
+          "received": 7
           }
         ]
       },
       {
         "productId": "PRD085",
         "productName": "Apple Premium",
-        "qty": 5,
         "unit": "Crates",
-        "rate": 2100,
-        "amount": 10500,
+        "totalQuantity": 14,
+        "unitPrice": 2100,
+        "totalCost": 29400,
         "allocations": [
           {
-            "branch": "KODIHALLI",
             "branchId": "BR002",
-            "qty": 5,
-            "received": 5
+            "branch": "Kodihalli",
+            "qty": 14,
+          "allocated": 14,
+          "received": 14
           }
         ]
       },
       {
         "productId": "PRD097",
-        "productName": "Muskmelon",
-        "qty": 4,
+        "productName": "Muskmelon Farm",
         "unit": "Crates",
-        "rate": 600,
-        "amount": 2400,
+        "totalQuantity": 6,
+        "unitPrice": 600,
+        "totalCost": 3600,
         "allocations": [
           {
-            "branch": "KODIHALLI",
             "branchId": "BR002",
-            "qty": 4,
-            "received": 4
+            "branch": "Kodihalli",
+            "qty": 6,
+          "allocated": 6,
+          "received": 6
           }
         ]
       },
       {
-        "productId": "PRD121",
-        "productName": "SWEET MILON",
-        "qty": 6,
-        "unit": "Kg",
-        "rate": 45,
-        "amount": 270,
+        "productId": "PRD218",
+        "productName": "Muskmelon Nati",
+        "unit": "Crates",
+        "totalQuantity": 13,
+        "unitPrice": 650,
+        "totalCost": 8450,
         "allocations": [
           {
-            "branch": "KODIHALLI",
             "branchId": "BR002",
-            "qty": 6,
-            "received": 6
+            "branch": "Kodihalli",
+            "qty": 13,
+          "allocated": 13,
+          "received": 13
           }
         ]
       },
       {
         "productId": "PRD196",
         "productName": "Pink Lady",
-        "qty": 3,
         "unit": "Crates",
-        "rate": 1850,
-        "amount": 5550,
+        "totalQuantity": 5,
+        "unitPrice": 1850,
+        "totalCost": 9250,
         "allocations": [
           {
-            "branch": "KODIHALLI",
             "branchId": "BR002",
-            "qty": 3,
-            "received": 3
+            "branch": "Kodihalli",
+            "qty": 5,
+          "allocated": 5,
+          "received": 5
           }
         ]
       },
       {
         "productId": "PRD174",
         "productName": "Persimmon Fruit",
-        "qty": 4,
         "unit": "Boxes",
-        "rate": 850,
-        "amount": 3400,
+        "totalQuantity": 12,
+        "unitPrice": 850,
+        "totalCost": 10200,
         "allocations": [
           {
-            "branch": "KODIHALLI",
             "branchId": "BR002",
-            "qty": 4,
-            "received": 4
+            "branch": "Kodihalli",
+            "qty": 12,
+          "allocated": 12,
+          "received": 12
           }
         ]
       },
       {
         "productId": "PRD073",
         "productName": "Apple Green (Granny Smith)",
-        "qty": 5,
         "unit": "Crates",
-        "rate": 2100,
-        "amount": 10500,
+        "totalQuantity": 4,
+        "unitPrice": 2100,
+        "totalCost": 8400,
         "allocations": [
           {
-            "branch": "KODIHALLI",
             "branchId": "BR002",
-            "qty": 5,
-            "received": 5
+            "branch": "Kodihalli",
+            "qty": 4,
+          "allocated": 4,
+          "received": 4
           }
         ]
       },
       {
         "productId": "PRD075",
         "productName": "Apple Royal Gala",
-        "qty": 6,
         "unit": "Crates",
-        "rate": 2100,
-        "amount": 12600,
+        "totalQuantity": 11,
+        "unitPrice": 2100,
+        "totalCost": 23100,
         "allocations": [
           {
-            "branch": "KODIHALLI",
             "branchId": "BR002",
-            "qty": 6,
-            "received": 6
+            "branch": "Kodihalli",
+            "qty": 11,
+          "allocated": 11,
+          "received": 11
           }
         ]
       },
       {
         "productId": "PRD072",
         "productName": "Apple China Fuji",
-        "qty": 4,
         "unit": "Crates",
-        "rate": 2100,
-        "amount": 8400,
+        "totalQuantity": 3,
+        "unitPrice": 2100,
+        "totalCost": 6300,
         "allocations": [
           {
-            "branch": "KODIHALLI",
             "branchId": "BR002",
-            "qty": 4,
-            "received": 4
+            "branch": "Kodihalli",
+            "qty": 3,
+          "allocated": 3,
+          "received": 3
           }
         ]
       },
       {
         "productId": "PRD090",
         "productName": "Pear Green",
-        "qty": 6,
         "unit": "Boxes",
-        "rate": 1450,
-        "amount": 8700,
+        "totalQuantity": 10,
+        "unitPrice": 1450,
+        "totalCost": 14500,
         "allocations": [
           {
-            "branch": "KODIHALLI",
             "branchId": "BR002",
-            "qty": 6,
-            "received": 6
+            "branch": "Kodihalli",
+            "qty": 10,
+          "allocated": 10,
+          "received": 10
           }
         ]
       },
       {
         "productId": "PRD091",
         "productName": "Golden Pear",
-        "qty": 3,
         "unit": "Boxes",
-        "rate": 1450,
-        "amount": 4350,
+        "totalQuantity": 17,
+        "unitPrice": 1450,
+        "totalCost": 24650,
         "allocations": [
           {
-            "branch": "KODIHALLI",
             "branchId": "BR002",
-            "qty": 3,
-            "received": 3
+            "branch": "Kodihalli",
+            "qty": 17,
+          "allocated": 17,
+          "received": 17
           }
         ]
       },
       {
         "productId": "PRD084",
         "productName": "Kiwi Fruit",
-        "qty": 5,
         "unit": "Boxes",
-        "rate": 850,
-        "amount": 4250,
+        "totalQuantity": 9,
+        "unitPrice": 850,
+        "totalCost": 7650,
         "allocations": [
           {
-            "branch": "KODIHALLI",
             "branchId": "BR002",
-            "qty": 5,
-            "received": 5
+            "branch": "Kodihalli",
+            "qty": 9,
+          "allocated": 9,
+          "received": 9
           }
         ]
       },
       {
         "productId": "PRD166",
         "productName": "Chiku (Sapota)",
-        "qty": 2,
         "unit": "Crates",
-        "rate": 650,
-        "amount": 1300,
+        "totalQuantity": 16,
+        "unitPrice": 650,
+        "totalCost": 10400,
         "allocations": [
           {
-            "branch": "KODIHALLI",
             "branchId": "BR002",
-            "qty": 2,
-            "received": 2
+            "branch": "Kodihalli",
+            "qty": 16,
+          "allocated": 16,
+          "received": 16
           }
         ]
       },
       {
         "productId": "PRD081",
         "productName": "Grapes Green Thompson",
-        "qty": 7,
         "unit": "Crates",
-        "rate": 1200,
-        "amount": 8400,
+        "totalQuantity": 8,
+        "unitPrice": 1200,
+        "totalCost": 9600,
         "allocations": [
           {
-            "branch": "KODIHALLI",
             "branchId": "BR002",
-            "qty": 7,
-            "received": 7
+            "branch": "Kodihalli",
+            "qty": 8,
+          "allocated": 8,
+          "received": 8
           }
         ]
       },
       {
         "productId": "PRD080",
         "productName": "Grapes Black Seedless",
-        "qty": 4,
         "unit": "Crates",
-        "rate": 1200,
-        "amount": 4800,
+        "totalQuantity": 15,
+        "unitPrice": 1200,
+        "totalCost": 18000,
         "allocations": [
           {
-            "branch": "KODIHALLI",
             "branchId": "BR002",
-            "qty": 4,
-            "received": 4
+            "branch": "Kodihalli",
+            "qty": 15,
+          "allocated": 15,
+          "received": 15
           }
         ]
       },
       {
         "productId": "PRD079",
         "productName": "Grapes Red Globe Imported",
-        "qty": 5,
         "unit": "Crates",
-        "rate": 1200,
-        "amount": 6000,
+        "totalQuantity": 7,
+        "unitPrice": 1200,
+        "totalCost": 8400,
         "allocations": [
           {
-            "branch": "KODIHALLI",
             "branchId": "BR002",
-            "qty": 5,
-            "received": 5
+            "branch": "Kodihalli",
+            "qty": 7,
+          "allocated": 7,
+          "received": 7
           }
         ]
       },
       {
         "productId": "PRD077",
         "productName": "Anar (Pomegranate)",
-        "qty": 3,
         "unit": "Boxes",
-        "rate": 1650,
-        "amount": 4950,
+        "totalQuantity": 14,
+        "unitPrice": 1650,
+        "totalCost": 23100,
         "allocations": [
           {
-            "branch": "KODIHALLI",
             "branchId": "BR002",
-            "qty": 3,
-            "received": 3
+            "branch": "Kodihalli",
+            "qty": 14,
+          "allocated": 14,
+          "received": 14
           }
         ]
       },
       {
         "productId": "PRD197",
         "productName": "Pomegranate Big",
-        "qty": 4,
         "unit": "Boxes",
-        "rate": 1400,
-        "amount": 5600,
+        "totalQuantity": 6,
+        "unitPrice": 1400,
+        "totalCost": 8400,
         "allocations": [
           {
-            "branch": "KODIHALLI",
             "branchId": "BR002",
-            "qty": 4,
-            "received": 4
+            "branch": "Kodihalli",
+            "qty": 6,
+          "allocated": 6,
+          "received": 6
           }
         ]
       },
       {
         "productId": "PRD099",
         "productName": "Butter Fruit (Avocado)",
-        "qty": 2,
         "unit": "Crates",
-        "rate": 1500,
-        "amount": 3000,
+        "totalQuantity": 13,
+        "unitPrice": 1500,
+        "totalCost": 19500,
         "allocations": [
           {
-            "branch": "KODIHALLI",
             "branchId": "BR002",
-            "qty": 2,
-            "received": 2
+            "branch": "Kodihalli",
+            "qty": 13,
+          "allocated": 13,
+          "received": 13
           }
         ]
       },
       {
         "productId": "PRD173",
-        "productName": "Dragon Fruit (Pitaya)",
-        "qty": 8,
+        "productName": "Dragon Fruit Red",
         "unit": "Boxes",
-        "rate": 900,
-        "amount": 7200,
+        "totalQuantity": 5,
+        "unitPrice": 900,
+        "totalCost": 4500,
         "allocations": [
           {
-            "branch": "KODIHALLI",
             "branchId": "BR002",
-            "qty": 8,
-            "received": 8
+            "branch": "Kodihalli",
+            "qty": 5,
+          "allocated": 5,
+          "received": 5
           }
         ]
       },
       {
         "productId": "PRD198",
-        "productName": "Wht Dragon",
-        "qty": 3,
+        "productName": "Dragon Fruit White",
         "unit": "Boxes",
-        "rate": 1100,
-        "amount": 3300,
+        "totalQuantity": 12,
+        "unitPrice": 1100,
+        "totalCost": 13200,
         "allocations": [
           {
-            "branch": "KODIHALLI",
             "branchId": "BR002",
-            "qty": 3,
-            "received": 3
+            "branch": "Kodihalli",
+            "qty": 12,
+          "allocated": 12,
+          "received": 12
           }
         ]
       },
       {
-        "productId": "PRD180",
-        "productName": "MADRIN",
-        "qty": 5,
-        "unit": "Kg",
-        "rate": 45,
-        "amount": 225,
+        "productId": "PRD104",
+        "productName": "Madrin",
+        "unit": "Crates",
+        "totalQuantity": 4,
+        "unitPrice": 1350,
+        "totalCost": 5400,
         "allocations": [
           {
-            "branch": "KODIHALLI",
             "branchId": "BR002",
-            "qty": 5,
-            "received": 5
+            "branch": "Kodihalli",
+            "qty": 4,
+          "allocated": 4,
+          "received": 4
           }
         ]
       },
       {
         "productId": "PRD101",
         "productName": "Guava (Allahabad Safeda)",
-        "qty": 4,
         "unit": "Crates",
-        "rate": 650,
-        "amount": 2600,
+        "totalQuantity": 11,
+        "unitPrice": 650,
+        "totalCost": 7150,
         "allocations": [
           {
-            "branch": "KODIHALLI",
             "branchId": "BR002",
-            "qty": 4,
-            "received": 4
+            "branch": "Kodihalli",
+            "qty": 11,
+          "allocated": 11,
+          "received": 11
           }
         ]
       },
       {
         "productId": "PRD199",
         "productName": "Nati Gauva",
-        "qty": 6,
         "unit": "Crates",
-        "rate": 550,
-        "amount": 3300,
+        "totalQuantity": 3,
+        "unitPrice": 550,
+        "totalCost": 1650,
         "allocations": [
           {
-            "branch": "KODIHALLI",
             "branchId": "BR002",
-            "qty": 6,
-            "received": 6
+            "branch": "Kodihalli",
+            "qty": 3,
+          "allocated": 3,
+          "received": 3
           }
         ]
       },
       {
         "productId": "PRD094",
         "productName": "Apple Premium",
-        "qty": 3,
         "unit": "Crates",
-        "rate": 2100,
-        "amount": 6300,
+        "totalQuantity": 10,
+        "unitPrice": 2100,
+        "totalCost": 21000,
         "allocations": [
           {
-            "branch": "KODIHALLI",
             "branchId": "BR002",
-            "qty": 3,
-            "received": 3
+            "branch": "Kodihalli",
+            "qty": 10,
+          "allocated": 10,
+          "received": 10
           }
         ]
       },
       {
         "productId": "PRD179",
         "productName": "CITRUS",
-        "qty": 4,
         "unit": "Kg",
-        "rate": 45,
-        "amount": 180,
+        "totalQuantity": 17,
+        "unitPrice": 45,
+        "totalCost": 765,
         "allocations": [
           {
-            "branch": "KODIHALLI",
             "branchId": "BR002",
-            "qty": 4,
-            "received": 4
+            "branch": "Kodihalli",
+            "qty": 17,
+          "allocated": 17,
+          "received": 17
           }
         ]
       },
       {
         "productId": "PRD074",
         "productName": "Apple Premium",
-        "qty": 5,
         "unit": "Crates",
-        "rate": 2100,
-        "amount": 10500,
+        "totalQuantity": 9,
+        "unitPrice": 2100,
+        "totalCost": 18900,
         "allocations": [
           {
-            "branch": "KODIHALLI",
             "branchId": "BR002",
-            "qty": 5,
-            "received": 5
+            "branch": "Kodihalli",
+            "qty": 9,
+          "allocated": 9,
+          "received": 9
           }
         ]
       },
       {
         "productId": "PRD076",
         "productName": "Mosambi Sweet Lime",
-        "qty": 6,
         "unit": "Bags",
-        "rate": 1100,
-        "amount": 6600,
+        "totalQuantity": 16,
+        "unitPrice": 1100,
+        "totalCost": 17600,
         "allocations": [
           {
-            "branch": "KODIHALLI",
             "branchId": "BR002",
-            "qty": 6,
-            "received": 6
+            "branch": "Kodihalli",
+            "qty": 16,
+          "allocated": 16,
+          "received": 16
           }
         ]
       },
       {
-        "productId": "PRD104",
-        "productName": "Orange Nagpur Sweet",
-        "qty": 4,
-        "unit": "Crates",
-        "rate": 1350,
-        "amount": 5400,
+        "productId": "PRD180",
+        "productName": "MADRIN",
+        "unit": "Kg",
+        "totalQuantity": 8,
+        "unitPrice": 45,
+        "totalCost": 360,
         "allocations": [
           {
-            "branch": "KODIHALLI",
             "branchId": "BR002",
-            "qty": 4,
-            "received": 4
+            "branch": "Kodihalli",
+            "qty": 8,
+          "allocated": 8,
+          "received": 8
           }
         ]
       },
       {
         "productId": "PRD200",
         "productName": "Malda",
-        "qty": 6,
         "unit": "Crates",
-        "rate": 950,
-        "amount": 5700,
+        "totalQuantity": 15,
+        "unitPrice": 950,
+        "totalCost": 14250,
         "allocations": [
           {
-            "branch": "KODIHALLI",
             "branchId": "BR002",
-            "qty": 6,
-            "received": 6
+            "branch": "Kodihalli",
+            "qty": 15,
+          "allocated": 15,
+          "received": 15
           }
         ]
       },
       {
         "productId": "PRD201",
         "productName": "Kashmiri Apple",
-        "qty": 3,
         "unit": "Crates",
-        "rate": 1650,
-        "amount": 4950,
+        "totalQuantity": 7,
+        "unitPrice": 1650,
+        "totalCost": 11550,
         "allocations": [
           {
-            "branch": "KODIHALLI",
             "branchId": "BR002",
-            "qty": 3,
-            "received": 3
+            "branch": "Kodihalli",
+            "qty": 7,
+          "allocated": 7,
+          "received": 7
           }
         ]
       },
       {
         "productId": "PRD070",
         "productName": "Apple Indian (Shimla)",
-        "qty": 5,
         "unit": "Crates",
-        "rate": 2100,
-        "amount": 10500,
+        "totalQuantity": 14,
+        "unitPrice": 2100,
+        "totalCost": 29400,
         "allocations": [
           {
-            "branch": "KODIHALLI",
             "branchId": "BR002",
-            "qty": 5,
-            "received": 5
+            "branch": "Kodihalli",
+            "qty": 14,
+          "allocated": 14,
+          "received": 14
           }
         ]
       },
       {
         "productId": "PRD202",
         "productName": "Misri Apple",
-        "qty": 2,
         "unit": "Crates",
-        "rate": 1700,
-        "amount": 3400,
+        "totalQuantity": 6,
+        "unitPrice": 1700,
+        "totalCost": 10200,
         "allocations": [
           {
-            "branch": "KODIHALLI",
             "branchId": "BR002",
-            "qty": 2,
-            "received": 2
+            "branch": "Kodihalli",
+            "qty": 6,
+          "allocated": 6,
+          "received": 6
           }
         ]
       },
       {
         "productId": "PRD203",
         "productName": "Ooty Apple",
-        "qty": 7,
         "unit": "Crates",
-        "rate": 1600,
-        "amount": 11200,
+        "totalQuantity": 13,
+        "unitPrice": 1600,
+        "totalCost": 20800,
         "allocations": [
           {
-            "branch": "KODIHALLI",
             "branchId": "BR002",
-            "qty": 7,
-            "received": 7
+            "branch": "Kodihalli",
+            "qty": 13,
+          "allocated": 13,
+          "received": 13
           }
         ]
       },
       {
         "productId": "PRD078",
         "productName": "Papaya Ripe (Red Lady)",
-        "qty": 4,
         "unit": "Crates",
-        "rate": 650,
-        "amount": 2600,
+        "totalQuantity": 5,
+        "unitPrice": 650,
+        "totalCost": 3250,
         "allocations": [
           {
-            "branch": "KODIHALLI",
             "branchId": "BR002",
-            "qty": 4,
-            "received": 4
+            "branch": "Kodihalli",
+            "qty": 5,
+          "allocated": 5,
+          "received": 5
           }
         ]
       },
       {
         "productId": "PRD086",
         "productName": "Banana Yellaki",
-        "qty": 5,
         "unit": "Bunches",
-        "rate": 450,
-        "amount": 2250,
+        "totalQuantity": 12,
+        "unitPrice": 450,
+        "totalCost": 5400,
         "allocations": [
           {
-            "branch": "KODIHALLI",
             "branchId": "BR002",
-            "qty": 5,
-            "received": 5
+            "branch": "Kodihalli",
+            "qty": 12,
+          "allocated": 12,
+          "received": 12
           }
         ]
       },
       {
         "productId": "PRD092",
         "productName": "Banana Robusta",
-        "qty": 3,
         "unit": "Bunches",
-        "rate": 450,
-        "amount": 1350,
+        "totalQuantity": 4,
+        "unitPrice": 450,
+        "totalCost": 1800,
         "allocations": [
           {
-            "branch": "KODIHALLI",
             "branchId": "BR002",
-            "qty": 3,
-            "received": 3
+            "branch": "Kodihalli",
+            "qty": 4,
+          "allocated": 4,
+          "received": 4
           }
         ]
       },
       {
         "productId": "PRD088",
-        "productName": "Watermelon Big Dark",
-        "qty": 4,
+        "productName": "Watermelon Normal",
         "unit": "Kg",
-        "rate": 22,
-        "amount": 88,
+        "totalQuantity": 11,
+        "unitPrice": 22,
+        "totalCost": 242,
         "allocations": [
           {
-            "branch": "KODIHALLI",
             "branchId": "BR002",
-            "qty": 4,
-            "received": 4
+            "branch": "Kodihalli",
+            "qty": 11,
+          "allocated": 11,
+          "received": 11
+          }
+        ]
+      },
+      {
+        "productId": "PRD089",
+        "productName": "Watermelon Stripes",
+        "unit": "Kg",
+        "totalQuantity": 3,
+        "unitPrice": 22,
+        "totalCost": 66,
+        "allocations": [
+          {
+            "branchId": "BR002",
+            "branch": "Kodihalli",
+            "qty": 3,
+          "allocated": 3,
+          "received": 3
           }
         ]
       },
       {
         "productId": "PRD087",
         "productName": "Banana Nendran",
-        "qty": 2,
         "unit": "Bunches",
-        "rate": 450,
-        "amount": 900,
+        "totalQuantity": 10,
+        "unitPrice": 450,
+        "totalCost": 4500,
         "allocations": [
           {
-            "branch": "KODIHALLI",
             "branchId": "BR002",
-            "qty": 2,
-            "received": 2
+            "branch": "Kodihalli",
+            "qty": 10,
+          "allocated": 10,
+          "received": 10
           }
         ]
       },
       {
         "productId": "PRD093",
         "productName": "Red Banana",
-        "qty": 8,
         "unit": "Bunches",
-        "rate": 450,
-        "amount": 3600,
+        "totalQuantity": 17,
+        "unitPrice": 450,
+        "totalCost": 7650,
         "allocations": [
           {
-            "branch": "KODIHALLI",
             "branchId": "BR002",
-            "qty": 8,
-            "received": 8
+            "branch": "Kodihalli",
+            "qty": 17,
+          "allocated": 17,
+          "received": 17
           }
         ]
       },
       {
         "productId": "PRD112",
         "productName": "Mango Banganapalli",
-        "qty": 3,
         "unit": "Crates",
-        "rate": 2200,
-        "amount": 6600,
+        "totalQuantity": 9,
+        "unitPrice": 2200,
+        "totalCost": 19800,
         "allocations": [
           {
-            "branch": "KODIHALLI",
             "branchId": "BR002",
-            "qty": 3,
-            "received": 3
+            "branch": "Kodihalli",
+            "qty": 9,
+          "allocated": 9,
+          "received": 9
           }
         ]
       }
@@ -6506,1646 +6720,1764 @@ export const INITIAL_PURCHASE_ORDERS = [
       }
     ],
     "status": "Incoming Delivery"
-  }
-,
+  },
   {
     "id": "PO-20261003-LBS01",
     "supplierName": "K.R. Market & APMC Fruit-Veg Terminal (LBS Nagar)",
     "date": "03 Oct 2026",
     "time": "06:45 AM",
-    "totalAmount": 369493,
+    "totalAmount": 835114,
     "source": "DAILY_STOCK_CHECK_LBS_DISPATCH",
     "manifestReference": "LBS-MORNING-DISPATCH-01",
     "items": [
       {
         "productId": "PRD005",
         "productName": "Green Beans",
-        "qty": 5,
         "unit": "Bags",
-        "rate": 900,
-        "amount": 4500,
+        "totalQuantity": 3,
+        "unitPrice": 900,
+        "totalCost": 2700,
         "allocations": [
           {
-            "branch": "LBS NAGAR",
             "branchId": "BR003",
-            "qty": 5,
-            "received": 5
+            "branch": "LB Shastri Nagar",
+            "qty": 3,
+          "allocated": 3,
+          "received": 3
           }
         ]
       },
       {
         "productId": "PRD004",
         "productName": "Carrot",
-        "qty": 4,
         "unit": "Bags",
-        "rate": 850,
-        "amount": 3400,
+        "totalQuantity": 10,
+        "unitPrice": 850,
+        "totalCost": 8500,
         "allocations": [
           {
-            "branch": "LBS NAGAR",
             "branchId": "BR003",
-            "qty": 4,
-            "received": 4
+            "branch": "LB Shastri Nagar",
+            "qty": 10,
+          "allocated": 10,
+          "received": 10
           }
         ]
       },
       {
         "productId": "PRD023",
         "productName": "Cucumber Local",
-        "qty": 6,
         "unit": "Crates",
-        "rate": 450,
-        "amount": 2700,
+        "totalQuantity": 17,
+        "unitPrice": 450,
+        "totalCost": 7650,
         "allocations": [
           {
-            "branch": "LBS NAGAR",
             "branchId": "BR003",
-            "qty": 6,
-            "received": 6
+            "branch": "LB Shastri Nagar",
+            "qty": 17,
+          "allocated": 17,
+          "received": 17
           }
         ]
       },
       {
         "productId": "PRD057",
         "productName": "Beetroot",
-        "qty": 3,
         "unit": "Bags",
-        "rate": 750,
-        "amount": 2250,
+        "totalQuantity": 9,
+        "unitPrice": 750,
+        "totalCost": 6750,
         "allocations": [
           {
-            "branch": "LBS NAGAR",
             "branchId": "BR003",
-            "qty": 3,
-            "received": 3
+            "branch": "LB Shastri Nagar",
+            "qty": 9,
+          "allocated": 9,
+          "received": 9
           }
         ]
       },
       {
         "productId": "PRD032",
         "productName": "Cauliflower",
-        "qty": 7,
         "unit": "Crates",
-        "rate": 600,
-        "amount": 4200,
+        "totalQuantity": 16,
+        "unitPrice": 600,
+        "totalCost": 9600,
         "allocations": [
           {
-            "branch": "LBS NAGAR",
             "branchId": "BR003",
-            "qty": 7,
-            "received": 7
+            "branch": "LB Shastri Nagar",
+            "qty": 16,
+          "allocated": 16,
+          "received": 16
           }
         ]
       },
       {
         "productId": "PRD022",
         "productName": "Cabbage Green",
-        "qty": 5,
         "unit": "Bags",
-        "rate": 420,
-        "amount": 2100,
+        "totalQuantity": 8,
+        "unitPrice": 420,
+        "totalCost": 3360,
         "allocations": [
           {
-            "branch": "LBS NAGAR",
             "branchId": "BR003",
-            "qty": 5,
-            "received": 5
+            "branch": "LB Shastri Nagar",
+            "qty": 8,
+          "allocated": 8,
+          "received": 8
           }
         ]
       },
       {
         "productId": "PRD028",
         "productName": "Green Chilli",
-        "qty": 4,
         "unit": "Crates",
-        "rate": 650,
-        "amount": 2600,
+        "totalQuantity": 15,
+        "unitPrice": 650,
+        "totalCost": 9750,
         "allocations": [
           {
-            "branch": "LBS NAGAR",
             "branchId": "BR003",
-            "qty": 4,
-            "received": 4
+            "branch": "LB Shastri Nagar",
+            "qty": 15,
+          "allocated": 15,
+          "received": 15
           }
         ]
       },
       {
         "productId": "PRD192",
         "productName": "Big Chilli",
-        "qty": 6,
         "unit": "Crates",
-        "rate": 620,
-        "amount": 3720,
+        "totalQuantity": 7,
+        "unitPrice": 620,
+        "totalCost": 4340,
         "allocations": [
           {
-            "branch": "LBS NAGAR",
             "branchId": "BR003",
-            "qty": 6,
-            "received": 6
+            "branch": "LB Shastri Nagar",
+            "qty": 7,
+          "allocated": 7,
+          "received": 7
           }
         ]
       },
       {
         "productId": "PRD009",
         "productName": "Green Peas",
-        "qty": 3,
         "unit": "Bags",
-        "rate": 1400,
-        "amount": 4200,
+        "totalQuantity": 14,
+        "unitPrice": 1400,
+        "totalCost": 19600,
         "allocations": [
           {
-            "branch": "LBS NAGAR",
             "branchId": "BR003",
-            "qty": 3,
-            "received": 3
+            "branch": "LB Shastri Nagar",
+            "qty": 14,
+          "allocated": 14,
+          "received": 14
           }
         ]
       },
       {
         "productId": "PRD125",
         "productName": "Parval (Pointed Gourd)",
-        "qty": 5,
         "unit": "Crates",
-        "rate": 650,
-        "amount": 3250,
+        "totalQuantity": 6,
+        "unitPrice": 650,
+        "totalCost": 3900,
         "allocations": [
           {
-            "branch": "LBS NAGAR",
             "branchId": "BR003",
-            "qty": 5,
-            "received": 5
+            "branch": "LB Shastri Nagar",
+            "qty": 6,
+          "allocated": 6,
+          "received": 6
           }
         ]
       },
       {
         "productId": "PRD019",
         "productName": "Lauki (Bottle Gourd)",
-        "qty": 4,
         "unit": "Bags",
-        "rate": 400,
-        "amount": 1600,
+        "totalQuantity": 13,
+        "unitPrice": 400,
+        "totalCost": 5200,
         "allocations": [
           {
-            "branch": "LBS NAGAR",
             "branchId": "BR003",
-            "qty": 4,
-            "received": 4
+            "branch": "LB Shastri Nagar",
+            "qty": 13,
+          "allocated": 13,
+          "received": 13
           }
         ]
       },
       {
         "productId": "PRD012",
         "productName": "Radish White",
-        "qty": 3,
         "unit": "Bags",
-        "rate": 480,
-        "amount": 1440,
+        "totalQuantity": 5,
+        "unitPrice": 480,
+        "totalCost": 2400,
         "allocations": [
           {
-            "branch": "LBS NAGAR",
             "branchId": "BR003",
-            "qty": 3,
-            "received": 3
+            "branch": "LB Shastri Nagar",
+            "qty": 5,
+          "allocated": 5,
+          "received": 5
           }
         ]
       },
       {
         "productId": "PRD014",
-        "productName": "Brinjal Mysore",
-        "qty": 6,
+        "productName": "Small Brinjal Green",
         "unit": "Crates",
-        "rate": 480,
-        "amount": 2880,
+        "totalQuantity": 12,
+        "unitPrice": 480,
+        "totalCost": 5760,
         "allocations": [
           {
-            "branch": "LBS NAGAR",
             "branchId": "BR003",
-            "qty": 6,
-            "received": 6
+            "branch": "LB Shastri Nagar",
+            "qty": 12,
+          "allocated": 12,
+          "received": 12
           }
         ]
       },
       {
         "productId": "PRD188",
-        "productName": "Rampuri Brinjal",
-        "qty": 5,
+        "productName": "Small Brinjal Purple",
         "unit": "Crates",
-        "rate": 500,
-        "amount": 2500,
+        "totalQuantity": 4,
+        "unitPrice": 500,
+        "totalCost": 2000,
         "allocations": [
           {
-            "branch": "LBS NAGAR",
             "branchId": "BR003",
-            "qty": 5,
-            "received": 5
+            "branch": "LB Shastri Nagar",
+            "qty": 4,
+          "allocated": 4,
+          "received": 4
           }
         ]
       },
       {
         "productId": "PRD011",
         "productName": "Nookkol",
-        "qty": 2,
         "unit": "Bags",
-        "rate": 520,
-        "amount": 1040,
+        "totalQuantity": 11,
+        "unitPrice": 520,
+        "totalCost": 5720,
         "allocations": [
           {
-            "branch": "LBS NAGAR",
             "branchId": "BR003",
-            "qty": 2,
-            "received": 2
+            "branch": "LB Shastri Nagar",
+            "qty": 11,
+          "allocated": 11,
+          "received": 11
           }
         ]
       },
       {
         "productId": "PRD183",
         "productName": "Small Karela (S.Karela)",
-        "qty": 8,
         "unit": "Crates",
-        "rate": 600,
-        "amount": 4800,
+        "totalQuantity": 3,
+        "unitPrice": 600,
+        "totalCost": 1800,
         "allocations": [
           {
-            "branch": "LBS NAGAR",
             "branchId": "BR003",
-            "qty": 8,
-            "received": 8
+            "branch": "LB Shastri Nagar",
+            "qty": 3,
+          "allocated": 3,
+          "received": 3
           }
         ]
       },
       {
         "productId": "PRD020",
         "productName": "Bitter Gourd",
-        "qty": 4,
         "unit": "Crates",
-        "rate": 600,
-        "amount": 2400,
+        "totalQuantity": 10,
+        "unitPrice": 600,
+        "totalCost": 6000,
         "allocations": [
           {
-            "branch": "LBS NAGAR",
             "branchId": "BR003",
-            "qty": 4,
-            "received": 4
+            "branch": "LB Shastri Nagar",
+            "qty": 10,
+          "allocated": 10,
+          "received": 10
           }
         ]
       },
       {
         "productId": "PRD006",
         "productName": "Ladies Finger",
-        "qty": 5,
         "unit": "Crates",
-        "rate": 650,
-        "amount": 3250,
+        "totalQuantity": 17,
+        "unitPrice": 650,
+        "totalCost": 11050,
         "allocations": [
           {
-            "branch": "LBS NAGAR",
             "branchId": "BR003",
-            "qty": 5,
-            "received": 5
+            "branch": "LB Shastri Nagar",
+            "qty": 17,
+          "allocated": 17,
+          "received": 17
           }
         ]
       },
       {
         "productId": "PRD049",
         "productName": "Ridge Gourd (Hirekayi)",
-        "qty": 6,
         "unit": "Bags",
-        "rate": 500,
-        "amount": 3000,
+        "totalQuantity": 9,
+        "unitPrice": 500,
+        "totalCost": 4500,
         "allocations": [
           {
-            "branch": "LBS NAGAR",
             "branchId": "BR003",
-            "qty": 6,
-            "received": 6
+            "branch": "LB Shastri Nagar",
+            "qty": 9,
+          "allocated": 9,
+          "received": 9
           }
         ]
       },
       {
         "productId": "PRD021",
         "productName": "Capsicum Green",
-        "qty": 4,
         "unit": "Crates",
-        "rate": 700,
-        "amount": 2800,
+        "totalQuantity": 16,
+        "unitPrice": 700,
+        "totalCost": 11200,
         "allocations": [
           {
-            "branch": "LBS NAGAR",
             "branchId": "BR003",
-            "qty": 4,
-            "received": 4
+            "branch": "LB Shastri Nagar",
+            "qty": 16,
+          "allocated": 16,
+          "received": 16
           }
         ]
       },
       {
         "productId": "PRD027",
         "productName": "Ginger",
-        "qty": 5,
         "unit": "Bags",
-        "rate": 1600,
-        "amount": 8000,
+        "totalQuantity": 8,
+        "unitPrice": 1600,
+        "totalCost": 12800,
         "allocations": [
           {
-            "branch": "LBS NAGAR",
             "branchId": "BR003",
-            "qty": 5,
-            "received": 5
+            "branch": "LB Shastri Nagar",
+            "qty": 8,
+          "allocated": 8,
+          "received": 8
           }
         ]
       },
       {
         "productId": "PRD204",
         "productName": "Ginger Old",
-        "qty": 4,
         "unit": "Bags",
-        "rate": 1800,
-        "amount": 7200,
+        "totalQuantity": 15,
+        "unitPrice": 1800,
+        "totalCost": 27000,
         "allocations": [
           {
-            "branch": "LBS NAGAR",
             "branchId": "BR003",
-            "qty": 4,
-            "received": 4
+            "branch": "LB Shastri Nagar",
+            "qty": 15,
+          "allocated": 15,
+          "received": 15
           }
         ]
       },
       {
         "productId": "PRD024",
         "productName": "Raw Banana (Cooking)",
-        "qty": 6,
         "unit": "Bunches",
-        "rate": 350,
-        "amount": 2100,
+        "totalQuantity": 7,
+        "unitPrice": 350,
+        "totalCost": 2450,
         "allocations": [
           {
-            "branch": "LBS NAGAR",
             "branchId": "BR003",
-            "qty": 6,
-            "received": 6
+            "branch": "LB Shastri Nagar",
+            "qty": 7,
+          "allocated": 7,
+          "received": 7
           }
         ]
       },
       {
         "productId": "PRD030",
         "productName": "Raw Green Papaya",
-        "qty": 3,
         "unit": "Crates",
-        "rate": 650,
-        "amount": 1950,
+        "totalQuantity": 14,
+        "unitPrice": 650,
+        "totalCost": 9100,
         "allocations": [
           {
-            "branch": "LBS NAGAR",
             "branchId": "BR003",
-            "qty": 3,
-            "received": 3
+            "branch": "LB Shastri Nagar",
+            "qty": 14,
+          "allocated": 14,
+          "received": 14
           }
         ]
       },
       {
         "productId": "PRD051",
         "productName": "Banana Stem",
-        "qty": 7,
         "unit": "Pieces",
-        "rate": 25,
-        "amount": 175,
+        "totalQuantity": 6,
+        "unitPrice": 25,
+        "totalCost": 150,
         "allocations": [
           {
-            "branch": "LBS NAGAR",
             "branchId": "BR003",
-            "qty": 7,
-            "received": 7
+            "branch": "LB Shastri Nagar",
+            "qty": 6,
+          "allocated": 6,
+          "received": 6
           }
         ]
       },
       {
         "productId": "PRD060",
         "productName": "Banana Flower (Vazhaipoo)",
-        "qty": 5,
         "unit": "Pieces",
-        "rate": 30,
-        "amount": 150,
+        "totalQuantity": 13,
+        "unitPrice": 30,
+        "totalCost": 390,
         "allocations": [
           {
-            "branch": "LBS NAGAR",
             "branchId": "BR003",
-            "qty": 5,
-            "received": 5
+            "branch": "LB Shastri Nagar",
+            "qty": 13,
+          "allocated": 13,
+          "received": 13
           }
         ]
       },
       {
         "productId": "PRD054",
         "productName": "English Cucumber",
-        "qty": 4,
         "unit": "Crates",
-        "rate": 450,
-        "amount": 1800,
+        "totalQuantity": 5,
+        "unitPrice": 450,
+        "totalCost": 2250,
         "allocations": [
           {
-            "branch": "LBS NAGAR",
             "branchId": "BR003",
-            "qty": 4,
-            "received": 4
+            "branch": "LB Shastri Nagar",
+            "qty": 5,
+          "allocated": 5,
+          "received": 5
           }
         ]
       },
       {
         "productId": "PRD143",
         "productName": "S POTATO",
-        "qty": 6,
         "unit": "Kg",
-        "rate": 45,
-        "amount": 270,
+        "totalQuantity": 12,
+        "unitPrice": 45,
+        "totalCost": 540,
         "allocations": [
           {
-            "branch": "LBS NAGAR",
             "branchId": "BR003",
-            "qty": 6,
-            "received": 6
+            "branch": "LB Shastri Nagar",
+            "qty": 12,
+          "allocated": 12,
+          "received": 12
           }
         ]
       },
       {
         "productId": "PRD172",
         "productName": "Tapioca (Kappa / Cassava)",
-        "qty": 3,
         "unit": "Bags",
-        "rate": 650,
-        "amount": 1950,
+        "totalQuantity": 4,
+        "unitPrice": 650,
+        "totalCost": 2600,
         "allocations": [
           {
-            "branch": "LBS NAGAR",
             "branchId": "BR003",
-            "qty": 3,
-            "received": 3
+            "branch": "LB Shastri Nagar",
+            "qty": 4,
+          "allocated": 4,
+          "received": 4
           }
         ]
       },
       {
         "productId": "PRD029",
         "productName": "Drumstick",
-        "qty": 5,
         "unit": "Bags",
-        "rate": 550,
-        "amount": 2750,
+        "totalQuantity": 11,
+        "unitPrice": 550,
+        "totalCost": 6050,
         "allocations": [
           {
-            "branch": "LBS NAGAR",
             "branchId": "BR003",
-            "qty": 5,
-            "received": 5
+            "branch": "LB Shastri Nagar",
+            "qty": 11,
+          "allocated": 11,
+          "received": 11
           }
         ]
       },
       {
         "productId": "PRD017",
         "productName": "Amla",
-        "qty": 4,
         "unit": "Kg",
-        "rate": 60,
-        "amount": 240,
+        "totalQuantity": 3,
+        "unitPrice": 60,
+        "totalCost": 180,
         "allocations": [
           {
-            "branch": "LBS NAGAR",
             "branchId": "BR003",
-            "qty": 4,
-            "received": 4
+            "branch": "LB Shastri Nagar",
+            "qty": 3,
+          "allocated": 3,
+          "received": 3
           }
         ]
       },
       {
         "productId": "PRD189",
-        "productName": "L Brinjal Purple",
-        "qty": 3,
+        "productName": "Long Brinjal Purple",
         "unit": "Crates",
-        "rate": 520,
-        "amount": 1560,
+        "totalQuantity": 10,
+        "unitPrice": 520,
+        "totalCost": 5200,
         "allocations": [
           {
-            "branch": "LBS NAGAR",
             "branchId": "BR003",
-            "qty": 3,
-            "received": 3
+            "branch": "LB Shastri Nagar",
+            "qty": 10,
+          "allocated": 10,
+          "received": 10
           }
         ]
       },
       {
         "productId": "PRD015",
-        "productName": "Brinjal Green",
-        "qty": 6,
+        "productName": "Long Brinjal Green",
         "unit": "Crates",
-        "rate": 480,
-        "amount": 2880,
+        "totalQuantity": 17,
+        "unitPrice": 480,
+        "totalCost": 8160,
         "allocations": [
           {
-            "branch": "LBS NAGAR",
             "branchId": "BR003",
-            "qty": 6,
-            "received": 6
+            "branch": "LB Shastri Nagar",
+            "qty": 17,
+          "allocated": 17,
+          "received": 17
           }
         ]
       },
       {
         "productId": "PRD058",
-        "productName": "Bajji Chilli (Bhavnagri)",
-        "qty": 5,
+        "productName": "Bhajji Chilly",
         "unit": "Crates",
-        "rate": 650,
-        "amount": 3250,
+        "totalQuantity": 9,
+        "unitPrice": 650,
+        "totalCost": 5850,
         "allocations": [
           {
-            "branch": "LBS NAGAR",
             "branchId": "BR003",
-            "qty": 5,
-            "received": 5
-          }
-        ]
-      },
-      {
-        "productId": "PRD016",
-        "productName": "Brinjal Bhartha",
-        "qty": 2,
-        "unit": "Crates",
-        "rate": 480,
-        "amount": 960,
-        "allocations": [
-          {
-            "branch": "LBS NAGAR",
-            "branchId": "BR003",
-            "qty": 2,
-            "received": 2
+            "branch": "LB Shastri Nagar",
+            "qty": 9,
+          "allocated": 9,
+          "received": 9
           }
         ]
       },
       {
         "productId": "PRD205",
-        "productName": "Bharta Green",
-        "qty": 8,
+        "productName": "Bharta Black",
         "unit": "Crates",
-        "rate": 550,
-        "amount": 4400,
+        "totalQuantity": 16,
+        "unitPrice": 550,
+        "totalCost": 8800,
         "allocations": [
           {
-            "branch": "LBS NAGAR",
             "branchId": "BR003",
+            "branch": "LB Shastri Nagar",
+            "qty": 16,
+          "allocated": 16,
+          "received": 16
+          }
+        ]
+      },
+      {
+        "productId": "PRD016",
+        "productName": "Bharta Green",
+        "unit": "Crates",
+        "totalQuantity": 8,
+        "unitPrice": 480,
+        "totalCost": 3840,
+        "allocations": [
+          {
+            "branchId": "BR003",
+            "branch": "LB Shastri Nagar",
             "qty": 8,
-            "received": 8
+          "allocated": 8,
+          "received": 8
           }
         ]
       },
       {
         "productId": "PRD047",
         "productName": "Yellow Pumpkin",
-        "qty": 4,
         "unit": "Bags",
-        "rate": 550,
-        "amount": 2200,
+        "totalQuantity": 15,
+        "unitPrice": 550,
+        "totalCost": 8250,
         "allocations": [
           {
-            "branch": "LBS NAGAR",
             "branchId": "BR003",
-            "qty": 4,
-            "received": 4
+            "branch": "LB Shastri Nagar",
+            "qty": 15,
+          "allocated": 15,
+          "received": 15
           }
         ]
       },
       {
         "productId": "PRD048",
         "productName": "White Pumpkin (Ash Gourd)",
-        "qty": 5,
         "unit": "Bags",
-        "rate": 550,
-        "amount": 2750,
+        "totalQuantity": 7,
+        "unitPrice": 550,
+        "totalCost": 3850,
         "allocations": [
           {
-            "branch": "LBS NAGAR",
             "branchId": "BR003",
-            "qty": 5,
-            "received": 5
+            "branch": "LB Shastri Nagar",
+            "qty": 7,
+          "allocated": 7,
+          "received": 7
           }
         ]
       },
       {
         "productId": "PRD052",
         "productName": "Elephant Foot Yam (Suran)",
-        "qty": 6,
         "unit": "Bags",
-        "rate": 900,
-        "amount": 5400,
+        "totalQuantity": 14,
+        "unitPrice": 900,
+        "totalCost": 12600,
         "allocations": [
           {
-            "branch": "LBS NAGAR",
             "branchId": "BR003",
-            "qty": 6,
-            "received": 6
+            "branch": "LB Shastri Nagar",
+            "qty": 14,
+          "allocated": 14,
+          "received": 14
           }
         ]
       },
       {
         "productId": "PRD031",
         "productName": "Lemon Standard",
-        "qty": 4,
         "unit": "Bags",
-        "rate": 650,
-        "amount": 2600,
+        "totalQuantity": 6,
+        "unitPrice": 650,
+        "totalCost": 3900,
         "allocations": [
           {
-            "branch": "LBS NAGAR",
             "branchId": "BR003",
-            "qty": 4,
-            "received": 4
+            "branch": "LB Shastri Nagar",
+            "qty": 6,
+          "allocated": 6,
+          "received": 6
           }
         ]
       },
       {
         "productId": "PRD035",
         "productName": "Small Onion (Shallots)",
-        "qty": 5,
         "unit": "Bags",
-        "rate": 1450,
-        "amount": 7250,
+        "totalQuantity": 13,
+        "unitPrice": 1450,
+        "totalCost": 18850,
         "allocations": [
           {
-            "branch": "LBS NAGAR",
             "branchId": "BR003",
-            "qty": 5,
-            "received": 5
+            "branch": "LB Shastri Nagar",
+            "qty": 13,
+          "allocated": 13,
+          "received": 13
           }
         ]
       },
       {
         "productId": "PRD033",
         "productName": "Sambar Cucumber",
-        "qty": 4,
         "unit": "Crates",
-        "rate": 450,
-        "amount": 1800,
+        "totalQuantity": 5,
+        "unitPrice": 450,
+        "totalCost": 2250,
         "allocations": [
           {
-            "branch": "LBS NAGAR",
             "branchId": "BR003",
-            "qty": 4,
-            "received": 4
+            "branch": "LB Shastri Nagar",
+            "qty": 5,
+          "allocated": 5,
+          "received": 5
           }
         ]
       },
       {
         "productId": "PRD193",
         "productName": "Kandrela",
-        "qty": 6,
         "unit": "Kg",
-        "rate": 90,
-        "amount": 540,
+        "totalQuantity": 12,
+        "unitPrice": 90,
+        "totalCost": 1080,
         "allocations": [
           {
-            "branch": "LBS NAGAR",
             "branchId": "BR003",
-            "qty": 6,
-            "received": 6
+            "branch": "LB Shastri Nagar",
+            "qty": 12,
+          "allocated": 12,
+          "received": 12
           }
         ]
       },
       {
         "productId": "PRD206",
         "productName": "Round Loki",
-        "qty": 3,
         "unit": "Bags",
-        "rate": 420,
-        "amount": 1260,
+        "totalQuantity": 4,
+        "unitPrice": 420,
+        "totalCost": 1680,
         "allocations": [
           {
-            "branch": "LBS NAGAR",
             "branchId": "BR003",
-            "qty": 3,
-            "received": 3
+            "branch": "LB Shastri Nagar",
+            "qty": 4,
+          "allocated": 4,
+          "received": 4
           }
         ]
       },
       {
         "productId": "PRD156",
         "productName": "Turmeric Raw (Haldi)",
-        "qty": 7,
         "unit": "Kg",
-        "rate": 90,
-        "amount": 630,
+        "totalQuantity": 11,
+        "unitPrice": 90,
+        "totalCost": 990,
         "allocations": [
           {
-            "branch": "LBS NAGAR",
             "branchId": "BR003",
-            "qty": 7,
-            "received": 7
+            "branch": "LB Shastri Nagar",
+            "qty": 11,
+          "allocated": 11,
+          "received": 11
           }
         ]
       },
       {
         "productId": "PRD034",
-        "productName": "Arbi (Colocasia)",
-        "qty": 5,
+        "productName": "Arvi",
         "unit": "Bags",
-        "rate": 750,
-        "amount": 3750,
+        "totalQuantity": 3,
+        "unitPrice": 750,
+        "totalCost": 2250,
         "allocations": [
           {
-            "branch": "LBS NAGAR",
             "branchId": "BR003",
-            "qty": 5,
-            "received": 5
+            "branch": "LB Shastri Nagar",
+            "qty": 3,
+          "allocated": 3,
+          "received": 3
           }
         ]
       },
       {
         "productId": "PRD169",
         "productName": "Matki Falli (Moth Pods)",
-        "qty": 4,
         "unit": "Kg",
-        "rate": 65,
-        "amount": 260,
+        "totalQuantity": 10,
+        "unitPrice": 65,
+        "totalCost": 650,
         "allocations": [
           {
-            "branch": "LBS NAGAR",
             "branchId": "BR003",
-            "qty": 4,
-            "received": 4
+            "branch": "LB Shastri Nagar",
+            "qty": 10,
+          "allocated": 10,
+          "received": 10
           }
         ]
       },
       {
         "productId": "PRD170",
-        "productName": "Sem Beans",
-        "qty": 6,
+        "productName": "Sem",
         "unit": "Kg",
-        "rate": 55,
-        "amount": 330,
+        "totalQuantity": 17,
+        "unitPrice": 55,
+        "totalCost": 935,
         "allocations": [
           {
-            "branch": "LBS NAGAR",
             "branchId": "BR003",
-            "qty": 6,
-            "received": 6
+            "branch": "LB Shastri Nagar",
+            "qty": 17,
+          "allocated": 17,
+          "received": 17
           }
         ]
       },
       {
         "productId": "PRD053",
         "productName": "Avarakkai",
-        "qty": 3,
         "unit": "Kg",
-        "rate": 55,
-        "amount": 165,
+        "totalQuantity": 9,
+        "unitPrice": 55,
+        "totalCost": 495,
         "allocations": [
           {
-            "branch": "LBS NAGAR",
             "branchId": "BR003",
-            "qty": 3,
-            "received": 3
+            "branch": "LB Shastri Nagar",
+            "qty": 9,
+          "allocated": 9,
+          "received": 9
           }
         ]
       },
       {
         "productId": "PRD037",
         "productName": "Kovakkai / Kundru (Tindora)",
-        "qty": 5,
         "unit": "Crates",
-        "rate": 550,
-        "amount": 2750,
+        "totalQuantity": 16,
+        "unitPrice": 550,
+        "totalCost": 8800,
         "allocations": [
           {
-            "branch": "LBS NAGAR",
             "branchId": "BR003",
-            "qty": 5,
-            "received": 5
+            "branch": "LB Shastri Nagar",
+            "qty": 16,
+          "allocated": 16,
+          "received": 16
           }
         ]
       },
       {
         "productId": "PRD008",
         "productName": "Long Beans",
-        "qty": 4,
         "unit": "Kg",
-        "rate": 50,
-        "amount": 200,
+        "totalQuantity": 8,
+        "unitPrice": 50,
+        "totalCost": 400,
         "allocations": [
           {
-            "branch": "LBS NAGAR",
             "branchId": "BR003",
-            "qty": 4,
-            "received": 4
+            "branch": "LB Shastri Nagar",
+            "qty": 8,
+          "allocated": 8,
+          "received": 8
           }
         ]
       },
       {
         "productId": "PRD066",
         "productName": "Double Beans (Lima)",
-        "qty": 3,
         "unit": "Kg",
-        "rate": 80,
-        "amount": 240,
+        "totalQuantity": 15,
+        "unitPrice": 80,
+        "totalCost": 1200,
         "allocations": [
           {
-            "branch": "LBS NAGAR",
             "branchId": "BR003",
-            "qty": 3,
-            "received": 3
+            "branch": "LB Shastri Nagar",
+            "qty": 15,
+          "allocated": 15,
+          "received": 15
           }
         ]
       },
       {
         "productId": "PRD018",
         "productName": "Avarakkai",
-        "qty": 6,
         "unit": "Kg",
-        "rate": 55,
-        "amount": 330,
+        "totalQuantity": 7,
+        "unitPrice": 55,
+        "totalCost": 385,
         "allocations": [
           {
-            "branch": "LBS NAGAR",
             "branchId": "BR003",
-            "qty": 6,
-            "received": 6
+            "branch": "LB Shastri Nagar",
+            "qty": 7,
+          "allocated": 7,
+          "received": 7
           }
         ]
       },
       {
         "productId": "PRD010",
         "productName": "Chow Chow",
-        "qty": 5,
         "unit": "Bags",
-        "rate": 450,
-        "amount": 2250,
+        "totalQuantity": 14,
+        "unitPrice": 450,
+        "totalCost": 6300,
         "allocations": [
           {
-            "branch": "LBS NAGAR",
             "branchId": "BR003",
-            "qty": 5,
-            "received": 5
+            "branch": "LB Shastri Nagar",
+            "qty": 14,
+          "allocated": 14,
+          "received": 14
           }
         ]
       },
       {
         "productId": "PRD176",
         "productName": "Karamani (Cowpea Pods)",
-        "qty": 2,
         "unit": "Kg",
-        "rate": 65,
-        "amount": 130,
+        "totalQuantity": 6,
+        "unitPrice": 65,
+        "totalCost": 390,
         "allocations": [
           {
-            "branch": "LBS NAGAR",
             "branchId": "BR003",
-            "qty": 2,
-            "received": 2
+            "branch": "LB Shastri Nagar",
+            "qty": 6,
+          "allocated": 6,
+          "received": 6
           }
         ]
       },
       {
         "productId": "PRD038",
         "productName": "Snake Gourd (Padavalakai)",
-        "qty": 8,
         "unit": "Bags",
-        "rate": 420,
-        "amount": 3360,
+        "totalQuantity": 13,
+        "unitPrice": 420,
+        "totalCost": 5460,
         "allocations": [
           {
-            "branch": "LBS NAGAR",
             "branchId": "BR003",
-            "qty": 8,
-            "received": 8
+            "branch": "LB Shastri Nagar",
+            "qty": 13,
+          "allocated": 13,
+          "received": 13
           }
         ]
       },
       {
         "productId": "PRD207",
-        "productName": "Bhaggi",
-        "qty": 4,
+        "productName": "Bhajji Chilly",
         "unit": "Bunches",
-        "rate": 15,
-        "amount": 60,
+        "totalQuantity": 5,
+        "unitPrice": 15,
+        "totalCost": 75,
         "allocations": [
           {
-            "branch": "LBS NAGAR",
             "branchId": "BR003",
-            "qty": 4,
-            "received": 4
+            "branch": "LB Shastri Nagar",
+            "qty": 5,
+          "allocated": 5,
+          "received": 5
           }
         ]
       },
       {
         "productId": "PRD045",
         "productName": "Coriander (Kothmir)",
-        "qty": 5,
         "unit": "Bunches",
-        "rate": 25,
-        "amount": 125,
+        "totalQuantity": 12,
+        "unitPrice": 25,
+        "totalCost": 300,
         "allocations": [
           {
-            "branch": "LBS NAGAR",
             "branchId": "BR003",
-            "qty": 5,
-            "received": 5
+            "branch": "LB Shastri Nagar",
+            "qty": 12,
+          "allocated": 12,
+          "received": 12
           }
         ]
       },
       {
         "productId": "PRD042",
         "productName": "Pudina (Mint)",
-        "qty": 6,
         "unit": "Bunches",
-        "rate": 25,
-        "amount": 150,
+        "totalQuantity": 4,
+        "unitPrice": 25,
+        "totalCost": 100,
         "allocations": [
           {
-            "branch": "LBS NAGAR",
             "branchId": "BR003",
-            "qty": 6,
-            "received": 6
+            "branch": "LB Shastri Nagar",
+            "qty": 4,
+          "allocated": 4,
+          "received": 4
           }
         ]
       },
       {
         "productId": "PRD041",
         "productName": "Curry Leaf",
-        "qty": 4,
         "unit": "Bunches",
-        "rate": 25,
-        "amount": 100,
+        "totalQuantity": 11,
+        "unitPrice": 25,
+        "totalCost": 275,
         "allocations": [
           {
-            "branch": "LBS NAGAR",
             "branchId": "BR003",
-            "qty": 4,
-            "received": 4
+            "branch": "LB Shastri Nagar",
+            "qty": 11,
+          "allocated": 11,
+          "received": 11
           }
         ]
       },
       {
         "productId": "PRD003",
         "productName": "Tomato",
-        "qty": 5,
         "unit": "Crates",
-        "rate": 550,
-        "amount": 2750,
+        "totalQuantity": 3,
+        "unitPrice": 550,
+        "totalCost": 1650,
         "allocations": [
           {
-            "branch": "LBS NAGAR",
             "branchId": "BR003",
-            "qty": 5,
-            "received": 5
+            "branch": "LB Shastri Nagar",
+            "qty": 3,
+          "allocated": 3,
+          "received": 3
           }
         ]
       },
       {
         "productId": "PRD185",
         "productName": "N TOMATO",
-        "qty": 4,
         "unit": "Kg",
-        "rate": 45,
-        "amount": 180,
+        "totalQuantity": 10,
+        "unitPrice": 45,
+        "totalCost": 450,
         "allocations": [
           {
-            "branch": "LBS NAGAR",
             "branchId": "BR003",
-            "qty": 4,
-            "received": 4
+            "branch": "LB Shastri Nagar",
+            "qty": 10,
+          "allocated": 10,
+          "received": 10
           }
         ]
       },
       {
         "productId": "PRD092",
         "productName": "Banana Robusta",
-        "qty": 6,
         "unit": "Bunches",
-        "rate": 450,
-        "amount": 2700,
+        "totalQuantity": 17,
+        "unitPrice": 450,
+        "totalCost": 7650,
         "allocations": [
           {
-            "branch": "LBS NAGAR",
             "branchId": "BR003",
-            "qty": 6,
-            "received": 6
+            "branch": "LB Shastri Nagar",
+            "qty": 17,
+          "allocated": 17,
+          "received": 17
           }
         ]
       },
       {
         "productId": "PRD079",
         "productName": "Grapes Red Globe Imported",
-        "qty": 3,
         "unit": "Crates",
-        "rate": 1200,
-        "amount": 3600,
+        "totalQuantity": 9,
+        "unitPrice": 1200,
+        "totalCost": 10800,
         "allocations": [
           {
-            "branch": "LBS NAGAR",
             "branchId": "BR003",
-            "qty": 3,
-            "received": 3
+            "branch": "LB Shastri Nagar",
+            "qty": 9,
+          "allocated": 9,
+          "received": 9
           }
         ]
       },
       {
         "productId": "PRD075",
         "productName": "Apple Royal Gala",
-        "qty": 7,
         "unit": "Crates",
-        "rate": 2100,
-        "amount": 14700,
+        "totalQuantity": 16,
+        "unitPrice": 2100,
+        "totalCost": 33600,
         "allocations": [
           {
-            "branch": "LBS NAGAR",
             "branchId": "BR003",
-            "qty": 7,
-            "received": 7
+            "branch": "LB Shastri Nagar",
+            "qty": 16,
+          "allocated": 16,
+          "received": 16
           }
         ]
       },
       {
         "productId": "PRD196",
         "productName": "Pink Lady",
-        "qty": 5,
         "unit": "Crates",
-        "rate": 1850,
-        "amount": 9250,
+        "totalQuantity": 8,
+        "unitPrice": 1850,
+        "totalCost": 14800,
         "allocations": [
           {
-            "branch": "LBS NAGAR",
             "branchId": "BR003",
-            "qty": 5,
-            "received": 5
+            "branch": "LB Shastri Nagar",
+            "qty": 8,
+          "allocated": 8,
+          "received": 8
           }
         ]
       },
       {
         "productId": "PRD208",
         "productName": "Turkey Apple",
-        "qty": 4,
         "unit": "Crates",
-        "rate": 1750,
-        "amount": 7000,
+        "totalQuantity": 15,
+        "unitPrice": 1750,
+        "totalCost": 26250,
         "allocations": [
           {
-            "branch": "LBS NAGAR",
             "branchId": "BR003",
-            "qty": 4,
-            "received": 4
+            "branch": "LB Shastri Nagar",
+            "qty": 15,
+          "allocated": 15,
+          "received": 15
           }
         ]
       },
       {
         "productId": "PRD071",
         "productName": "Apple Washington",
-        "qty": 6,
         "unit": "Crates",
-        "rate": 2100,
-        "amount": 12600,
+        "totalQuantity": 7,
+        "unitPrice": 2100,
+        "totalCost": 14700,
         "allocations": [
           {
-            "branch": "LBS NAGAR",
             "branchId": "BR003",
-            "qty": 6,
-            "received": 6
+            "branch": "LB Shastri Nagar",
+            "qty": 7,
+          "allocated": 7,
+          "received": 7
           }
         ]
       },
       {
         "productId": "PRD209",
         "productName": "Rocket Apple",
-        "qty": 3,
         "unit": "Boxes",
-        "rate": 1950,
-        "amount": 5850,
+        "totalQuantity": 14,
+        "unitPrice": 1950,
+        "totalCost": 27300,
         "allocations": [
           {
-            "branch": "LBS NAGAR",
             "branchId": "BR003",
-            "qty": 3,
-            "received": 3
+            "branch": "LB Shastri Nagar",
+            "qty": 14,
+          "allocated": 14,
+          "received": 14
           }
         ]
       },
       {
         "productId": "PRD210",
         "productName": "Alibinder",
-        "qty": 5,
         "unit": "Crates",
-        "rate": 1800,
-        "amount": 9000,
+        "totalQuantity": 6,
+        "unitPrice": 1800,
+        "totalCost": 10800,
         "allocations": [
           {
-            "branch": "LBS NAGAR",
             "branchId": "BR003",
-            "qty": 5,
-            "received": 5
+            "branch": "LB Shastri Nagar",
+            "qty": 6,
+          "allocated": 6,
+          "received": 6
           }
         ]
       },
       {
         "productId": "PRD073",
         "productName": "Apple Green (Granny Smith)",
-        "qty": 4,
         "unit": "Crates",
-        "rate": 2100,
-        "amount": 8400,
+        "totalQuantity": 13,
+        "unitPrice": 2100,
+        "totalCost": 27300,
         "allocations": [
           {
-            "branch": "LBS NAGAR",
             "branchId": "BR003",
-            "qty": 4,
-            "received": 4
+            "branch": "LB Shastri Nagar",
+            "qty": 13,
+          "allocated": 13,
+          "received": 13
           }
         ]
       },
       {
         "productId": "PRD211",
         "productName": "Iran Apple",
-        "qty": 3,
         "unit": "Crates",
-        "rate": 1600,
-        "amount": 4800,
+        "totalQuantity": 5,
+        "unitPrice": 1600,
+        "totalCost": 8000,
         "allocations": [
           {
-            "branch": "LBS NAGAR",
             "branchId": "BR003",
-            "qty": 3,
-            "received": 3
+            "branch": "LB Shastri Nagar",
+            "qty": 5,
+          "allocated": 5,
+          "received": 5
           }
         ]
       },
       {
         "productId": "PRD201",
         "productName": "Kashmiri Apple",
-        "qty": 6,
         "unit": "Crates",
-        "rate": 1650,
-        "amount": 9900,
+        "totalQuantity": 12,
+        "unitPrice": 1650,
+        "totalCost": 19800,
         "allocations": [
           {
-            "branch": "LBS NAGAR",
             "branchId": "BR003",
-            "qty": 6,
-            "received": 6
+            "branch": "LB Shastri Nagar",
+            "qty": 12,
+          "allocated": 12,
+          "received": 12
           }
         ]
       },
       {
         "productId": "PRD070",
         "productName": "Apple Indian (Shimla)",
-        "qty": 5,
         "unit": "Crates",
-        "rate": 2100,
-        "amount": 10500,
+        "totalQuantity": 4,
+        "unitPrice": 2100,
+        "totalCost": 8400,
         "allocations": [
           {
-            "branch": "LBS NAGAR",
             "branchId": "BR003",
-            "qty": 5,
-            "received": 5
+            "branch": "LB Shastri Nagar",
+            "qty": 4,
+          "allocated": 4,
+          "received": 4
           }
         ]
       },
       {
         "productId": "PRD202",
         "productName": "Misri Apple",
-        "qty": 2,
         "unit": "Crates",
-        "rate": 1700,
-        "amount": 3400,
+        "totalQuantity": 11,
+        "unitPrice": 1700,
+        "totalCost": 18700,
         "allocations": [
           {
-            "branch": "LBS NAGAR",
             "branchId": "BR003",
-            "qty": 2,
-            "received": 2
+            "branch": "LB Shastri Nagar",
+            "qty": 11,
+          "allocated": 11,
+          "received": 11
           }
         ]
       },
       {
         "productId": "PRD090",
         "productName": "Pear Green",
-        "qty": 8,
         "unit": "Boxes",
-        "rate": 1450,
-        "amount": 11600,
+        "totalQuantity": 3,
+        "unitPrice": 1450,
+        "totalCost": 4350,
         "allocations": [
           {
-            "branch": "LBS NAGAR",
             "branchId": "BR003",
-            "qty": 8,
-            "received": 8
+            "branch": "LB Shastri Nagar",
+            "qty": 3,
+          "allocated": 3,
+          "received": 3
           }
         ]
       },
       {
         "productId": "PRD091",
         "productName": "Golden Pear",
-        "qty": 4,
         "unit": "Boxes",
-        "rate": 1450,
-        "amount": 5800,
+        "totalQuantity": 10,
+        "unitPrice": 1450,
+        "totalCost": 14500,
         "allocations": [
           {
-            "branch": "LBS NAGAR",
             "branchId": "BR003",
-            "qty": 4,
-            "received": 4
+            "branch": "LB Shastri Nagar",
+            "qty": 10,
+          "allocated": 10,
+          "received": 10
           }
         ]
       },
       {
         "productId": "PRD174",
         "productName": "Persimmon Fruit",
-        "qty": 5,
         "unit": "Boxes",
-        "rate": 850,
-        "amount": 4250,
+        "totalQuantity": 17,
+        "unitPrice": 850,
+        "totalCost": 14450,
         "allocations": [
           {
-            "branch": "LBS NAGAR",
             "branchId": "BR003",
-            "qty": 5,
-            "received": 5
+            "branch": "LB Shastri Nagar",
+            "qty": 17,
+          "allocated": 17,
+          "received": 17
           }
         ]
       },
       {
         "productId": "PRD084",
         "productName": "Kiwi Fruit",
-        "qty": 6,
         "unit": "Boxes",
-        "rate": 850,
-        "amount": 5100,
+        "totalQuantity": 9,
+        "unitPrice": 850,
+        "totalCost": 7650,
         "allocations": [
           {
-            "branch": "LBS NAGAR",
             "branchId": "BR003",
-            "qty": 6,
-            "received": 6
+            "branch": "LB Shastri Nagar",
+            "qty": 9,
+          "allocated": 9,
+          "received": 9
           }
         ]
       },
       {
         "productId": "PRD099",
         "productName": "Butter Fruit (Avocado)",
-        "qty": 4,
         "unit": "Crates",
-        "rate": 1500,
-        "amount": 6000,
+        "totalQuantity": 16,
+        "unitPrice": 1500,
+        "totalCost": 24000,
         "allocations": [
           {
-            "branch": "LBS NAGAR",
             "branchId": "BR003",
-            "qty": 4,
-            "received": 4
+            "branch": "LB Shastri Nagar",
+            "qty": 16,
+          "allocated": 16,
+          "received": 16
           }
         ]
       },
       {
         "productId": "PRD212",
         "productName": "Butter Fruit Imported",
-        "qty": 5,
         "unit": "Crates",
-        "rate": 2200,
-        "amount": 11000,
+        "totalQuantity": 8,
+        "unitPrice": 2200,
+        "totalCost": 17600,
         "allocations": [
           {
-            "branch": "LBS NAGAR",
             "branchId": "BR003",
-            "qty": 5,
-            "received": 5
+            "branch": "LB Shastri Nagar",
+            "qty": 8,
+          "allocated": 8,
+          "received": 8
           }
         ]
       },
       {
         "productId": "PRD080",
         "productName": "Grapes Black Seedless",
-        "qty": 4,
         "unit": "Crates",
-        "rate": 1200,
-        "amount": 4800,
+        "totalQuantity": 15,
+        "unitPrice": 1200,
+        "totalCost": 18000,
         "allocations": [
           {
-            "branch": "LBS NAGAR",
             "branchId": "BR003",
-            "qty": 4,
-            "received": 4
+            "branch": "LB Shastri Nagar",
+            "qty": 15,
+          "allocated": 15,
+          "received": 15
           }
         ]
       },
       {
         "productId": "PRD213",
         "productName": "Black Grapes Imported",
-        "qty": 6,
         "unit": "Crates",
-        "rate": 1400,
-        "amount": 8400,
+        "totalQuantity": 7,
+        "unitPrice": 1400,
+        "totalCost": 9800,
         "allocations": [
           {
-            "branch": "LBS NAGAR",
             "branchId": "BR003",
-            "qty": 6,
-            "received": 6
+            "branch": "LB Shastri Nagar",
+            "qty": 7,
+          "allocated": 7,
+          "received": 7
           }
         ]
       },
       {
         "productId": "PRD081",
         "productName": "Grapes Green Thompson",
-        "qty": 3,
         "unit": "Crates",
-        "rate": 1200,
-        "amount": 3600,
+        "totalQuantity": 14,
+        "unitPrice": 1200,
+        "totalCost": 16800,
         "allocations": [
           {
-            "branch": "LBS NAGAR",
             "branchId": "BR003",
-            "qty": 3,
-            "received": 3
+            "branch": "LB Shastri Nagar",
+            "qty": 14,
+          "allocated": 14,
+          "received": 14
           }
         ]
       },
       {
         "productId": "PRD097",
-        "productName": "Muskmelon",
-        "qty": 7,
+        "productName": "Muskmelon Farm",
         "unit": "Crates",
-        "rate": 600,
-        "amount": 4200,
+        "totalQuantity": 6,
+        "unitPrice": 600,
+        "totalCost": 3600,
         "allocations": [
           {
-            "branch": "LBS NAGAR",
             "branchId": "BR003",
-            "qty": 7,
-            "received": 7
+            "branch": "LB Shastri Nagar",
+            "qty": 6,
+          "allocated": 6,
+          "received": 6
           }
         ]
       },
       {
-        "productId": "PRD121",
-        "productName": "SWEET MILON",
-        "qty": 5,
-        "unit": "Kg",
-        "rate": 45,
-        "amount": 225,
+        "productId": "PRD218",
+        "productName": "Muskmelon Nati",
+        "unit": "Crates",
+        "totalQuantity": 13,
+        "unitPrice": 650,
+        "totalCost": 8450,
         "allocations": [
           {
-            "branch": "LBS NAGAR",
             "branchId": "BR003",
-            "qty": 5,
-            "received": 5
+            "branch": "LB Shastri Nagar",
+            "qty": 13,
+          "allocated": 13,
+          "received": 13
           }
         ]
       },
       {
         "productId": "PRD166",
         "productName": "Chiku (Sapota)",
-        "qty": 4,
         "unit": "Crates",
-        "rate": 650,
-        "amount": 2600,
+        "totalQuantity": 5,
+        "unitPrice": 650,
+        "totalCost": 3250,
         "allocations": [
           {
-            "branch": "LBS NAGAR",
             "branchId": "BR003",
-            "qty": 4,
-            "received": 4
+            "branch": "LB Shastri Nagar",
+            "qty": 5,
+          "allocated": 5,
+          "received": 5
           }
         ]
       },
       {
         "productId": "PRD157",
         "productName": "BAERY",
-        "qty": 6,
         "unit": "Kg",
-        "rate": 45,
-        "amount": 270,
+        "totalQuantity": 12,
+        "unitPrice": 45,
+        "totalCost": 540,
         "allocations": [
           {
-            "branch": "LBS NAGAR",
             "branchId": "BR003",
-            "qty": 6,
-            "received": 6
+            "branch": "LB Shastri Nagar",
+            "qty": 12,
+          "allocated": 12,
+          "received": 12
           }
         ]
       },
       {
         "productId": "PRD076",
         "productName": "Mosambi Sweet Lime",
-        "qty": 3,
         "unit": "Bags",
-        "rate": 1100,
-        "amount": 3300,
+        "totalQuantity": 4,
+        "unitPrice": 1100,
+        "totalCost": 4400,
         "allocations": [
           {
-            "branch": "LBS NAGAR",
             "branchId": "BR003",
-            "qty": 3,
-            "received": 3
+            "branch": "LB Shastri Nagar",
+            "qty": 4,
+          "allocated": 4,
+          "received": 4
           }
         ]
       },
       {
-        "productId": "PRD180",
-        "productName": "MADRIN",
-        "qty": 5,
-        "unit": "Kg",
-        "rate": 45,
-        "amount": 225,
+        "productId": "PRD104",
+        "productName": "Madrin",
+        "unit": "Crates",
+        "totalQuantity": 11,
+        "unitPrice": 1350,
+        "totalCost": 14850,
         "allocations": [
           {
-            "branch": "LBS NAGAR",
             "branchId": "BR003",
-            "qty": 5,
-            "received": 5
+            "branch": "LB Shastri Nagar",
+            "qty": 11,
+          "allocated": 11,
+          "received": 11
           }
         ]
       },
       {
         "productId": "PRD173",
-        "productName": "Dragon Fruit (Pitaya)",
-        "qty": 4,
+        "productName": "Dragon Fruit Red",
         "unit": "Boxes",
-        "rate": 900,
-        "amount": 3600,
+        "totalQuantity": 3,
+        "unitPrice": 900,
+        "totalCost": 2700,
         "allocations": [
           {
-            "branch": "LBS NAGAR",
             "branchId": "BR003",
-            "qty": 4,
-            "received": 4
+            "branch": "LB Shastri Nagar",
+            "qty": 3,
+          "allocated": 3,
+          "received": 3
           }
         ]
       },
       {
         "productId": "PRD198",
-        "productName": "Wht Dragon",
-        "qty": 3,
+        "productName": "Dragon Fruit White",
         "unit": "Boxes",
-        "rate": 1100,
-        "amount": 3300,
+        "totalQuantity": 10,
+        "unitPrice": 1100,
+        "totalCost": 11000,
         "allocations": [
           {
-            "branch": "LBS NAGAR",
             "branchId": "BR003",
-            "qty": 3,
-            "received": 3
+            "branch": "LB Shastri Nagar",
+            "qty": 10,
+          "allocated": 10,
+          "received": 10
           }
         ]
       },
       {
         "productId": "PRD214",
         "productName": "Logan",
-        "qty": 6,
         "unit": "Boxes",
-        "rate": 1250,
-        "amount": 7500,
+        "totalQuantity": 17,
+        "unitPrice": 1250,
+        "totalCost": 21250,
         "allocations": [
           {
-            "branch": "LBS NAGAR",
             "branchId": "BR003",
-            "qty": 6,
-            "received": 6
+            "branch": "LB Shastri Nagar",
+            "qty": 17,
+          "allocated": 17,
+          "received": 17
           }
         ]
       },
       {
         "productId": "PRD197",
         "productName": "Pomegranate Big",
-        "qty": 5,
         "unit": "Boxes",
-        "rate": 1400,
-        "amount": 7000,
+        "totalQuantity": 9,
+        "unitPrice": 1400,
+        "totalCost": 12600,
         "allocations": [
           {
-            "branch": "LBS NAGAR",
             "branchId": "BR003",
-            "qty": 5,
-            "received": 5
+            "branch": "LB Shastri Nagar",
+            "qty": 9,
+          "allocated": 9,
+          "received": 9
           }
         ]
       },
       {
         "productId": "PRD077",
         "productName": "Anar (Pomegranate)",
-        "qty": 2,
         "unit": "Boxes",
-        "rate": 1650,
-        "amount": 3300,
+        "totalQuantity": 16,
+        "unitPrice": 1650,
+        "totalCost": 26400,
         "allocations": [
           {
-            "branch": "LBS NAGAR",
             "branchId": "BR003",
-            "qty": 2,
-            "received": 2
+            "branch": "LB Shastri Nagar",
+            "qty": 16,
+          "allocated": 16,
+          "received": 16
           }
         ]
       },
       {
         "productId": "PRD179",
         "productName": "CITRUS",
-        "qty": 8,
         "unit": "Kg",
-        "rate": 45,
-        "amount": 360,
+        "totalQuantity": 8,
+        "unitPrice": 45,
+        "totalCost": 360,
         "allocations": [
           {
-            "branch": "LBS NAGAR",
             "branchId": "BR003",
+            "branch": "LB Shastri Nagar",
             "qty": 8,
-            "received": 8
+          "allocated": 8,
+          "received": 8
           }
         ]
       },
       {
         "productId": "PRD094",
         "productName": "Apple Premium",
-        "qty": 4,
         "unit": "Crates",
-        "rate": 2100,
-        "amount": 8400,
+        "totalQuantity": 15,
+        "unitPrice": 2100,
+        "totalCost": 31500,
         "allocations": [
           {
-            "branch": "LBS NAGAR",
             "branchId": "BR003",
-            "qty": 4,
-            "received": 4
+            "branch": "LB Shastri Nagar",
+            "qty": 15,
+          "allocated": 15,
+          "received": 15
           }
         ]
       },
       {
         "productId": "PRD215",
         "productName": "Ramphal",
-        "qty": 5,
         "unit": "Crates",
-        "rate": 800,
-        "amount": 4000,
+        "totalQuantity": 7,
+        "unitPrice": 800,
+        "totalCost": 5600,
         "allocations": [
           {
-            "branch": "LBS NAGAR",
             "branchId": "BR003",
-            "qty": 5,
-            "received": 5
+            "branch": "LB Shastri Nagar",
+            "qty": 7,
+          "allocated": 7,
+          "received": 7
           }
         ]
       },
       {
         "productId": "PRD101",
         "productName": "Guava (Allahabad Safeda)",
-        "qty": 6,
         "unit": "Crates",
-        "rate": 650,
-        "amount": 3900,
+        "totalQuantity": 14,
+        "unitPrice": 650,
+        "totalCost": 9100,
         "allocations": [
           {
-            "branch": "LBS NAGAR",
             "branchId": "BR003",
-            "qty": 6,
-            "received": 6
+            "branch": "LB Shastri Nagar",
+            "qty": 14,
+          "allocated": 14,
+          "received": 14
           }
         ]
       },
       {
         "productId": "PRD085",
         "productName": "Apple Premium",
-        "qty": 4,
         "unit": "Crates",
-        "rate": 2100,
-        "amount": 8400,
+        "totalQuantity": 6,
+        "unitPrice": 2100,
+        "totalCost": 12600,
         "allocations": [
           {
-            "branch": "LBS NAGAR",
             "branchId": "BR003",
-            "qty": 4,
-            "received": 4
+            "branch": "LB Shastri Nagar",
+            "qty": 6,
+          "allocated": 6,
+          "received": 6
           }
         ]
       },
       {
-        "productId": "PRD104",
-        "productName": "Orange Nagpur Sweet",
-        "qty": 5,
-        "unit": "Crates",
-        "rate": 1350,
-        "amount": 6750,
+        "productId": "PRD180",
+        "productName": "MADRIN",
+        "unit": "Kg",
+        "totalQuantity": 13,
+        "unitPrice": 45,
+        "totalCost": 585,
         "allocations": [
           {
-            "branch": "LBS NAGAR",
             "branchId": "BR003",
-            "qty": 5,
-            "received": 5
+            "branch": "LB Shastri Nagar",
+            "qty": 13,
+          "allocated": 13,
+          "received": 13
           }
         ]
       },
       {
         "productId": "PRD088",
-        "productName": "Watermelon Big Dark",
-        "qty": 4,
+        "productName": "Watermelon Normal",
         "unit": "Kg",
-        "rate": 22,
-        "amount": 88,
+        "totalQuantity": 5,
+        "unitPrice": 22,
+        "totalCost": 110,
         "allocations": [
           {
-            "branch": "LBS NAGAR",
             "branchId": "BR003",
-            "qty": 4,
-            "received": 4
+            "branch": "LB Shastri Nagar",
+            "qty": 5,
+          "allocated": 5,
+          "received": 5
+          }
+        ]
+      },
+      {
+        "productId": "PRD089",
+        "productName": "Watermelon Stripes",
+        "unit": "Kg",
+        "totalQuantity": 12,
+        "unitPrice": 22,
+        "totalCost": 264,
+        "allocations": [
+          {
+            "branchId": "BR003",
+            "branch": "LB Shastri Nagar",
+            "qty": 12,
+          "allocated": 12,
+          "received": 12
           }
         ]
       }
@@ -8183,1630 +8515,1781 @@ export const INITIAL_PURCHASE_ORDERS = [
       }
     ],
     "status": "Incoming Delivery"
-  }
-,
+  },
   {
     "id": "PO-20261003-BSV01",
     "supplierName": "K.R. Market & APMC Fruit-Veg Terminal (Basavanagar)",
     "date": "03 Oct 2026",
     "time": "06:45 AM",
-    "totalAmount": 360300,
+    "totalAmount": 825961,
     "source": "DAILY_STOCK_CHECK_BSV_DISPATCH",
     "manifestReference": "BSV-MORNING-DISPATCH-01",
     "items": [
       {
         "productId": "PRD088",
-        "productName": "Watermelon Big Dark",
-        "qty": 5,
+        "productName": "Watermelon Normal",
         "unit": "Kg",
-        "rate": 22,
-        "amount": 110,
+        "totalQuantity": 3,
+        "unitPrice": 22,
+        "totalCost": 66,
         "allocations": [
           {
-            "branch": "BASAVANAGAR",
             "branchId": "BR004",
-            "qty": 5,
-            "received": 5
+            "branch": "Basavanagar",
+            "qty": 3,
+          "allocated": 3,
+          "received": 3
+          }
+        ]
+      },
+      {
+        "productId": "PRD089",
+        "productName": "Watermelon Stripes",
+        "unit": "Kg",
+        "totalQuantity": 10,
+        "unitPrice": 22,
+        "totalCost": 220,
+        "allocations": [
+          {
+            "branchId": "BR004",
+            "branch": "Basavanagar",
+            "qty": 10,
+          "allocated": 10,
+          "received": 10
           }
         ]
       },
       {
         "productId": "PRD078",
         "productName": "Papaya Ripe (Red Lady)",
-        "qty": 4,
         "unit": "Crates",
-        "rate": 650,
-        "amount": 2600,
+        "totalQuantity": 17,
+        "unitPrice": 650,
+        "totalCost": 11050,
         "allocations": [
           {
-            "branch": "BASAVANAGAR",
             "branchId": "BR004",
-            "qty": 4,
-            "received": 4
+            "branch": "Basavanagar",
+            "qty": 17,
+          "allocated": 17,
+          "received": 17
           }
         ]
       },
       {
         "productId": "PRD085",
         "productName": "Apple Premium",
-        "qty": 6,
         "unit": "Crates",
-        "rate": 2100,
-        "amount": 12600,
+        "totalQuantity": 9,
+        "unitPrice": 2100,
+        "totalCost": 18900,
         "allocations": [
           {
-            "branch": "BASAVANAGAR",
             "branchId": "BR004",
-            "qty": 6,
-            "received": 6
+            "branch": "Basavanagar",
+            "qty": 9,
+          "allocated": 9,
+          "received": 9
           }
         ]
       },
       {
         "productId": "PRD104",
-        "productName": "Orange Nagpur Sweet",
-        "qty": 3,
+        "productName": "Madrin",
         "unit": "Crates",
-        "rate": 1350,
-        "amount": 4050,
+        "totalQuantity": 16,
+        "unitPrice": 1350,
+        "totalCost": 21600,
         "allocations": [
           {
-            "branch": "BASAVANAGAR",
             "branchId": "BR004",
-            "qty": 3,
-            "received": 3
+            "branch": "Basavanagar",
+            "qty": 16,
+          "allocated": 16,
+          "received": 16
           }
         ]
       },
       {
         "productId": "PRD179",
         "productName": "CITRUS",
-        "qty": 7,
         "unit": "Kg",
-        "rate": 45,
-        "amount": 315,
+        "totalQuantity": 8,
+        "unitPrice": 45,
+        "totalCost": 360,
         "allocations": [
           {
-            "branch": "BASAVANAGAR",
             "branchId": "BR004",
-            "qty": 7,
-            "received": 7
+            "branch": "Basavanagar",
+            "qty": 8,
+          "allocated": 8,
+          "received": 8
           }
         ]
       },
       {
         "productId": "PRD180",
         "productName": "MADRIN",
-        "qty": 5,
         "unit": "Kg",
-        "rate": 45,
-        "amount": 225,
+        "totalQuantity": 15,
+        "unitPrice": 45,
+        "totalCost": 675,
         "allocations": [
           {
-            "branch": "BASAVANAGAR",
             "branchId": "BR004",
-            "qty": 5,
-            "received": 5
+            "branch": "Basavanagar",
+            "qty": 15,
+          "allocated": 15,
+          "received": 15
           }
         ]
       },
       {
         "productId": "PRD076",
         "productName": "Mosambi Sweet Lime",
-        "qty": 4,
         "unit": "Bags",
-        "rate": 1100,
-        "amount": 4400,
+        "totalQuantity": 7,
+        "unitPrice": 1100,
+        "totalCost": 7700,
         "allocations": [
           {
-            "branch": "BASAVANAGAR",
             "branchId": "BR004",
-            "qty": 4,
-            "received": 4
+            "branch": "Basavanagar",
+            "qty": 7,
+          "allocated": 7,
+          "received": 7
           }
         ]
       },
       {
         "productId": "PRD097",
-        "productName": "Muskmelon",
-        "qty": 6,
+        "productName": "Muskmelon Farm",
         "unit": "Crates",
-        "rate": 600,
-        "amount": 3600,
+        "totalQuantity": 14,
+        "unitPrice": 600,
+        "totalCost": 8400,
         "allocations": [
           {
-            "branch": "BASAVANAGAR",
             "branchId": "BR004",
+            "branch": "Basavanagar",
+            "qty": 14,
+          "allocated": 14,
+          "received": 14
+          }
+        ]
+      },
+      {
+        "productId": "PRD218",
+        "productName": "Muskmelon Nati",
+        "unit": "Crates",
+        "totalQuantity": 6,
+        "unitPrice": 650,
+        "totalCost": 3900,
+        "allocations": [
+          {
+            "branchId": "BR004",
+            "branch": "Basavanagar",
             "qty": 6,
-            "received": 6
+          "allocated": 6,
+          "received": 6
           }
         ]
       },
       {
         "productId": "PRD094",
         "productName": "Apple Premium",
-        "qty": 3,
         "unit": "Crates",
-        "rate": 2100,
-        "amount": 6300,
+        "totalQuantity": 13,
+        "unitPrice": 2100,
+        "totalCost": 27300,
         "allocations": [
           {
-            "branch": "BASAVANAGAR",
             "branchId": "BR004",
-            "qty": 3,
-            "received": 3
+            "branch": "Basavanagar",
+            "qty": 13,
+          "allocated": 13,
+          "received": 13
           }
         ]
       },
       {
         "productId": "PRD166",
         "productName": "Chiku (Sapota)",
-        "qty": 5,
         "unit": "Crates",
-        "rate": 650,
-        "amount": 3250,
+        "totalQuantity": 5,
+        "unitPrice": 650,
+        "totalCost": 3250,
         "allocations": [
           {
-            "branch": "BASAVANAGAR",
             "branchId": "BR004",
+            "branch": "Basavanagar",
             "qty": 5,
-            "received": 5
+          "allocated": 5,
+          "received": 5
           }
         ]
       },
       {
         "productId": "PRD216",
         "productName": "Thai Guava",
-        "qty": 4,
         "unit": "Crates",
-        "rate": 1100,
-        "amount": 4400,
+        "totalQuantity": 12,
+        "unitPrice": 1100,
+        "totalCost": 13200,
         "allocations": [
           {
-            "branch": "BASAVANAGAR",
             "branchId": "BR004",
-            "qty": 4,
-            "received": 4
+            "branch": "Basavanagar",
+            "qty": 12,
+          "allocated": 12,
+          "received": 12
           }
         ]
       },
       {
         "productId": "PRD199",
         "productName": "Nati Gauva",
-        "qty": 3,
         "unit": "Crates",
-        "rate": 550,
-        "amount": 1650,
+        "totalQuantity": 4,
+        "unitPrice": 550,
+        "totalCost": 2200,
         "allocations": [
           {
-            "branch": "BASAVANAGAR",
             "branchId": "BR004",
-            "qty": 3,
-            "received": 3
+            "branch": "Basavanagar",
+            "qty": 4,
+          "allocated": 4,
+          "received": 4
           }
         ]
       },
       {
         "productId": "PRD157",
         "productName": "BAERY",
-        "qty": 6,
         "unit": "Kg",
-        "rate": 45,
-        "amount": 270,
+        "totalQuantity": 11,
+        "unitPrice": 45,
+        "totalCost": 495,
         "allocations": [
           {
-            "branch": "BASAVANAGAR",
             "branchId": "BR004",
-            "qty": 6,
-            "received": 6
+            "branch": "Basavanagar",
+            "qty": 11,
+          "allocated": 11,
+          "received": 11
           }
         ]
       },
       {
         "productId": "PRD173",
-        "productName": "Dragon Fruit (Pitaya)",
-        "qty": 5,
+        "productName": "Dragon Fruit Red",
         "unit": "Boxes",
-        "rate": 900,
-        "amount": 4500,
+        "totalQuantity": 3,
+        "unitPrice": 900,
+        "totalCost": 2700,
         "allocations": [
           {
-            "branch": "BASAVANAGAR",
             "branchId": "BR004",
-            "qty": 5,
-            "received": 5
+            "branch": "Basavanagar",
+            "qty": 3,
+          "allocated": 3,
+          "received": 3
           }
         ]
       },
       {
         "productId": "PRD198",
-        "productName": "Wht Dragon",
-        "qty": 2,
+        "productName": "Dragon Fruit White",
         "unit": "Boxes",
-        "rate": 1100,
-        "amount": 2200,
+        "totalQuantity": 10,
+        "unitPrice": 1100,
+        "totalCost": 11000,
         "allocations": [
           {
-            "branch": "BASAVANAGAR",
             "branchId": "BR004",
-            "qty": 2,
-            "received": 2
+            "branch": "Basavanagar",
+            "qty": 10,
+          "allocated": 10,
+          "received": 10
           }
         ]
       },
       {
         "productId": "PRD081",
         "productName": "Grapes Green Thompson",
-        "qty": 8,
         "unit": "Crates",
-        "rate": 1200,
-        "amount": 9600,
+        "totalQuantity": 17,
+        "unitPrice": 1200,
+        "totalCost": 20400,
         "allocations": [
           {
-            "branch": "BASAVANAGAR",
             "branchId": "BR004",
-            "qty": 8,
-            "received": 8
+            "branch": "Basavanagar",
+            "qty": 17,
+          "allocated": 17,
+          "received": 17
           }
         ]
       },
       {
         "productId": "PRD080",
         "productName": "Grapes Black Seedless",
-        "qty": 4,
         "unit": "Crates",
-        "rate": 1200,
-        "amount": 4800,
+        "totalQuantity": 9,
+        "unitPrice": 1200,
+        "totalCost": 10800,
         "allocations": [
           {
-            "branch": "BASAVANAGAR",
             "branchId": "BR004",
-            "qty": 4,
-            "received": 4
+            "branch": "Basavanagar",
+            "qty": 9,
+          "allocated": 9,
+          "received": 9
           }
         ]
       },
       {
         "productId": "PRD079",
         "productName": "Grapes Red Globe Imported",
-        "qty": 5,
         "unit": "Crates",
-        "rate": 1200,
-        "amount": 6000,
+        "totalQuantity": 16,
+        "unitPrice": 1200,
+        "totalCost": 19200,
         "allocations": [
           {
-            "branch": "BASAVANAGAR",
             "branchId": "BR004",
-            "qty": 5,
-            "received": 5
+            "branch": "Basavanagar",
+            "qty": 16,
+          "allocated": 16,
+          "received": 16
           }
         ]
       },
       {
         "productId": "PRD217",
         "productName": "Golden Kiwi",
-        "qty": 6,
         "unit": "Boxes",
-        "rate": 1400,
-        "amount": 8400,
+        "totalQuantity": 8,
+        "unitPrice": 1400,
+        "totalCost": 11200,
         "allocations": [
           {
-            "branch": "BASAVANAGAR",
             "branchId": "BR004",
-            "qty": 6,
-            "received": 6
+            "branch": "Basavanagar",
+            "qty": 8,
+          "allocated": 8,
+          "received": 8
           }
         ]
       },
       {
         "productId": "PRD084",
         "productName": "Kiwi Fruit",
-        "qty": 4,
         "unit": "Boxes",
-        "rate": 850,
-        "amount": 3400,
+        "totalQuantity": 15,
+        "unitPrice": 850,
+        "totalCost": 12750,
         "allocations": [
           {
-            "branch": "BASAVANAGAR",
             "branchId": "BR004",
-            "qty": 4,
-            "received": 4
+            "branch": "Basavanagar",
+            "qty": 15,
+          "allocated": 15,
+          "received": 15
           }
         ]
       },
       {
         "productId": "PRD197",
         "productName": "Pomegranate Big",
-        "qty": 5,
         "unit": "Boxes",
-        "rate": 1400,
-        "amount": 7000,
+        "totalQuantity": 7,
+        "unitPrice": 1400,
+        "totalCost": 9800,
         "allocations": [
           {
-            "branch": "BASAVANAGAR",
             "branchId": "BR004",
-            "qty": 5,
-            "received": 5
+            "branch": "Basavanagar",
+            "qty": 7,
+          "allocated": 7,
+          "received": 7
           }
         ]
       },
       {
         "productId": "PRD077",
         "productName": "Anar (Pomegranate)",
-        "qty": 4,
         "unit": "Boxes",
-        "rate": 1650,
-        "amount": 6600,
+        "totalQuantity": 14,
+        "unitPrice": 1650,
+        "totalCost": 23100,
         "allocations": [
           {
-            "branch": "BASAVANAGAR",
             "branchId": "BR004",
-            "qty": 4,
-            "received": 4
+            "branch": "Basavanagar",
+            "qty": 14,
+          "allocated": 14,
+          "received": 14
           }
         ]
       },
       {
         "productId": "PRD103",
         "productName": "Plum Black",
-        "qty": 6,
         "unit": "Boxes",
-        "rate": 650,
-        "amount": 3900,
+        "totalQuantity": 6,
+        "unitPrice": 650,
+        "totalCost": 3900,
         "allocations": [
           {
-            "branch": "BASAVANAGAR",
             "branchId": "BR004",
+            "branch": "Basavanagar",
             "qty": 6,
-            "received": 6
+          "allocated": 6,
+          "received": 6
           }
         ]
       },
       {
         "productId": "PRD090",
         "productName": "Pear Green",
-        "qty": 3,
         "unit": "Boxes",
-        "rate": 1450,
-        "amount": 4350,
+        "totalQuantity": 13,
+        "unitPrice": 1450,
+        "totalCost": 18850,
         "allocations": [
           {
-            "branch": "BASAVANAGAR",
             "branchId": "BR004",
-            "qty": 3,
-            "received": 3
+            "branch": "Basavanagar",
+            "qty": 13,
+          "allocated": 13,
+          "received": 13
           }
         ]
       },
       {
         "productId": "PRD099",
         "productName": "Butter Fruit (Avocado)",
-        "qty": 7,
         "unit": "Crates",
-        "rate": 1500,
-        "amount": 10500,
+        "totalQuantity": 5,
+        "unitPrice": 1500,
+        "totalCost": 7500,
         "allocations": [
           {
-            "branch": "BASAVANAGAR",
             "branchId": "BR004",
-            "qty": 7,
-            "received": 7
+            "branch": "Basavanagar",
+            "qty": 5,
+          "allocated": 5,
+          "received": 5
           }
         ]
       },
       {
         "productId": "PRD212",
         "productName": "Butter Fruit Imported",
-        "qty": 5,
         "unit": "Crates",
-        "rate": 2200,
-        "amount": 11000,
+        "totalQuantity": 12,
+        "unitPrice": 2200,
+        "totalCost": 26400,
         "allocations": [
           {
-            "branch": "BASAVANAGAR",
             "branchId": "BR004",
-            "qty": 5,
-            "received": 5
+            "branch": "Basavanagar",
+            "qty": 12,
+          "allocated": 12,
+          "received": 12
           }
         ]
       },
       {
         "productId": "PRD174",
         "productName": "Persimmon Fruit",
-        "qty": 4,
         "unit": "Boxes",
-        "rate": 850,
-        "amount": 3400,
+        "totalQuantity": 4,
+        "unitPrice": 850,
+        "totalCost": 3400,
         "allocations": [
           {
-            "branch": "BASAVANAGAR",
             "branchId": "BR004",
+            "branch": "Basavanagar",
             "qty": 4,
-            "received": 4
+          "allocated": 4,
+          "received": 4
           }
         ]
       },
       {
         "productId": "PRD075",
         "productName": "Apple Royal Gala",
-        "qty": 6,
         "unit": "Crates",
-        "rate": 2100,
-        "amount": 12600,
+        "totalQuantity": 11,
+        "unitPrice": 2100,
+        "totalCost": 23100,
         "allocations": [
           {
-            "branch": "BASAVANAGAR",
             "branchId": "BR004",
-            "qty": 6,
-            "received": 6
+            "branch": "Basavanagar",
+            "qty": 11,
+          "allocated": 11,
+          "received": 11
           }
         ]
       },
       {
         "productId": "PRD196",
         "productName": "Pink Lady",
-        "qty": 3,
         "unit": "Crates",
-        "rate": 1850,
-        "amount": 5550,
+        "totalQuantity": 3,
+        "unitPrice": 1850,
+        "totalCost": 5550,
         "allocations": [
           {
-            "branch": "BASAVANAGAR",
             "branchId": "BR004",
+            "branch": "Basavanagar",
             "qty": 3,
-            "received": 3
+          "allocated": 3,
+          "received": 3
           }
         ]
       },
       {
         "productId": "PRD208",
         "productName": "Turkey Apple",
-        "qty": 5,
         "unit": "Crates",
-        "rate": 1750,
-        "amount": 8750,
+        "totalQuantity": 10,
+        "unitPrice": 1750,
+        "totalCost": 17500,
         "allocations": [
           {
-            "branch": "BASAVANAGAR",
             "branchId": "BR004",
-            "qty": 5,
-            "received": 5
+            "branch": "Basavanagar",
+            "qty": 10,
+          "allocated": 10,
+          "received": 10
           }
         ]
       },
       {
         "productId": "PRD071",
         "productName": "Apple Washington",
-        "qty": 4,
         "unit": "Crates",
-        "rate": 2100,
-        "amount": 8400,
+        "totalQuantity": 17,
+        "unitPrice": 2100,
+        "totalCost": 35700,
         "allocations": [
           {
-            "branch": "BASAVANAGAR",
             "branchId": "BR004",
-            "qty": 4,
-            "received": 4
+            "branch": "Basavanagar",
+            "qty": 17,
+          "allocated": 17,
+          "received": 17
           }
         ]
       },
       {
         "productId": "PRD209",
         "productName": "Rocket Apple",
-        "qty": 3,
         "unit": "Boxes",
-        "rate": 1950,
-        "amount": 5850,
+        "totalQuantity": 9,
+        "unitPrice": 1950,
+        "totalCost": 17550,
         "allocations": [
           {
-            "branch": "BASAVANAGAR",
             "branchId": "BR004",
-            "qty": 3,
-            "received": 3
+            "branch": "Basavanagar",
+            "qty": 9,
+          "allocated": 9,
+          "received": 9
           }
         ]
       },
       {
         "productId": "PRD210",
         "productName": "Alibinder",
-        "qty": 6,
         "unit": "Crates",
-        "rate": 1800,
-        "amount": 10800,
+        "totalQuantity": 16,
+        "unitPrice": 1800,
+        "totalCost": 28800,
         "allocations": [
           {
-            "branch": "BASAVANAGAR",
             "branchId": "BR004",
-            "qty": 6,
-            "received": 6
+            "branch": "Basavanagar",
+            "qty": 16,
+          "allocated": 16,
+          "received": 16
           }
         ]
       },
       {
         "productId": "PRD073",
         "productName": "Apple Green (Granny Smith)",
-        "qty": 5,
         "unit": "Crates",
-        "rate": 2100,
-        "amount": 10500,
+        "totalQuantity": 8,
+        "unitPrice": 2100,
+        "totalCost": 16800,
         "allocations": [
           {
-            "branch": "BASAVANAGAR",
             "branchId": "BR004",
-            "qty": 5,
-            "received": 5
+            "branch": "Basavanagar",
+            "qty": 8,
+          "allocated": 8,
+          "received": 8
           }
         ]
       },
       {
         "productId": "PRD211",
         "productName": "Iran Apple",
-        "qty": 2,
         "unit": "Crates",
-        "rate": 1600,
-        "amount": 3200,
+        "totalQuantity": 15,
+        "unitPrice": 1600,
+        "totalCost": 24000,
         "allocations": [
           {
-            "branch": "BASAVANAGAR",
             "branchId": "BR004",
-            "qty": 2,
-            "received": 2
+            "branch": "Basavanagar",
+            "qty": 15,
+          "allocated": 15,
+          "received": 15
           }
         ]
       },
       {
         "productId": "PRD201",
         "productName": "Kashmiri Apple",
-        "qty": 8,
         "unit": "Crates",
-        "rate": 1650,
-        "amount": 13200,
+        "totalQuantity": 7,
+        "unitPrice": 1650,
+        "totalCost": 11550,
         "allocations": [
           {
-            "branch": "BASAVANAGAR",
             "branchId": "BR004",
-            "qty": 8,
-            "received": 8
+            "branch": "Basavanagar",
+            "qty": 7,
+          "allocated": 7,
+          "received": 7
           }
         ]
       },
       {
         "productId": "PRD070",
         "productName": "Apple Indian (Shimla)",
-        "qty": 4,
         "unit": "Crates",
-        "rate": 2100,
-        "amount": 8400,
+        "totalQuantity": 14,
+        "unitPrice": 2100,
+        "totalCost": 29400,
         "allocations": [
           {
-            "branch": "BASAVANAGAR",
             "branchId": "BR004",
-            "qty": 4,
-            "received": 4
+            "branch": "Basavanagar",
+            "qty": 14,
+          "allocated": 14,
+          "received": 14
           }
         ]
       },
       {
         "productId": "PRD202",
         "productName": "Misri Apple",
-        "qty": 5,
         "unit": "Crates",
-        "rate": 1700,
-        "amount": 8500,
+        "totalQuantity": 6,
+        "unitPrice": 1700,
+        "totalCost": 10200,
         "allocations": [
           {
-            "branch": "BASAVANAGAR",
             "branchId": "BR004",
-            "qty": 5,
-            "received": 5
+            "branch": "Basavanagar",
+            "qty": 6,
+          "allocated": 6,
+          "received": 6
           }
         ]
       },
       {
         "productId": "PRD023",
         "productName": "Cucumber Local",
-        "qty": 6,
         "unit": "Crates",
-        "rate": 450,
-        "amount": 2700,
+        "totalQuantity": 13,
+        "unitPrice": 450,
+        "totalCost": 5850,
         "allocations": [
           {
-            "branch": "BASAVANAGAR",
             "branchId": "BR004",
-            "qty": 6,
-            "received": 6
+            "branch": "Basavanagar",
+            "qty": 13,
+          "allocated": 13,
+          "received": 13
           }
         ]
       },
       {
         "productId": "PRD032",
         "productName": "Cauliflower",
-        "qty": 4,
         "unit": "Crates",
-        "rate": 600,
-        "amount": 2400,
+        "totalQuantity": 5,
+        "unitPrice": 600,
+        "totalCost": 3000,
         "allocations": [
           {
-            "branch": "BASAVANAGAR",
             "branchId": "BR004",
-            "qty": 4,
-            "received": 4
+            "branch": "Basavanagar",
+            "qty": 5,
+          "allocated": 5,
+          "received": 5
           }
         ]
       },
       {
         "productId": "PRD022",
         "productName": "Cabbage Green",
-        "qty": 5,
         "unit": "Bags",
-        "rate": 420,
-        "amount": 2100,
+        "totalQuantity": 12,
+        "unitPrice": 420,
+        "totalCost": 5040,
         "allocations": [
           {
-            "branch": "BASAVANAGAR",
             "branchId": "BR004",
-            "qty": 5,
-            "received": 5
+            "branch": "Basavanagar",
+            "qty": 12,
+          "allocated": 12,
+          "received": 12
           }
         ]
       },
       {
         "productId": "PRD019",
         "productName": "Lauki (Bottle Gourd)",
-        "qty": 4,
         "unit": "Bags",
-        "rate": 400,
-        "amount": 1600,
+        "totalQuantity": 4,
+        "unitPrice": 400,
+        "totalCost": 1600,
         "allocations": [
           {
-            "branch": "BASAVANAGAR",
             "branchId": "BR004",
+            "branch": "Basavanagar",
             "qty": 4,
-            "received": 4
+          "allocated": 4,
+          "received": 4
           }
         ]
       },
       {
         "productId": "PRD049",
         "productName": "Ridge Gourd (Hirekayi)",
-        "qty": 6,
         "unit": "Bags",
-        "rate": 500,
-        "amount": 3000,
+        "totalQuantity": 11,
+        "unitPrice": 500,
+        "totalCost": 5500,
         "allocations": [
           {
-            "branch": "BASAVANAGAR",
             "branchId": "BR004",
-            "qty": 6,
-            "received": 6
+            "branch": "Basavanagar",
+            "qty": 11,
+          "allocated": 11,
+          "received": 11
           }
         ]
       },
       {
         "productId": "PRD143",
         "productName": "S POTATO",
-        "qty": 3,
         "unit": "Kg",
-        "rate": 45,
-        "amount": 135,
+        "totalQuantity": 3,
+        "unitPrice": 45,
+        "totalCost": 135,
         "allocations": [
           {
-            "branch": "BASAVANAGAR",
             "branchId": "BR004",
+            "branch": "Basavanagar",
             "qty": 3,
-            "received": 3
+          "allocated": 3,
+          "received": 3
           }
         ]
       },
       {
         "productId": "PRD006",
         "productName": "Ladies Finger",
-        "qty": 7,
         "unit": "Crates",
-        "rate": 650,
-        "amount": 4550,
+        "totalQuantity": 10,
+        "unitPrice": 650,
+        "totalCost": 6500,
         "allocations": [
           {
-            "branch": "BASAVANAGAR",
             "branchId": "BR004",
-            "qty": 7,
-            "received": 7
+            "branch": "Basavanagar",
+            "qty": 10,
+          "allocated": 10,
+          "received": 10
           }
         ]
       },
       {
         "productId": "PRD009",
         "productName": "Green Peas",
-        "qty": 5,
         "unit": "Bags",
-        "rate": 1400,
-        "amount": 7000,
+        "totalQuantity": 17,
+        "unitPrice": 1400,
+        "totalCost": 23800,
         "allocations": [
           {
-            "branch": "BASAVANAGAR",
             "branchId": "BR004",
-            "qty": 5,
-            "received": 5
+            "branch": "Basavanagar",
+            "qty": 17,
+          "allocated": 17,
+          "received": 17
           }
         ]
       },
       {
         "productId": "PRD005",
         "productName": "Green Beans",
-        "qty": 4,
         "unit": "Bags",
-        "rate": 900,
-        "amount": 3600,
+        "totalQuantity": 9,
+        "unitPrice": 900,
+        "totalCost": 8100,
         "allocations": [
           {
-            "branch": "BASAVANAGAR",
             "branchId": "BR004",
-            "qty": 4,
-            "received": 4
+            "branch": "Basavanagar",
+            "qty": 9,
+          "allocated": 9,
+          "received": 9
           }
         ]
       },
       {
         "productId": "PRD004",
         "productName": "Carrot",
-        "qty": 6,
         "unit": "Bags",
-        "rate": 850,
-        "amount": 5100,
+        "totalQuantity": 16,
+        "unitPrice": 850,
+        "totalCost": 13600,
         "allocations": [
           {
-            "branch": "BASAVANAGAR",
             "branchId": "BR004",
-            "qty": 6,
-            "received": 6
+            "branch": "Basavanagar",
+            "qty": 16,
+          "allocated": 16,
+          "received": 16
           }
         ]
       },
       {
         "productId": "PRD057",
         "productName": "Beetroot",
-        "qty": 3,
         "unit": "Bags",
-        "rate": 750,
-        "amount": 2250,
+        "totalQuantity": 8,
+        "unitPrice": 750,
+        "totalCost": 6000,
         "allocations": [
           {
-            "branch": "BASAVANAGAR",
             "branchId": "BR004",
-            "qty": 3,
-            "received": 3
+            "branch": "Basavanagar",
+            "qty": 8,
+          "allocated": 8,
+          "received": 8
           }
         ]
       },
       {
         "productId": "PRD029",
         "productName": "Drumstick",
-        "qty": 5,
         "unit": "Bags",
-        "rate": 550,
-        "amount": 2750,
+        "totalQuantity": 15,
+        "unitPrice": 550,
+        "totalCost": 8250,
         "allocations": [
           {
-            "branch": "BASAVANAGAR",
             "branchId": "BR004",
-            "qty": 5,
-            "received": 5
+            "branch": "Basavanagar",
+            "qty": 15,
+          "allocated": 15,
+          "received": 15
           }
         ]
       },
       {
         "productId": "PRD012",
         "productName": "Radish White",
-        "qty": 4,
         "unit": "Bags",
-        "rate": 480,
-        "amount": 1920,
+        "totalQuantity": 7,
+        "unitPrice": 480,
+        "totalCost": 3360,
         "allocations": [
           {
-            "branch": "BASAVANAGAR",
             "branchId": "BR004",
-            "qty": 4,
-            "received": 4
+            "branch": "Basavanagar",
+            "qty": 7,
+          "allocated": 7,
+          "received": 7
           }
         ]
       },
       {
         "productId": "PRD021",
         "productName": "Capsicum Green",
-        "qty": 3,
         "unit": "Crates",
-        "rate": 700,
-        "amount": 2100,
+        "totalQuantity": 14,
+        "unitPrice": 700,
+        "totalCost": 9800,
         "allocations": [
           {
-            "branch": "BASAVANAGAR",
             "branchId": "BR004",
-            "qty": 3,
-            "received": 3
+            "branch": "Basavanagar",
+            "qty": 14,
+          "allocated": 14,
+          "received": 14
           }
         ]
       },
       {
         "productId": "PRD125",
         "productName": "Parval (Pointed Gourd)",
-        "qty": 6,
         "unit": "Crates",
-        "rate": 650,
-        "amount": 3900,
+        "totalQuantity": 6,
+        "unitPrice": 650,
+        "totalCost": 3900,
         "allocations": [
           {
-            "branch": "BASAVANAGAR",
             "branchId": "BR004",
+            "branch": "Basavanagar",
             "qty": 6,
-            "received": 6
+          "allocated": 6,
+          "received": 6
           }
         ]
       },
       {
         "productId": "PRD017",
         "productName": "Amla",
-        "qty": 5,
         "unit": "Kg",
-        "rate": 60,
-        "amount": 300,
+        "totalQuantity": 13,
+        "unitPrice": 60,
+        "totalCost": 780,
         "allocations": [
           {
-            "branch": "BASAVANAGAR",
             "branchId": "BR004",
-            "qty": 5,
-            "received": 5
+            "branch": "Basavanagar",
+            "qty": 13,
+          "allocated": 13,
+          "received": 13
           }
         ]
       },
       {
         "productId": "PRD008",
         "productName": "Long Beans",
-        "qty": 2,
         "unit": "Kg",
-        "rate": 50,
-        "amount": 100,
+        "totalQuantity": 5,
+        "unitPrice": 50,
+        "totalCost": 250,
         "allocations": [
           {
-            "branch": "BASAVANAGAR",
             "branchId": "BR004",
-            "qty": 2,
-            "received": 2
+            "branch": "Basavanagar",
+            "qty": 5,
+          "allocated": 5,
+          "received": 5
           }
         ]
       },
       {
         "productId": "PRD018",
         "productName": "Avarakkai",
-        "qty": 8,
         "unit": "Kg",
-        "rate": 55,
-        "amount": 440,
+        "totalQuantity": 12,
+        "unitPrice": 55,
+        "totalCost": 660,
         "allocations": [
           {
-            "branch": "BASAVANAGAR",
             "branchId": "BR004",
-            "qty": 8,
-            "received": 8
-          }
-        ]
-      },
-      {
-        "productId": "PRD177",
-        "productName": "White Butter Beans",
-        "qty": 4,
-        "unit": "Kg",
-        "rate": 80,
-        "amount": 320,
-        "allocations": [
-          {
-            "branch": "BASAVANAGAR",
-            "branchId": "BR004",
-            "qty": 4,
-            "received": 4
+            "branch": "Basavanagar",
+            "qty": 12,
+          "allocated": 12,
+          "received": 12
           }
         ]
       },
       {
         "productId": "PRD066",
         "productName": "Double Beans (Lima)",
-        "qty": 5,
         "unit": "Kg",
-        "rate": 80,
-        "amount": 400,
+        "totalQuantity": 4,
+        "unitPrice": 80,
+        "totalCost": 320,
         "allocations": [
           {
-            "branch": "BASAVANAGAR",
             "branchId": "BR004",
-            "qty": 5,
-            "received": 5
+            "branch": "Basavanagar",
+            "qty": 4,
+          "allocated": 4,
+          "received": 4
           }
         ]
       },
       {
         "productId": "PRD011",
         "productName": "Nookkol",
-        "qty": 6,
         "unit": "Bags",
-        "rate": 520,
-        "amount": 3120,
+        "totalQuantity": 11,
+        "unitPrice": 520,
+        "totalCost": 5720,
         "allocations": [
           {
-            "branch": "BASAVANAGAR",
             "branchId": "BR004",
-            "qty": 6,
-            "received": 6
+            "branch": "Basavanagar",
+            "qty": 11,
+          "allocated": 11,
+          "received": 11
           }
         ]
       },
       {
         "productId": "PRD183",
         "productName": "Small Karela (S.Karela)",
-        "qty": 4,
         "unit": "Crates",
-        "rate": 600,
-        "amount": 2400,
+        "totalQuantity": 3,
+        "unitPrice": 600,
+        "totalCost": 1800,
         "allocations": [
           {
-            "branch": "BASAVANAGAR",
             "branchId": "BR004",
-            "qty": 4,
-            "received": 4
+            "branch": "Basavanagar",
+            "qty": 3,
+          "allocated": 3,
+          "received": 3
           }
         ]
       },
       {
         "productId": "PRD020",
         "productName": "Bitter Gourd",
-        "qty": 5,
         "unit": "Crates",
-        "rate": 600,
-        "amount": 3000,
+        "totalQuantity": 10,
+        "unitPrice": 600,
+        "totalCost": 6000,
         "allocations": [
           {
-            "branch": "BASAVANAGAR",
             "branchId": "BR004",
-            "qty": 5,
-            "received": 5
+            "branch": "Basavanagar",
+            "qty": 10,
+          "allocated": 10,
+          "received": 10
           }
         ]
       },
       {
         "productId": "PRD014",
-        "productName": "Brinjal Mysore",
-        "qty": 4,
+        "productName": "Small Brinjal Green",
         "unit": "Crates",
-        "rate": 480,
-        "amount": 1920,
+        "totalQuantity": 17,
+        "unitPrice": 480,
+        "totalCost": 8160,
         "allocations": [
           {
-            "branch": "BASAVANAGAR",
             "branchId": "BR004",
-            "qty": 4,
-            "received": 4
+            "branch": "Basavanagar",
+            "qty": 17,
+          "allocated": 17,
+          "received": 17
+          }
+        ]
+      },
+      {
+        "productId": "PRD188",
+        "productName": "Small Brinjal Purple",
+        "unit": "Crates",
+        "totalQuantity": 9,
+        "unitPrice": 500,
+        "totalCost": 4500,
+        "allocations": [
+          {
+            "branchId": "BR004",
+            "branch": "Basavanagar",
+            "qty": 9,
+          "allocated": 9,
+          "received": 9
           }
         ]
       },
       {
         "productId": "PRD189",
-        "productName": "L Brinjal Purple",
-        "qty": 6,
+        "productName": "Long Brinjal Purple",
         "unit": "Crates",
-        "rate": 520,
-        "amount": 3120,
+        "totalQuantity": 16,
+        "unitPrice": 520,
+        "totalCost": 8320,
         "allocations": [
           {
-            "branch": "BASAVANAGAR",
             "branchId": "BR004",
-            "qty": 6,
-            "received": 6
+            "branch": "Basavanagar",
+            "qty": 16,
+          "allocated": 16,
+          "received": 16
           }
         ]
       },
       {
         "productId": "PRD015",
-        "productName": "Brinjal Green",
-        "qty": 3,
+        "productName": "Long Brinjal Green",
         "unit": "Crates",
-        "rate": 480,
-        "amount": 1440,
+        "totalQuantity": 8,
+        "unitPrice": 480,
+        "totalCost": 3840,
         "allocations": [
           {
-            "branch": "BASAVANAGAR",
             "branchId": "BR004",
-            "qty": 3,
-            "received": 3
-          }
-        ]
-      },
-      {
-        "productId": "PRD205",
-        "productName": "Bharta Green",
-        "qty": 7,
-        "unit": "Crates",
-        "rate": 550,
-        "amount": 3850,
-        "allocations": [
-          {
-            "branch": "BASAVANAGAR",
-            "branchId": "BR004",
-            "qty": 7,
-            "received": 7
+            "branch": "Basavanagar",
+            "qty": 8,
+          "allocated": 8,
+          "received": 8
           }
         ]
       },
       {
         "productId": "PRD016",
-        "productName": "Brinjal Bhartha",
-        "qty": 5,
+        "productName": "Bharta Green",
         "unit": "Crates",
-        "rate": 480,
-        "amount": 2400,
+        "totalQuantity": 15,
+        "unitPrice": 480,
+        "totalCost": 7200,
         "allocations": [
           {
-            "branch": "BASAVANAGAR",
             "branchId": "BR004",
-            "qty": 5,
-            "received": 5
+            "branch": "Basavanagar",
+            "qty": 15,
+          "allocated": 15,
+          "received": 15
+          }
+        ]
+      },
+      {
+        "productId": "PRD205",
+        "productName": "Bharta Black",
+        "unit": "Crates",
+        "totalQuantity": 7,
+        "unitPrice": 550,
+        "totalCost": 3850,
+        "allocations": [
+          {
+            "branchId": "BR004",
+            "branch": "Basavanagar",
+            "qty": 7,
+          "allocated": 7,
+          "received": 7
           }
         ]
       },
       {
         "productId": "PRD028",
         "productName": "Green Chilli",
-        "qty": 4,
         "unit": "Crates",
-        "rate": 650,
-        "amount": 2600,
+        "totalQuantity": 14,
+        "unitPrice": 650,
+        "totalCost": 9100,
         "allocations": [
           {
-            "branch": "BASAVANAGAR",
             "branchId": "BR004",
-            "qty": 4,
-            "received": 4
+            "branch": "Basavanagar",
+            "qty": 14,
+          "allocated": 14,
+          "received": 14
           }
         ]
       },
       {
         "productId": "PRD192",
         "productName": "Big Chilli",
-        "qty": 6,
         "unit": "Crates",
-        "rate": 620,
-        "amount": 3720,
+        "totalQuantity": 6,
+        "unitPrice": 620,
+        "totalCost": 3720,
         "allocations": [
           {
-            "branch": "BASAVANAGAR",
             "branchId": "BR004",
+            "branch": "Basavanagar",
             "qty": 6,
-            "received": 6
+          "allocated": 6,
+          "received": 6
           }
         ]
       },
       {
         "productId": "PRD058",
-        "productName": "Bajji Chilli (Bhavnagri)",
-        "qty": 3,
+        "productName": "Bhajji Chilly",
         "unit": "Crates",
-        "rate": 650,
-        "amount": 1950,
+        "totalQuantity": 13,
+        "unitPrice": 650,
+        "totalCost": 8450,
         "allocations": [
           {
-            "branch": "BASAVANAGAR",
             "branchId": "BR004",
-            "qty": 3,
-            "received": 3
+            "branch": "Basavanagar",
+            "qty": 13,
+          "allocated": 13,
+          "received": 13
           }
         ]
       },
       {
         "productId": "PRD169",
         "productName": "Matki Falli (Moth Pods)",
-        "qty": 5,
         "unit": "Kg",
-        "rate": 65,
-        "amount": 325,
+        "totalQuantity": 5,
+        "unitPrice": 65,
+        "totalCost": 325,
         "allocations": [
           {
-            "branch": "BASAVANAGAR",
             "branchId": "BR004",
+            "branch": "Basavanagar",
             "qty": 5,
-            "received": 5
+          "allocated": 5,
+          "received": 5
           }
         ]
       },
       {
         "productId": "PRD170",
-        "productName": "Sem Beans",
-        "qty": 4,
+        "productName": "Sem",
         "unit": "Kg",
-        "rate": 55,
-        "amount": 220,
+        "totalQuantity": 12,
+        "unitPrice": 55,
+        "totalCost": 660,
         "allocations": [
           {
-            "branch": "BASAVANAGAR",
             "branchId": "BR004",
-            "qty": 4,
-            "received": 4
+            "branch": "Basavanagar",
+            "qty": 12,
+          "allocated": 12,
+          "received": 12
           }
         ]
       },
       {
         "productId": "PRD053",
         "productName": "Avarakkai",
-        "qty": 3,
         "unit": "Kg",
-        "rate": 55,
-        "amount": 165,
+        "totalQuantity": 4,
+        "unitPrice": 55,
+        "totalCost": 220,
         "allocations": [
           {
-            "branch": "BASAVANAGAR",
             "branchId": "BR004",
-            "qty": 3,
-            "received": 3
+            "branch": "Basavanagar",
+            "qty": 4,
+          "allocated": 4,
+          "received": 4
           }
         ]
       },
       {
         "productId": "PRD037",
         "productName": "Kovakkai / Kundru (Tindora)",
-        "qty": 6,
         "unit": "Crates",
-        "rate": 550,
-        "amount": 3300,
+        "totalQuantity": 11,
+        "unitPrice": 550,
+        "totalCost": 6050,
         "allocations": [
           {
-            "branch": "BASAVANAGAR",
             "branchId": "BR004",
-            "qty": 6,
-            "received": 6
+            "branch": "Basavanagar",
+            "qty": 11,
+          "allocated": 11,
+          "received": 11
           }
         ]
       },
       {
         "productId": "PRD038",
         "productName": "Snake Gourd (Padavalakai)",
-        "qty": 5,
         "unit": "Bags",
-        "rate": 420,
-        "amount": 2100,
+        "totalQuantity": 3,
+        "unitPrice": 420,
+        "totalCost": 1260,
         "allocations": [
           {
-            "branch": "BASAVANAGAR",
             "branchId": "BR004",
-            "qty": 5,
-            "received": 5
+            "branch": "Basavanagar",
+            "qty": 3,
+          "allocated": 3,
+          "received": 3
           }
         ]
       },
       {
         "productId": "PRD010",
         "productName": "Chow Chow",
-        "qty": 2,
         "unit": "Bags",
-        "rate": 450,
-        "amount": 900,
+        "totalQuantity": 10,
+        "unitPrice": 450,
+        "totalCost": 4500,
         "allocations": [
           {
-            "branch": "BASAVANAGAR",
             "branchId": "BR004",
-            "qty": 2,
-            "received": 2
+            "branch": "Basavanagar",
+            "qty": 10,
+          "allocated": 10,
+          "received": 10
           }
         ]
       },
       {
         "productId": "PRD030",
         "productName": "Raw Green Papaya",
-        "qty": 8,
         "unit": "Crates",
-        "rate": 650,
-        "amount": 5200,
+        "totalQuantity": 17,
+        "unitPrice": 650,
+        "totalCost": 11050,
         "allocations": [
           {
-            "branch": "BASAVANAGAR",
             "branchId": "BR004",
-            "qty": 8,
-            "received": 8
+            "branch": "Basavanagar",
+            "qty": 17,
+          "allocated": 17,
+          "received": 17
           }
         ]
       },
       {
         "productId": "PRD024",
         "productName": "Raw Banana (Cooking)",
-        "qty": 4,
         "unit": "Bunches",
-        "rate": 350,
-        "amount": 1400,
+        "totalQuantity": 9,
+        "unitPrice": 350,
+        "totalCost": 3150,
         "allocations": [
           {
-            "branch": "BASAVANAGAR",
             "branchId": "BR004",
-            "qty": 4,
-            "received": 4
+            "branch": "Basavanagar",
+            "qty": 9,
+          "allocated": 9,
+          "received": 9
           }
         ]
       },
       {
         "productId": "PRD051",
         "productName": "Banana Stem",
-        "qty": 5,
         "unit": "Pieces",
-        "rate": 25,
-        "amount": 125,
+        "totalQuantity": 16,
+        "unitPrice": 25,
+        "totalCost": 400,
         "allocations": [
           {
-            "branch": "BASAVANAGAR",
             "branchId": "BR004",
-            "qty": 5,
-            "received": 5
+            "branch": "Basavanagar",
+            "qty": 16,
+          "allocated": 16,
+          "received": 16
           }
         ]
       },
       {
         "productId": "PRD060",
         "productName": "Banana Flower (Vazhaipoo)",
-        "qty": 6,
         "unit": "Pieces",
-        "rate": 30,
-        "amount": 180,
+        "totalQuantity": 8,
+        "unitPrice": 30,
+        "totalCost": 240,
         "allocations": [
           {
-            "branch": "BASAVANAGAR",
             "branchId": "BR004",
-            "qty": 6,
-            "received": 6
+            "branch": "Basavanagar",
+            "qty": 8,
+          "allocated": 8,
+          "received": 8
           }
         ]
       },
       {
         "productId": "PRD131",
         "productName": "Raw Green Mango",
-        "qty": 4,
         "unit": "Crates",
-        "rate": 2200,
-        "amount": 8800,
+        "totalQuantity": 15,
+        "unitPrice": 2200,
+        "totalCost": 33000,
         "allocations": [
           {
-            "branch": "BASAVANAGAR",
             "branchId": "BR004",
-            "qty": 4,
-            "received": 4
+            "branch": "Basavanagar",
+            "qty": 15,
+          "allocated": 15,
+          "received": 15
           }
         ]
       },
       {
         "productId": "PRD050",
         "productName": "Jackfruit (Raw / Ripe)",
-        "qty": 5,
         "unit": "Kg",
-        "rate": 45,
-        "amount": 225,
+        "totalQuantity": 7,
+        "unitPrice": 45,
+        "totalCost": 315,
         "allocations": [
           {
-            "branch": "BASAVANAGAR",
             "branchId": "BR004",
-            "qty": 5,
-            "received": 5
+            "branch": "Basavanagar",
+            "qty": 7,
+          "allocated": 7,
+          "received": 7
           }
         ]
       },
       {
         "productId": "PRD034",
-        "productName": "Arbi (Colocasia)",
-        "qty": 4,
+        "productName": "Arvi",
         "unit": "Bags",
-        "rate": 750,
-        "amount": 3000,
+        "totalQuantity": 14,
+        "unitPrice": 750,
+        "totalCost": 10500,
         "allocations": [
           {
-            "branch": "BASAVANAGAR",
             "branchId": "BR004",
-            "qty": 4,
-            "received": 4
+            "branch": "Basavanagar",
+            "qty": 14,
+          "allocated": 14,
+          "received": 14
           }
         ]
       },
       {
         "productId": "PRD172",
         "productName": "Tapioca (Kappa / Cassava)",
-        "qty": 6,
         "unit": "Bags",
-        "rate": 650,
-        "amount": 3900,
+        "totalQuantity": 6,
+        "unitPrice": 650,
+        "totalCost": 3900,
         "allocations": [
           {
-            "branch": "BASAVANAGAR",
             "branchId": "BR004",
+            "branch": "Basavanagar",
             "qty": 6,
-            "received": 6
+          "allocated": 6,
+          "received": 6
           }
         ]
       },
       {
         "productId": "PRD027",
         "productName": "Ginger",
-        "qty": 3,
         "unit": "Bags",
-        "rate": 1600,
-        "amount": 4800,
+        "totalQuantity": 13,
+        "unitPrice": 1600,
+        "totalCost": 20800,
         "allocations": [
           {
-            "branch": "BASAVANAGAR",
             "branchId": "BR004",
-            "qty": 3,
-            "received": 3
+            "branch": "Basavanagar",
+            "qty": 13,
+          "allocated": 13,
+          "received": 13
           }
         ]
       },
       {
         "productId": "PRD048",
         "productName": "White Pumpkin (Ash Gourd)",
-        "qty": 7,
         "unit": "Bags",
-        "rate": 550,
-        "amount": 3850,
+        "totalQuantity": 5,
+        "unitPrice": 550,
+        "totalCost": 2750,
         "allocations": [
           {
-            "branch": "BASAVANAGAR",
             "branchId": "BR004",
-            "qty": 7,
-            "received": 7
+            "branch": "Basavanagar",
+            "qty": 5,
+          "allocated": 5,
+          "received": 5
           }
         ]
       },
       {
         "productId": "PRD047",
         "productName": "Yellow Pumpkin",
-        "qty": 5,
         "unit": "Bags",
-        "rate": 550,
-        "amount": 2750,
+        "totalQuantity": 12,
+        "unitPrice": 550,
+        "totalCost": 6600,
         "allocations": [
           {
-            "branch": "BASAVANAGAR",
             "branchId": "BR004",
-            "qty": 5,
-            "received": 5
+            "branch": "Basavanagar",
+            "qty": 12,
+          "allocated": 12,
+          "received": 12
           }
         ]
       },
       {
         "productId": "PRD052",
         "productName": "Elephant Foot Yam (Suran)",
-        "qty": 4,
         "unit": "Bags",
-        "rate": 900,
-        "amount": 3600,
+        "totalQuantity": 4,
+        "unitPrice": 900,
+        "totalCost": 3600,
         "allocations": [
           {
-            "branch": "BASAVANAGAR",
             "branchId": "BR004",
+            "branch": "Basavanagar",
             "qty": 4,
-            "received": 4
+          "allocated": 4,
+          "received": 4
           }
         ]
       },
       {
         "productId": "PRD033",
         "productName": "Sambar Cucumber",
-        "qty": 6,
         "unit": "Crates",
-        "rate": 450,
-        "amount": 2700,
+        "totalQuantity": 11,
+        "unitPrice": 450,
+        "totalCost": 4950,
         "allocations": [
           {
-            "branch": "BASAVANAGAR",
             "branchId": "BR004",
-            "qty": 6,
-            "received": 6
+            "branch": "Basavanagar",
+            "qty": 11,
+          "allocated": 11,
+          "received": 11
           }
         ]
       },
       {
         "productId": "PRD035",
         "productName": "Small Onion (Shallots)",
-        "qty": 3,
         "unit": "Bags",
-        "rate": 1450,
-        "amount": 4350,
+        "totalQuantity": 3,
+        "unitPrice": 1450,
+        "totalCost": 4350,
         "allocations": [
           {
-            "branch": "BASAVANAGAR",
             "branchId": "BR004",
+            "branch": "Basavanagar",
             "qty": 3,
-            "received": 3
+          "allocated": 3,
+          "received": 3
+          }
+        ]
+      },
+      {
+        "productId": "PRD193",
+        "productName": "Kandrela",
+        "unit": "Kg",
+        "totalQuantity": 10,
+        "unitPrice": 90,
+        "totalCost": 900,
+        "allocations": [
+          {
+            "branchId": "BR004",
+            "branch": "Basavanagar",
+            "qty": 10,
+          "allocated": 10,
+          "received": 10
           }
         ]
       },
       {
         "productId": "PRD156",
         "productName": "Turmeric Raw (Haldi)",
-        "qty": 5,
         "unit": "Kg",
-        "rate": 90,
-        "amount": 450,
+        "totalQuantity": 17,
+        "unitPrice": 90,
+        "totalCost": 1530,
         "allocations": [
           {
-            "branch": "BASAVANAGAR",
             "branchId": "BR004",
-            "qty": 5,
-            "received": 5
+            "branch": "Basavanagar",
+            "qty": 17,
+          "allocated": 17,
+          "received": 17
           }
         ]
       },
       {
         "productId": "PRD176",
         "productName": "Karamani (Cowpea Pods)",
-        "qty": 4,
         "unit": "Kg",
-        "rate": 65,
-        "amount": 260,
+        "totalQuantity": 9,
+        "unitPrice": 65,
+        "totalCost": 585,
         "allocations": [
           {
-            "branch": "BASAVANAGAR",
             "branchId": "BR004",
-            "qty": 4,
-            "received": 4
+            "branch": "Basavanagar",
+            "qty": 9,
+          "allocated": 9,
+          "received": 9
           }
         ]
       },
       {
         "productId": "PRD045",
         "productName": "Coriander (Kothmir)",
-        "qty": 3,
         "unit": "Bunches",
-        "rate": 25,
-        "amount": 75,
+        "totalQuantity": 16,
+        "unitPrice": 25,
+        "totalCost": 400,
         "allocations": [
           {
-            "branch": "BASAVANAGAR",
             "branchId": "BR004",
-            "qty": 3,
-            "received": 3
+            "branch": "Basavanagar",
+            "qty": 16,
+          "allocated": 16,
+          "received": 16
           }
         ]
       },
       {
         "productId": "PRD194",
         "productName": "Naati",
-        "qty": 6,
         "unit": "Bunches",
-        "rate": 15,
-        "amount": 90,
+        "totalQuantity": 8,
+        "unitPrice": 15,
+        "totalCost": 120,
         "allocations": [
           {
-            "branch": "BASAVANAGAR",
             "branchId": "BR004",
-            "qty": 6,
-            "received": 6
+            "branch": "Basavanagar",
+            "qty": 8,
+          "allocated": 8,
+          "received": 8
           }
         ]
       },
       {
         "productId": "PRD041",
         "productName": "Curry Leaf",
-        "qty": 5,
         "unit": "Bunches",
-        "rate": 25,
-        "amount": 125,
+        "totalQuantity": 15,
+        "unitPrice": 25,
+        "totalCost": 375,
         "allocations": [
           {
-            "branch": "BASAVANAGAR",
             "branchId": "BR004",
-            "qty": 5,
-            "received": 5
+            "branch": "Basavanagar",
+            "qty": 15,
+          "allocated": 15,
+          "received": 15
           }
         ]
       },
       {
         "productId": "PRD042",
         "productName": "Pudina (Mint)",
-        "qty": 2,
         "unit": "Bunches",
-        "rate": 25,
-        "amount": 50,
+        "totalQuantity": 7,
+        "unitPrice": 25,
+        "totalCost": 175,
         "allocations": [
           {
-            "branch": "BASAVANAGAR",
             "branchId": "BR004",
-            "qty": 2,
-            "received": 2
+            "branch": "Basavanagar",
+            "qty": 7,
+          "allocated": 7,
+          "received": 7
           }
         ]
       },
       {
         "productId": "PRD043",
         "productName": "Palak (Spinach)",
-        "qty": 8,
         "unit": "Bunches",
-        "rate": 25,
-        "amount": 200,
+        "totalQuantity": 14,
+        "unitPrice": 25,
+        "totalCost": 350,
         "allocations": [
           {
-            "branch": "BASAVANAGAR",
             "branchId": "BR004",
-            "qty": 8,
-            "received": 8
+            "branch": "Basavanagar",
+            "qty": 14,
+          "allocated": 14,
+          "received": 14
           }
         ]
       },
       {
         "productId": "PRD044",
         "productName": "Methi (Fenugreek)",
-        "qty": 4,
         "unit": "Bunches",
-        "rate": 25,
-        "amount": 100,
+        "totalQuantity": 6,
+        "unitPrice": 25,
+        "totalCost": 150,
         "allocations": [
           {
-            "branch": "BASAVANAGAR",
             "branchId": "BR004",
-            "qty": 4,
-            "received": 4
+            "branch": "Basavanagar",
+            "qty": 6,
+          "allocated": 6,
+          "received": 6
           }
         ]
       },
       {
         "productId": "PRD207",
-        "productName": "Bhaggi",
-        "qty": 5,
+        "productName": "Bhajji Chilly",
         "unit": "Bunches",
-        "rate": 15,
-        "amount": 75,
+        "totalQuantity": 13,
+        "unitPrice": 15,
+        "totalCost": 195,
         "allocations": [
           {
-            "branch": "BASAVANAGAR",
             "branchId": "BR004",
-            "qty": 5,
-            "received": 5
+            "branch": "Basavanagar",
+            "qty": 13,
+          "allocated": 13,
+          "received": 13
           }
         ]
       },
       {
         "productId": "PRD092",
         "productName": "Banana Robusta",
-        "qty": 6,
         "unit": "Bunches",
-        "rate": 450,
-        "amount": 2700,
+        "totalQuantity": 5,
+        "unitPrice": 450,
+        "totalCost": 2250,
         "allocations": [
           {
-            "branch": "BASAVANAGAR",
             "branchId": "BR004",
-            "qty": 6,
-            "received": 6
+            "branch": "Basavanagar",
+            "qty": 5,
+          "allocated": 5,
+          "received": 5
           }
         ]
       },
       {
         "productId": "PRD185",
         "productName": "N TOMATO",
-        "qty": 4,
         "unit": "Kg",
-        "rate": 45,
-        "amount": 180,
+        "totalQuantity": 12,
+        "unitPrice": 45,
+        "totalCost": 540,
         "allocations": [
           {
-            "branch": "BASAVANAGAR",
             "branchId": "BR004",
-            "qty": 4,
-            "received": 4
+            "branch": "Basavanagar",
+            "qty": 12,
+          "allocated": 12,
+          "received": 12
           }
         ]
       },
       {
         "productId": "PRD003",
         "productName": "Tomato",
-        "qty": 5,
         "unit": "Crates",
-        "rate": 550,
-        "amount": 2750,
+        "totalQuantity": 4,
+        "unitPrice": 550,
+        "totalCost": 2200,
         "allocations": [
           {
-            "branch": "BASAVANAGAR",
             "branchId": "BR004",
-            "qty": 5,
-            "received": 5
+            "branch": "Basavanagar",
+            "qty": 4,
+          "allocated": 4,
+          "received": 4
           }
         ]
       }
@@ -9829,1614 +10312,1747 @@ export const INITIAL_PURCHASE_ORDERS = [
       }
     ],
     "status": "Incoming Delivery"
-  }
-,
+  },
   {
     "id": "PO-20261003-ASP01",
     "supplierName": "K.R. Market & APMC Fruit-Veg Terminal (Annasandrapalya)",
     "date": "03 Oct 2026",
     "time": "06:45 AM",
-    "totalAmount": 376747,
+    "totalAmount": 823472,
     "source": "DAILY_STOCK_CHECK_ASP_DISPATCH",
     "manifestReference": "ASP-MORNING-DISPATCH-01",
     "items": [
       {
         "productId": "PRD005",
         "productName": "Green Beans",
-        "qty": 5,
         "unit": "Bags",
-        "rate": 900,
-        "amount": 4500,
+        "totalQuantity": 3,
+        "unitPrice": 900,
+        "totalCost": 2700,
         "allocations": [
           {
-            "branch": "ANNASANDRAPALYA",
             "branchId": "BR001",
-            "qty": 5,
-            "received": 5
+            "branch": "Annasandra Palya",
+            "qty": 3,
+          "allocated": 3,
+          "received": 3
           }
         ]
       },
       {
         "productId": "PRD004",
         "productName": "Carrot",
-        "qty": 4,
         "unit": "Bags",
-        "rate": 850,
-        "amount": 3400,
+        "totalQuantity": 10,
+        "unitPrice": 850,
+        "totalCost": 8500,
         "allocations": [
           {
-            "branch": "ANNASANDRAPALYA",
             "branchId": "BR001",
-            "qty": 4,
-            "received": 4
+            "branch": "Annasandra Palya",
+            "qty": 10,
+          "allocated": 10,
+          "received": 10
           }
         ]
       },
       {
         "productId": "PRD023",
         "productName": "Cucumber Local",
-        "qty": 6,
         "unit": "Crates",
-        "rate": 450,
-        "amount": 2700,
+        "totalQuantity": 17,
+        "unitPrice": 450,
+        "totalCost": 7650,
         "allocations": [
           {
-            "branch": "ANNASANDRAPALYA",
             "branchId": "BR001",
-            "qty": 6,
-            "received": 6
+            "branch": "Annasandra Palya",
+            "qty": 17,
+          "allocated": 17,
+          "received": 17
           }
         ]
       },
       {
         "productId": "PRD057",
         "productName": "Beetroot",
-        "qty": 3,
         "unit": "Bags",
-        "rate": 750,
-        "amount": 2250,
+        "totalQuantity": 9,
+        "unitPrice": 750,
+        "totalCost": 6750,
         "allocations": [
           {
-            "branch": "ANNASANDRAPALYA",
             "branchId": "BR001",
-            "qty": 3,
-            "received": 3
+            "branch": "Annasandra Palya",
+            "qty": 9,
+          "allocated": 9,
+          "received": 9
           }
         ]
       },
       {
         "productId": "PRD032",
         "productName": "Cauliflower",
-        "qty": 7,
         "unit": "Crates",
-        "rate": 600,
-        "amount": 4200,
+        "totalQuantity": 16,
+        "unitPrice": 600,
+        "totalCost": 9600,
         "allocations": [
           {
-            "branch": "ANNASANDRAPALYA",
             "branchId": "BR001",
-            "qty": 7,
-            "received": 7
+            "branch": "Annasandra Palya",
+            "qty": 16,
+          "allocated": 16,
+          "received": 16
           }
         ]
       },
       {
         "productId": "PRD022",
         "productName": "Cabbage Green",
-        "qty": 5,
         "unit": "Bags",
-        "rate": 420,
-        "amount": 2100,
+        "totalQuantity": 8,
+        "unitPrice": 420,
+        "totalCost": 3360,
         "allocations": [
           {
-            "branch": "ANNASANDRAPALYA",
             "branchId": "BR001",
-            "qty": 5,
-            "received": 5
+            "branch": "Annasandra Palya",
+            "qty": 8,
+          "allocated": 8,
+          "received": 8
           }
         ]
       },
       {
         "productId": "PRD028",
         "productName": "Green Chilli",
-        "qty": 4,
         "unit": "Crates",
-        "rate": 650,
-        "amount": 2600,
+        "totalQuantity": 15,
+        "unitPrice": 650,
+        "totalCost": 9750,
         "allocations": [
           {
-            "branch": "ANNASANDRAPALYA",
             "branchId": "BR001",
-            "qty": 4,
-            "received": 4
+            "branch": "Annasandra Palya",
+            "qty": 15,
+          "allocated": 15,
+          "received": 15
           }
         ]
       },
       {
         "productId": "PRD192",
         "productName": "Big Chilli",
-        "qty": 6,
         "unit": "Crates",
-        "rate": 620,
-        "amount": 3720,
+        "totalQuantity": 7,
+        "unitPrice": 620,
+        "totalCost": 4340,
         "allocations": [
           {
-            "branch": "ANNASANDRAPALYA",
             "branchId": "BR001",
-            "qty": 6,
-            "received": 6
+            "branch": "Annasandra Palya",
+            "qty": 7,
+          "allocated": 7,
+          "received": 7
           }
         ]
       },
       {
         "productId": "PRD009",
         "productName": "Green Peas",
-        "qty": 3,
         "unit": "Bags",
-        "rate": 1400,
-        "amount": 4200,
+        "totalQuantity": 14,
+        "unitPrice": 1400,
+        "totalCost": 19600,
         "allocations": [
           {
-            "branch": "ANNASANDRAPALYA",
             "branchId": "BR001",
-            "qty": 3,
-            "received": 3
+            "branch": "Annasandra Palya",
+            "qty": 14,
+          "allocated": 14,
+          "received": 14
           }
         ]
       },
       {
         "productId": "PRD125",
         "productName": "Parval (Pointed Gourd)",
-        "qty": 5,
         "unit": "Crates",
-        "rate": 650,
-        "amount": 3250,
+        "totalQuantity": 6,
+        "unitPrice": 650,
+        "totalCost": 3900,
         "allocations": [
           {
-            "branch": "ANNASANDRAPALYA",
             "branchId": "BR001",
-            "qty": 5,
-            "received": 5
+            "branch": "Annasandra Palya",
+            "qty": 6,
+          "allocated": 6,
+          "received": 6
           }
         ]
       },
       {
         "productId": "PRD019",
         "productName": "Lauki (Bottle Gourd)",
-        "qty": 4,
         "unit": "Bags",
-        "rate": 400,
-        "amount": 1600,
+        "totalQuantity": 13,
+        "unitPrice": 400,
+        "totalCost": 5200,
         "allocations": [
           {
-            "branch": "ANNASANDRAPALYA",
             "branchId": "BR001",
-            "qty": 4,
-            "received": 4
+            "branch": "Annasandra Palya",
+            "qty": 13,
+          "allocated": 13,
+          "received": 13
           }
         ]
       },
       {
         "productId": "PRD012",
         "productName": "Radish White",
-        "qty": 3,
         "unit": "Bags",
-        "rate": 480,
-        "amount": 1440,
+        "totalQuantity": 5,
+        "unitPrice": 480,
+        "totalCost": 2400,
         "allocations": [
           {
-            "branch": "ANNASANDRAPALYA",
             "branchId": "BR001",
-            "qty": 3,
-            "received": 3
+            "branch": "Annasandra Palya",
+            "qty": 5,
+          "allocated": 5,
+          "received": 5
           }
         ]
       },
       {
         "productId": "PRD014",
-        "productName": "Brinjal Mysore",
-        "qty": 6,
+        "productName": "Small Brinjal Green",
         "unit": "Crates",
-        "rate": 480,
-        "amount": 2880,
+        "totalQuantity": 12,
+        "unitPrice": 480,
+        "totalCost": 5760,
         "allocations": [
           {
-            "branch": "ANNASANDRAPALYA",
             "branchId": "BR001",
-            "qty": 6,
-            "received": 6
+            "branch": "Annasandra Palya",
+            "qty": 12,
+          "allocated": 12,
+          "received": 12
           }
         ]
       },
       {
         "productId": "PRD188",
-        "productName": "Rampuri Brinjal",
-        "qty": 5,
+        "productName": "Small Brinjal Purple",
         "unit": "Crates",
-        "rate": 500,
-        "amount": 2500,
+        "totalQuantity": 4,
+        "unitPrice": 500,
+        "totalCost": 2000,
         "allocations": [
           {
-            "branch": "ANNASANDRAPALYA",
             "branchId": "BR001",
-            "qty": 5,
-            "received": 5
+            "branch": "Annasandra Palya",
+            "qty": 4,
+          "allocated": 4,
+          "received": 4
           }
         ]
       },
       {
         "productId": "PRD011",
         "productName": "Nookkol",
-        "qty": 2,
         "unit": "Bags",
-        "rate": 520,
-        "amount": 1040,
+        "totalQuantity": 11,
+        "unitPrice": 520,
+        "totalCost": 5720,
         "allocations": [
           {
-            "branch": "ANNASANDRAPALYA",
             "branchId": "BR001",
-            "qty": 2,
-            "received": 2
+            "branch": "Annasandra Palya",
+            "qty": 11,
+          "allocated": 11,
+          "received": 11
           }
         ]
       },
       {
         "productId": "PRD183",
         "productName": "Small Karela (S.Karela)",
-        "qty": 8,
         "unit": "Crates",
-        "rate": 600,
-        "amount": 4800,
+        "totalQuantity": 3,
+        "unitPrice": 600,
+        "totalCost": 1800,
         "allocations": [
           {
-            "branch": "ANNASANDRAPALYA",
             "branchId": "BR001",
-            "qty": 8,
-            "received": 8
+            "branch": "Annasandra Palya",
+            "qty": 3,
+          "allocated": 3,
+          "received": 3
           }
         ]
       },
       {
         "productId": "PRD020",
         "productName": "Bitter Gourd",
-        "qty": 4,
         "unit": "Crates",
-        "rate": 600,
-        "amount": 2400,
+        "totalQuantity": 10,
+        "unitPrice": 600,
+        "totalCost": 6000,
         "allocations": [
           {
-            "branch": "ANNASANDRAPALYA",
             "branchId": "BR001",
-            "qty": 4,
-            "received": 4
+            "branch": "Annasandra Palya",
+            "qty": 10,
+          "allocated": 10,
+          "received": 10
           }
         ]
       },
       {
         "productId": "PRD006",
         "productName": "Ladies Finger",
-        "qty": 5,
         "unit": "Crates",
-        "rate": 650,
-        "amount": 3250,
+        "totalQuantity": 17,
+        "unitPrice": 650,
+        "totalCost": 11050,
         "allocations": [
           {
-            "branch": "ANNASANDRAPALYA",
             "branchId": "BR001",
-            "qty": 5,
-            "received": 5
+            "branch": "Annasandra Palya",
+            "qty": 17,
+          "allocated": 17,
+          "received": 17
           }
         ]
       },
       {
         "productId": "PRD049",
         "productName": "Ridge Gourd (Hirekayi)",
-        "qty": 6,
         "unit": "Bags",
-        "rate": 500,
-        "amount": 3000,
+        "totalQuantity": 9,
+        "unitPrice": 500,
+        "totalCost": 4500,
         "allocations": [
           {
-            "branch": "ANNASANDRAPALYA",
             "branchId": "BR001",
-            "qty": 6,
-            "received": 6
+            "branch": "Annasandra Palya",
+            "qty": 9,
+          "allocated": 9,
+          "received": 9
           }
         ]
       },
       {
         "productId": "PRD021",
         "productName": "Capsicum Green",
-        "qty": 4,
         "unit": "Crates",
-        "rate": 700,
-        "amount": 2800,
+        "totalQuantity": 16,
+        "unitPrice": 700,
+        "totalCost": 11200,
         "allocations": [
           {
-            "branch": "ANNASANDRAPALYA",
             "branchId": "BR001",
-            "qty": 4,
-            "received": 4
+            "branch": "Annasandra Palya",
+            "qty": 16,
+          "allocated": 16,
+          "received": 16
           }
         ]
       },
       {
         "productId": "PRD027",
         "productName": "Ginger",
-        "qty": 5,
         "unit": "Bags",
-        "rate": 1600,
-        "amount": 8000,
+        "totalQuantity": 8,
+        "unitPrice": 1600,
+        "totalCost": 12800,
         "allocations": [
           {
-            "branch": "ANNASANDRAPALYA",
             "branchId": "BR001",
-            "qty": 5,
-            "received": 5
+            "branch": "Annasandra Palya",
+            "qty": 8,
+          "allocated": 8,
+          "received": 8
           }
         ]
       },
       {
         "productId": "PRD204",
         "productName": "Ginger Old",
-        "qty": 4,
         "unit": "Bags",
-        "rate": 1800,
-        "amount": 7200,
+        "totalQuantity": 15,
+        "unitPrice": 1800,
+        "totalCost": 27000,
         "allocations": [
           {
-            "branch": "ANNASANDRAPALYA",
             "branchId": "BR001",
-            "qty": 4,
-            "received": 4
+            "branch": "Annasandra Palya",
+            "qty": 15,
+          "allocated": 15,
+          "received": 15
           }
         ]
       },
       {
         "productId": "PRD024",
         "productName": "Raw Banana (Cooking)",
-        "qty": 6,
         "unit": "Bunches",
-        "rate": 350,
-        "amount": 2100,
+        "totalQuantity": 7,
+        "unitPrice": 350,
+        "totalCost": 2450,
         "allocations": [
           {
-            "branch": "ANNASANDRAPALYA",
             "branchId": "BR001",
-            "qty": 6,
-            "received": 6
+            "branch": "Annasandra Palya",
+            "qty": 7,
+          "allocated": 7,
+          "received": 7
           }
         ]
       },
       {
         "productId": "PRD030",
         "productName": "Raw Green Papaya",
-        "qty": 3,
         "unit": "Crates",
-        "rate": 650,
-        "amount": 1950,
+        "totalQuantity": 14,
+        "unitPrice": 650,
+        "totalCost": 9100,
         "allocations": [
           {
-            "branch": "ANNASANDRAPALYA",
             "branchId": "BR001",
-            "qty": 3,
-            "received": 3
+            "branch": "Annasandra Palya",
+            "qty": 14,
+          "allocated": 14,
+          "received": 14
           }
         ]
       },
       {
         "productId": "PRD051",
         "productName": "Banana Stem",
-        "qty": 7,
         "unit": "Pieces",
-        "rate": 25,
-        "amount": 175,
+        "totalQuantity": 6,
+        "unitPrice": 25,
+        "totalCost": 150,
         "allocations": [
           {
-            "branch": "ANNASANDRAPALYA",
             "branchId": "BR001",
-            "qty": 7,
-            "received": 7
+            "branch": "Annasandra Palya",
+            "qty": 6,
+          "allocated": 6,
+          "received": 6
           }
         ]
       },
       {
         "productId": "PRD060",
         "productName": "Banana Flower (Vazhaipoo)",
-        "qty": 5,
         "unit": "Pieces",
-        "rate": 30,
-        "amount": 150,
+        "totalQuantity": 13,
+        "unitPrice": 30,
+        "totalCost": 390,
         "allocations": [
           {
-            "branch": "ANNASANDRAPALYA",
             "branchId": "BR001",
-            "qty": 5,
-            "received": 5
+            "branch": "Annasandra Palya",
+            "qty": 13,
+          "allocated": 13,
+          "received": 13
           }
         ]
       },
       {
         "productId": "PRD054",
         "productName": "English Cucumber",
-        "qty": 4,
         "unit": "Crates",
-        "rate": 450,
-        "amount": 1800,
+        "totalQuantity": 5,
+        "unitPrice": 450,
+        "totalCost": 2250,
         "allocations": [
           {
-            "branch": "ANNASANDRAPALYA",
             "branchId": "BR001",
-            "qty": 4,
-            "received": 4
+            "branch": "Annasandra Palya",
+            "qty": 5,
+          "allocated": 5,
+          "received": 5
           }
         ]
       },
       {
         "productId": "PRD143",
         "productName": "S POTATO",
-        "qty": 6,
         "unit": "Kg",
-        "rate": 45,
-        "amount": 270,
+        "totalQuantity": 12,
+        "unitPrice": 45,
+        "totalCost": 540,
         "allocations": [
           {
-            "branch": "ANNASANDRAPALYA",
             "branchId": "BR001",
-            "qty": 6,
-            "received": 6
+            "branch": "Annasandra Palya",
+            "qty": 12,
+          "allocated": 12,
+          "received": 12
           }
         ]
       },
       {
         "productId": "PRD172",
         "productName": "Tapioca (Kappa / Cassava)",
-        "qty": 3,
         "unit": "Bags",
-        "rate": 650,
-        "amount": 1950,
+        "totalQuantity": 4,
+        "unitPrice": 650,
+        "totalCost": 2600,
         "allocations": [
           {
-            "branch": "ANNASANDRAPALYA",
             "branchId": "BR001",
-            "qty": 3,
-            "received": 3
+            "branch": "Annasandra Palya",
+            "qty": 4,
+          "allocated": 4,
+          "received": 4
           }
         ]
       },
       {
         "productId": "PRD029",
         "productName": "Drumstick",
-        "qty": 5,
         "unit": "Bags",
-        "rate": 550,
-        "amount": 2750,
+        "totalQuantity": 11,
+        "unitPrice": 550,
+        "totalCost": 6050,
         "allocations": [
           {
-            "branch": "ANNASANDRAPALYA",
             "branchId": "BR001",
-            "qty": 5,
-            "received": 5
+            "branch": "Annasandra Palya",
+            "qty": 11,
+          "allocated": 11,
+          "received": 11
           }
         ]
       },
       {
         "productId": "PRD017",
         "productName": "Amla",
-        "qty": 4,
         "unit": "Kg",
-        "rate": 60,
-        "amount": 240,
+        "totalQuantity": 3,
+        "unitPrice": 60,
+        "totalCost": 180,
         "allocations": [
           {
-            "branch": "ANNASANDRAPALYA",
             "branchId": "BR001",
-            "qty": 4,
-            "received": 4
+            "branch": "Annasandra Palya",
+            "qty": 3,
+          "allocated": 3,
+          "received": 3
           }
         ]
       },
       {
         "productId": "PRD189",
-        "productName": "L Brinjal Purple",
-        "qty": 3,
+        "productName": "Long Brinjal Purple",
         "unit": "Crates",
-        "rate": 520,
-        "amount": 1560,
+        "totalQuantity": 10,
+        "unitPrice": 520,
+        "totalCost": 5200,
         "allocations": [
           {
-            "branch": "ANNASANDRAPALYA",
             "branchId": "BR001",
-            "qty": 3,
-            "received": 3
+            "branch": "Annasandra Palya",
+            "qty": 10,
+          "allocated": 10,
+          "received": 10
           }
         ]
       },
       {
         "productId": "PRD015",
-        "productName": "Brinjal Green",
-        "qty": 6,
+        "productName": "Long Brinjal Green",
         "unit": "Crates",
-        "rate": 480,
-        "amount": 2880,
+        "totalQuantity": 17,
+        "unitPrice": 480,
+        "totalCost": 8160,
         "allocations": [
           {
-            "branch": "ANNASANDRAPALYA",
             "branchId": "BR001",
-            "qty": 6,
-            "received": 6
+            "branch": "Annasandra Palya",
+            "qty": 17,
+          "allocated": 17,
+          "received": 17
           }
         ]
       },
       {
         "productId": "PRD058",
-        "productName": "Bajji Chilli (Bhavnagri)",
-        "qty": 5,
+        "productName": "Bhajji Chilly",
         "unit": "Crates",
-        "rate": 650,
-        "amount": 3250,
+        "totalQuantity": 9,
+        "unitPrice": 650,
+        "totalCost": 5850,
         "allocations": [
           {
-            "branch": "ANNASANDRAPALYA",
             "branchId": "BR001",
-            "qty": 5,
-            "received": 5
-          }
-        ]
-      },
-      {
-        "productId": "PRD016",
-        "productName": "Brinjal Bhartha",
-        "qty": 2,
-        "unit": "Crates",
-        "rate": 480,
-        "amount": 960,
-        "allocations": [
-          {
-            "branch": "ANNASANDRAPALYA",
-            "branchId": "BR001",
-            "qty": 2,
-            "received": 2
+            "branch": "Annasandra Palya",
+            "qty": 9,
+          "allocated": 9,
+          "received": 9
           }
         ]
       },
       {
         "productId": "PRD205",
-        "productName": "Bharta Green",
-        "qty": 8,
+        "productName": "Bharta Black",
         "unit": "Crates",
-        "rate": 550,
-        "amount": 4400,
+        "totalQuantity": 16,
+        "unitPrice": 550,
+        "totalCost": 8800,
         "allocations": [
           {
-            "branch": "ANNASANDRAPALYA",
             "branchId": "BR001",
+            "branch": "Annasandra Palya",
+            "qty": 16,
+          "allocated": 16,
+          "received": 16
+          }
+        ]
+      },
+      {
+        "productId": "PRD016",
+        "productName": "Bharta Green",
+        "unit": "Crates",
+        "totalQuantity": 8,
+        "unitPrice": 480,
+        "totalCost": 3840,
+        "allocations": [
+          {
+            "branchId": "BR001",
+            "branch": "Annasandra Palya",
             "qty": 8,
-            "received": 8
+          "allocated": 8,
+          "received": 8
           }
         ]
       },
       {
         "productId": "PRD047",
         "productName": "Yellow Pumpkin",
-        "qty": 4,
         "unit": "Bags",
-        "rate": 550,
-        "amount": 2200,
+        "totalQuantity": 15,
+        "unitPrice": 550,
+        "totalCost": 8250,
         "allocations": [
           {
-            "branch": "ANNASANDRAPALYA",
             "branchId": "BR001",
-            "qty": 4,
-            "received": 4
+            "branch": "Annasandra Palya",
+            "qty": 15,
+          "allocated": 15,
+          "received": 15
           }
         ]
       },
       {
         "productId": "PRD048",
         "productName": "White Pumpkin (Ash Gourd)",
-        "qty": 5,
         "unit": "Bags",
-        "rate": 550,
-        "amount": 2750,
+        "totalQuantity": 7,
+        "unitPrice": 550,
+        "totalCost": 3850,
         "allocations": [
           {
-            "branch": "ANNASANDRAPALYA",
             "branchId": "BR001",
-            "qty": 5,
-            "received": 5
+            "branch": "Annasandra Palya",
+            "qty": 7,
+          "allocated": 7,
+          "received": 7
           }
         ]
       },
       {
         "productId": "PRD052",
         "productName": "Elephant Foot Yam (Suran)",
-        "qty": 6,
         "unit": "Bags",
-        "rate": 900,
-        "amount": 5400,
+        "totalQuantity": 14,
+        "unitPrice": 900,
+        "totalCost": 12600,
         "allocations": [
           {
-            "branch": "ANNASANDRAPALYA",
             "branchId": "BR001",
-            "qty": 6,
-            "received": 6
+            "branch": "Annasandra Palya",
+            "qty": 14,
+          "allocated": 14,
+          "received": 14
           }
         ]
       },
       {
         "productId": "PRD031",
         "productName": "Lemon Standard",
-        "qty": 4,
         "unit": "Bags",
-        "rate": 650,
-        "amount": 2600,
+        "totalQuantity": 6,
+        "unitPrice": 650,
+        "totalCost": 3900,
         "allocations": [
           {
-            "branch": "ANNASANDRAPALYA",
             "branchId": "BR001",
-            "qty": 4,
-            "received": 4
+            "branch": "Annasandra Palya",
+            "qty": 6,
+          "allocated": 6,
+          "received": 6
           }
         ]
       },
       {
         "productId": "PRD035",
         "productName": "Small Onion (Shallots)",
-        "qty": 5,
         "unit": "Bags",
-        "rate": 1450,
-        "amount": 7250,
+        "totalQuantity": 13,
+        "unitPrice": 1450,
+        "totalCost": 18850,
         "allocations": [
           {
-            "branch": "ANNASANDRAPALYA",
             "branchId": "BR001",
-            "qty": 5,
-            "received": 5
+            "branch": "Annasandra Palya",
+            "qty": 13,
+          "allocated": 13,
+          "received": 13
           }
         ]
       },
       {
         "productId": "PRD033",
         "productName": "Sambar Cucumber",
-        "qty": 4,
         "unit": "Crates",
-        "rate": 450,
-        "amount": 1800,
+        "totalQuantity": 5,
+        "unitPrice": 450,
+        "totalCost": 2250,
         "allocations": [
           {
-            "branch": "ANNASANDRAPALYA",
             "branchId": "BR001",
-            "qty": 4,
-            "received": 4
+            "branch": "Annasandra Palya",
+            "qty": 5,
+          "allocated": 5,
+          "received": 5
           }
         ]
       },
       {
         "productId": "PRD193",
         "productName": "Kandrela",
-        "qty": 6,
         "unit": "Kg",
-        "rate": 90,
-        "amount": 540,
+        "totalQuantity": 12,
+        "unitPrice": 90,
+        "totalCost": 1080,
         "allocations": [
           {
-            "branch": "ANNASANDRAPALYA",
             "branchId": "BR001",
-            "qty": 6,
-            "received": 6
+            "branch": "Annasandra Palya",
+            "qty": 12,
+          "allocated": 12,
+          "received": 12
           }
         ]
       },
       {
         "productId": "PRD206",
         "productName": "Round Loki",
-        "qty": 3,
         "unit": "Bags",
-        "rate": 420,
-        "amount": 1260,
+        "totalQuantity": 4,
+        "unitPrice": 420,
+        "totalCost": 1680,
         "allocations": [
           {
-            "branch": "ANNASANDRAPALYA",
             "branchId": "BR001",
-            "qty": 3,
-            "received": 3
+            "branch": "Annasandra Palya",
+            "qty": 4,
+          "allocated": 4,
+          "received": 4
           }
         ]
       },
       {
         "productId": "PRD156",
         "productName": "Turmeric Raw (Haldi)",
-        "qty": 7,
         "unit": "Kg",
-        "rate": 90,
-        "amount": 630,
+        "totalQuantity": 11,
+        "unitPrice": 90,
+        "totalCost": 990,
         "allocations": [
           {
-            "branch": "ANNASANDRAPALYA",
             "branchId": "BR001",
-            "qty": 7,
-            "received": 7
+            "branch": "Annasandra Palya",
+            "qty": 11,
+          "allocated": 11,
+          "received": 11
           }
         ]
       },
       {
         "productId": "PRD034",
-        "productName": "Arbi (Colocasia)",
-        "qty": 5,
+        "productName": "Arvi",
         "unit": "Bags",
-        "rate": 750,
-        "amount": 3750,
+        "totalQuantity": 3,
+        "unitPrice": 750,
+        "totalCost": 2250,
         "allocations": [
           {
-            "branch": "ANNASANDRAPALYA",
             "branchId": "BR001",
-            "qty": 5,
-            "received": 5
+            "branch": "Annasandra Palya",
+            "qty": 3,
+          "allocated": 3,
+          "received": 3
           }
         ]
       },
       {
         "productId": "PRD169",
         "productName": "Matki Falli (Moth Pods)",
-        "qty": 4,
         "unit": "Kg",
-        "rate": 65,
-        "amount": 260,
+        "totalQuantity": 10,
+        "unitPrice": 65,
+        "totalCost": 650,
         "allocations": [
           {
-            "branch": "ANNASANDRAPALYA",
             "branchId": "BR001",
-            "qty": 4,
-            "received": 4
+            "branch": "Annasandra Palya",
+            "qty": 10,
+          "allocated": 10,
+          "received": 10
           }
         ]
       },
       {
         "productId": "PRD170",
-        "productName": "Sem Beans",
-        "qty": 6,
+        "productName": "Sem",
         "unit": "Kg",
-        "rate": 55,
-        "amount": 330,
+        "totalQuantity": 17,
+        "unitPrice": 55,
+        "totalCost": 935,
         "allocations": [
           {
-            "branch": "ANNASANDRAPALYA",
             "branchId": "BR001",
-            "qty": 6,
-            "received": 6
+            "branch": "Annasandra Palya",
+            "qty": 17,
+          "allocated": 17,
+          "received": 17
           }
         ]
       },
       {
         "productId": "PRD053",
         "productName": "Avarakkai",
-        "qty": 3,
         "unit": "Kg",
-        "rate": 55,
-        "amount": 165,
+        "totalQuantity": 9,
+        "unitPrice": 55,
+        "totalCost": 495,
         "allocations": [
           {
-            "branch": "ANNASANDRAPALYA",
             "branchId": "BR001",
-            "qty": 3,
-            "received": 3
+            "branch": "Annasandra Palya",
+            "qty": 9,
+          "allocated": 9,
+          "received": 9
           }
         ]
       },
       {
         "productId": "PRD037",
         "productName": "Kovakkai / Kundru (Tindora)",
-        "qty": 5,
         "unit": "Crates",
-        "rate": 550,
-        "amount": 2750,
+        "totalQuantity": 16,
+        "unitPrice": 550,
+        "totalCost": 8800,
         "allocations": [
           {
-            "branch": "ANNASANDRAPALYA",
             "branchId": "BR001",
-            "qty": 5,
-            "received": 5
+            "branch": "Annasandra Palya",
+            "qty": 16,
+          "allocated": 16,
+          "received": 16
           }
         ]
       },
       {
         "productId": "PRD008",
         "productName": "Long Beans",
-        "qty": 4,
         "unit": "Kg",
-        "rate": 50,
-        "amount": 200,
+        "totalQuantity": 8,
+        "unitPrice": 50,
+        "totalCost": 400,
         "allocations": [
           {
-            "branch": "ANNASANDRAPALYA",
             "branchId": "BR001",
-            "qty": 4,
-            "received": 4
+            "branch": "Annasandra Palya",
+            "qty": 8,
+          "allocated": 8,
+          "received": 8
           }
         ]
       },
       {
         "productId": "PRD066",
         "productName": "Double Beans (Lima)",
-        "qty": 3,
         "unit": "Kg",
-        "rate": 80,
-        "amount": 240,
+        "totalQuantity": 15,
+        "unitPrice": 80,
+        "totalCost": 1200,
         "allocations": [
           {
-            "branch": "ANNASANDRAPALYA",
             "branchId": "BR001",
-            "qty": 3,
-            "received": 3
+            "branch": "Annasandra Palya",
+            "qty": 15,
+          "allocated": 15,
+          "received": 15
           }
         ]
       },
       {
         "productId": "PRD018",
         "productName": "Avarakkai",
-        "qty": 6,
         "unit": "Kg",
-        "rate": 55,
-        "amount": 330,
+        "totalQuantity": 7,
+        "unitPrice": 55,
+        "totalCost": 385,
         "allocations": [
           {
-            "branch": "ANNASANDRAPALYA",
             "branchId": "BR001",
-            "qty": 6,
-            "received": 6
+            "branch": "Annasandra Palya",
+            "qty": 7,
+          "allocated": 7,
+          "received": 7
           }
         ]
       },
       {
         "productId": "PRD010",
         "productName": "Chow Chow",
-        "qty": 5,
         "unit": "Bags",
-        "rate": 450,
-        "amount": 2250,
+        "totalQuantity": 14,
+        "unitPrice": 450,
+        "totalCost": 6300,
         "allocations": [
           {
-            "branch": "ANNASANDRAPALYA",
             "branchId": "BR001",
-            "qty": 5,
-            "received": 5
+            "branch": "Annasandra Palya",
+            "qty": 14,
+          "allocated": 14,
+          "received": 14
           }
         ]
       },
       {
         "productId": "PRD176",
         "productName": "Karamani (Cowpea Pods)",
-        "qty": 2,
         "unit": "Kg",
-        "rate": 65,
-        "amount": 130,
+        "totalQuantity": 6,
+        "unitPrice": 65,
+        "totalCost": 390,
         "allocations": [
           {
-            "branch": "ANNASANDRAPALYA",
             "branchId": "BR001",
-            "qty": 2,
-            "received": 2
+            "branch": "Annasandra Palya",
+            "qty": 6,
+          "allocated": 6,
+          "received": 6
           }
         ]
       },
       {
         "productId": "PRD038",
         "productName": "Snake Gourd (Padavalakai)",
-        "qty": 8,
         "unit": "Bags",
-        "rate": 420,
-        "amount": 3360,
+        "totalQuantity": 13,
+        "unitPrice": 420,
+        "totalCost": 5460,
         "allocations": [
           {
-            "branch": "ANNASANDRAPALYA",
             "branchId": "BR001",
-            "qty": 8,
-            "received": 8
+            "branch": "Annasandra Palya",
+            "qty": 13,
+          "allocated": 13,
+          "received": 13
           }
         ]
       },
       {
         "productId": "PRD207",
-        "productName": "Bhaggi",
-        "qty": 4,
+        "productName": "Bhajji Chilly",
         "unit": "Bunches",
-        "rate": 15,
-        "amount": 60,
+        "totalQuantity": 5,
+        "unitPrice": 15,
+        "totalCost": 75,
         "allocations": [
           {
-            "branch": "ANNASANDRAPALYA",
             "branchId": "BR001",
-            "qty": 4,
-            "received": 4
+            "branch": "Annasandra Palya",
+            "qty": 5,
+          "allocated": 5,
+          "received": 5
           }
         ]
       },
       {
         "productId": "PRD045",
         "productName": "Coriander (Kothmir)",
-        "qty": 5,
         "unit": "Bunches",
-        "rate": 25,
-        "amount": 125,
+        "totalQuantity": 12,
+        "unitPrice": 25,
+        "totalCost": 300,
         "allocations": [
           {
-            "branch": "ANNASANDRAPALYA",
             "branchId": "BR001",
-            "qty": 5,
-            "received": 5
+            "branch": "Annasandra Palya",
+            "qty": 12,
+          "allocated": 12,
+          "received": 12
           }
         ]
       },
       {
         "productId": "PRD042",
         "productName": "Pudina (Mint)",
-        "qty": 6,
         "unit": "Bunches",
-        "rate": 25,
-        "amount": 150,
+        "totalQuantity": 4,
+        "unitPrice": 25,
+        "totalCost": 100,
         "allocations": [
           {
-            "branch": "ANNASANDRAPALYA",
             "branchId": "BR001",
-            "qty": 6,
-            "received": 6
+            "branch": "Annasandra Palya",
+            "qty": 4,
+          "allocated": 4,
+          "received": 4
           }
         ]
       },
       {
         "productId": "PRD041",
         "productName": "Curry Leaf",
-        "qty": 4,
         "unit": "Bunches",
-        "rate": 25,
-        "amount": 100,
+        "totalQuantity": 11,
+        "unitPrice": 25,
+        "totalCost": 275,
         "allocations": [
           {
-            "branch": "ANNASANDRAPALYA",
             "branchId": "BR001",
-            "qty": 4,
-            "received": 4
+            "branch": "Annasandra Palya",
+            "qty": 11,
+          "allocated": 11,
+          "received": 11
           }
         ]
       },
       {
         "productId": "PRD003",
         "productName": "Tomato",
-        "qty": 5,
         "unit": "Crates",
-        "rate": 550,
-        "amount": 2750,
+        "totalQuantity": 3,
+        "unitPrice": 550,
+        "totalCost": 1650,
         "allocations": [
           {
-            "branch": "ANNASANDRAPALYA",
             "branchId": "BR001",
-            "qty": 5,
-            "received": 5
+            "branch": "Annasandra Palya",
+            "qty": 3,
+          "allocated": 3,
+          "received": 3
           }
         ]
       },
       {
         "productId": "PRD185",
         "productName": "N TOMATO",
-        "qty": 4,
         "unit": "Kg",
-        "rate": 45,
-        "amount": 180,
+        "totalQuantity": 10,
+        "unitPrice": 45,
+        "totalCost": 450,
         "allocations": [
           {
-            "branch": "ANNASANDRAPALYA",
             "branchId": "BR001",
-            "qty": 4,
-            "received": 4
+            "branch": "Annasandra Palya",
+            "qty": 10,
+          "allocated": 10,
+          "received": 10
           }
         ]
       },
       {
         "productId": "PRD088",
-        "productName": "Watermelon Big Dark",
-        "qty": 6,
+        "productName": "Watermelon Normal",
         "unit": "Kg",
-        "rate": 22,
-        "amount": 132,
+        "totalQuantity": 17,
+        "unitPrice": 22,
+        "totalCost": 374,
         "allocations": [
           {
-            "branch": "ANNASANDRAPALYA",
             "branchId": "BR001",
-            "qty": 6,
-            "received": 6
+            "branch": "Annasandra Palya",
+            "qty": 17,
+          "allocated": 17,
+          "received": 17
+          }
+        ]
+      },
+      {
+        "productId": "PRD089",
+        "productName": "Watermelon Stripes",
+        "unit": "Kg",
+        "totalQuantity": 9,
+        "unitPrice": 22,
+        "totalCost": 198,
+        "allocations": [
+          {
+            "branchId": "BR001",
+            "branch": "Annasandra Palya",
+            "qty": 9,
+          "allocated": 9,
+          "received": 9
           }
         ]
       },
       {
         "productId": "PRD078",
         "productName": "Papaya Ripe (Red Lady)",
-        "qty": 3,
         "unit": "Crates",
-        "rate": 650,
-        "amount": 1950,
+        "totalQuantity": 16,
+        "unitPrice": 650,
+        "totalCost": 10400,
         "allocations": [
           {
-            "branch": "ANNASANDRAPALYA",
             "branchId": "BR001",
-            "qty": 3,
-            "received": 3
+            "branch": "Annasandra Palya",
+            "qty": 16,
+          "allocated": 16,
+          "received": 16
           }
         ]
       },
       {
         "productId": "PRD085",
         "productName": "Apple Premium",
-        "qty": 7,
         "unit": "Crates",
-        "rate": 2100,
-        "amount": 14700,
+        "totalQuantity": 8,
+        "unitPrice": 2100,
+        "totalCost": 16800,
         "allocations": [
           {
-            "branch": "ANNASANDRAPALYA",
             "branchId": "BR001",
-            "qty": 7,
-            "received": 7
+            "branch": "Annasandra Palya",
+            "qty": 8,
+          "allocated": 8,
+          "received": 8
           }
         ]
       },
       {
         "productId": "PRD104",
-        "productName": "Orange Nagpur Sweet",
-        "qty": 5,
+        "productName": "Madrin",
         "unit": "Crates",
-        "rate": 1350,
-        "amount": 6750,
+        "totalQuantity": 15,
+        "unitPrice": 1350,
+        "totalCost": 20250,
         "allocations": [
           {
-            "branch": "ANNASANDRAPALYA",
             "branchId": "BR001",
-            "qty": 5,
-            "received": 5
+            "branch": "Annasandra Palya",
+            "qty": 15,
+          "allocated": 15,
+          "received": 15
           }
         ]
       },
       {
         "productId": "PRD179",
         "productName": "CITRUS",
-        "qty": 4,
         "unit": "Kg",
-        "rate": 45,
-        "amount": 180,
+        "totalQuantity": 7,
+        "unitPrice": 45,
+        "totalCost": 315,
         "allocations": [
           {
-            "branch": "ANNASANDRAPALYA",
             "branchId": "BR001",
-            "qty": 4,
-            "received": 4
+            "branch": "Annasandra Palya",
+            "qty": 7,
+          "allocated": 7,
+          "received": 7
           }
         ]
       },
       {
         "productId": "PRD180",
         "productName": "MADRIN",
-        "qty": 6,
         "unit": "Kg",
-        "rate": 45,
-        "amount": 270,
+        "totalQuantity": 14,
+        "unitPrice": 45,
+        "totalCost": 630,
         "allocations": [
           {
-            "branch": "ANNASANDRAPALYA",
             "branchId": "BR001",
-            "qty": 6,
-            "received": 6
+            "branch": "Annasandra Palya",
+            "qty": 14,
+          "allocated": 14,
+          "received": 14
           }
         ]
       },
       {
         "productId": "PRD076",
         "productName": "Mosambi Sweet Lime",
-        "qty": 3,
         "unit": "Bags",
-        "rate": 1100,
-        "amount": 3300,
+        "totalQuantity": 6,
+        "unitPrice": 1100,
+        "totalCost": 6600,
         "allocations": [
           {
-            "branch": "ANNASANDRAPALYA",
             "branchId": "BR001",
-            "qty": 3,
-            "received": 3
+            "branch": "Annasandra Palya",
+            "qty": 6,
+          "allocated": 6,
+          "received": 6
           }
         ]
       },
       {
         "productId": "PRD097",
-        "productName": "Muskmelon",
-        "qty": 5,
+        "productName": "Muskmelon Farm",
         "unit": "Crates",
-        "rate": 600,
-        "amount": 3000,
+        "totalQuantity": 13,
+        "unitPrice": 600,
+        "totalCost": 7800,
         "allocations": [
           {
-            "branch": "ANNASANDRAPALYA",
             "branchId": "BR001",
+            "branch": "Annasandra Palya",
+            "qty": 13,
+          "allocated": 13,
+          "received": 13
+          }
+        ]
+      },
+      {
+        "productId": "PRD218",
+        "productName": "Muskmelon Nati",
+        "unit": "Crates",
+        "totalQuantity": 5,
+        "unitPrice": 650,
+        "totalCost": 3250,
+        "allocations": [
+          {
+            "branchId": "BR001",
+            "branch": "Annasandra Palya",
             "qty": 5,
-            "received": 5
+          "allocated": 5,
+          "received": 5
           }
         ]
       },
       {
         "productId": "PRD094",
         "productName": "Apple Premium",
-        "qty": 4,
         "unit": "Crates",
-        "rate": 2100,
-        "amount": 8400,
+        "totalQuantity": 12,
+        "unitPrice": 2100,
+        "totalCost": 25200,
         "allocations": [
           {
-            "branch": "ANNASANDRAPALYA",
             "branchId": "BR001",
-            "qty": 4,
-            "received": 4
+            "branch": "Annasandra Palya",
+            "qty": 12,
+          "allocated": 12,
+          "received": 12
           }
         ]
       },
       {
         "productId": "PRD166",
         "productName": "Chiku (Sapota)",
-        "qty": 3,
         "unit": "Crates",
-        "rate": 650,
-        "amount": 1950,
+        "totalQuantity": 4,
+        "unitPrice": 650,
+        "totalCost": 2600,
         "allocations": [
           {
-            "branch": "ANNASANDRAPALYA",
             "branchId": "BR001",
-            "qty": 3,
-            "received": 3
+            "branch": "Annasandra Palya",
+            "qty": 4,
+          "allocated": 4,
+          "received": 4
           }
         ]
       },
       {
         "productId": "PRD216",
         "productName": "Thai Guava",
-        "qty": 6,
         "unit": "Crates",
-        "rate": 1100,
-        "amount": 6600,
+        "totalQuantity": 11,
+        "unitPrice": 1100,
+        "totalCost": 12100,
         "allocations": [
           {
-            "branch": "ANNASANDRAPALYA",
             "branchId": "BR001",
-            "qty": 6,
-            "received": 6
+            "branch": "Annasandra Palya",
+            "qty": 11,
+          "allocated": 11,
+          "received": 11
           }
         ]
       },
       {
         "productId": "PRD199",
         "productName": "Nati Gauva",
-        "qty": 5,
         "unit": "Crates",
-        "rate": 550,
-        "amount": 2750,
+        "totalQuantity": 3,
+        "unitPrice": 550,
+        "totalCost": 1650,
         "allocations": [
           {
-            "branch": "ANNASANDRAPALYA",
             "branchId": "BR001",
-            "qty": 5,
-            "received": 5
+            "branch": "Annasandra Palya",
+            "qty": 3,
+          "allocated": 3,
+          "received": 3
           }
         ]
       },
       {
         "productId": "PRD157",
         "productName": "BAERY",
-        "qty": 2,
         "unit": "Kg",
-        "rate": 45,
-        "amount": 90,
+        "totalQuantity": 10,
+        "unitPrice": 45,
+        "totalCost": 450,
         "allocations": [
           {
-            "branch": "ANNASANDRAPALYA",
             "branchId": "BR001",
-            "qty": 2,
-            "received": 2
+            "branch": "Annasandra Palya",
+            "qty": 10,
+          "allocated": 10,
+          "received": 10
           }
         ]
       },
       {
         "productId": "PRD173",
-        "productName": "Dragon Fruit (Pitaya)",
-        "qty": 8,
+        "productName": "Dragon Fruit Red",
         "unit": "Boxes",
-        "rate": 900,
-        "amount": 7200,
+        "totalQuantity": 17,
+        "unitPrice": 900,
+        "totalCost": 15300,
         "allocations": [
           {
-            "branch": "ANNASANDRAPALYA",
             "branchId": "BR001",
-            "qty": 8,
-            "received": 8
+            "branch": "Annasandra Palya",
+            "qty": 17,
+          "allocated": 17,
+          "received": 17
           }
         ]
       },
       {
         "productId": "PRD198",
-        "productName": "Wht Dragon",
-        "qty": 4,
+        "productName": "Dragon Fruit White",
         "unit": "Boxes",
-        "rate": 1100,
-        "amount": 4400,
+        "totalQuantity": 9,
+        "unitPrice": 1100,
+        "totalCost": 9900,
         "allocations": [
           {
-            "branch": "ANNASANDRAPALYA",
             "branchId": "BR001",
-            "qty": 4,
-            "received": 4
+            "branch": "Annasandra Palya",
+            "qty": 9,
+          "allocated": 9,
+          "received": 9
           }
         ]
       },
       {
         "productId": "PRD081",
         "productName": "Grapes Green Thompson",
-        "qty": 5,
         "unit": "Crates",
-        "rate": 1200,
-        "amount": 6000,
+        "totalQuantity": 16,
+        "unitPrice": 1200,
+        "totalCost": 19200,
         "allocations": [
           {
-            "branch": "ANNASANDRAPALYA",
             "branchId": "BR001",
-            "qty": 5,
-            "received": 5
+            "branch": "Annasandra Palya",
+            "qty": 16,
+          "allocated": 16,
+          "received": 16
           }
         ]
       },
       {
         "productId": "PRD080",
         "productName": "Grapes Black Seedless",
-        "qty": 6,
         "unit": "Crates",
-        "rate": 1200,
-        "amount": 7200,
+        "totalQuantity": 8,
+        "unitPrice": 1200,
+        "totalCost": 9600,
         "allocations": [
           {
-            "branch": "ANNASANDRAPALYA",
             "branchId": "BR001",
-            "qty": 6,
-            "received": 6
+            "branch": "Annasandra Palya",
+            "qty": 8,
+          "allocated": 8,
+          "received": 8
           }
         ]
       },
       {
         "productId": "PRD079",
         "productName": "Grapes Red Globe Imported",
-        "qty": 4,
         "unit": "Crates",
-        "rate": 1200,
-        "amount": 4800,
+        "totalQuantity": 15,
+        "unitPrice": 1200,
+        "totalCost": 18000,
         "allocations": [
           {
-            "branch": "ANNASANDRAPALYA",
             "branchId": "BR001",
-            "qty": 4,
-            "received": 4
+            "branch": "Annasandra Palya",
+            "qty": 15,
+          "allocated": 15,
+          "received": 15
           }
         ]
       },
       {
         "productId": "PRD217",
         "productName": "Golden Kiwi",
-        "qty": 5,
         "unit": "Boxes",
-        "rate": 1400,
-        "amount": 7000,
+        "totalQuantity": 7,
+        "unitPrice": 1400,
+        "totalCost": 9800,
         "allocations": [
           {
-            "branch": "ANNASANDRAPALYA",
             "branchId": "BR001",
-            "qty": 5,
-            "received": 5
+            "branch": "Annasandra Palya",
+            "qty": 7,
+          "allocated": 7,
+          "received": 7
           }
         ]
       },
       {
         "productId": "PRD084",
         "productName": "Kiwi Fruit",
-        "qty": 4,
         "unit": "Boxes",
-        "rate": 850,
-        "amount": 3400,
+        "totalQuantity": 14,
+        "unitPrice": 850,
+        "totalCost": 11900,
         "allocations": [
           {
-            "branch": "ANNASANDRAPALYA",
             "branchId": "BR001",
-            "qty": 4,
-            "received": 4
+            "branch": "Annasandra Palya",
+            "qty": 14,
+          "allocated": 14,
+          "received": 14
           }
         ]
       },
       {
         "productId": "PRD197",
         "productName": "Pomegranate Big",
-        "qty": 6,
         "unit": "Boxes",
-        "rate": 1400,
-        "amount": 8400,
+        "totalQuantity": 6,
+        "unitPrice": 1400,
+        "totalCost": 8400,
         "allocations": [
           {
-            "branch": "ANNASANDRAPALYA",
             "branchId": "BR001",
+            "branch": "Annasandra Palya",
             "qty": 6,
-            "received": 6
+          "allocated": 6,
+          "received": 6
           }
         ]
       },
       {
         "productId": "PRD077",
         "productName": "Anar (Pomegranate)",
-        "qty": 3,
         "unit": "Boxes",
-        "rate": 1650,
-        "amount": 4950,
+        "totalQuantity": 13,
+        "unitPrice": 1650,
+        "totalCost": 21450,
         "allocations": [
           {
-            "branch": "ANNASANDRAPALYA",
             "branchId": "BR001",
-            "qty": 3,
-            "received": 3
+            "branch": "Annasandra Palya",
+            "qty": 13,
+          "allocated": 13,
+          "received": 13
           }
         ]
       },
       {
         "productId": "PRD103",
         "productName": "Plum Black",
-        "qty": 7,
         "unit": "Boxes",
-        "rate": 650,
-        "amount": 4550,
+        "totalQuantity": 5,
+        "unitPrice": 650,
+        "totalCost": 3250,
         "allocations": [
           {
-            "branch": "ANNASANDRAPALYA",
             "branchId": "BR001",
-            "qty": 7,
-            "received": 7
+            "branch": "Annasandra Palya",
+            "qty": 5,
+          "allocated": 5,
+          "received": 5
           }
         ]
       },
       {
         "productId": "PRD090",
         "productName": "Pear Green",
-        "qty": 5,
         "unit": "Boxes",
-        "rate": 1450,
-        "amount": 7250,
+        "totalQuantity": 12,
+        "unitPrice": 1450,
+        "totalCost": 17400,
         "allocations": [
           {
-            "branch": "ANNASANDRAPALYA",
             "branchId": "BR001",
-            "qty": 5,
-            "received": 5
+            "branch": "Annasandra Palya",
+            "qty": 12,
+          "allocated": 12,
+          "received": 12
           }
         ]
       },
       {
         "productId": "PRD099",
         "productName": "Butter Fruit (Avocado)",
-        "qty": 4,
         "unit": "Crates",
-        "rate": 1500,
-        "amount": 6000,
+        "totalQuantity": 4,
+        "unitPrice": 1500,
+        "totalCost": 6000,
         "allocations": [
           {
-            "branch": "ANNASANDRAPALYA",
             "branchId": "BR001",
+            "branch": "Annasandra Palya",
             "qty": 4,
-            "received": 4
+          "allocated": 4,
+          "received": 4
           }
         ]
       },
       {
         "productId": "PRD212",
         "productName": "Butter Fruit Imported",
-        "qty": 6,
         "unit": "Crates",
-        "rate": 2200,
-        "amount": 13200,
+        "totalQuantity": 11,
+        "unitPrice": 2200,
+        "totalCost": 24200,
         "allocations": [
           {
-            "branch": "ANNASANDRAPALYA",
             "branchId": "BR001",
-            "qty": 6,
-            "received": 6
+            "branch": "Annasandra Palya",
+            "qty": 11,
+          "allocated": 11,
+          "received": 11
           }
         ]
       },
       {
         "productId": "PRD174",
         "productName": "Persimmon Fruit",
-        "qty": 3,
         "unit": "Boxes",
-        "rate": 850,
-        "amount": 2550,
+        "totalQuantity": 3,
+        "unitPrice": 850,
+        "totalCost": 2550,
         "allocations": [
           {
-            "branch": "ANNASANDRAPALYA",
             "branchId": "BR001",
+            "branch": "Annasandra Palya",
             "qty": 3,
-            "received": 3
+          "allocated": 3,
+          "received": 3
           }
         ]
       },
       {
         "productId": "PRD075",
         "productName": "Apple Royal Gala",
-        "qty": 5,
         "unit": "Crates",
-        "rate": 2100,
-        "amount": 10500,
+        "totalQuantity": 10,
+        "unitPrice": 2100,
+        "totalCost": 21000,
         "allocations": [
           {
-            "branch": "ANNASANDRAPALYA",
             "branchId": "BR001",
-            "qty": 5,
-            "received": 5
+            "branch": "Annasandra Palya",
+            "qty": 10,
+          "allocated": 10,
+          "received": 10
           }
         ]
       },
       {
         "productId": "PRD196",
         "productName": "Pink Lady",
-        "qty": 4,
         "unit": "Crates",
-        "rate": 1850,
-        "amount": 7400,
+        "totalQuantity": 17,
+        "unitPrice": 1850,
+        "totalCost": 31450,
         "allocations": [
           {
-            "branch": "ANNASANDRAPALYA",
             "branchId": "BR001",
-            "qty": 4,
-            "received": 4
+            "branch": "Annasandra Palya",
+            "qty": 17,
+          "allocated": 17,
+          "received": 17
           }
         ]
       },
       {
         "productId": "PRD208",
         "productName": "Turkey Apple",
-        "qty": 3,
         "unit": "Crates",
-        "rate": 1750,
-        "amount": 5250,
+        "totalQuantity": 9,
+        "unitPrice": 1750,
+        "totalCost": 15750,
         "allocations": [
           {
-            "branch": "ANNASANDRAPALYA",
             "branchId": "BR001",
-            "qty": 3,
-            "received": 3
+            "branch": "Annasandra Palya",
+            "qty": 9,
+          "allocated": 9,
+          "received": 9
           }
         ]
       },
       {
         "productId": "PRD071",
         "productName": "Apple Washington",
-        "qty": 6,
         "unit": "Crates",
-        "rate": 2100,
-        "amount": 12600,
+        "totalQuantity": 16,
+        "unitPrice": 2100,
+        "totalCost": 33600,
         "allocations": [
           {
-            "branch": "ANNASANDRAPALYA",
             "branchId": "BR001",
-            "qty": 6,
-            "received": 6
+            "branch": "Annasandra Palya",
+            "qty": 16,
+          "allocated": 16,
+          "received": 16
           }
         ]
       },
       {
         "productId": "PRD209",
         "productName": "Rocket Apple",
-        "qty": 5,
         "unit": "Boxes",
-        "rate": 1950,
-        "amount": 9750,
+        "totalQuantity": 8,
+        "unitPrice": 1950,
+        "totalCost": 15600,
         "allocations": [
           {
-            "branch": "ANNASANDRAPALYA",
             "branchId": "BR001",
-            "qty": 5,
-            "received": 5
+            "branch": "Annasandra Palya",
+            "qty": 8,
+          "allocated": 8,
+          "received": 8
           }
         ]
       },
       {
         "productId": "PRD210",
         "productName": "Alibinder",
-        "qty": 2,
         "unit": "Crates",
-        "rate": 1800,
-        "amount": 3600,
+        "totalQuantity": 15,
+        "unitPrice": 1800,
+        "totalCost": 27000,
         "allocations": [
           {
-            "branch": "ANNASANDRAPALYA",
             "branchId": "BR001",
-            "qty": 2,
-            "received": 2
+            "branch": "Annasandra Palya",
+            "qty": 15,
+          "allocated": 15,
+          "received": 15
           }
         ]
       },
       {
         "productId": "PRD073",
         "productName": "Apple Green (Granny Smith)",
-        "qty": 8,
         "unit": "Crates",
-        "rate": 2100,
-        "amount": 16800,
+        "totalQuantity": 7,
+        "unitPrice": 2100,
+        "totalCost": 14700,
         "allocations": [
           {
-            "branch": "ANNASANDRAPALYA",
             "branchId": "BR001",
-            "qty": 8,
-            "received": 8
+            "branch": "Annasandra Palya",
+            "qty": 7,
+          "allocated": 7,
+          "received": 7
           }
         ]
       },
       {
         "productId": "PRD211",
         "productName": "Iran Apple",
-        "qty": 4,
         "unit": "Crates",
-        "rate": 1600,
-        "amount": 6400,
+        "totalQuantity": 14,
+        "unitPrice": 1600,
+        "totalCost": 22400,
         "allocations": [
           {
-            "branch": "ANNASANDRAPALYA",
             "branchId": "BR001",
-            "qty": 4,
-            "received": 4
+            "branch": "Annasandra Palya",
+            "qty": 14,
+          "allocated": 14,
+          "received": 14
           }
         ]
       },
       {
         "productId": "PRD201",
         "productName": "Kashmiri Apple",
-        "qty": 5,
         "unit": "Crates",
-        "rate": 1650,
-        "amount": 8250,
+        "totalQuantity": 6,
+        "unitPrice": 1650,
+        "totalCost": 9900,
         "allocations": [
           {
-            "branch": "ANNASANDRAPALYA",
             "branchId": "BR001",
-            "qty": 5,
-            "received": 5
+            "branch": "Annasandra Palya",
+            "qty": 6,
+          "allocated": 6,
+          "received": 6
           }
         ]
       },
       {
         "productId": "PRD070",
         "productName": "Apple Indian (Shimla)",
-        "qty": 6,
         "unit": "Crates",
-        "rate": 2100,
-        "amount": 12600,
+        "totalQuantity": 13,
+        "unitPrice": 2100,
+        "totalCost": 27300,
         "allocations": [
           {
-            "branch": "ANNASANDRAPALYA",
             "branchId": "BR001",
-            "qty": 6,
-            "received": 6
+            "branch": "Annasandra Palya",
+            "qty": 13,
+          "allocated": 13,
+          "received": 13
           }
         ]
       },
       {
         "productId": "PRD202",
         "productName": "Misri Apple",
-        "qty": 4,
         "unit": "Crates",
-        "rate": 1700,
-        "amount": 6800,
+        "totalQuantity": 5,
+        "unitPrice": 1700,
+        "totalCost": 8500,
         "allocations": [
           {
-            "branch": "ANNASANDRAPALYA",
             "branchId": "BR001",
-            "qty": 4,
-            "received": 4
+            "branch": "Annasandra Palya",
+            "qty": 5,
+          "allocated": 5,
+          "received": 5
           }
         ]
       }
@@ -11511,424 +12127,423 @@ export const INITIAL_STOCK_MOVEMENTS = [
   }
 ];
 
-// Official sequence for KODIHALLI branch (BR002) for both Daily Stock Check and Stock Receiving
+// Official sequence for KODIHALLI branch (BR002)
 export const KODIHALLI_SEQUENCE = [
-  "PRD023", // 1. Cucumber
-  "PRD004", // 2. Carrot
-  "PRD019", // 3. Loki
-  "PRD021", // 4. Capsicum
-  "PRD032", // 5. Gobi
-  "PRD022", // 6. Cabage
-  "PRD005", // 7. beans
-  "PRD006", // 8. Bhindi
-  "PRD012", // 9. Mooli
-  "PRD057", // 10. Bitrot
-  "PRD049", // 11. Turai
-  "PRD187", // 12. Akash chilli
-  "PRD008", // 13. L beans
-  "PRD014", // 14. Gund brinjal
-  "PRD188", // 15. Rampuri brinjal
-  "PRD015", // 16. L brinjal green
-  "PRD189", // 17. L brinjal purple
-  "PRD016", // 18. Bharta blk
-  "PRD190", // 19. Bengali bharta
-  "PRD191", // 20. Totapuri
-  "PRD125", // 21. Parval
-  "PRD192", // 22. Big chilli
-  "PRD058", // 23. Bajji chilli
-  "PRD170", // 24. Same
-  "PRD053", // 25. Belt
-  "PRD009", // 26. Matar
-  "PRD169", // 27. Matki
-  "PRD183", // 28. Karela small
-  "PRD020", // 29. Karela b
-  "PRD017", // 30. Amla
-  "PRD037", // 31. Kundru
-  "PRD011", // 32. Nukul
-  "PRD010", // 33. Chow Chow
-  "PRD030", // 34. Raw papaya
-  "PRD024", // 35. Raw banana
-  "PRD038", // 36. Snake guard
-  "PRD193", // 37. Kandrela
-  "PRD145", // 38. White karela
-  "PRD171", // 39. Ballar
-  "PRD018", // 40. Nati beans
-  "PRD156", // 41. Kacha haldi
-  "PRD029", // 42. Drumstick
-  "PRD031", // 43. Lemon
-  "PRD034", // 44. Arvi
-  "PRD045", // 45. Dhanya farm
-  "PRD194", // 46. Naati
-  "PRD042", // 47. Pudina
-  "PRD041", // 48. Karileaf
-  "PRD043", // 49. Palak
-  "PRD044", // 50. Methi
-  "PRD046", // 51. Spring onion
-  "PRD195", // 52. Sabakki
-  "PRD143", // 53. Sweet potato
-  "PRD085", // 54. Pine apple
-  "PRD097", // 55. Muskmelon
-  "PRD121", // 56. Muskmelon lines
-  "PRD196", // 57. Pink lady
-  "PRD174", // 58. Persimmon
-  "PRD073", // 59. Green apple
-  "PRD075", // 60. Royal gala
-  "PRD072", // 61. Fuji gala
-  "PRD090", // 62. Pears
-  "PRD091", // 63. Ind pears
-  "PRD084", // 64. Kiwi
-  "PRD166", // 65. Chikku
-  "PRD081", // 66. Green grapes
-  "PRD080", // 67. Black grapes
-  "PRD079", // 68. Red globe
-  "PRD077", // 69. Pomegranate
-  "PRD197", // 70. Pomegranate big
-  "PRD099", // 71. Avocado
-  "PRD173", // 72. Red dragon
-  "PRD198", // 73. Wht dragon
-  "PRD180", // 74. Madrin
-  "PRD101", // 75. Gauva
-  "PRD199", // 76. Nati gauva
-  "PRD094", // 77. Sithaphal
-  "PRD179", // 78. Citrus
-  "PRD074", // 79. Apple
-  "PRD076", // 80. Mosambi
-  "PRD104", // 81. Nagpur orange
-  "PRD200", // 82. Malda
-  "PRD201", // 83. Kashmiri apple
-  "PRD070", // 84. Shimla apple
-  "PRD202", // 85. Misri apple
-  "PRD203", // 86. Ooty apple
-  "PRD078", // 87. Papaya
-  "PRD086", // 88. Yalakki banana
-  "PRD092", // 89. Robusta
-  "PRD088", // 90. Watermelon
-  "PRD087", // 91. Nendra
-  "PRD093", // 92. Red banana
-  "PRD112"  // 93. Mangoes
+  "PRD023", // 1
+  "PRD004", // 2
+  "PRD019", // 3
+  "PRD021", // 4
+  "PRD032", // 5
+  "PRD022", // 6
+  "PRD005", // 7
+  "PRD006", // 8
+  "PRD012", // 9
+  "PRD057", // 10
+  "PRD049", // 11
+  "PRD187", // 12
+  "PRD008", // 13
+  "PRD014", // 14
+  "PRD188", // 15
+  "PRD015", // 16
+  "PRD189", // 17
+  "PRD205", // 18
+  "PRD190", // 19
+  "PRD191", // 20
+  "PRD125", // 21
+  "PRD192", // 22
+  "PRD058", // 23
+  "PRD170", // 24
+  "PRD053", // 25
+  "PRD009", // 26
+  "PRD169", // 27
+  "PRD183", // 28
+  "PRD020", // 29
+  "PRD017", // 30
+  "PRD037", // 31
+  "PRD011", // 32
+  "PRD010", // 33
+  "PRD030", // 34
+  "PRD024", // 35
+  "PRD038", // 36
+  "PRD193", // 37
+  "PRD145", // 38
+  "PRD171", // 39
+  "PRD018", // 40
+  "PRD156", // 41
+  "PRD029", // 42
+  "PRD031", // 43
+  "PRD034", // 44
+  "PRD045", // 45
+  "PRD194", // 46
+  "PRD042", // 47
+  "PRD041", // 48
+  "PRD043", // 49
+  "PRD044", // 50
+  "PRD046", // 51
+  "PRD195", // 52
+  "PRD143", // 53
+  "PRD085", // 54
+  "PRD097", // 55
+  "PRD218", // 56
+  "PRD196", // 57
+  "PRD174", // 58
+  "PRD073", // 59
+  "PRD075", // 60
+  "PRD072", // 61
+  "PRD090", // 62
+  "PRD091", // 63
+  "PRD084", // 64
+  "PRD166", // 65
+  "PRD081", // 66
+  "PRD080", // 67
+  "PRD079", // 68
+  "PRD077", // 69
+  "PRD197", // 70
+  "PRD099", // 71
+  "PRD173", // 72
+  "PRD198", // 73
+  "PRD104", // 74
+  "PRD101", // 75
+  "PRD199", // 76
+  "PRD094", // 77
+  "PRD179", // 78
+  "PRD074", // 79
+  "PRD076", // 80
+  "PRD180", // 81
+  "PRD200", // 82
+  "PRD201", // 83
+  "PRD070", // 84
+  "PRD202", // 85
+  "PRD203", // 86
+  "PRD078", // 87
+  "PRD086", // 88
+  "PRD092", // 89
+  "PRD088", // 90
+  "PRD089", // 91
+  "PRD087", // 92
+  "PRD093", // 93
+  "PRD112" // 94
 ];
 
-// Official sequence for LB SHASTRI NAGAR branch (BR003) for both Daily Stock Check and Stock Receiving
-// Categorized strictly: Items 1..62 (Vegetables), Items 63..102 (Fruits)
+// Official sequence for LB SHASTRI NAGAR branch (BR003)
 export const LBS_NAGAR_SEQUENCE = [
-  // --- VEGETABLES (Image 1 & Image 2) ---
-  "PRD005", // 1. Beans
-  "PRD004", // 2. Carrot
-  "PRD023", // 3. Cucumber
-  "PRD057", // 4. Beetroot
-  "PRD032", // 5. Gobi
-  "PRD022", // 6. Cabbage
-  "PRD028", // 7. chilli
-  "PRD192", // 8. Big chilli
-  "PRD009", // 9. Mattar
-  "PRD125", // 10. Parval
-  "PRD019", // 11. Loki
-  "PRD012", // 12. Mulli
-  "PRD014", // 13. Gund
-  "PRD188", // 14. Rampuri
-  "PRD011", // 15. Nukal
-  "PRD183", // 16. Karela Small
-  "PRD020", // 17. Karela Big
-  "PRD006", // 18. Bhendi
-  "PRD049", // 19. Turai
-  "PRD021", // 20. Capsicum
-  "PRD027", // 21. Ginger new
-  "PRD204", // 22. Ginger old
-  "PRD024", // 23. Raw Banana
-  "PRD030", // 24. Raw papaya
-  "PRD051", // 25. Banana stem
-  "PRD060", // 26. Banana flower
-  "PRD054", // 27. English Cucumber
-  "PRD143", // 28. Sweet Potato
-  "PRD172", // 29. Kappa
-  "PRD029", // 30. Drumstick
-  "PRD017", // 31. Amla
-  "PRD189", // 32. Long Brinjal P.
-  "PRD015", // 33. Long Brinjal G.
-  "PRD058", // 34. Bhaggi chilli
-  "PRD016", // 35. Bharta Black
-  "PRD205", // 36. Bharta Green
-  "PRD047", // 37. Yellow Pumpkin
-  "PRD048", // 38. White pumpkin
-  "PRD052", // 39. Suran
-  "PRD031", // 40. Lemon
-  "PRD035", // 41. Sambar onion
-  "PRD033", // 42. Sambar cucumber
-  "PRD193", // 43. Kankrela
-  "PRD206", // 44. Round Loki
-  "PRD156", // 45. Haldi Raw
-  "PRD034", // 46. Arvi
-  "PRD169", // 47. Matki phali
-  "PRD170", // 48. Seem
-  "PRD053", // 49. Belt
-  "PRD037", // 50. Kunduru
-  "PRD008", // 51. Long Beans
-  "PRD066", // 52. D. phali
-  "PRD018", // 53. N. Beans
-  "PRD010", // 54. Chow chow
-  "PRD176", // 55. Karamani
-  "PRD038", // 56. Snake guard
-  "PRD207", // 57. Bhaggi
-  "PRD045", // 58. Coriender
-  "PRD042", // 59. Pudina
-  "PRD041", // 60. Carileaf
-  "PRD003", // 61. Tomato Farm
-  "PRD185", // 62. Tomato Nati
-  // --- FRUITS ---
-  "PRD092", // 63. robusta
-  "PRD079", // 64. red globe
-  "PRD075", // 65. Gala Apple
-  "PRD196", // 66. Pink lady Apple
-  "PRD208", // 67. Turkey Apple
-  "PRD071", // 68. WashingtonApple
-  "PRD209", // 69. Rocket Apple
-  "PRD210", // 70. Alibinder
-  "PRD073", // 71. Green Apple
-  "PRD211", // 72. Iran apple
-  "PRD201", // 73. Kashmir Apple
-  "PRD070", // 74. Shimla Apple
-  "PRD202", // 75. Misri Apple
-  "PRD090", // 76. pears
-  "PRD091", // 77. imported pears
-  "PRD174", // 78. persuman
-  "PRD084", // 79. kiwi
-  "PRD099", // 80. butter fruit normal
-  "PRD212", // 81. butter fruit imported
-  "PRD080", // 82. black grapes normal
-  "PRD213", // 83. black grapes imported
-  "PRD081", // 84. green grapes
-  "PRD097", // 85. musk mellon farm
-  "PRD121", // 86. musk mellon nati
-  "PRD166", // 87. sapota
-  "PRD157", // 88. bear
-  "PRD076", // 89. musambi
-  "PRD180", // 90. madrin
-  "PRD173", // 91. dragon red
-  "PRD198", // 92. dragon white
-  "PRD214", // 93. logan
-  "PRD197", // 94. anar big
-  "PRD077", // 95. anar small
-  "PRD179", // 96. citrus
-  "PRD094", // 97. sitaphal
-  "PRD215", // 98. ramphal
-  "PRD101", // 99. guava
-  "PRD085", // 100. pineapple
-  "PRD104", // 101. orange nati
-  "PRD088"  // 102. watermellon
+  "PRD005", // 1
+  "PRD004", // 2
+  "PRD023", // 3
+  "PRD057", // 4
+  "PRD032", // 5
+  "PRD022", // 6
+  "PRD028", // 7
+  "PRD192", // 8
+  "PRD009", // 9
+  "PRD125", // 10
+  "PRD019", // 11
+  "PRD012", // 12
+  "PRD014", // 13
+  "PRD188", // 14
+  "PRD011", // 15
+  "PRD183", // 16
+  "PRD020", // 17
+  "PRD006", // 18
+  "PRD049", // 19
+  "PRD021", // 20
+  "PRD027", // 21
+  "PRD204", // 22
+  "PRD024", // 23
+  "PRD030", // 24
+  "PRD051", // 25
+  "PRD060", // 26
+  "PRD054", // 27
+  "PRD143", // 28
+  "PRD172", // 29
+  "PRD029", // 30
+  "PRD017", // 31
+  "PRD189", // 32
+  "PRD015", // 33
+  "PRD058", // 34
+  "PRD205", // 35
+  "PRD016", // 36
+  "PRD047", // 37
+  "PRD048", // 38
+  "PRD052", // 39
+  "PRD031", // 40
+  "PRD035", // 41
+  "PRD033", // 42
+  "PRD193", // 43
+  "PRD206", // 44
+  "PRD156", // 45
+  "PRD034", // 46
+  "PRD169", // 47
+  "PRD170", // 48
+  "PRD053", // 49
+  "PRD037", // 50
+  "PRD008", // 51
+  "PRD066", // 52
+  "PRD018", // 53
+  "PRD010", // 54
+  "PRD176", // 55
+  "PRD038", // 56
+  "PRD207", // 57
+  "PRD045", // 58
+  "PRD042", // 59
+  "PRD041", // 60
+  "PRD003", // 61
+  "PRD185", // 62
+  "PRD092", // 63
+  "PRD079", // 64
+  "PRD075", // 65
+  "PRD196", // 66
+  "PRD208", // 67
+  "PRD071", // 68
+  "PRD209", // 69
+  "PRD210", // 70
+  "PRD073", // 71
+  "PRD211", // 72
+  "PRD201", // 73
+  "PRD070", // 74
+  "PRD202", // 75
+  "PRD090", // 76
+  "PRD091", // 77
+  "PRD174", // 78
+  "PRD084", // 79
+  "PRD099", // 80
+  "PRD212", // 81
+  "PRD080", // 82
+  "PRD213", // 83
+  "PRD081", // 84
+  "PRD097", // 85
+  "PRD218", // 86
+  "PRD166", // 87
+  "PRD157", // 88
+  "PRD076", // 89
+  "PRD104", // 90
+  "PRD173", // 91
+  "PRD198", // 92
+  "PRD214", // 93
+  "PRD197", // 94
+  "PRD077", // 95
+  "PRD179", // 96
+  "PRD094", // 97
+  "PRD215", // 98
+  "PRD101", // 99
+  "PRD085", // 100
+  "PRD180", // 101
+  "PRD088", // 102
+  "PRD089" // 103
 ];
 
 
-// Official sequence for BASAVANAGAR branch (BR004) for both Daily Stock Check and Stock Receiving
-// Categorized strictly: Items 1..38 (Fruits), Items 39..101 (Vegetables)
+// Official sequence for BASAVANAGAR branch (BR004)
 export const BASAVANAGAR_SEQUENCE = [
-  // --- FRUITS (38 items) ---
-  "PRD088", // 1. Watermelon
-  "PRD078", // 2. Papaya
-  "PRD085", // 3. Pineapple
-  "PRD104", // 4. Orange
-  "PRD179", // 5. Citrus
-  "PRD180", // 6. Madrin
-  "PRD076", // 7. Mosambi
-  "PRD097", // 8. Muskmelon
-  "PRD094", // 9. Custard Apple
-  "PRD166", // 10. Sapota
-  "PRD216", // 11. Thai Guava
-  "PRD199", // 12. Nati Guava
-  "PRD157", // 13. Green Bear
-  "PRD173", // 14. Red Dragon
-  "PRD198", // 15. White Dragon
-  "PRD081", // 16. Green Grapes
-  "PRD080", // 17. Black Grapes
-  "PRD079", // 18. Red Globe
-  "PRD217", // 19. Golden Kiwi
-  "PRD084", // 20. Kiwi
-  "PRD197", // 21. Anar big
-  "PRD077", // 22. Anar small
-  "PRD103", // 23. Plums
-  "PRD090", // 24. Pears
-  "PRD099", // 25. Butter fruit nati
-  "PRD212", // 26. Butter fruit imported
-  "PRD174", // 27. Persuman
-  "PRD075", // 28. Gala Apple
-  "PRD196", // 29. Pink lady Apple
-  "PRD208", // 30. Turkey Apple
-  "PRD071", // 31. WashingtonApple
-  "PRD209", // 32. Rocket Apple
-  "PRD210", // 33. Alibinder
-  "PRD073", // 34. Green Apple
-  "PRD211", // 35. Iran apple
-  "PRD201", // 36. Kashmir Apple
-  "PRD070", // 37. Shimla Apple
-  "PRD202", // 38. Misri Apple
-
-  // --- VEGETABLES (63 items) ---
-  "PRD023", // 39. Cucumber
-  "PRD032", // 40. Gobi
-  "PRD022", // 41. Cabbage
-  "PRD019", // 42. Loki
-  "PRD049", // 43. Turai
-  "PRD143", // 44. Sweet potato
-  "PRD006", // 45. Bhindi
-  "PRD009", // 46. Matar
-  "PRD005", // 47. Beans
-  "PRD004", // 48. Carrot
-  "PRD057", // 49. Beetroot
-  "PRD029", // 50. Drumstick
-  "PRD012", // 51. Mooli
-  "PRD021", // 52. Capsicum
-  "PRD125", // 53. Parval
-  "PRD017", // 54. Aamla
-  "PRD008", // 55. Long Beans
-  "PRD018", // 56. Nati Beans
-  "PRD177", // 57. White Beans
-  "PRD066", // 58. D phalli
-  "PRD011", // 59. Naukal
-  "PRD183", // 60. Karela small
-  "PRD020", // 61. Karela big
-  "PRD014", // 62. Small Brinjal
-  "PRD189", // 63. Long Brinjal purple
-  "PRD015", // 64. Long Brinjal green
-  "PRD205", // 65. Bharta Green
-  "PRD016", // 66. Bharta Black
-  "PRD028", // 67. Green chilli small
-  "PRD192", // 68. Green chilli Big
-  "PRD058", // 69. Bhajji chilli
-  "PRD169", // 70. Matki
-  "PRD170", // 71. Sem
-  "PRD053", // 72. Belt
-  "PRD037", // 73. Kundru
-  "PRD038", // 74. Snake guard
-  "PRD010", // 75. Chow Chow
-  "PRD030", // 76. Raw papaya
-  "PRD024", // 77. Raw Banana
-  "PRD051", // 78. Banana stem
-  "PRD060", // 79. Banana flower
-  "PRD131", // 80. Raw Mango
-  "PRD050", // 81. Jackfruit
-  "PRD034", // 82. Arvi
-  "PRD172", // 83. Kappa
-  "PRD027", // 84. Ginger
-  "PRD048", // 85. Ash guard
-  "PRD047", // 86. Pumpkin
-  "PRD052", // 87. Suran
-  "PRD033", // 88. Sambar cucumber
-  "PRD035", // 89. Sambar onion
-  "PRD156", // 90. Haldi
-  "PRD176", // 91. Karamani
-  "PRD045", // 92. Dhaniya farm
-  "PRD194", // 93. Dhaniya Nati
-  "PRD041", // 94. Kadipatta
-  "PRD042", // 95. Pudina
-  "PRD043", // 96. Palak
-  "PRD044", // 97. Mehti
-  "PRD207", // 98. Bhaji
-  "PRD092", // 99. Robusta
-  "PRD185", // 100. Tomato nati
-  "PRD003"  // 101. Tomato farm basvanagar
+  "PRD088", // 1
+  "PRD089", // 2
+  "PRD078", // 3
+  "PRD085", // 4
+  "PRD104", // 5
+  "PRD179", // 6
+  "PRD180", // 7
+  "PRD076", // 8
+  "PRD097", // 9
+  "PRD218", // 10
+  "PRD094", // 11
+  "PRD166", // 12
+  "PRD216", // 13
+  "PRD199", // 14
+  "PRD157", // 15
+  "PRD173", // 16
+  "PRD198", // 17
+  "PRD081", // 18
+  "PRD080", // 19
+  "PRD079", // 20
+  "PRD217", // 21
+  "PRD084", // 22
+  "PRD197", // 23
+  "PRD077", // 24
+  "PRD103", // 25
+  "PRD090", // 26
+  "PRD099", // 27
+  "PRD212", // 28
+  "PRD174", // 29
+  "PRD075", // 30
+  "PRD196", // 31
+  "PRD208", // 32
+  "PRD071", // 33
+  "PRD209", // 34
+  "PRD210", // 35
+  "PRD073", // 36
+  "PRD211", // 37
+  "PRD201", // 38
+  "PRD070", // 39
+  "PRD202", // 40
+  "PRD023", // 41
+  "PRD032", // 42
+  "PRD022", // 43
+  "PRD019", // 44
+  "PRD049", // 45
+  "PRD143", // 46
+  "PRD006", // 47
+  "PRD009", // 48
+  "PRD005", // 49
+  "PRD004", // 50
+  "PRD057", // 51
+  "PRD029", // 52
+  "PRD012", // 53
+  "PRD021", // 54
+  "PRD125", // 55
+  "PRD017", // 56
+  "PRD008", // 57
+  "PRD018", // 58
+  "PRD066", // 59
+  "PRD011", // 60
+  "PRD183", // 61
+  "PRD020", // 62
+  "PRD014", // 63
+  "PRD188", // 64
+  "PRD189", // 65
+  "PRD015", // 66
+  "PRD016", // 67
+  "PRD205", // 68
+  "PRD028", // 69
+  "PRD192", // 70
+  "PRD058", // 71
+  "PRD169", // 72
+  "PRD170", // 73
+  "PRD053", // 74
+  "PRD037", // 75
+  "PRD038", // 76
+  "PRD010", // 77
+  "PRD030", // 78
+  "PRD024", // 79
+  "PRD051", // 80
+  "PRD060", // 81
+  "PRD131", // 82
+  "PRD050", // 83
+  "PRD034", // 84
+  "PRD172", // 85
+  "PRD027", // 86
+  "PRD048", // 87
+  "PRD047", // 88
+  "PRD052", // 89
+  "PRD033", // 90
+  "PRD035", // 91
+  "PRD193", // 92
+  "PRD156", // 93
+  "PRD176", // 94
+  "PRD045", // 95
+  "PRD194", // 96
+  "PRD041", // 97
+  "PRD042", // 98
+  "PRD043", // 99
+  "PRD044", // 100
+  "PRD207", // 101
+  "PRD092", // 102
+  "PRD185", // 103
+  "PRD003" // 104
 ];
 
 
-// Official sequence for ANNASANDRAPALYA branch (BR001) for both Daily Stock Check and Stock Receiving
-// Sequence: 62 Vegetables (same as LB Shastri Nagar) + 38 Fruits (same as Basavanagar) = 100 items
+// Official sequence for ANNASANDRAPALYA branch (BR001)
 export const ANNASANDRAPALYA_SEQUENCE = [
-  "PRD005",
-  "PRD004",
-  "PRD023",
-  "PRD057",
-  "PRD032",
-  "PRD022",
-  "PRD028",
-  "PRD192",
-  "PRD009",
-  "PRD125",
-  "PRD019",
-  "PRD012",
-  "PRD014",
-  "PRD188",
-  "PRD011",
-  "PRD183",
-  "PRD020",
-  "PRD006",
-  "PRD049",
-  "PRD021",
-  "PRD027",
-  "PRD204",
-  "PRD024",
-  "PRD030",
-  "PRD051",
-  "PRD060",
-  "PRD054",
-  "PRD143",
-  "PRD172",
-  "PRD029",
-  "PRD017",
-  "PRD189",
-  "PRD015",
-  "PRD058",
-  "PRD016",
-  "PRD205",
-  "PRD047",
-  "PRD048",
-  "PRD052",
-  "PRD031",
-  "PRD035",
-  "PRD033",
-  "PRD193",
-  "PRD206",
-  "PRD156",
-  "PRD034",
-  "PRD169",
-  "PRD170",
-  "PRD053",
-  "PRD037",
-  "PRD008",
-  "PRD066",
-  "PRD018",
-  "PRD010",
-  "PRD176",
-  "PRD038",
-  "PRD207",
-  "PRD045",
-  "PRD042",
-  "PRD041",
-  "PRD003",
-  "PRD185",
-  "PRD088",
-  "PRD078",
-  "PRD085",
-  "PRD104",
-  "PRD179",
-  "PRD180",
-  "PRD076",
-  "PRD097",
-  "PRD094",
-  "PRD166",
-  "PRD216",
-  "PRD199",
-  "PRD157",
-  "PRD173",
-  "PRD198",
-  "PRD081",
-  "PRD080",
-  "PRD079",
-  "PRD217",
-  "PRD084",
-  "PRD197",
-  "PRD077",
-  "PRD103",
-  "PRD090",
-  "PRD099",
-  "PRD212",
-  "PRD174",
-  "PRD075",
-  "PRD196",
-  "PRD208",
-  "PRD071",
-  "PRD209",
-  "PRD210",
-  "PRD073",
-  "PRD211",
-  "PRD201",
-  "PRD070",
-  "PRD202"
+  "PRD005", // 1
+  "PRD004", // 2
+  "PRD023", // 3
+  "PRD057", // 4
+  "PRD032", // 5
+  "PRD022", // 6
+  "PRD028", // 7
+  "PRD192", // 8
+  "PRD009", // 9
+  "PRD125", // 10
+  "PRD019", // 11
+  "PRD012", // 12
+  "PRD014", // 13
+  "PRD188", // 14
+  "PRD011", // 15
+  "PRD183", // 16
+  "PRD020", // 17
+  "PRD006", // 18
+  "PRD049", // 19
+  "PRD021", // 20
+  "PRD027", // 21
+  "PRD204", // 22
+  "PRD024", // 23
+  "PRD030", // 24
+  "PRD051", // 25
+  "PRD060", // 26
+  "PRD054", // 27
+  "PRD143", // 28
+  "PRD172", // 29
+  "PRD029", // 30
+  "PRD017", // 31
+  "PRD189", // 32
+  "PRD015", // 33
+  "PRD058", // 34
+  "PRD205", // 35
+  "PRD016", // 36
+  "PRD047", // 37
+  "PRD048", // 38
+  "PRD052", // 39
+  "PRD031", // 40
+  "PRD035", // 41
+  "PRD033", // 42
+  "PRD193", // 43
+  "PRD206", // 44
+  "PRD156", // 45
+  "PRD034", // 46
+  "PRD169", // 47
+  "PRD170", // 48
+  "PRD053", // 49
+  "PRD037", // 50
+  "PRD008", // 51
+  "PRD066", // 52
+  "PRD018", // 53
+  "PRD010", // 54
+  "PRD176", // 55
+  "PRD038", // 56
+  "PRD207", // 57
+  "PRD045", // 58
+  "PRD042", // 59
+  "PRD041", // 60
+  "PRD003", // 61
+  "PRD185", // 62
+  "PRD088", // 63
+  "PRD089", // 64
+  "PRD078", // 65
+  "PRD085", // 66
+  "PRD104", // 67
+  "PRD179", // 68
+  "PRD180", // 69
+  "PRD076", // 70
+  "PRD097", // 71
+  "PRD218", // 72
+  "PRD094", // 73
+  "PRD166", // 74
+  "PRD216", // 75
+  "PRD199", // 76
+  "PRD157", // 77
+  "PRD173", // 78
+  "PRD198", // 79
+  "PRD081", // 80
+  "PRD080", // 81
+  "PRD079", // 82
+  "PRD217", // 83
+  "PRD084", // 84
+  "PRD197", // 85
+  "PRD077", // 86
+  "PRD103", // 87
+  "PRD090", // 88
+  "PRD099", // 89
+  "PRD212", // 90
+  "PRD174", // 91
+  "PRD075", // 92
+  "PRD196", // 93
+  "PRD208", // 94
+  "PRD071", // 95
+  "PRD209", // 96
+  "PRD210", // 97
+  "PRD073", // 98
+  "PRD211", // 99
+  "PRD201", // 100
+  "PRD070", // 101
+  "PRD202" // 102
 ];
