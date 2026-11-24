@@ -93,6 +93,31 @@ body {
   overflow-x: hidden;
 }
 
+/* Suppress Netlify Injected Badge, Floating Overlays, and Third-Party Badges */
+body > *:not(#app):not(script):not(style):not(link),
+netlify-badge,
+netlify-drawer,
+[data-netlify-badge],
+[data-netlify-drawer],
+iframe[src*="netlify"],
+div[id*="netlify"],
+div[class*="netlify"],
+[aria-label*="Netlify"],
+[title*="Netlify"],
+a[href*="netlify.com"][style*="fixed"],
+div[style*="z-index: 2147483647"],
+div[style*="z-index: 999999"] {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  opacity: 0 !important;
+  width: 0 !important;
+  height: 0 !important;
+  clip: rect(0, 0, 0, 0) !important;
+  position: absolute !important;
+  z-index: -999999 !important;
+}
+
 /* App Shell */
 .app-shell {
   display: flex;

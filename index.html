@@ -13,6 +13,33 @@
   
   <link rel="stylesheet" href="/src/style.css">
   <link rel="icon" type="image/png" href="/logo.png?v=3">
+
+  <!-- Suppress and purge any Netlify edge-injected floating badge / overlays -->
+  <script>
+    (function() {
+      function purgeNetlifyBadge() {
+        var items = document.querySelectorAll('netlify-badge, netlify-drawer, [data-netlify-badge], [data-netlify-drawer], iframe[src*="netlify"], div[id*="netlify"], div[class*="netlify"]');
+        items.forEach(function(el) { el.remove(); });
+        if (document.body) {
+          Array.from(document.body.children).forEach(function(child) {
+            if (child.id !== 'app' && child.tagName !== 'SCRIPT' && child.tagName !== 'LINK' && child.tagName !== 'STYLE') {
+              var tag = child.tagName.toLowerCase();
+              var id = (child.id || '').toLowerCase();
+              var cls = (child.className || '').toString().toLowerCase();
+              if (tag.indexOf('netlify') !== -1 || id.indexOf('netlify') !== -1 || cls.indexOf('netlify') !== -1 || child.shadowRoot) {
+                child.remove();
+              }
+            }
+          });
+        }
+      }
+      purgeNetlifyBadge();
+      if (typeof MutationObserver !== 'undefined') {
+        var obs = new MutationObserver(purgeNetlifyBadge);
+        obs.observe(document.documentElement, { childList: true, subtree: true });
+      }
+    })();
+  </script>
 </head>
 <body>
   <div id="app"></div>

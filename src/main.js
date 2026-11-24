@@ -171,12 +171,33 @@ function startLiveClockTicker() {
   }, 1000);
 }
 
+// Continuous Purge of Netlify injected badges / widgets
+function purgeNetlifyBadge() {
+  if (typeof document === 'undefined') return;
+  const selectors = 'netlify-badge, netlify-drawer, [data-netlify-badge], [data-netlify-drawer], iframe[src*="netlify"], div[id*="netlify"], [class*="netlify"]';
+  document.querySelectorAll(selectors).forEach(el => el.remove());
+  if (document.body) {
+    Array.from(document.body.children).forEach(child => {
+      if (child.id !== 'app' && child.tagName !== 'SCRIPT' && child.tagName !== 'LINK' && child.tagName !== 'STYLE') {
+        const tag = child.tagName.toLowerCase();
+        const id = (child.id || '').toLowerCase();
+        const cls = (child.className || '').toString().toLowerCase();
+        if (tag.includes('netlify') || id.includes('netlify') || cls.includes('netlify') || child.shadowRoot) {
+          child.remove();
+        }
+      }
+    });
+  }
+}
+
 // Initial mount & subscription
 document.addEventListener('DOMContentLoaded', () => {
   renderApp();
   startLiveClockTicker();
+  purgeNetlifyBadge();
   store.subscribe(() => {
     renderApp();
+    purgeNetlifyBadge();
   });
 });
 
