@@ -133,6 +133,21 @@ class InventoryStore {
       BR004: { PRD001: 2, PRD002: 3, PRD003: 4, PRD004: 5, PRD005: 6, PRD006: 7, PRD007: 1, PRD008: 2, PRD009: 3, PRD010: 4, PRD013: 7, PRD017: 4, PRD021: 1, PRD022: 5, PRD023: 2, PRD025: 6, PRD027: 3, PRD028: 7, PRD031: 4, PRD043: 1, PRD045: 5, PRD070: 2, PRD071: 6, PRD076: 3, PRD077: 7, PRD086: 4, PRD088: 1, PRD114: 5, PRD183: 2 }
     };
 
+    // Restore saved stock check drafts from localStorage so manual zeroing/deletions persist
+    try {
+      if (typeof localStorage !== 'undefined') {
+        const savedDrafts = localStorage.getItem('md_fresh_stock_check_drafts');
+        if (savedDrafts) {
+          const parsed = JSON.parse(savedDrafts);
+          if (parsed && typeof parsed === 'object') {
+            this.stockCheckDrafts = parsed;
+          }
+        }
+      }
+    } catch (e) {
+      // ignore
+    }
+
     // Finalized orders archive & next-day state
     this.finalizedOrders = [];
     this.isReadyForNextDay = false;
@@ -458,6 +473,16 @@ class InventoryStore {
     if (val > 0) {
       this.isReadyForNextDay = false;
     }
+
+    // Persist draft updates to localStorage
+    try {
+      if (typeof localStorage !== 'undefined') {
+        localStorage.setItem('md_fresh_stock_check_drafts', JSON.stringify(this.stockCheckDrafts));
+      }
+    } catch (e) {
+      // ignore
+    }
+
     if (shouldNotify) {
       this.notify();
     }
@@ -651,6 +676,14 @@ class InventoryStore {
       });
       this.branchLastRecorded[b.id] = now;
     });
+
+    try {
+      if (typeof localStorage !== 'undefined') {
+        localStorage.setItem('md_fresh_stock_check_drafts', JSON.stringify(this.stockCheckDrafts));
+      }
+    } catch (e) {
+      // ignore
+    }
 
     // 3. Update next-day readiness state
     this.isReadyForNextDay = true;

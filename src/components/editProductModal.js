@@ -285,18 +285,12 @@ export function setupEditProductModalEvents() {
       const prod = store.products.find(p => p.id === pId);
       if (!prod) return;
 
-      const confirmed = typeof window !== 'undefined' && window.confirm
-        ? window.confirm(`Are you sure you want to permanently remove "${prod.name}" (${prod.sku}) from catalog?`)
-        : true;
-
-      if (confirmed) {
-        const res = store.deleteProduct(pId);
-        if (res.success) {
-          closeModal();
-          showToast(`"${prod.name}" removed from catalog and all sequences`, 'warning');
-        } else {
-          showToast(res.message || 'Failed to remove product', 'error');
-        }
+      const res = store.deleteProduct(pId);
+      if (res.success) {
+        closeModal();
+        showToast(`"${prod.name}" permanently removed from catalog`, 'warning');
+      } else {
+        showToast(res.message || 'Failed to remove product', 'error');
       }
     });
   }

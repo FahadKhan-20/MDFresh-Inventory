@@ -393,6 +393,15 @@ export function renderDailyStockCheckView() {
                 >
                   ✏️ Edit
                 </button>
+                <button 
+                  type="button" 
+                  class="btn-direct-delete-product" 
+                  data-product-id="${p.id}" 
+                  title="Delete product from catalog" 
+                  style="border: 1.5px solid #FCA5A5; background: #FEF2F2; color: #DC2626; border-radius: 5px; padding: 2px 6px; font-size: 0.68rem; font-weight: 800; cursor: pointer; display: inline-flex; align-items: center; gap: 2px;"
+                >
+                  🗑️
+                </button>
               </div>
             </div>
 
@@ -1116,6 +1125,22 @@ function filterStockCheckDOM(query) {
     });
   });
 
+  // Direct product catalog deletion from stock check list
+  document.querySelectorAll('.btn-direct-delete-product').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const pId = e.currentTarget.getAttribute('data-product-id');
+      if (!pId) return;
+
+      const prod = store.products.find(p => p.id === pId);
+      const res = store.deleteProduct(pId);
+      if (res.success) {
+        showToast(`"${prod?.name || 'Item'}" permanently removed from catalog`, 'warning');
+      }
+    });
+  });
+
   document.querySelectorAll('.btn-clear-stock-item-mobile').forEach(btn => {
     btn.addEventListener('click', (e) => {
       e.preventDefault();
@@ -1148,6 +1173,22 @@ function filterStockCheckDOM(query) {
       updateLiveCheckSummary();
       const prod = store.products.find(p => p.id === pId);
       showToast(`Deleted "${prod?.name || 'Item'}" from requirements`, 'info');
+    });
+  });
+
+  // Direct product catalog deletion from stock check list
+  document.querySelectorAll('.btn-direct-delete-product').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const pId = e.currentTarget.getAttribute('data-product-id');
+      if (!pId) return;
+
+      const prod = store.products.find(p => p.id === pId);
+      const res = store.deleteProduct(pId);
+      if (res.success) {
+        showToast(`"${prod?.name || 'Item'}" permanently removed from catalog`, 'warning');
+      }
     });
   });
 
