@@ -249,6 +249,32 @@ export function renderInventoryView() {
                 <input type="number" id="invApCost" min="0" value="150" style="width:100%; padding:8px 12px; border:1.5px solid var(--md-border); border-radius:var(--radius-md); outline:none; font-size: 0.92rem;" />
               </div>
             </div>
+
+            <!-- Sequence & Serial Number Placement -->
+            <div style="background: #F8FAFC; border: 1.5px solid #E2E8F0; border-radius: var(--radius-md); padding: 12px; margin-top: 2px;">
+              <div style="font-weight: 800; font-size: 0.8rem; color: #1E293B; margin-bottom: 6px; display: flex; align-items: center; gap: 6px;">
+                <span>🔢 Branch Sequence & Serial Number</span>
+              </div>
+              <div style="display: grid; grid-template-columns: 1.3fr 1fr; gap: 10px;">
+                <div>
+                  <label style="display:block; font-size: 0.74rem; font-weight: 700; color: var(--md-text-secondary); margin-bottom: 4px;">Target Sequence</label>
+                  <select id="invApTargetBranch" style="width:100%; padding:7px 10px; border:1px solid var(--md-border); border-radius:var(--radius-md); font-size:0.85rem; font-weight:600; outline:none; background:white;">
+                    <option value="ALL">All Branches</option>
+                    <option value="BR001">Annasandrapalya (BR-ASP)</option>
+                    <option value="BR002">Kodihalli (BR-KDH)</option>
+                    <option value="BR003">LB Shastri Nagar (BR-LBS)</option>
+                    <option value="BR004">Basavanagar (BR-BSV)</option>
+                  </select>
+                </div>
+                <div>
+                  <label style="display:block; font-size: 0.74rem; font-weight: 700; color: var(--md-text-secondary); margin-bottom: 4px;">Insert at Serial No #</label>
+                  <input type="number" id="invApSerialNo" min="1" placeholder="e.g. 1, 15, or blank" style="width:100%; padding:7px 10px; border:1px solid var(--md-border); border-radius:var(--radius-md); font-size:0.85rem; font-weight:700; outline:none;" />
+                </div>
+              </div>
+              <div style="font-size: 0.72rem; color: var(--md-text-muted); margin-top: 4px;">
+                Specify serial number position or leave blank to append at end.
+              </div>
+            </div>
           </div>
 
           <div class="modal-footer" style="display: flex; justify-content: flex-end; gap: 10px; padding: 14px 20px; background: var(--md-surface-subtle); border-top: 1px solid var(--md-border);">
@@ -545,6 +571,9 @@ function filterInventoryDOM(query) {
 
       if (!name) return;
 
+      const targetBranch = document.getElementById('invApTargetBranch') ? document.getElementById('invApTargetBranch').value : 'ALL';
+      const serialNo = document.getElementById('invApSerialNo') ? document.getElementById('invApSerialNo').value : null;
+
       store.addProduct({
         name,
         category,
@@ -552,6 +581,9 @@ function filterInventoryDOM(query) {
         initialStock,
         reorderLevel,
         unitCost
+      }, {
+        targetBranch,
+        serialNo
       });
 
       invAddForm.reset();

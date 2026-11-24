@@ -22,6 +22,32 @@ export function renderReceivingView() {
     selectedPOId = store.latestDispatchPOId || (poList[0] ? poList[0].id : null);
     lastKnownDispatchPOId = store.latestDispatchPOId;
   }
+  // Prioritize Kodihalli comprehensive delivery PO when on Kodihalli branch
+        if (currentBranchId === "BR001" && (!selectedPOId || selectedPOId === "PO-20261003-0001") && !store.latestDispatchPOId) {
+    const aspPo = poList.find(p => p.id === "PO-20261003-ASP01");
+    if (aspPo) {
+      selectedPOId = aspPo.id;
+    }
+  }
+  if (currentBranchId === "BR004" && (!selectedPOId || selectedPOId === "PO-20261003-0001") && !store.latestDispatchPOId) {
+    const bsvPo = poList.find(p => p.id === "PO-20261003-BSV01");
+    if (bsvPo) {
+      selectedPOId = bsvPo.id;
+    }
+  }
+  if (currentBranchId === "BR003" && (!selectedPOId || selectedPOId === "PO-20261003-0001") && !store.latestDispatchPOId) {
+    const lbsPo = poList.find(p => p.id === "PO-20261003-LBS01");
+    if (lbsPo) {
+      selectedPOId = lbsPo.id;
+    }
+  }
+  if (currentBranchId === "BR002" && (!selectedPOId || selectedPOId === "PO-20261003-0001") && !store.latestDispatchPOId) {
+    const kdhPo = poList.find(p => p.id === "PO-20261003-KDH01");
+    if (kdhPo) {
+      selectedPOId = kdhPo.id;
+    }
+  }
+
   const currentPO = (selectedPOId && poList.find(p => p.id === selectedPOId)) || poList[0];
   selectedPOId = currentPO ? currentPO.id : null;
 
@@ -30,7 +56,7 @@ export function renderReceivingView() {
   const extraItems = extraItemsMap[currentBranchId] || [];
 
   // Merge extra items if not already present
-  const allItems = [...baseItems];
+  let allItems = [...baseItems];
   extraItems.forEach(extra => {
     if (!allItems.some(it => it.productId === extra.productId)) {
       allItems.push({
@@ -39,6 +65,9 @@ export function renderReceivingView() {
       });
     }
   });
+
+  // Get active receiving draft quantities
+  allItems = store.sortProductsForBranch(currentBranchId, allItems);
 
   // Get active receiving draft quantities
   const draft = store.receivingDrafts[currentBranchId] || {};
@@ -154,6 +183,84 @@ export function renderReceivingView() {
       </div>
     ` : ''}
 
+    <!-- Kodihalli Receiving Sequence Indicator Banner -->
+            ${currentBranchId === "BR001" ? `
+      <div style="background: linear-gradient(135deg, #F0FDF4 0%, #DCFCE7 100%); border: 1.5px solid #86EFAC; border-radius: var(--radius-md); padding: 10px 16px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; box-shadow: 0 2px 6px rgba(16, 185, 129, 0.08);">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <span style="font-size: 1.3rem;">🚚</span>
+          <div>
+            <div style="font-weight: 800; font-size: 0.92rem; color: #166534; display: flex; align-items: center; gap: 8px;">
+              <span>Annasandrapalya Dock Receiving Sequence Active (100 Produce Items: 62 Veg &bull; 38 Fruits)</span>
+              <span class="pill" style="background: #166534; color: white; font-size: 0.7rem; font-weight: 800; padding: 2px 8px;">ANNASANDRAPALYA SEQUENCE</span>
+            </div>
+            <div style="font-size: 0.78rem; color: #15803D; margin-top: 2px;">
+              Arriving crates are ordered strictly in the official Annasandrapalya stock receiving list order.
+            </div>
+          </div>
+        </div>
+        <div style="font-size: 0.8rem; font-weight: 700; color: #166534;">
+          #1 Beans through #100 Misri Apple
+        </div>
+      </div>
+    ` : ""}
+    ${currentBranchId === "BR004" ? `
+      <div style="background: linear-gradient(135deg, #F0FDF4 0%, #DCFCE7 100%); border: 1.5px solid #86EFAC; border-radius: var(--radius-md); padding: 10px 16px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; box-shadow: 0 2px 6px rgba(16, 185, 129, 0.08);">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <span style="font-size: 1.3rem;">🚚</span>
+          <div>
+            <div style="font-weight: 800; font-size: 0.92rem; color: #166534; display: flex; align-items: center; gap: 8px;">
+              <span>Basavanagar Dock Receiving Sequence Active (101 Produce Items: 38 Fruits &bull; 63 Veg)</span>
+              <span class="pill" style="background: #166534; color: white; font-size: 0.7rem; font-weight: 800; padding: 2px 8px;">BASAVANAGAR SEQUENCE</span>
+            </div>
+            <div style="font-size: 0.78rem; color: #15803D; margin-top: 2px;">
+              Arriving crates are ordered strictly in the official Basavanagar stock receiving list order.
+            </div>
+          </div>
+        </div>
+        <div style="font-size: 0.8rem; font-weight: 700; color: #166534;">
+          #1 Watermelon through #101 Tomato Farm
+        </div>
+      </div>
+    ` : ""}
+    ${currentBranchId === "BR003" ? `
+      <div style="background: linear-gradient(135deg, #F0FDF4 0%, #DCFCE7 100%); border: 1.5px solid #86EFAC; border-radius: var(--radius-md); padding: 10px 16px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; box-shadow: 0 2px 6px rgba(16, 185, 129, 0.08);">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <span style="font-size: 1.3rem;">🚚</span>
+          <div>
+            <div style="font-weight: 800; font-size: 0.92rem; color: #166534; display: flex; align-items: center; gap: 8px;">
+              <span>LB Shastri Nagar Dock Receiving Sequence Active (102 Produce Items: 62 Veg &bull; 40 Fruits)</span>
+              <span class="pill" style="background: #166534; color: white; font-size: 0.7rem; font-weight: 800; padding: 2px 8px;">LBS NAGAR SEQUENCE</span>
+            </div>
+            <div style="font-size: 0.78rem; color: #15803D; margin-top: 2px;">
+              Arriving crates are ordered strictly in the official LB Shastri Nagar stock receiving list order.
+            </div>
+          </div>
+        </div>
+        <div style="font-size: 0.8rem; font-weight: 700; color: #166534;">
+          #1 Beans through #102 Watermellon
+        </div>
+      </div>
+    ` : ""}
+    ${currentBranchId === "BR002" ? `
+      <div style="background: linear-gradient(135deg, #F0FDF4 0%, #DCFCE7 100%); border: 1.5px solid #86EFAC; border-radius: var(--radius-md); padding: 10px 16px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; box-shadow: 0 2px 6px rgba(16, 185, 129, 0.08);">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <span style="font-size: 1.3rem;">🚚</span>
+          <div>
+            <div style="font-weight: 800; font-size: 0.92rem; color: #166534; display: flex; align-items: center; gap: 8px;">
+              <span>Kodihalli Dock Receiving Sequence Active (93 Produce Items)</span>
+              <span class="pill" style="background: #166534; color: white; font-size: 0.7rem; font-weight: 800; padding: 2px 8px;">KODIHALLI SEQUENCE</span>
+            </div>
+            <div style="font-size: 0.78rem; color: #15803D; margin-top: 2px;">
+              Arriving crates are ordered strictly in the official Kodihalli stock receiving list order.
+            </div>
+          </div>
+        </div>
+        <div style="font-size: 0.8rem; font-weight: 700; color: #166534;">
+          #1 Cucumber through #93 Mangoes
+        </div>
+      </div>
+    ` : ""}
+
     <!-- Delivery Source Bar -->
     <div style="background: white; border: 1px solid var(--md-border); border-radius: var(--radius-md); padding: 14px 18px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;">
       <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
@@ -168,7 +275,7 @@ export function renderReceivingView() {
       </div>
 
       <div style="display: flex; align-items: center; gap: 10px; font-size: 0.8rem; color: var(--md-text-muted);">
-        <span>Receiving Staff: <strong style="color: var(--md-text-main);">${store.currentUser?.name || 'Store Staff'}</strong></span>
+        <span>Receiving Staff: <strong style="color: var(--md-text-main);">${store.currentUser?.name || 'MD FRESH STAFF'}</strong></span>
         <span>&bull;</span>
         <span class="live-clock-display" style="font-family: monospace; font-weight: 700; color: var(--md-secondary-dark);">${store.getLiveDateTimeString(new Date(), true)}</span>
       </div>
@@ -265,17 +372,18 @@ export function renderReceivingView() {
           <table class="custom-table" id="receivingVerificationTable">
             <thead>
               <tr>
-                <th style="width: 32%;">PRODUCT / ITEM</th>
-                <th style="width: 16%;">ORDERED (EXPECTED)</th>
-                <th style="width: 26%;">STOCK RECEIVED (UNLOADED)</th>
-                <th style="width: 16%;">VARIANCE / STATUS</th>
-                <th style="width: 10%; text-align: center;">ACTION</th>
+                <th style="width: 8%; text-align: center;">S.NO</th>
+                <th style="width: 28%;">PRODUCT / ITEM</th>
+                <th style="width: 15%;">ORDERED (EXPECTED)</th>
+                <th style="width: 25%;">STOCK RECEIVED (UNLOADED)</th>
+                <th style="width: 15%;">VARIANCE / STATUS</th>
+                <th style="width: 9%; text-align: center;">ACTION</th>
               </tr>
             </thead>
             <tbody>
               ${receivingRows.length === 0 ? `
                 <tr>
-                  <td colspan="5" style="text-align: center; padding: 48px 20px;">
+                  <td colspan="6" style="text-align: center; padding: 48px 20px;">
                     <div style="font-size: 2.2rem; margin-bottom: 8px;">📦</div>
                     <div style="font-weight: 800; font-size: 1.05rem; color: var(--md-secondary-dark);">
                       No Scheduled Deliveries for ${branch.name} in this Dispatch
@@ -286,6 +394,7 @@ export function renderReceivingView() {
                   </td>
                 </tr>
               ` : receivingRows.map((row, idx) => {
+                const seqNo = store.getBranchItemSerialNo ? store.getBranchItemSerialNo(currentBranchId, row.productId, idx) : (idx + 1);
                 let diffBadge = '';
                 if (row.difference < 0) {
                   diffBadge = `
@@ -322,7 +431,7 @@ export function renderReceivingView() {
                       <div class="product-cell">
                         <div class="product-avatar">${row.image}</div>
                         <div class="product-info-text">
-                          <span class="product-name-text">${row.productName}</span>
+                          <span class="product-name-text">${(currentBranchId === "BR002" || currentBranchId === "BR003" || currentBranchId === "BR004") && store.getBranchItemSequenceIndex(currentBranchId, row.productId) < 999 ? `<span class="pill" style="background: #E0F2FE; color: #0369A1; font-size: 0.68rem; font-weight: 800; padding: 1px 6px; margin-right: 6px; border: 1px solid #BAE6FD;" title="Kodihalli Receiving Sequence #${store.getBranchItemSequenceIndex(currentBranchId, row.productId) + 1}">#${store.getBranchItemSequenceIndex(currentBranchId, row.productId) + 1}</span>` : ""}${row.productName}</span>
                           <span class="product-sub-sku">${row.sku} &bull; ${row.category}</span>
                         </div>
                       </div>

@@ -469,7 +469,7 @@ export function generateGoodsReceivingPDF(data) {
   // Branch & Staff metadata bar
   pdf.addRect(40, pdf.currentY - 22, 515, 22, { fillColor: [0.93, 0.96, 0.93] });
   pdf.addText(`BRANCH: ${branchName} (${branchCode})`, 48, pdf.currentY - 15, { fontSize: 9.5, bold: true, color: [0.03, 0.31, 0.16] });
-  pdf.addText(`RECEIVED BY: ${receivedBy || 'Store Staff'}`, 380, pdf.currentY - 15, { fontSize: 8.5, bold: true, color: [0.03, 0.31, 0.16] });
+  pdf.addText(`RECEIVED BY: ${receivedBy || 'MD FRESH STAFF'}`, 380, pdf.currentY - 15, { fontSize: 8.5, bold: true, color: [0.03, 0.31, 0.16] });
   pdf.currentY -= 32;
 
   // Table header

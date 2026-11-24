@@ -16,8 +16,11 @@ export function renderDailyStockCheckView() {
   // Filter products according to category, search, and flags
   let filteredProducts = store.products.filter(p => {
     // Category filter
-    if (activeCategoryFilter !== 'All' && p.category !== activeCategoryFilter) {
-      return false;
+    if (activeCategoryFilter !== 'All') {
+      const prodCategory = store.getProductCategoryForBranch ? store.getProductCategoryForBranch(currentBranchId, p.id) : p.category;
+      if (prodCategory !== activeCategoryFilter) {
+        return false;
+      }
     }
     // Search query
     if (searchQuery.trim() !== '') {
@@ -35,6 +38,9 @@ export function renderDailyStockCheckView() {
     }
     return true;
   });
+
+  // Apply Kodihalli branch-specific sequence order
+  filteredProducts = store.sortProductsForBranch(currentBranchId, filteredProducts);
 
   // Calculate stats for branch
   const allBranchProducts = store.products;
@@ -112,6 +118,84 @@ export function renderDailyStockCheckView() {
         </div>
       </div>
     ` : ''}
+
+    <!-- Kodihalli Sequence Indicator Banner -->
+            ${currentBranchId === "BR001" ? `
+      <div style="background: linear-gradient(135deg, #F0FDF4 0%, #DCFCE7 100%); border: 1.5px solid #86EFAC; border-radius: var(--radius-md); padding: 10px 16px; margin-bottom: 16px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; box-shadow: 0 2px 6px rgba(16, 185, 129, 0.08);">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <span style="font-size: 1.3rem;">📋</span>
+          <div>
+            <div style="font-weight: 800; font-size: 0.92rem; color: #166534; display: flex; align-items: center; gap: 8px;">
+              <span>Annasandrapalya Branch Standard Sequence Active (100 Produce Items: 62 Veg &bull; 38 Fruits)</span>
+              <span class="pill" style="background: #166534; color: white; font-size: 0.7rem; font-weight: 800; padding: 2px 8px;">ANNASANDRAPALYA SEQUENCE</span>
+            </div>
+            <div style="font-size: 0.78rem; color: #15803D; margin-top: 2px;">
+              Direct morning store audit sequence: <strong>Vegetables (#1 Beans to #62 Tomato Nati)</strong> &bull; <strong>Fruits (#63 Watermelon to #100 Misri Apple)</strong>.
+            </div>
+          </div>
+        </div>
+        <div style="font-size: 0.8rem; font-weight: 700; color: #166534;">
+          Ordered strictly #1 Beans to #100 Misri Apple
+        </div>
+      </div>
+    ` : ""}
+    ${currentBranchId === "BR004" ? `
+      <div style="background: linear-gradient(135deg, #F0FDF4 0%, #DCFCE7 100%); border: 1.5px solid #86EFAC; border-radius: var(--radius-md); padding: 10px 16px; margin-bottom: 16px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; box-shadow: 0 2px 6px rgba(16, 185, 129, 0.08);">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <span style="font-size: 1.3rem;">📋</span>
+          <div>
+            <div style="font-weight: 800; font-size: 0.92rem; color: #166534; display: flex; align-items: center; gap: 8px;">
+              <span>Basavanagar Branch Standard Sequence Active (101 Produce Items: 38 Fruits &bull; 63 Veg)</span>
+              <span class="pill" style="background: #166534; color: white; font-size: 0.7rem; font-weight: 800; padding: 2px 8px;">BASAVANAGAR SEQUENCE</span>
+            </div>
+            <div style="font-size: 0.78rem; color: #15803D; margin-top: 2px;">
+              Direct morning store audit sequence: <strong>Fruits (#1 Watermelon to #38 Misri Apple)</strong> &bull; <strong>Vegetables (#39 Cucumber to #101 Tomato Farm)</strong>.
+            </div>
+          </div>
+        </div>
+        <div style="font-size: 0.8rem; font-weight: 700; color: #166534;">
+          Ordered strictly #1 Watermelon to #101 Tomato Farm
+        </div>
+      </div>
+    ` : ""}
+    ${currentBranchId === "BR003" ? `
+      <div style="background: linear-gradient(135deg, #F0FDF4 0%, #DCFCE7 100%); border: 1.5px solid #86EFAC; border-radius: var(--radius-md); padding: 10px 16px; margin-bottom: 16px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; box-shadow: 0 2px 6px rgba(16, 185, 129, 0.08);">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <span style="font-size: 1.3rem;">📋</span>
+          <div>
+            <div style="font-weight: 800; font-size: 0.92rem; color: #166534; display: flex; align-items: center; gap: 8px;">
+              <span>LB Shastri Nagar Branch Standard Sequence Active (102 Produce Items: 62 Veg &bull; 40 Fruits)</span>
+              <span class="pill" style="background: #166534; color: white; font-size: 0.7rem; font-weight: 800; padding: 2px 8px;">LBS NAGAR SEQUENCE</span>
+            </div>
+            <div style="font-size: 0.78rem; color: #15803D; margin-top: 2px;">
+              Direct morning store audit sequence: <strong>Vegetables (#1 Beans to #62 Tomato Nati)</strong> &bull; <strong>Fruits (#63 Robusta to #102 Watermellon)</strong>.
+            </div>
+          </div>
+        </div>
+        <div style="font-size: 0.8rem; font-weight: 700; color: #166534;">
+          Ordered strictly #1 Beans to #102 Watermellon
+        </div>
+      </div>
+    ` : ""}
+    ${currentBranchId === "BR002" ? `
+      <div style="background: linear-gradient(135deg, #F0FDF4 0%, #DCFCE7 100%); border: 1.5px solid #86EFAC; border-radius: var(--radius-md); padding: 10px 16px; margin-bottom: 16px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; box-shadow: 0 2px 6px rgba(16, 185, 129, 0.08);">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <span style="font-size: 1.3rem;">📋</span>
+          <div>
+            <div style="font-weight: 800; font-size: 0.92rem; color: #166534; display: flex; align-items: center; gap: 8px;">
+              <span>Kodihalli Branch Standard Sequence Active (93 Produce Items)</span>
+              <span class="pill" style="background: #166534; color: white; font-size: 0.7rem; font-weight: 800; padding: 2px 8px;">KODIHALLI SEQUENCE</span>
+            </div>
+            <div style="font-size: 0.78rem; color: #15803D; margin-top: 2px;">
+              Direct morning store audit sequence: <strong>Vegetables</strong> &bull; <strong>Leafy Greens</strong> &bull; <strong>Fruits</strong>.
+            </div>
+          </div>
+        </div>
+        <div style="font-size: 0.8rem; font-weight: 700; color: #166534;">
+          Ordered strictly #1 Cucumber to #93 Mangoes
+        </div>
+      </div>
+    ` : ""}
 
     <!-- Filters & Action Bar -->
     <div class="filter-bar">
@@ -192,8 +276,9 @@ export function renderDailyStockCheckView() {
           <table class="custom-table" id="stockCheckFastTable">
             <thead>
               <tr>
-                <th style="width: 44%;">PRODUCT</th>
-                <th style="width: 16%;">UNIT</th>
+                <th style="width: 8%; text-align: center;">S.NO</th>
+                <th style="width: 38%;">PRODUCT</th>
+                <th style="width: 14%;">UNIT</th>
                 <th style="width: 26%;">REQUIRED TO BUY</th>
                 <th style="width: 14%; text-align: center;">ACTION</th>
               </tr>
@@ -201,7 +286,7 @@ export function renderDailyStockCheckView() {
             <tbody>
               ${filteredProducts.length === 0 ? `
                 <tr>
-                  <td colspan="4" style="text-align: center; padding: 48px; color: var(--md-text-muted);">
+                  <td colspan="5" style="text-align: center; padding: 48px; color: var(--md-text-muted);">
                     <div style="font-size: 2rem; margin-bottom: 8px;">🔍</div>
                     <div style="font-weight: 700; font-size: 1rem; color: var(--md-text-main);">No matching products found</div>
                     <div style="font-size: 0.82rem; margin-top: 4px;">Try adjusting your search query or reset the filters.</div>
@@ -209,14 +294,18 @@ export function renderDailyStockCheckView() {
                 </tr>
               ` : filteredProducts.map((p, index) => {
                 const reqQty = draft[p.id] !== undefined ? draft[p.id] : 0;
+                const seqNo = store.getBranchItemSerialNo ? store.getBranchItemSerialNo(currentBranchId, p.id, index) : (index + 1);
 
                 return `
                   <tr data-product-id="${p.id}" class="${reqQty > 0 ? 'row-required-highlight' : ''}">
+                    <td style="text-align: center; vertical-align: middle;">
+                      <span class="pill" style="background: #E0F2FE; color: #0369A1; font-size: 0.78rem; font-weight: 800; padding: 2px 8px; border: 1px solid #BAE6FD;" title="Serial #${seqNo}">#${seqNo}</span>
+                    </td>
                     <td>
                       <div class="product-cell">
                         <div class="product-avatar">${p.image}</div>
                         <div class="product-info-text">
-                          <span class="product-name-text">${p.name}</span>
+                          <span class="product-name-text">${true && store.getBranchItemSequenceIndex(currentBranchId, p.id) < 999 ? `<span class="pill" style="background: #E0F2FE; color: #0369A1; font-size: 0.68rem; font-weight: 800; padding: 1px 6px; margin-right: 6px; border: 1px solid #BAE6FD;" title="Kodihalli Store Sequence #${store.getBranchItemSequenceIndex(currentBranchId, p.id) + 1}">#${store.getBranchItemSequenceIndex(currentBranchId, p.id) + 1}</span>` : ""}${p.name}</span>
                           <span class="product-sub-sku">${p.originalPluName ? `<strong style="color: #0D8244; background: #EAF5EE; padding: 1px 4px; border-radius: 3px; font-size: 0.68rem; margin-right: 4px; border: 1px solid #C6E9D0;">${p.originalPluName}</strong> &bull; ` : ''}${p.sku} &bull; ${p.variety}</span>
                         </div>
                       </div>
@@ -274,7 +363,7 @@ export function renderDailyStockCheckView() {
               <div style="display: flex; align-items: center; gap: 10px;">
                 <span style="font-size: 1.5rem;">${p.image}</span>
                 <div>
-                  <div class="mobile-card-product">${p.name}</div>
+                  <div class="mobile-card-product"><span class="pill" style="background: #E0F2FE; color: #0369A1; font-size: 0.72rem; font-weight: 800; padding: 1px 6px; margin-right: 6px; border: 1px solid #BAE6FD;">#${store.getBranchItemSerialNo ? store.getBranchItemSerialNo(currentBranchId, p.id, index) : (index + 1)}</span>${p.name}</div>
                   <div style="font-size: 0.74rem; color: var(--md-text-muted); font-family: monospace;">${p.originalPluName ? `<strong style="color: #0D8244; background: #EAF5EE; padding: 1px 4px; border-radius: 3px; font-size: 0.68rem; margin-right: 4px; border: 1px solid #C6E9D0;">${p.originalPluName}</strong> &bull; ` : ''}${p.sku}</div>
                 </div>
               </div>
@@ -319,28 +408,45 @@ export function renderDailyStockCheckView() {
       }).join('')}
     </div>
 
-    <!-- Bottom Sticky Bar -->
-    <div class="sticky-bottom-bar">
-      <div class="sticky-bar-info">
-        <div class="sticky-count-pill">${totalRequiredCount}</div>
-        <div>
-          <div class="sticky-text">${totalRequiredCount} products require purchase</div>
-          <div style="font-size: 0.74rem; color: var(--md-text-muted);">
-            Branch: ${currentBranch.name} &bull; Ready for market order submission
+    <!-- Bottom Sticky Bar / Collapsible Review Drawer on Mobile -->
+    <div class="sticky-bottom-bar is-collapsed" id="stickyBottomBar">
+      <!-- Mobile Arrow Toggle Header (keeps full screen view undisturbed until arrow is clicked) -->
+      <button type="button" class="sticky-bar-toggle-header" id="btnToggleStickyBar" aria-expanded="false" aria-label="Toggle Review Sheet">
+        <div class="toggle-header-left">
+          <span class="toggle-count-badge sticky-count-pill-mini">${totalRequiredCount}</span>
+          <span class="toggle-header-title">
+            <span class="toggle-collapsed-label">${totalRequiredCount} products require purchase</span>
+            <span class="toggle-expanded-label" style="display: none;">Hide Review Details</span>
+          </span>
+        </div>
+        <div class="toggle-header-arrow-wrap">
+          <span class="toggle-arrow-action-text" id="toggleArrowActionText">Review List</span>
+          <span class="sticky-bar-arrow-icon" id="stickyBarArrowIcon">▲</span>
+        </div>
+      </button>
+
+      <div class="sticky-bottom-bar-content" id="stickyBottomBarContent">
+        <div class="sticky-bar-info">
+          <div class="sticky-count-pill">${totalRequiredCount}</div>
+          <div>
+            <div class="sticky-text">${totalRequiredCount} products require purchase</div>
+            <div style="font-size: 0.74rem; color: var(--md-text-muted);">
+              Branch: ${currentBranch.name} &bull; Ready for market order submission
+            </div>
           </div>
         </div>
-      </div>
 
-      <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
-        <button class="btn btn-secondary btn-lg" id="btnStickyGoToMatrix" style="font-weight: 800; border: 1.5px solid var(--md-border); background: white; color: var(--md-secondary-dark);" title="View all branches combined tabular matrix">
-          ${icon('layers', 'icon-sm')} View All Branches Table
-        </button>
-        <button class="btn btn-secondary btn-lg" id="btnStickyDownloadPdf" style="font-weight: 800; border: 1.5px solid #B7E4C4; background: #E8F6ED; color: #0D8244;">
-          📥 PDF (Optional)
-        </button>
-        <button class="btn btn-primary btn-lg" id="btnReviewRequirements" ${totalRequiredCount === 0 ? 'disabled style="opacity: 0.6;"' : ''}>
-          ${icon('requirements', 'icon-sm')} Review Requirements (${totalRequiredCount})
-        </button>
+        <div class="sticky-bar-actions" style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+          <button class="btn btn-secondary btn-lg" id="btnStickyGoToMatrix" style="font-weight: 800; border: 1.5px solid var(--md-border); background: white; color: var(--md-secondary-dark);" title="View all branches combined tabular matrix">
+            ${icon('layers', 'icon-sm')} View All Branches Table
+          </button>
+          <button class="btn btn-secondary btn-lg" id="btnStickyDownloadPdf" style="font-weight: 800; border: 1.5px solid #B7E4C4; background: #E8F6ED; color: #0D8244;">
+            📥 PDF (Optional)
+          </button>
+          <button class="btn btn-primary btn-lg" id="btnReviewRequirements" ${totalRequiredCount === 0 ? 'disabled style="opacity: 0.6;"' : ''}>
+            ${icon('requirements', 'icon-sm')} Review Requirements (${totalRequiredCount})
+          </button>
+        </div>
       </div>
     </div>
 
@@ -494,7 +600,34 @@ export function renderDailyStockCheckView() {
               ${icon('check', 'icon-sm')} Save & Add to Stock Check
             </button>
           </div>
-        </form>
+                  </div>
+
+            <!-- Sequence & Serial Number Placement -->
+            <div style="background: #F8FAFC; border: 1.5px solid #E2E8F0; border-radius: var(--radius-md); padding: 12px; margin-top: 2px;">
+              <div style="font-weight: 800; font-size: 0.8rem; color: #1E293B; margin-bottom: 6px; display: flex; align-items: center; gap: 6px;">
+                <span>🔢 Branch Sequence & Serial Number</span>
+              </div>
+              <div style="display: grid; grid-template-columns: 1.3fr 1fr; gap: 10px;">
+                <div>
+                  <label style="display:block; font-size: 0.74rem; font-weight: 700; color: var(--md-text-secondary); margin-bottom: 4px;">Target Sequence</label>
+                  <select id="fapTargetBranch" style="width:100%; padding:7px 10px; border:1px solid var(--md-border); border-radius:var(--radius-md); font-size:0.85rem; font-weight:600; outline:none; background:white;">
+                    <option value="ALL">All Branches</option>
+                    <option value="BR001" ${currentBranchId === 'BR001' ? 'selected' : ''}>Annasandrapalya (BR-ASP)</option>
+                    <option value="BR002" ${currentBranchId === 'BR002' ? 'selected' : ''}>Kodihalli (BR-KDH)</option>
+                    <option value="BR003" ${currentBranchId === 'BR003' ? 'selected' : ''}>LB Shastri Nagar (BR-LBS)</option>
+                    <option value="BR004" ${currentBranchId === 'BR004' ? 'selected' : ''}>Basavanagar (BR-BSV)</option>
+                  </select>
+                </div>
+                <div>
+                  <label style="display:block; font-size: 0.74rem; font-weight: 700; color: var(--md-text-secondary); margin-bottom: 4px;">Insert at Serial No #</label>
+                  <input type="number" id="fapSerialNo" min="1" placeholder="e.g. 1, 15, or leave blank" style="width:100%; padding:7px 10px; border:1px solid var(--md-border); border-radius:var(--radius-md); font-size:0.85rem; font-weight:700; outline:none;" />
+                </div>
+              </div>
+              <div style="font-size: 0.72rem; color: var(--md-text-muted); margin-top: 4px;">
+                Specify position (e.g. #1 for top, or #20). Existing items shift automatically.
+              </div>
+            </div>
+        <div class="modal-footer">
       </div>
     </div>
 
@@ -732,12 +865,18 @@ function filterStockCheckDOM(query) {
       progressMetaText.textContent = `${checkedCount} / ${totalCount} checked`;
     }
 
-    // Update Sticky Bottom Bar
+    // Update Sticky Bottom Bar & Mobile Toggle Header
     const stickyPill = document.querySelector('.sticky-count-pill');
     if (stickyPill) stickyPill.textContent = String(requiredCount);
 
+    const togglePill = document.querySelector('.sticky-count-pill-mini');
+    if (togglePill) togglePill.textContent = String(requiredCount);
+
     const stickyText = document.querySelector('.sticky-text');
     if (stickyText) stickyText.textContent = `${requiredCount} products require purchase`;
+
+    const collapsedLabel = document.querySelector('.toggle-collapsed-label');
+    if (collapsedLabel) collapsedLabel.textContent = `${requiredCount} products require purchase`;
 
     const btnReview = document.getElementById('btnReviewRequirements');
     if (btnReview) {
@@ -941,6 +1080,37 @@ function filterStockCheckDOM(query) {
     });
   }
 
+  // Toggle Collapsible Mobile Review Bar via Arrow
+  const stickyBar = document.getElementById('stickyBottomBar');
+  const btnToggleSticky = document.getElementById('btnToggleStickyBar');
+  const arrowIcon = document.getElementById('stickyBarArrowIcon');
+  const toggleActionText = document.getElementById('toggleArrowActionText');
+  const collapsedLabelEl = document.querySelector('.toggle-collapsed-label');
+  const expandedLabelEl = document.querySelector('.toggle-expanded-label');
+
+  if (btnToggleSticky && stickyBar) {
+    btnToggleSticky.addEventListener('click', () => {
+      const isCurrentlyCollapsed = stickyBar.classList.contains('is-collapsed');
+      if (isCurrentlyCollapsed) {
+        stickyBar.classList.remove('is-collapsed');
+        stickyBar.classList.add('is-expanded');
+        btnToggleSticky.setAttribute('aria-expanded', 'true');
+        if (arrowIcon) arrowIcon.textContent = '▼';
+        if (toggleActionText) toggleActionText.textContent = 'Hide';
+        if (collapsedLabelEl) collapsedLabelEl.style.display = 'none';
+        if (expandedLabelEl) expandedLabelEl.style.display = 'inline';
+      } else {
+        stickyBar.classList.add('is-collapsed');
+        stickyBar.classList.remove('is-expanded');
+        btnToggleSticky.setAttribute('aria-expanded', 'false');
+        if (arrowIcon) arrowIcon.textContent = '▲';
+        if (toggleActionText) toggleActionText.textContent = 'Review List';
+        if (collapsedLabelEl) collapsedLabelEl.style.display = 'inline';
+        if (expandedLabelEl) expandedLabelEl.style.display = 'none';
+      }
+    });
+  }
+
   const btnStickyGoMatrix = document.getElementById('btnStickyGoToMatrix');
   if (btnStickyGoMatrix) {
     btnStickyGoMatrix.addEventListener('click', () => {
@@ -995,6 +1165,9 @@ function filterStockCheckDOM(query) {
 
       if (!name) return;
 
+      const targetBranch = document.getElementById('fapTargetBranch') ? document.getElementById('fapTargetBranch').value : 'ALL';
+      const serialNo = document.getElementById('fapSerialNo') ? document.getElementById('fapSerialNo').value : null;
+
       store.addProduct({
         name,
         category,
@@ -1002,6 +1175,9 @@ function filterStockCheckDOM(query) {
         initialStock,
         reorderLevel,
         unitCost
+      }, {
+        targetBranch,
+        serialNo
       });
 
       fastAddForm.reset();

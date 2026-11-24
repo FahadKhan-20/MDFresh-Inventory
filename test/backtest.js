@@ -49,8 +49,8 @@ console.log('\x1b[36m▶ TEST SUITE 1: Authentication Workflow & Device Persiste
 
 // Test 1.1: Staff Login
 store.login({
-  name: 'Ramesh Staff',
-  email: 'ramesh@mdfresh.in',
+  name: 'MD FRESH STAFF',
+  email: 'staff@mdfresh.in',
   role: 'Store Staff',
   branchId: 'BR001',
   isAuthorized: false,
@@ -61,12 +61,13 @@ assert(store.isAuthenticated === true, '1.1 Staff login authenticates user');
 assert(store.isAuthorized === false, '1.2 Staff login defaults to unauthorized for manager features');
 assert(store.activeView === 'stock-check', '1.3 Staff login lands on staff-allowed view (stock-check)');
 assert(store.currentUser.role === 'Store Staff', '1.4 Current user role set to Store Staff');
+assert(store.currentUser.name === 'MD FRESH STAFF', '1.4b Current user name set to MD FRESH STAFF');
 
 // Test 1.5: localStorage Persistence
 const sessionRaw = localStorage.getItem('md_fresh_auth_session');
 assert(sessionRaw !== null, '1.5 Session persisted to localStorage for staying signed in');
 const parsedSession = JSON.parse(sessionRaw || '{}');
-assert(parsedSession.email === 'ramesh@mdfresh.in', '1.6 Stored email matches logged-in user');
+assert(parsedSession.email === 'staff@mdfresh.in', '1.6 Stored email matches logged-in user');
 assert(parsedSession.isAuthorized === false, '1.7 Stored authorization status is false for staff');
 
 // Test 1.8: Logout clears session
@@ -311,6 +312,12 @@ assert(cssSource.includes('overflow-x: auto'), '9.5 Responsive table horizontal 
 const bottomNavSource = fs.readFileSync(path.resolve('./src/components/mobileBottomNav.js'), 'utf-8');
 assert(bottomNavSource.includes('renderMobileBottomNav'), '9.6 renderMobileBottomNav exported');
 assert(bottomNavSource.includes('setupMobileBottomNavEvents'), '9.7 setupMobileBottomNavEvents exported');
+assert(cssSource.includes('.sticky-bar-toggle-header'), '9.8 Mobile collapsible drawer toggle header styled');
+assert(cssSource.includes('.sticky-bottom-bar.is-collapsed'), '9.9 Mobile collapsed state hides content to unblock full screen');
+assert(cssSource.includes('.sticky-bar-arrow-icon'), '9.10 Toggle arrow icon styled for mobile drawer expand/collapse');
+const dscSource = fs.readFileSync(path.resolve('./src/views/dailyStockCheckView.js'), 'utf-8');
+assert(dscSource.includes('btnToggleStickyBar'), '9.11 Arrow toggle button implemented in dailyStockCheckView');
+assert(dscSource.includes('stickyBarArrowIcon'), '9.12 Sticky bar arrow icon element present in dailyStockCheckView');
 
 // -------------------------------------------------------------
 // POINT 10: END-TO-END VIEW RENDERING & APP MODULES
@@ -592,6 +599,252 @@ assert(delRes.success === true, '14.16 deleteProduct executed successfully');
 assert(store.products.find(p => p.id === newProdId) === undefined, '14.17 Deleted product no longer in catalog');
 
 // -------------------------------------------------------------
+// POINT 15: KODIHALLI BRANCH SEQUENCE SPECIFICATION
+// -------------------------------------------------------------
+console.log("\n\x1b[36m▶ TEST SUITE 15: Kodihalli Branch Sequence Specification (Daily Stock Check & Stock Receiving)\x1b[0m");
+
+import { KODIHALLI_SEQUENCE } from "../src/data/mockData.js";
+
+// Test 15.1: Sequence length
+assert(Array.isArray(KODIHALLI_SEQUENCE) && KODIHALLI_SEQUENCE.length === 93, `15.1 Kodihalli sequence contains exactly 93 items (got: ${KODIHALLI_SEQUENCE?.length})`);
+
+// Test 15.2: Daily Stock Check sorting for Kodihalli
+const sortedStockCheck = store.sortProductsForBranch("BR002", store.products);
+assert(sortedStockCheck[0].id === "PRD023", `15.2 Item #1 in Kodihalli Daily Stock Check is Cucumber (got: ${sortedStockCheck[0]?.name})`);
+assert(sortedStockCheck[1].id === "PRD004", `15.3 Item #2 in Kodihalli Daily Stock Check is Carrot (got: ${sortedStockCheck[1]?.name})`);
+assert(sortedStockCheck[2].id === "PRD019", `15.4 Item #3 in Kodihalli Daily Stock Check is Loki (got: ${sortedStockCheck[2]?.name})`);
+assert(sortedStockCheck[3].id === "PRD021", `15.5 Item #4 in Kodihalli Daily Stock Check is Capsicum (got: ${sortedStockCheck[3]?.name})`);
+assert(sortedStockCheck[4].id === "PRD032", `15.6 Item #5 in Kodihalli Daily Stock Check is Gobi (got: ${sortedStockCheck[4]?.name})`);
+assert(sortedStockCheck[5].id === "PRD022", `15.7 Item #6 in Kodihalli Daily Stock Check is Cabage (got: ${sortedStockCheck[5]?.name})`);
+assert(sortedStockCheck[6].id === "PRD005", `15.8 Item #7 in Kodihalli Daily Stock Check is beans (got: ${sortedStockCheck[6]?.name})`);
+assert(sortedStockCheck[7].id === "PRD006", `15.9 Item #8 in Kodihalli Daily Stock Check is Bhindi (got: ${sortedStockCheck[7]?.name})`);
+assert(sortedStockCheck[8].id === "PRD012", `15.10 Item #9 in Kodihalli Daily Stock Check is Mooli (got: ${sortedStockCheck[8]?.name})`);
+assert(sortedStockCheck[9].id === "PRD057", `15.11 Item #10 in Kodihalli Daily Stock Check is Bitrot (got: ${sortedStockCheck[9]?.name})`);
+assert(sortedStockCheck[10].id === "PRD049", `15.12 Item #11 in Kodihalli Daily Stock Check is Turai (got: ${sortedStockCheck[10]?.name})`);
+assert(sortedStockCheck[43].id === "PRD034", `15.13 Item #44 in Kodihalli Daily Stock Check is Arvi (got: ${sortedStockCheck[43]?.name})`);
+assert(sortedStockCheck[44].id === "PRD045", `15.14 Item #45 in Kodihalli Daily Stock Check is Dhanya farm (got: ${sortedStockCheck[44]?.name})`);
+assert(sortedStockCheck[51].id === "PRD195", `15.15 Item #52 in Kodihalli Daily Stock Check is Sabakki (got: ${sortedStockCheck[51]?.name})`);
+assert(sortedStockCheck[52].id === "PRD143", `15.16 Item #53 in Kodihalli Daily Stock Check is Sweet potato (got: ${sortedStockCheck[52]?.name})`);
+assert(sortedStockCheck[53].id === "PRD085", `15.17 Item #54 in Kodihalli Daily Stock Check is Pine apple (got: ${sortedStockCheck[53]?.name})`);
+assert(sortedStockCheck[92].id === "PRD112", `15.18 Item #93 in Kodihalli Daily Stock Check is Mangoes (got: ${sortedStockCheck[92]?.name})`);
+
+// Test 15.19: Complete sequence integrity test across all 93 items
+let all93Match = true;
+for (let i = 0; i < 93; i++) {
+  if (sortedStockCheck[i].id !== KODIHALLI_SEQUENCE[i]) {
+    all93Match = false;
+    break;
+  }
+}
+assert(all93Match === true, "15.19 All 93 items strictly follow sequence in Daily Stock Check");
+
+// Test 15.20: Stock Receiving list for Kodihalli
+const kdhIncoming = store.getBranchIncomingOrder("BR002", "PO-20261003-KDH01");
+assert(kdhIncoming.length === 93, `15.20 Kodihalli receiving delivery has 93 items (got: ${kdhIncoming.length})`);
+assert(kdhIncoming[0].productId === "PRD023", `15.21 Stock Receiving item #1 is Cucumber (got: ${kdhIncoming[0]?.productName})`);
+assert(kdhIncoming[1].productId === "PRD004", `15.22 Stock Receiving item #2 is Carrot (got: ${kdhIncoming[1]?.productName})`);
+assert(kdhIncoming[92].productId === "PRD112", `15.23 Stock Receiving item #93 is Mangoes (got: ${kdhIncoming[92]?.productName})`);
+
+let all93RecvMatch = true;
+for (let i = 0; i < 93; i++) {
+  if (kdhIncoming[i].productId !== KODIHALLI_SEQUENCE[i]) {
+    all93RecvMatch = false;
+    break;
+  }
+}
+assert(all93RecvMatch === true, "15.24 All 93 items strictly follow sequence in Stock Receiving");
+
+// Test 15.25: Non-Kodihalli branches retain normal catalog order
+const kdhFirst = store.sortProductsForBranch("BR002", store.products)[0];
+assert(kdhFirst.id === KODIHALLI_SEQUENCE[0], "15.25 Kodihalli sequence correctly prioritizes its item #1");
+
+// -------------------------------------------------------------
+// POINT 16: LB SHASTRI NAGAR SEQUENCE & DUAL-BRANCH CATEGORIZATION
+// -------------------------------------------------------------
+console.log("\n\x1b[36m▶ TEST SUITE 16: LB Shastri Nagar Sequence & Dual-Branch Categorization\x1b[0m");
+
+import { LBS_NAGAR_SEQUENCE } from "../src/data/mockData.js";
+
+// Test 16.1: LBS Sequence length
+assert(Array.isArray(LBS_NAGAR_SEQUENCE) && LBS_NAGAR_SEQUENCE.length === 102, `16.1 LBS Nagar sequence contains exactly 102 items (got: ${LBS_NAGAR_SEQUENCE?.length})`);
+
+// Test 16.2: Daily Stock Check sorting for LBS Nagar
+const sortedLBS = store.sortProductsForBranch("BR003", store.products);
+assert(sortedLBS[0].id === "PRD005", `16.2 Item #1 in LBS Daily Stock Check is Beans (got: ${sortedLBS[0]?.name})`);
+assert(sortedLBS[1].id === "PRD004", `16.3 Item #2 in LBS Daily Stock Check is Carrot (got: ${sortedLBS[1]?.name})`);
+assert(sortedLBS[2].id === "PRD023", `16.4 Item #3 in LBS Daily Stock Check is Cucumber (got: ${sortedLBS[2]?.name})`);
+assert(sortedLBS[61].id === "PRD185", `16.5 Item #62 in LBS Daily Stock Check is Tomato Nati (got: ${sortedLBS[61]?.name})`);
+assert(sortedLBS[62].id === "PRD092", `16.6 Item #63 in LBS Daily Stock Check is robusta (got: ${sortedLBS[62]?.name})`);
+assert(sortedLBS[101].id === "PRD088", `16.7 Item #102 in LBS Daily Stock Check is watermellon (got: ${sortedLBS[101]?.name})`);
+
+// Test 16.8: All 102 items strictly follow LBS sequence
+let all102Match = true;
+for (let i = 0; i < 102; i++) {
+  if (sortedLBS[i].id !== LBS_NAGAR_SEQUENCE[i]) {
+    all102Match = false;
+    break;
+  }
+}
+assert(all102Match === true, "16.8 All 102 items strictly follow sequence in LBS Daily Stock Check");
+
+// Test 16.9: Stock Receiving for LBS Nagar
+const lbsIncoming = store.getBranchIncomingOrder("BR003", "PO-20261003-LBS01");
+assert(lbsIncoming.length === 102, `16.9 LBS receiving delivery has 102 items (got: ${lbsIncoming.length})`);
+assert(lbsIncoming[0].productId === "PRD005", `16.10 LBS Receiving item #1 is Beans (got: ${lbsIncoming[0]?.productName})`);
+assert(lbsIncoming[101].productId === "PRD088", `16.11 LBS Receiving item #102 is watermellon (got: ${lbsIncoming[101]?.productName})`);
+
+let all102RecvMatch = true;
+for (let i = 0; i < 102; i++) {
+  if (lbsIncoming[i].productId !== LBS_NAGAR_SEQUENCE[i]) {
+    all102RecvMatch = false;
+    break;
+  }
+}
+assert(all102RecvMatch === true, "16.12 All 102 items strictly follow sequence in LBS Stock Receiving");
+
+// Test 16.13: Categorization verification for Kodihalli (53 Veg / 40 Fruits)
+const kdhVegList = sortedStockCheck.filter(p => p.category === "Vegetables");
+const kdhFruitList = sortedStockCheck.filter(p => p.category === "Fruits");
+assert(kdhVegList.slice(0, 53).every((p, idx) => p.id === KODIHALLI_SEQUENCE[idx]), "16.13 Kodihalli first 53 items are categorized as Vegetables in exact sequence");
+assert(kdhFruitList.slice(0, 40).every((p, idx) => p.id === KODIHALLI_SEQUENCE[53 + idx]), "16.14 Kodihalli remaining 40 items are categorized as Fruits in exact sequence");
+
+// Test 16.15: Categorization verification for LB Shastri Nagar (62 Veg / 40 Fruits)
+const lbsVegList = sortedLBS.filter(p => p.category === "Vegetables");
+const lbsFruitList = sortedLBS.filter(p => p.category === "Fruits");
+assert(lbsVegList.slice(0, 62).every((p, idx) => p.id === LBS_NAGAR_SEQUENCE[idx]), "16.15 LBS Nagar first 62 items are categorized as Vegetables in exact sequence");
+assert(lbsFruitList.slice(0, 40).every((p, idx) => p.id === LBS_NAGAR_SEQUENCE[62 + idx]), "16.16 LBS Nagar remaining 40 items are categorized as Fruits in exact sequence");
+
+// -------------------------------------------------------------
+
+// -------------------------------------------------------------
+// POINT 17: BASAVANAGAR SEQUENCE & PRODUCE CATEGORIZATION
+// -------------------------------------------------------------
+console.log("\n\x1b[36m▶ TEST SUITE 17: Basavanagar Sequence & Produce Categorization\x1b[0m");
+
+import { BASAVANAGAR_SEQUENCE } from "../src/data/mockData.js";
+
+// Test 17.1: Basavanagar Sequence length
+assert(Array.isArray(BASAVANAGAR_SEQUENCE) && BASAVANAGAR_SEQUENCE.length === 101, `17.1 Basavanagar sequence contains exactly 101 items (got: ${BASAVANAGAR_SEQUENCE?.length})`);
+
+// Test 17.2 to 17.5: Daily Stock Check sorting for Basavanagar
+const sortedBSV = store.sortProductsForBranch("BR004", store.products);
+assert(sortedBSV[0].id === "PRD088", `17.2 Item #1 in Basavanagar Daily Stock Check is Watermelon (got: ${sortedBSV[0]?.name})`);
+assert(sortedBSV[37].id === "PRD202", `17.3 Item #38 in Basavanagar Daily Stock Check is Misri Apple (got: ${sortedBSV[37]?.name})`);
+assert(sortedBSV[38].id === "PRD023", `17.4 Item #39 in Basavanagar Daily Stock Check is Cucumber (got: ${sortedBSV[38]?.name})`);
+assert(sortedBSV[100].id === "PRD003", `17.5 Item #101 in Basavanagar Daily Stock Check is Tomato farm (got: ${sortedBSV[100]?.name})`);
+
+// Test 17.6: All 101 items strictly follow Basavanagar sequence
+let all101Match = true;
+for (let i = 0; i < 101; i++) {
+  if (sortedBSV[i].id !== BASAVANAGAR_SEQUENCE[i]) {
+    all101Match = false;
+    break;
+  }
+}
+assert(all101Match === true, "17.6 All 101 items strictly follow sequence in Basavanagar Daily Stock Check");
+
+// Test 17.7: Stock Receiving for Basavanagar
+const bsvIncoming = store.getBranchIncomingOrder("BR004", "PO-20261003-BSV01");
+assert(bsvIncoming.length === 101, `17.7 Basavanagar receiving delivery has 101 items (got: ${bsvIncoming.length})`);
+assert(bsvIncoming[0].productId === "PRD088", `17.8 Basavanagar Receiving item #1 is Watermelon (got: ${bsvIncoming[0]?.productName})`);
+assert(bsvIncoming[100].productId === "PRD003", `17.9 Basavanagar Receiving item #101 is Tomato farm (got: ${bsvIncoming[100]?.productName})`);
+
+let all101RecvMatch = true;
+for (let i = 0; i < 101; i++) {
+  if (bsvIncoming[i].productId !== BASAVANAGAR_SEQUENCE[i]) {
+    all101RecvMatch = false;
+    break;
+  }
+}
+assert(all101RecvMatch === true, "17.10 All 101 items strictly follow sequence in Basavanagar Stock Receiving");
+
+// Test 17.11 & 17.12: Categorization verification for Basavanagar (38 Fruits / 63 Veg)
+const bsvFruitList = sortedBSV.filter(p => store.getProductCategoryForBranch("BR004", p.id) === "Fruits");
+const bsvVegList = sortedBSV.filter(p => store.getProductCategoryForBranch("BR004", p.id) === "Vegetables");
+assert(bsvFruitList.slice(0, 38).every((p, idx) => p.id === BASAVANAGAR_SEQUENCE[idx]), "17.11 Basavanagar first 38 items are categorized as Fruits in exact sequence");
+assert(bsvVegList.slice(0, 63).every((p, idx) => p.id === BASAVANAGAR_SEQUENCE[38 + idx]), "17.12 Basavanagar remaining 63 items are categorized as Vegetables in exact sequence");
+
+
+// -------------------------------------------------------------
+// POINT 18: ANNASANDRAPALYA SEQUENCE & CUSTOM SERIAL NUMBER POSITIONING
+// -------------------------------------------------------------
+console.log("\n\x1b[36m▶ TEST SUITE 18: Annasandrapalya Sequence & Custom Serial Number Positioning\x1b[0m");
+
+import { ANNASANDRAPALYA_SEQUENCE } from "../src/data/mockData.js";
+
+// Test 18.1: Annasandrapalya Sequence length (62 LBS Veg + 38 BSV Fruits = 100)
+assert(Array.isArray(ANNASANDRAPALYA_SEQUENCE) && ANNASANDRAPALYA_SEQUENCE.length === 100, `18.1 Annasandrapalya sequence contains exactly 100 items (got: ${ANNASANDRAPALYA_SEQUENCE?.length})`);
+
+// Test 18.2 to 18.5: Daily Stock Check sorting for Annasandrapalya
+const sortedASP = store.sortProductsForBranch("BR001", store.products);
+assert(sortedASP[0].id === "PRD005", `18.2 Item #1 in ASP Daily Stock Check is Beans (got: ${sortedASP[0]?.name})`);
+assert(sortedASP[61].id === "PRD185", `18.3 Item #62 in ASP Daily Stock Check is Tomato Nati (got: ${sortedASP[61]?.name})`);
+assert(sortedASP[62].id === "PRD088", `18.4 Item #63 in ASP Daily Stock Check is Watermelon (got: ${sortedASP[62]?.name})`);
+assert(sortedASP[99].id === "PRD202", `18.5 Item #100 in ASP Daily Stock Check is Misri Apple (got: ${sortedASP[99]?.name})`);
+
+// Test 18.6: All 100 items strictly follow Annasandrapalya sequence
+let all100Match = true;
+for (let i = 0; i < 100; i++) {
+  if (sortedASP[i].id !== ANNASANDRAPALYA_SEQUENCE[i]) {
+    all100Match = false;
+    break;
+  }
+}
+assert(all100Match === true, "18.6 All 100 items strictly follow sequence in Annasandrapalya Daily Stock Check");
+
+// Test 18.7 to 18.10: Stock Receiving for Annasandrapalya
+const aspIncoming = store.getBranchIncomingOrder("BR001", "PO-20261003-ASP01");
+assert(aspIncoming.length === 100, `18.7 Annasandrapalya receiving delivery has 100 items (got: ${aspIncoming.length})`);
+assert(aspIncoming[0].productId === "PRD005", `18.8 ASP Receiving item #1 is Beans (got: ${aspIncoming[0]?.productName})`);
+assert(aspIncoming[99].productId === "PRD202", `18.9 ASP Receiving item #100 is Misri Apple (got: ${aspIncoming[99]?.productName})`);
+
+let all100RecvMatch = true;
+for (let i = 0; i < 100; i++) {
+  if (aspIncoming[i].productId !== ANNASANDRAPALYA_SEQUENCE[i]) {
+    all100RecvMatch = false;
+    break;
+  }
+}
+assert(all100RecvMatch === true, "18.10 All 100 items strictly follow sequence in Annasandrapalya Stock Receiving");
+
+// Test 18.11 & 18.12: Categorization verification for Annasandrapalya (62 Veg / 38 Fruits)
+const aspVegList = sortedASP.filter(p => store.getProductCategoryForBranch("BR001", p.id) === "Vegetables");
+const aspFruitList = sortedASP.filter(p => store.getProductCategoryForBranch("BR001", p.id) === "Fruits");
+assert(aspVegList.slice(0, 62).every((p, idx) => p.id === ANNASANDRAPALYA_SEQUENCE[idx]), "18.11 Annasandrapalya first 62 items are categorized as Vegetables in exact sequence");
+assert(aspFruitList.slice(0, 38).every((p, idx) => p.id === ANNASANDRAPALYA_SEQUENCE[62 + idx]), "18.12 Annasandrapalya remaining 38 items are categorized as Fruits in exact sequence");
+
+// Test 18.13: Serial numbers provided for all branches
+const aspSNo1 = store.getBranchItemSerialNo("BR001", sortedASP[0].id);
+const kdhSNo1 = store.getBranchItemSerialNo("BR002", KODIHALLI_SEQUENCE[0]);
+const lbsSNo1 = store.getBranchItemSerialNo("BR003", LBS_NAGAR_SEQUENCE[0]);
+const bsvSNo1 = store.getBranchItemSerialNo("BR004", BASAVANAGAR_SEQUENCE[0]);
+assert(aspSNo1 === 1 && kdhSNo1 === 1 && lbsSNo1 === 1 && bsvSNo1 === 1, "18.13 Serial numbers consistently provided (#1) across all branches");
+
+// Test 18.14: Adding product with specific serial number in a branch sequence
+const testInsertProduct = store.addProduct({
+  name: "Exotic Japanese Melon",
+  category: "Fruits",
+  unit: "Boxes",
+  unitCost: 2500
+}, { targetBranch: "BR001", serialNo: 10 });
+
+const aspAfterInsert = store.sortProductsForBranch("BR001", store.products);
+assert(aspAfterInsert[9].id === testInsertProduct.id, `18.14 Product inserted at serial number #10 in ASP sequence (got: ${aspAfterInsert[9]?.name})`);
+assert(store.getBranchItemSerialNo("BR001", testInsertProduct.id) === 10, "18.15 Serial number helper returns #10 for newly inserted product");
+
+// Test 18.16: Adding product with ALL branches option at position 1
+const testTopProduct = store.addProduct({
+  name: "Priority Organic Spinach",
+  category: "Vegetables",
+  unit: "Bunches",
+  unitCost: 35
+}, { targetBranch: "ALL", serialNo: 1 });
+
+assert(store.branchSequences.BR001[0] === testTopProduct.id, "18.16 Priority product placed at serial #1 in BR001");
+assert(store.branchSequences.BR002[0] === testTopProduct.id, "18.17 Priority product placed at serial #1 in BR002");
+assert(store.branchSequences.BR003[0] === testTopProduct.id, "18.18 Priority product placed at serial #1 in BR003");
+assert(store.branchSequences.BR004[0] === testTopProduct.id, "18.19 Priority product placed at serial #1 in BR004");
+
 // SUMMARY REPORT
 // -------------------------------------------------------------
 console.log('\n============================================================');

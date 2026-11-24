@@ -8,7 +8,11 @@ import {
   INITIAL_PURCHASE_ORDERS,
   INITIAL_NOTIFICATIONS,
   INITIAL_STOCK_MOVEMENTS,
-  INITIAL_SUPPLIERS
+  INITIAL_SUPPLIERS,
+  ANNASANDRAPALYA_SEQUENCE,
+  KODIHALLI_SEQUENCE,
+  LBS_NAGAR_SEQUENCE,
+  BASAVANAGAR_SEQUENCE
 } from '../data/mockData.js';
 
 class InventoryStore {
@@ -20,11 +24,19 @@ class InventoryStore {
     this.purchaseOrders = [...INITIAL_PURCHASE_ORDERS];
     this.notifications = [...INITIAL_NOTIFICATIONS];
     this.stockMovements = [...INITIAL_STOCK_MOVEMENTS];
+    // Branch-specific produce sequences (mutable for custom serial number insertion)
+    this.branchSequences = {
+      BR001: [...ANNASANDRAPALYA_SEQUENCE],
+      BR002: [...KODIHALLI_SEQUENCE],
+      BR003: [...LBS_NAGAR_SEQUENCE],
+      BR004: [...BASAVANAGAR_SEQUENCE]
+    };
+
     this.auditLogs = [
       {
         id: 'LOG-001',
         timestamp: '03 Oct 2026, 06:45 pm',
-        user: 'Ramesh Staff',
+        user: 'MD FRESH STAFF',
         role: 'Store Staff',
         action: 'REQUIREMENT_DRAFT_SAVE',
         details: 'Updated required stock quantities for Annasandra Palya (BR001)',
@@ -33,7 +45,7 @@ class InventoryStore {
       {
         id: 'LOG-002',
         timestamp: '03 Oct 2026, 07:15 pm',
-        user: 'Kiran Kumar',
+        user: 'MD FRESH STAFF',
         role: 'Store Manager',
         action: 'MANDI_PO_GENERATE',
         details: 'Generated consolidated APMC Mandi purchase list for 4 branches',
@@ -83,11 +95,11 @@ class InventoryStore {
     } else {
       this.isAuthenticated = false;
       this.currentUser = {
-        name: 'Store Staff',
+        name: 'MD FRESH STAFF',
         email: 'staff@mdfresh.in',
         role: 'Store Staff',
         branch: 'ANNASANDRAPALYA',
-        avatar: 'SS'
+        avatar: 'MS'
       };
     }
 
@@ -184,7 +196,7 @@ class InventoryStore {
     const avatar = (name || 'MD').split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
 
     this.currentUser = {
-      name: name || (this.isAuthorized ? 'Store Manager' : 'Store Staff'),
+      name: name || (this.isAuthorized ? 'Store Manager' : 'MD FRESH STAFF'),
       email: email || (this.isAuthorized ? 'manager@mdfresh.in' : 'staff@mdfresh.in'),
       role: role || (this.isAuthorized ? 'Manager & Owner (Authorized)' : 'Store Staff'),
       branch: branchName,
@@ -221,11 +233,11 @@ class InventoryStore {
     this.isAuthenticated = false;
     this.isAuthorized = false;
     this.currentUser = {
-      name: 'Store Staff',
+      name: 'MD FRESH STAFF',
       email: 'staff@mdfresh.in',
       role: 'Store Staff',
       branch: 'ANNASANDRAPALYA',
-      avatar: 'SS'
+      avatar: 'MS'
     };
     this.activeView = 'stock-check';
     this.notify();
@@ -320,6 +332,80 @@ class InventoryStore {
     } else {
       return { label: 'Healthy', status: 'healthy' };
     }
+  }
+
+  // Branch-specific product sequence & category helpers
+  getProductCategoryForBranch(branchId, productId) {
+    const seq = this.branchSequences ? this.branchSequences[branchId] : null;
+    if (branchId === "BR001") {
+      const idx = seq ? seq.indexOf(productId) : ANNASANDRAPALYA_SEQUENCE.indexOf(productId);
+      if (idx !== -1) return idx < 62 ? "Vegetables" : "Fruits";
+    }
+    if (branchId === "BR002") {
+      const idx = seq ? seq.indexOf(productId) : KODIHALLI_SEQUENCE.indexOf(productId);
+      if (idx !== -1) return idx < 53 ? "Vegetables" : "Fruits";
+    }
+    if (branchId === "BR003") {
+      const idx = seq ? seq.indexOf(productId) : LBS_NAGAR_SEQUENCE.indexOf(productId);
+      if (idx !== -1) return idx < 62 ? "Vegetables" : "Fruits";
+    }
+    if (branchId === "BR004") {
+      const idx = seq ? seq.indexOf(productId) : BASAVANAGAR_SEQUENCE.indexOf(productId);
+      if (idx !== -1) return idx < 38 ? "Fruits" : "Vegetables";
+    }
+    const prod = this.products.find(p => p.id === productId);
+    return prod ? prod.category : "General";
+  }
+
+  getBranchItemSequenceIndex(branchId, productId) {
+    const seq = this.branchSequences ? this.branchSequences[branchId] : null;
+    if (seq) {
+      const idx = seq.indexOf(productId);
+      return idx !== -1 ? idx : 9999;
+    }
+    if (branchId === "BR001") {
+      const idx = ANNASANDRAPALYA_SEQUENCE.indexOf(productId);
+      return idx !== -1 ? idx : 9999;
+    }
+    if (branchId === "BR002") {
+      const idx = KODIHALLI_SEQUENCE.indexOf(productId);
+      return idx !== -1 ? idx : 9999;
+    }
+    if (branchId === "BR003") {
+      const idx = LBS_NAGAR_SEQUENCE.indexOf(productId);
+      return idx !== -1 ? idx : 9999;
+    }
+    if (branchId === "BR004") {
+      const idx = BASAVANAGAR_SEQUENCE.indexOf(productId);
+      return idx !== -1 ? idx : 9999;
+    }
+    return 9999;
+  }
+
+  getBranchItemSerialNo(branchId, productId, fallbackIndex = null) {
+    const idx = this.getBranchItemSequenceIndex(branchId, productId);
+    if (idx !== -1 && idx < 9999) {
+      return idx + 1;
+    }
+    const seq = this.branchSequences ? this.branchSequences[branchId] : null;
+    const baseLen = seq ? seq.length : 100;
+    return fallbackIndex !== null ? baseLen + fallbackIndex + 1 : baseLen + 1;
+  }
+
+  sortProductsForBranch(branchId, productList) {
+    if (Array.isArray(productList)) {
+      return [...productList].sort((a, b) => {
+        const idA = a.id || a.productId;
+        const idB = b.id || b.productId;
+        const idxA = this.getBranchItemSequenceIndex(branchId, idA);
+        const idxB = this.getBranchItemSequenceIndex(branchId, idB);
+        if (idxA !== idxB) {
+          return idxA - idxB;
+        }
+        return 0;
+      });
+    }
+    return productList;
   }
 
   // Stock check methods
@@ -723,6 +809,9 @@ class InventoryStore {
       });
     }
 
+    if (items.length > 0) {
+      items = this.sortProductsForBranch(branchId, items);
+    }
     return items;
   }
 
@@ -793,7 +882,7 @@ class InventoryStore {
       date: this.getLiveDateString(now),
       time: this.getLiveTimeString(now, true),
       timestamp: this.getLiveDateTimeString(now, true),
-      receivedBy: this.currentUser?.name || 'Store Staff',
+      receivedBy: this.currentUser?.name || 'MD FRESH STAFF',
       totalOrdered,
       totalReceived,
       surplusCount,
@@ -826,7 +915,7 @@ class InventoryStore {
     this.auditLogs.unshift({
       id: `LOG-${Date.now()}`,
       timestamp: this.getLiveDateTimeString(now, true),
-      user: this.currentUser?.name || 'Store Staff',
+      user: this.currentUser?.name || 'MD FRESH STAFF',
       role: this.currentUser?.role || 'Store Staff',
       action: 'STOCK_UNLOADING_RECEIVE',
       details: `${grnRef}: Received ${totalReceived} units at ${branch.name} (${shortageCount} shortages, ${surplusCount} surplus)`
@@ -847,8 +936,8 @@ class InventoryStore {
     return { success: true, status: report.status, report };
   }
 
-  // Add new product manually to catalog
-  addProduct(newProd) {
+  // Add new product manually to catalog with target branch & serial number positioning
+  addProduct(newProd, sequenceOptions = null) {
     const nextNum = (this.products.length + 1).toString().padStart(3, '0');
     const prefix = newProd.category === 'Vegetables' ? 'VEG' : 'FRU';
     const sku = newProd.sku || `${prefix}-${nextNum}`;
@@ -894,6 +983,29 @@ class InventoryStore {
 
     if (newProd.initialStock !== undefined) {
       p.stocks[this.currentBranchId] = parseInt(newProd.initialStock, 10) || 0;
+    }
+
+    // Sequence & Serial Number Placement
+    const targetBranch = sequenceOptions?.targetBranch || newProd.targetBranch || 'ALL';
+    const rawPos = sequenceOptions?.serialNo || sequenceOptions?.position || newProd.targetSerialNo || newProd.serialNo;
+    const targetSerialNo = rawPos !== undefined && rawPos !== null && rawPos !== '' ? parseInt(rawPos, 10) : null;
+
+    if (this.branchSequences) {
+      const branchesToUpdate = targetBranch === 'ALL'
+        ? ['BR001', 'BR002', 'BR003', 'BR004']
+        : [targetBranch];
+
+      branchesToUpdate.forEach(bId => {
+        const seq = this.branchSequences[bId];
+        if (seq) {
+          if (targetSerialNo !== null && !isNaN(targetSerialNo) && targetSerialNo >= 1) {
+            const insertIdx = Math.min(Math.max(0, targetSerialNo - 1), seq.length);
+            seq.splice(insertIdx, 0, p.id);
+          } else {
+            seq.push(p.id);
+          }
+        }
+      });
     }
 
     this.products.unshift(p);

@@ -148,6 +148,32 @@ export function renderProductsView() {
                 ${store.suppliers.map(s => `<option value="${s.name}">${s.name} (${s.mandi})</option>`).join('')}
               </select>
             </div>
+
+            <!-- Sequence & Serial Number Placement -->
+            <div style="background: #F8FAFC; border: 1.5px solid #E2E8F0; border-radius: var(--radius-md); padding: 12px; margin-top: 2px;">
+              <div style="font-weight: 800; font-size: 0.8rem; color: #1E293B; margin-bottom: 6px; display: flex; align-items: center; gap: 6px;">
+                <span>🔢 Branch Sequence & Serial Number</span>
+              </div>
+              <div style="display: grid; grid-template-columns: 1.3fr 1fr; gap: 10px;">
+                <div>
+                  <label style="display:block; font-size: 0.74rem; font-weight: 700; color: var(--md-text-secondary); margin-bottom: 4px;">Target Sequence</label>
+                  <select id="npTargetBranch" style="width:100%; padding:7px 10px; border:1px solid var(--md-border); border-radius:var(--radius-md); font-size:0.85rem; font-weight:600; outline:none; background:white;">
+                    <option value="ALL">All Branches</option>
+                    <option value="BR001">Annasandrapalya (BR-ASP)</option>
+                    <option value="BR002">Kodihalli (BR-KDH)</option>
+                    <option value="BR003">LB Shastri Nagar (BR-LBS)</option>
+                    <option value="BR004">Basavanagar (BR-BSV)</option>
+                  </select>
+                </div>
+                <div>
+                  <label style="display:block; font-size: 0.74rem; font-weight: 700; color: var(--md-text-secondary); margin-bottom: 4px;">Insert at Serial No #</label>
+                  <input type="number" id="npSerialNo" min="1" placeholder="e.g. 1, 15, or blank" style="width:100%; padding:7px 10px; border:1px solid var(--md-border); border-radius:var(--radius-md); font-size:0.85rem; font-weight:700; outline:none;" />
+                </div>
+              </div>
+              <div style="font-size: 0.72rem; color: var(--md-text-muted); margin-top: 4px;">
+                Specify position (e.g. #1 for top, or #20). Existing items shift automatically.
+              </div>
+            </div>
           </div>
 
           <div class="modal-footer">
@@ -198,6 +224,9 @@ export function setupProductsEvents() {
       const unitCost = document.getElementById('npUnitCost').value;
       const supplierName = document.getElementById('npSupplier').value;
 
+      const targetBranch = document.getElementById('npTargetBranch') ? document.getElementById('npTargetBranch').value : 'ALL';
+      const serialNo = document.getElementById('npSerialNo') ? document.getElementById('npSerialNo').value : null;
+
       store.addProduct({
         name,
         sku,
@@ -210,6 +239,9 @@ export function setupProductsEvents() {
         stockBR002: 4,
         stockBR003: 3,
         stockBR004: 2
+      }, {
+        targetBranch,
+        serialNo
       });
 
       if (modalBackdrop) modalBackdrop.classList.remove('open');

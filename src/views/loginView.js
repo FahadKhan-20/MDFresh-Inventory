@@ -93,7 +93,7 @@ export function renderLoginView() {
                   type="text" 
                   id="authFullNameInput" 
                   class="auth-input" 
-                  placeholder="e.g. Rahul Sharma"
+                  placeholder="MD FRESH STAFF"
                   required
                 />
               </div>
@@ -259,8 +259,8 @@ export function setupLoginEvents() {
       selectedRole = 'staff';
       const staySignedIn = document.getElementById('authStaySignedIn')?.checked ?? true;
       store.login({
-        name: 'Rahul Sharma',
-        email: 'rahul.sharma@gmail.com',
+        name: 'MD FRESH STAFF',
+        email: 'staff@mdfresh.in',
         role: 'Store Staff',
         branchId: 'BR001',
         isAuthorized: false,
@@ -363,7 +363,7 @@ function handleFormSubmit() {
 function handleGoogleLogin() {
   const staySignedIn = document.getElementById('authStaySignedIn')?.checked ?? true;
   const isManager = selectedRole === 'manager';
-  const emailName = isManager ? 'Manager Account' : 'Store Staff User';
+  const emailName = isManager ? 'Manager Account' : 'MD FRESH STAFF';
 
   store.login({
     name: emailName,

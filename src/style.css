@@ -1356,6 +1356,18 @@ body {
   left: var(--sidebar-collapsed-width);
 }
 
+/* Mobile Drawer Toggle Header (Hidden on Desktop) */
+.sticky-bar-toggle-header {
+  display: none;
+}
+
+.sticky-bottom-bar-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
 .sticky-bar-info {
   display: flex;
   align-items: center;
@@ -2980,7 +2992,129 @@ body {
   }
   .sticky-bottom-bar {
     left: 0 !important;
-    bottom: 60px; /* Above mobile bottom bar */
+    right: 0 !important;
+    bottom: 60px !important; /* Above mobile bottom bar */
+    padding: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    border-top: 1px solid var(--md-border);
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.12);
+    z-index: 140 !important;
+    background: white;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .sticky-bar-toggle-header {
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px 16px;
+    background: #F4FBF7;
+    border: none;
+    border-bottom: 1px solid rgba(13, 130, 68, 0.12);
+    cursor: pointer;
+    text-align: left;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .sticky-bar-toggle-header:active {
+    background: #E8F7EE;
+  }
+
+  .toggle-header-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+  }
+
+  .sticky-count-pill-mini {
+    min-width: 26px;
+    height: 26px;
+    padding: 0 6px;
+    border-radius: 13px;
+    background-color: var(--md-primary);
+    color: white;
+    font-weight: 800;
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .toggle-header-title {
+    font-size: 0.86rem;
+    font-weight: 700;
+    color: var(--md-text-main);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .toggle-header-arrow-wrap {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  .toggle-arrow-action-text {
+    font-size: 0.78rem;
+    font-weight: 800;
+    color: var(--md-primary);
+  }
+
+  .sticky-bar-arrow-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--md-primary);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 900;
+    transition: transform 0.25s ease, background-color 0.2s ease;
+  }
+
+  /* When collapsed: Drawer content is completely hidden so full screen product list is unobstructed */
+  .sticky-bottom-bar.is-collapsed .sticky-bottom-bar-content {
+    display: none !important;
+  }
+  .sticky-bottom-bar.is-collapsed .sticky-bar-arrow-icon {
+    transform: rotate(0deg);
+  }
+
+  /* When expanded: Drawer content comes up cleanly */
+  .sticky-bottom-bar.is-expanded .sticky-bottom-bar-content {
+    display: flex !important;
+    flex-direction: column;
+    gap: 12px;
+    padding: 14px 16px 18px 16px;
+    background: white;
+    max-height: 70vh;
+    overflow-y: auto;
+  }
+  .sticky-bottom-bar.is-expanded .sticky-bar-arrow-icon {
+    transform: rotate(180deg);
+    background: #475569;
+  }
+
+  .sticky-bottom-bar.is-expanded .sticky-bar-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .sticky-bottom-bar.is-expanded .sticky-bar-actions button {
+    width: 100%;
+    justify-content: center;
+    padding: 12px 16px;
   }
   .stat-grid-6 {
     grid-template-columns: repeat(2, 1fr);
@@ -2990,7 +3124,7 @@ body {
   }
   .main-content {
     padding: 16px 12px;
-    padding-bottom: 85px; /* for mobile bottom bar */
+    padding-bottom: 125px; /* for mobile bottom bar + collapsed toggle bar */
     width: 100% !important;
     max-width: 100% !important;
     box-sizing: border-box;
