@@ -52,6 +52,11 @@ export function renderDailyStockCheckView() {
   const requiredProductsList = store.getRequiredItemsForBranch(currentBranchId);
   const totalRequiredCount = requiredProductsList.length;
 
+  // 4-Branch Submission Status for PDF Export Guardrail
+  const allBranchesSubmitted = store.areAllBranchesSubmitted ? store.areAllBranchesSubmitted() : true;
+  const submissionSummary = store.getBranchSubmissionSummary ? store.getBranchSubmissionSummary() : [];
+  const submittedCount = submissionSummary.filter(s => s.isSubmitted).length;
+
   return `
     <!-- Top Stock Check Header Card -->
     <div class="stock-check-header-card">
@@ -252,9 +257,10 @@ export function renderDailyStockCheckView() {
         <button 
           id="btnOpenManifestPdfModal" 
           class="btn btn-sm"
-          style="font-weight: 800; background: #E8F6ED; color: #0D8244; border: 1.5px solid #B7E4C4;"
+          style="font-weight: 800; background: ${allBranchesSubmitted ? '#E8F6ED' : '#FEF3C7'}; color: ${allBranchesSubmitted ? '#0D8244' : '#B45309'}; border: 1.5px solid ${allBranchesSubmitted ? '#B7E4C4' : '#FCD34D'}; display: inline-flex; align-items: center; gap: 5px;"
+          title="${allBranchesSubmitted ? 'Download complete APMC purchase manifest in PDF' : 'Waiting for all 4 branches to submit requirements before PDF can be exported'}"
         >
-          📥 PDF (Optional)
+          ${allBranchesSubmitted ? '📥 PDF (Optional)' : `🔒 PDF (${submittedCount}/4 Submitted)`}
         </button>
 
         <!-- RESTORE DELETED PRODUCTS BUTTON -->
@@ -529,8 +535,8 @@ export function renderDailyStockCheckView() {
           <button class="btn btn-secondary btn-lg" id="btnStickyGoToMatrix" style="font-weight: 800; border: 1.5px solid var(--md-border); background: white; color: var(--md-secondary-dark);" title="View all branches combined tabular matrix">
             ${icon('layers', 'icon-sm')} View All Branches Table
           </button>
-          <button class="btn btn-secondary btn-lg" id="btnStickyDownloadPdf" style="font-weight: 800; border: 1.5px solid #B7E4C4; background: #E8F6ED; color: #0D8244;">
-            📥 PDF (Optional)
+          <button class="btn btn-secondary btn-lg" id="btnStickyDownloadPdf" style="font-weight: 800; border: 1.5px solid ${allBranchesSubmitted ? '#B7E4C4' : '#FCD34D'}; background: ${allBranchesSubmitted ? '#E8F6ED' : '#FEF3C7'}; color: ${allBranchesSubmitted ? '#0D8244' : '#B45309'};">
+            ${allBranchesSubmitted ? '📥 PDF (Optional)' : `🔒 PDF (${submittedCount}/4 Submitted)`}
           </button>
           <button class="btn btn-primary btn-lg" id="btnReviewRequirements" ${totalRequiredCount === 0 ? 'disabled style="opacity: 0.6;"' : ''}>
             ${icon('requirements', 'icon-sm')} Review Requirements (${totalRequiredCount})
@@ -756,6 +762,69 @@ export function renderDailyStockCheckView() {
         </div>
 
         <div class="modal-body" style="padding: 20px 24px;">
+          <!-- 4-Branch Submission Status & Guardrail Banner -->
+          ${!allBranchesSubmitted ? `
+            <div style="background: #FFFBEB; border: 2px solid #FCD34D; border-radius: var(--radius-md); padding: 16px; margin-bottom: 18px;">
+              <div style="display: flex; align-items: flex-start; gap: 12px;">
+                <div style="width: 44px; height: 44px; border-radius: 50%; background: #FEF3C7; color: #D97706; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; flex-shrink: 0; border: 1.5px solid #F59E0B;">
+                  🔒
+                </div>
+                <div style="flex: 1;">
+                  <h4 style="font-size: 1.05rem; font-weight: 800; color: #92400E; margin-bottom: 4px;">
+                    PDF Download Locked — Waiting for All 4 Branches (${submittedCount}/4 Submitted)
+                  </h4>
+                  <p style="font-size: 0.82rem; color: #B45309; line-height: 1.45;">
+                    To protect against incomplete APMC Mandi market orders, the PDF manifest can only be exported after all 4 retail stores complete and submit their morning stock check.
+                  </p>
+                </div>
+              </div>
+
+              <!-- 4-Branch Status Grid -->
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 8px; margin-top: 14px;">
+                ${submissionSummary.map(b => `
+                  <div style="padding: 10px 12px; border-radius: 8px; border: 1.5px solid ${b.isSubmitted ? '#86EFAC' : '#FCA5A5'}; background: ${b.isSubmitted ? '#F0FDF4' : '#FEF2F2'}; display: flex; align-items: center; justify-content: space-between; gap: 8px;">
+                    <div style="min-width: 0;">
+                      <div style="font-weight: 800; font-size: 0.86rem; color: ${b.isSubmitted ? '#166534' : '#991B1B'}; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                        ${b.branchName}
+                      </div>
+                      <div style="font-size: 0.72rem; color: ${b.isSubmitted ? '#15803D' : '#DC2626'}; font-family: monospace;">
+                        ${b.isSubmitted ? `✓ Submitted (${b.itemCount} items &bull; ${b.time})` : `⏳ Pending audit`}
+                      </div>
+                    </div>
+                    ${!b.isSubmitted ? `
+                      <button 
+                        type="button" 
+                        class="btn btn-sm btn-quick-submit-branch" 
+                        data-branch-id="${b.branchId}"
+                        style="background: #DC2626; color: white; border: none; font-size: 0.68rem; font-weight: 800; padding: 4px 8px; border-radius: 5px; cursor: pointer; flex-shrink: 0;"
+                        title="Mark ${b.branchName} as submitted"
+                      >
+                        ✓ Mark Done
+                      </button>
+                    ` : `
+                      <span style="color: #166534; font-size: 1.1rem; font-weight: 900;">✓</span>
+                    `}
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+          ` : `
+            <div style="background: #F0FDF4; border: 1.5px solid #86EFAC; border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 16px; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;">
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <span style="font-size: 1.3rem;">✅</span>
+                <div>
+                  <div style="font-weight: 800; font-size: 0.95rem; color: #166534;">
+                    All 4 Branches Submitted &amp; Verified
+                  </div>
+                  <div style="font-size: 0.76rem; color: #15803D;">
+                    Annasandrapalya &bull; Kodihalli &bull; LBS Nagar &bull; Basavanagar are all ready for consolidated Mandi purchasing.
+                  </div>
+                </div>
+              </div>
+              <span class="pill" style="background: #166534; color: white; font-weight: 800; font-size: 0.72rem; padding: 3px 8px;">4 / 4 READY</span>
+            </div>
+          `}
+
           <!-- Automatic Reset Notice -->
           <div style="background: #EBF8F1; border: 1.5px solid #A7E0BE; border-radius: var(--radius-md); padding: 10px 14px; margin-bottom: 16px; display: flex; align-items: center; gap: 10px;">
             <span style="font-size: 1.25rem;">✨</span>
@@ -768,18 +837,18 @@ export function renderDailyStockCheckView() {
           <div style="display: grid; grid-template-columns: 1fr; gap: 12px; margin-bottom: 20px;">
             
             <!-- Option 1: Master Manifest (Combined + Branch Headlined) -->
-            <div style="background: linear-gradient(135deg, #064E3B, #0D8244); border-radius: var(--radius-md); padding: 18px; color: white; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;">
+            <div style="background: ${allBranchesSubmitted ? 'linear-gradient(135deg, #064E3B, #0D8244)' : '#64748B'}; border-radius: var(--radius-md); padding: 18px; color: white; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;">
               <div>
                 <div style="font-size: 0.72rem; font-weight: 800; text-transform: uppercase; background: rgba(255,255,255,0.2); display: inline-block; padding: 2px 8px; border-radius: 4px; margin-bottom: 4px;">
-                  RECOMMENDED COMPLETE DOCUMENT
+                  ${allBranchesSubmitted ? 'RECOMMENDED COMPLETE DOCUMENT' : 'LOCKED — WAITING FOR ALL BRANCHES'}
                 </div>
                 <h4 style="font-size: 1.1rem; font-weight: 800;">Complete Master Manifest (PDF)</h4>
                 <p style="font-size: 0.8rem; color: #D1EADE; margin-top: 2px;">
                   Includes Combined Total List at top + All 4 Branch Headlined Sections below.
                 </p>
               </div>
-              <button class="btn btn-primary btn-lg" id="btnDownloadMasterPdf" style="background: white; color: #064E3B; font-weight: 800; border: none; flex-shrink: 0;">
-                📥 Download PDF
+              <button class="btn btn-primary btn-lg" id="btnDownloadMasterPdf" ${!allBranchesSubmitted ? 'disabled style="background: rgba(255,255,255,0.5); color: #334155; font-weight: 800; border: none; flex-shrink: 0; cursor: not-allowed; opacity: 0.75;"' : 'style="background: white; color: #064E3B; font-weight: 800; border: none; flex-shrink: 0;"'}>
+                ${!allBranchesSubmitted ? '🔒 Waiting for 4/4 Branches' : '📥 Download PDF'}
               </button>
             </div>
 
@@ -793,8 +862,8 @@ export function renderDailyStockCheckView() {
                     Consolidated total bulk quantities across all branches for APMC bidding.
                   </p>
                 </div>
-                <button class="btn btn-secondary btn-sm" id="btnDownloadCombinedOnlyPdf" style="margin-top: 12px; font-weight: 700;">
-                  📥 Download Combined PDF
+                <button class="btn btn-secondary btn-sm" id="btnDownloadCombinedOnlyPdf" ${!allBranchesSubmitted ? 'disabled style="margin-top: 12px; font-weight: 700; opacity: 0.6; cursor: not-allowed;"' : 'style="margin-top: 12px; font-weight: 700;"'}>
+                  ${!allBranchesSubmitted ? '🔒 Need 4/4 Branches' : '📥 Download Combined PDF'}
                 </button>
               </div>
 
@@ -806,8 +875,8 @@ export function renderDailyStockCheckView() {
                     Delivery checklist headlined by Annasandrapalya, Kodihalli, LBS Nagar & Basavanagar.
                   </p>
                 </div>
-                <button class="btn btn-secondary btn-sm" id="btnDownloadBranchOnlyPdf" style="margin-top: 12px; font-weight: 700;">
-                  📥 Download Branch List PDF
+                <button class="btn btn-secondary btn-sm" id="btnDownloadBranchOnlyPdf" ${!allBranchesSubmitted ? 'disabled style="margin-top: 12px; font-weight: 700; opacity: 0.6; cursor: not-allowed;"' : 'style="margin-top: 12px; font-weight: 700;"'}>
+                  ${!allBranchesSubmitted ? '🔒 Need 4/4 Branches' : '📥 Download Branch List PDF'}
                 </button>
               </div>
             </div>
@@ -1538,10 +1607,29 @@ function filterStockCheckDOM(query) {
 
   const getFileDate = () => store.getLiveDateString().replace(/ /g, '_');
 
+  // Quick submit branch verification button inside PDF modal
+  document.querySelectorAll('.btn-quick-submit-branch').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const bId = e.currentTarget.getAttribute('data-branch-id');
+      if (bId) {
+        store.markBranchSubmitted(bId, true);
+        const b = store.branches.find(br => br.id === bId);
+        showToast(`Marked ${b ? b.name : bId} requirements as submitted!`, 'success');
+      }
+    });
+  });
+
   // 1. Master Manifest (Combined + Branch Headlined in 1 PDF)
   const btnDlMaster = document.getElementById('btnDownloadMasterPdf');
   if (btnDlMaster) {
     btnDlMaster.addEventListener('click', () => {
+      if (!store.areAllBranchesSubmitted()) {
+        const pending = store.getPendingBranches().map(b => b.name).join(', ');
+        showToast(`⚠️ PDF Download Blocked: Waiting for ${pending} to submit requirements. All 4 branches must submit first.`, 'error');
+        return;
+      }
       const data = getPdfData();
       const blob = generateMasterManifestPDF(data);
       downloadBlob(blob, `MD_Fresh_Master_Manifest_${getFileDate()}.pdf`);
@@ -1555,6 +1643,11 @@ function filterStockCheckDOM(query) {
   const btnDlCombined = document.getElementById('btnDownloadCombinedOnlyPdf');
   if (btnDlCombined) {
     btnDlCombined.addEventListener('click', () => {
+      if (!store.areAllBranchesSubmitted()) {
+        const pending = store.getPendingBranches().map(b => b.name).join(', ');
+        showToast(`⚠️ PDF Download Blocked: Waiting for ${pending} to submit requirements. All 4 branches must submit first.`, 'error');
+        return;
+      }
       const data = getPdfData();
       const blob = generateCombinedListOnlyPDF(data);
       downloadBlob(blob, `MD_Fresh_Combined_Total_${getFileDate()}.pdf`);
@@ -1568,6 +1661,11 @@ function filterStockCheckDOM(query) {
   const btnDlBranch = document.getElementById('btnDownloadBranchOnlyPdf');
   if (btnDlBranch) {
     btnDlBranch.addEventListener('click', () => {
+      if (!store.areAllBranchesSubmitted()) {
+        const pending = store.getPendingBranches().map(b => b.name).join(', ');
+        showToast(`⚠️ PDF Download Blocked: Waiting for ${pending} to submit requirements. All 4 branches must submit first.`, 'error');
+        return;
+      }
       const data = getPdfData();
       const blob = generateBranchHeadlinedPDF(data);
       downloadBlob(blob, `MD_Fresh_Branch_Headlined_${getFileDate()}.pdf`);

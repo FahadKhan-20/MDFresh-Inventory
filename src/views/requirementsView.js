@@ -828,6 +828,11 @@ function filterMatrixDOM(query) {
   const btnFinalizeNextDay = document.getElementById('btnFinalizeAndResetForNextDay');
   if (btnFinalizeNextDay) {
     btnFinalizeNextDay.addEventListener('click', () => {
+      if (!store.areAllBranchesSubmitted()) {
+        const pending = store.getPendingBranches().map(b => b.name).join(', ');
+        showToast(`⚠️ PDF Blocked: Waiting for ${pending} to submit requirements. All 4 branches must submit first.`, 'error');
+        return;
+      }
       const liveDate = store.getLiveDateString();
       const liveTimestamp = store.getLiveDateTimeString(new Date(), true);
       const data = {
@@ -848,6 +853,11 @@ function filterMatrixDOM(query) {
   const btnDlReq = document.getElementById('btnDownloadReqPdf');
   if (btnDlReq) {
     btnDlReq.addEventListener('click', () => {
+      if (!store.areAllBranchesSubmitted()) {
+        const pending = store.getPendingBranches().map(b => b.name).join(', ');
+        showToast(`⚠️ PDF Blocked: Waiting for ${pending} to submit requirements. All 4 branches must submit first.`, 'error');
+        return;
+      }
       const liveDate = store.getLiveDateString();
       const liveTimestamp = store.getLiveDateTimeString(new Date(), true);
       const data = {

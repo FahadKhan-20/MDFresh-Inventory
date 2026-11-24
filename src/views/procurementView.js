@@ -247,6 +247,11 @@ export function setupProcurementEvents() {
   const btnDownloadPdf = document.getElementById('btnDownloadProcurementPdf');
   if (btnDownloadPdf) {
     btnDownloadPdf.addEventListener('click', () => {
+      if (!store.areAllBranchesSubmitted()) {
+        const pending = store.getPendingBranches().map(b => b.name).join(', ');
+        showToast(`⚠️ PDF Blocked: Waiting for ${pending} to submit requirements. All 4 branches must submit first.`, 'error');
+        return;
+      }
       const liveDate = store.getLiveDateString();
       const liveTimestamp = store.getLiveDateTimeString(new Date(), true);
       const data = {

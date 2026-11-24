@@ -985,6 +985,53 @@ const currentZero = store.getBranchRequiredQty('BR001', 'PRD005');
 store.updateRequiredQuantity('BR001', 'PRD005', Math.max(0, currentZero - 1));
 assert(store.getBranchRequiredQty('BR001', 'PRD005') === 0, "21.9 Stepper clamped at 0 without becoming negative");
 
+// -------------------------------------------------------------
+// POINT 22: 4-BRANCH SUBMISSION PDF GUARDRAIL
+// -------------------------------------------------------------
+console.log("\n\x1b[36m▶ TEST SUITE 22: 4-Branch Submission PDF Guardrail\x1b[0m");
+
+// Ensure initial baseline of all 4 submitted
+store.markBranchSubmitted('BR001', true);
+store.markBranchSubmitted('BR002', true);
+store.markBranchSubmitted('BR003', true);
+store.markBranchSubmitted('BR004', true);
+
+// Test 22.1: areAllBranchesSubmitted returns true when all 4 submitted
+assert(store.areAllBranchesSubmitted() === true, "22.1 areAllBranchesSubmitted returns true when all 4 branches submitted");
+
+// Test 22.2: Unsubmitting 1 branch (e.g. Basavanagar BR004)
+store.markBranchSubmitted('BR004', false);
+assert(store.isBranchSubmitted('BR004') === false, "22.2 Basavanagar BR004 marked unsubmitted");
+
+// Test 22.3: areAllBranchesSubmitted strictly returns false when even 1 branch is pending
+assert(store.areAllBranchesSubmitted() === false, "22.3 areAllBranchesSubmitted strictly returns false if 1 branch is pending");
+
+// Test 22.4: getPendingBranches identifies the unsubmitted branch
+const pending = store.getPendingBranches();
+assert(pending.length === 1 && pending[0].id === 'BR004', `22.4 Pending branches accurately lists Basavanagar (got: ${pending.map(p => p.name).join(', ')})`);
+
+// Test 22.5: Daily stock check view shows locked indicator when branches are pending
+const lockedViewHtml = renderDailyStockCheckView();
+assert(lockedViewHtml.includes('🔒') || lockedViewHtml.includes('PDF Download Locked'), "22.5 View renders locked indicator when branches pending");
+assert(lockedViewHtml.includes('Waiting for All 4 Branches') || lockedViewHtml.includes('PDF Export Locked'), "22.6 View renders 4-branch readiness banner");
+
+// Test 22.7: Submitting the missing branch restores all branches submitted
+store.markBranchSubmitted('BR004', true);
+assert(store.areAllBranchesSubmitted() === true, "22.7 areAllBranchesSubmitted returns true after Basavanagar submits");
+assert(store.getPendingBranches().length === 0, "22.8 No pending branches remain");
+
+// Test 22.9: Resetting for next day resets submission status to false for all branches
+store.finalizeOrderAndResetForNextDay({ source: 'TEST_RESET' });
+assert(store.areAllBranchesSubmitted() === false, "22.9 Reset for next day sets all branches to pending for tomorrow's count");
+assert(store.getPendingBranches().length === 4, "22.10 Exactly 4 branches pending after next day reset");
+
+// Re-submit all 4 branches for clean state
+store.markBranchSubmitted('BR001', true);
+store.markBranchSubmitted('BR002', true);
+store.markBranchSubmitted('BR003', true);
+store.markBranchSubmitted('BR004', true);
+assert(store.areAllBranchesSubmitted() === true, "22.11 All 4 branches restored to submitted state for production use");
+
 // SUMMARY REPORT
 // -------------------------------------------------------------
 console.log('\n============================================================');

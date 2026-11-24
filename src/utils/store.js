@@ -203,6 +203,29 @@ class InventoryStore {
     };
     this.currentDate = this.getLiveDateString();
 
+    // 4-Branch Daily Requirement Submission Tracking
+    // All 4 branches must submit before APMC Mandi Procurement PDF can be downloaded or opened
+    this.branchSubmitted = {
+      BR001: true,
+      BR002: true,
+      BR003: true,
+      BR004: true
+    };
+    this.branchSubmissionDetails = {};
+    try {
+      if (typeof localStorage !== 'undefined') {
+        const savedSub = localStorage.getItem('md_fresh_branch_submission_status');
+        if (savedSub) {
+          const parsed = JSON.parse(savedSub);
+          if (parsed && typeof parsed === 'object') {
+            this.branchSubmitted = parsed;
+          }
+        }
+      }
+    } catch (e) {
+      // ignore
+    }
+
     this.listeners = [];
   }
 
@@ -579,6 +602,24 @@ class InventoryStore {
     this.branchLastRecorded[branchId] = now;
     this.requirements.unshift(newReq);
 
+    // Mark branch as submitted
+    if (!this.branchSubmitted) this.branchSubmitted = {};
+    this.branchSubmitted[branchId] = true;
+    if (!this.branchSubmissionDetails) this.branchSubmissionDetails = {};
+    this.branchSubmissionDetails[branchId] = {
+      time: this.getLiveTimeString(now, true),
+      timestamp: this.getLiveDateTimeString(now, true),
+      count: items.length
+    };
+
+    try {
+      if (typeof localStorage !== 'undefined') {
+        localStorage.setItem('md_fresh_branch_submission_status', JSON.stringify(this.branchSubmitted));
+      }
+    } catch (e) {
+      // ignore
+    }
+
     // Reset this branch's active input drafts to 0 so inputs become clean 0
     if (this.stockCheckDrafts[branchId]) {
       this.products.forEach(p => {
@@ -715,12 +756,28 @@ class InventoryStore {
       // ignore
     }
 
-    // 3. Update next-day readiness state
+    // 3. Reset branch submission statuses so all 4 branches must submit fresh for next day's morning order
+    this.branchSubmitted = {
+      BR001: false,
+      BR002: false,
+      BR003: false,
+      BR004: false
+    };
+    this.branchSubmissionDetails = {};
+    try {
+      if (typeof localStorage !== 'undefined') {
+        localStorage.setItem('md_fresh_branch_submission_status', JSON.stringify(this.branchSubmitted));
+      }
+    } catch (e) {
+      // ignore
+    }
+
+    // 4. Update next-day readiness state
     this.isReadyForNextDay = true;
     this.lastFinalizedTimestamp = now;
     this.matrixLastRecorded = now;
 
-    // 4. Add notification to drawer
+    // 5. Add notification to drawer
     this.notifications.unshift({
       id: `NOTIF-${Date.now()}`,
       title: 'Order Finalized & System Reset',
@@ -737,6 +794,90 @@ class InventoryStore {
   // Alias for manual reset
   resetAllRequirementsToZero() {
     return this.finalizeOrderAndResetForNextDay({ source: 'MANUAL_RESET' });
+  }
+
+  // 4-Branch Daily Requirement Submission Guardrail
+  isBranchSubmitted(branchId) {
+    if (this.branchSubmitted && this.branchSubmitted[branchId] !== undefined) {
+      return Boolean(this.branchSubmitted[branchId]);
+    }
+    // Fallback: check if active requirement exists
+    const hasActiveReq = this.requirements && this.requirements.some(r => r.branchId === branchId && r.status !== 'FINALIZED' && r.status !== 'REJECTED');
+    return Boolean(hasActiveReq);
+  }
+
+  markBranchSubmitted(branchId, status = true) {
+    if (!this.branchSubmitted) this.branchSubmitted = {};
+    this.branchSubmitted[branchId] = Boolean(status);
+
+    const branch = this.branches.find(b => b.id === branchId);
+    const branchName = branch ? branch.name : branchId;
+    const now = new Date();
+
+    if (status) {
+      if (!this.branchSubmissionDetails) this.branchSubmissionDetails = {};
+      const reqCount = this.getRequiredItemsForBranch(branchId).length;
+      this.branchSubmissionDetails[branchId] = {
+        time: this.getLiveTimeString(now, true),
+        timestamp: this.getLiveDateTimeString(now, true),
+        count: reqCount
+      };
+
+      this.auditLogs.unshift({
+        id: `LOG-${Date.now()}`,
+        timestamp: this.getLiveDateTimeString(now, true),
+        user: this.currentUser?.name || 'MD FRESH STAFF',
+        role: this.currentUser?.role || 'Store Staff',
+        action: 'BRANCH_REQUIREMENT_VERIFIED',
+        details: `Confirmed ${branchName} requirements submitted for today's APMC Mandi purchase order.`
+      });
+    }
+
+    try {
+      if (typeof localStorage !== 'undefined') {
+        localStorage.setItem('md_fresh_branch_submission_status', JSON.stringify(this.branchSubmitted));
+      }
+    } catch (e) {
+      // ignore
+    }
+
+    this.notify();
+  }
+
+  areAllBranchesSubmitted() {
+    const activeBranchIds = ['BR001', 'BR002', 'BR003', 'BR004'];
+    return activeBranchIds.every(id => this.isBranchSubmitted(id));
+  }
+
+  getPendingBranches() {
+    const activeBranchIds = ['BR001', 'BR002', 'BR003', 'BR004'];
+    return this.branches.filter(b => activeBranchIds.includes(b.id) && !this.isBranchSubmitted(b.id));
+  }
+
+  getSubmittedBranches() {
+    const activeBranchIds = ['BR001', 'BR002', 'BR003', 'BR004'];
+    return this.branches.filter(b => activeBranchIds.includes(b.id) && this.isBranchSubmitted(b.id));
+  }
+
+  getBranchSubmissionSummary() {
+    const activeBranches = this.branches.filter(b => ['BR001', 'BR002', 'BR003', 'BR004'].includes(b.id));
+    return activeBranches.map(b => {
+      const submitted = this.isBranchSubmitted(b.id);
+      const detail = this.branchSubmissionDetails ? this.branchSubmissionDetails[b.id] : null;
+      const activeReq = this.requirements && this.requirements.find(r => r.branchId === b.id && r.status !== 'FINALIZED' && r.status !== 'REJECTED');
+      const count = activeReq ? activeReq.itemCount : (detail ? detail.count : this.getRequiredItemsForBranch(b.id).length);
+      const time = detail ? detail.time : (activeReq ? (activeReq.time || activeReq.timestamp) : null);
+
+      return {
+        branchId: b.id,
+        branchName: b.name,
+        branchCode: b.code,
+        isSubmitted: submitted,
+        itemCount: count,
+        time: time || (submitted ? 'Recorded' : 'Pending ⏳'),
+        status: submitted ? 'Submitted' : 'Pending Verification'
+      };
+    });
   }
 
   updateRequirementStatus(reqId, newStatus) {
