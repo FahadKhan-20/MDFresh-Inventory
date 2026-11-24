@@ -3,6 +3,7 @@
 import { store } from '../utils/store.js';
 import { icon } from '../utils/icons.js';
 import { showToast } from '../utils/toast.js';
+import { promptDeleteProduct } from './deletionModals.js';
 
 let currentEditingProductId = null;
 let editProductDelegatedListenerAttached = false;
@@ -282,16 +283,8 @@ export function setupEditProductModalEvents() {
     btnDelete.addEventListener('click', (e) => {
       e.preventDefault();
       const pId = document.getElementById('editProdId')?.value;
-      const prod = store.products.find(p => p.id === pId);
-      if (!prod) return;
-
-      const res = store.deleteProduct(pId);
-      if (res.success) {
-        closeModal();
-        showToast(`"${prod.name}" permanently removed from catalog`, 'warning');
-      } else {
-        showToast(res.message || 'Failed to remove product', 'error');
-      }
+      if (!pId) return;
+      promptDeleteProduct(pId);
     });
   }
 

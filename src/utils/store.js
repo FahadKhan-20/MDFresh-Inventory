@@ -32,7 +32,24 @@ class InventoryStore {
       BR004: [...BASAVANAGAR_SEQUENCE]
     };
 
-    // Purge any deleted product IDs saved in localStorage
+    // Initialize deleted products recycle bin
+    this.deletedProducts = [];
+    try {
+      if (typeof localStorage !== 'undefined') {
+        const cachedDeleted = localStorage.getItem('md_fresh_deleted_products_cache');
+        if (cachedDeleted) {
+          const parsed = JSON.parse(cachedDeleted);
+          if (Array.isArray(parsed)) {
+            this.deletedProducts = parsed;
+          }
+        }
+      }
+    } catch (e) {
+      // ignore
+    }
+
+    // Purge any deleted product IDs saved in localStorage and ensure they are in this.deletedProducts
+    const initialFullCatalog = [...this.products];
     try {
       if (typeof localStorage !== 'undefined') {
         const raw = localStorage.getItem('md_fresh_deleted_product_ids');
@@ -42,6 +59,19 @@ class InventoryStore {
           Object.keys(this.branchSequences).forEach(bId => {
             if (Array.isArray(this.branchSequences[bId])) {
               this.branchSequences[bId] = this.branchSequences[bId].filter(id => !deletedIds.includes(id));
+            }
+          });
+
+          // Ensure any deletedId is recorded in this.deletedProducts so it can be restored
+          deletedIds.forEach(id => {
+            if (!this.deletedProducts.some(p => p.id === id)) {
+              const orig = initialFullCatalog.find(p => p.id === id);
+              if (orig) {
+                this.deletedProducts.push({
+                  ...orig,
+                  deletedAt: 'Previously deleted'
+                });
+              }
             }
           });
         }
@@ -1210,7 +1240,16 @@ class InventoryStore {
       });
     }
 
-    // Persist deleted product ID in localStorage so it never resurrects on refresh
+    // Store in deletedProducts recycle bin (prevent duplicates)
+    if (!this.deletedProducts) this.deletedProducts = [];
+    if (!this.deletedProducts.some(p => p.id === productId)) {
+      this.deletedProducts.unshift({
+        ...deleted,
+        deletedAt: this.getLiveDateTimeString(new Date(), true)
+      });
+    }
+
+    // Persist deleted product ID and cache in localStorage so it persists across refreshes
     try {
       if (typeof localStorage !== 'undefined') {
         const raw = localStorage.getItem('md_fresh_deleted_product_ids');
@@ -1219,6 +1258,7 @@ class InventoryStore {
           deletedIds.push(productId);
           localStorage.setItem('md_fresh_deleted_product_ids', JSON.stringify(deletedIds));
         }
+        localStorage.setItem('md_fresh_deleted_products_cache', JSON.stringify(this.deletedProducts));
       }
     } catch (e) {
       console.error('Failed to store deleted product ID in localStorage', e);
@@ -1228,14 +1268,100 @@ class InventoryStore {
     this.auditLogs.unshift({
       id: `LOG-${Date.now()}`,
       timestamp: this.getLiveDateTimeString(new Date(), true),
-      user: this.currentUser?.name || 'Authorized Manager',
-      role: this.currentUser?.role || 'Authorized Manager',
+      user: this.currentUser?.name || 'MD FRESH STAFF',
+      role: this.currentUser?.role || 'Store Staff',
       action: 'PRODUCT_DELETED',
       details: `Product "${deleted.name}" (${deleted.sku}) removed from catalog.`
     });
 
     this.notify();
     return { success: true, product: deleted };
+  }
+
+  // Restore product from recycle bin back to catalog and branch sequences
+  restoreProduct(productId) {
+    if (!this.deletedProducts) this.deletedProducts = [];
+    const delIdx = this.deletedProducts.findIndex(p => p.id === productId);
+    if (delIdx === -1) {
+      return { success: false, message: 'Product not found in deleted list' };
+    }
+
+    const [restored] = this.deletedProducts.splice(delIdx, 1);
+    const cleanRestored = { ...restored };
+    delete cleanRestored.deletedAt;
+
+    // Add back to active catalog if not already present
+    if (!this.products.some(p => p.id === productId)) {
+      this.products.push(cleanRestored);
+    }
+
+    // Restore into branch sequences
+    if (this.branchSequences) {
+      const canonicalSequences = {
+        BR001: ANNASANDRAPALYA_SEQUENCE,
+        BR002: KODIHALLI_SEQUENCE,
+        BR003: LBS_NAGAR_SEQUENCE,
+        BR004: BASAVANAGAR_SEQUENCE
+      };
+
+      Object.keys(canonicalSequences).forEach(bId => {
+        if (!this.branchSequences[bId]) this.branchSequences[bId] = [];
+        if (!this.branchSequences[bId].includes(productId)) {
+          const canonical = canonicalSequences[bId];
+          const canonicalIdx = canonical.indexOf(productId);
+          if (canonicalIdx !== -1 && canonicalIdx <= this.branchSequences[bId].length) {
+            this.branchSequences[bId].splice(canonicalIdx, 0, productId);
+          } else {
+            this.branchSequences[bId].push(productId);
+          }
+        }
+      });
+    }
+
+    // Remove from localStorage deleted IDs
+    try {
+      if (typeof localStorage !== 'undefined') {
+        const raw = localStorage.getItem('md_fresh_deleted_product_ids');
+        let deletedIds = raw ? JSON.parse(raw) : [];
+        deletedIds = deletedIds.filter(id => id !== productId);
+        localStorage.setItem('md_fresh_deleted_product_ids', JSON.stringify(deletedIds));
+        localStorage.setItem('md_fresh_deleted_products_cache', JSON.stringify(this.deletedProducts));
+      }
+    } catch (e) {
+      // ignore
+    }
+
+    // Add audit log
+    this.auditLogs.unshift({
+      id: `LOG-${Date.now()}`,
+      timestamp: this.getLiveDateTimeString(new Date(), true),
+      user: this.currentUser?.name || 'MD FRESH STAFF',
+      role: this.currentUser?.role || 'Store Staff',
+      action: 'PRODUCT_RESTORED',
+      details: `Product "${cleanRestored.name}" (${cleanRestored.sku}) restored back to catalog.`
+    });
+
+    this.notify();
+    return { success: true, product: cleanRestored };
+  }
+
+  // Restore all deleted products at once
+  restoreAllDeletedProducts() {
+    if (!this.deletedProducts || this.deletedProducts.length === 0) {
+      return { success: false, message: 'No deleted products to restore' };
+    }
+    const toRestore = [...this.deletedProducts];
+    let count = 0;
+    toRestore.forEach(p => {
+      const res = this.restoreProduct(p.id);
+      if (res.success) count++;
+    });
+    return { success: true, count };
+  }
+
+  // Get all currently deleted products
+  getDeletedProducts() {
+    return Array.isArray(this.deletedProducts) ? [...this.deletedProducts] : [];
   }
 
   // Get requirements across all 4 branches for combined list & PDF generation

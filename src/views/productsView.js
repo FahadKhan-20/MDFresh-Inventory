@@ -14,9 +14,14 @@ export function renderProductsView() {
         </p>
       </div>
 
-      <button class="btn btn-primary" id="btnOpenNewProductModal">
-        ${icon('plus', 'icon-sm')} Add New Product
-      </button>
+      <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+        <button class="btn btn-secondary btn-open-restore-modal" id="btnOpenRestoreModalCatalog" style="font-weight: 700; border: 1.5px solid #CBD5E1; background: white; color: #334155; display: inline-flex; align-items: center; gap: 6px;">
+          ♻️ Restore Deleted (<span class="restore-count-badge">${store.getDeletedProducts ? store.getDeletedProducts().length : 0}</span>)
+        </button>
+        <button class="btn btn-primary" id="btnOpenNewProductModal">
+          ${icon('plus', 'icon-sm')} Add New Product
+        </button>
+      </div>
     </div>
 
     <!-- Product Grid of Cards -->

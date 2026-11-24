@@ -6,6 +6,7 @@ import { renderNotificationsDrawer, setupNotificationsDrawerEvents } from './com
 import { renderMobileBottomNav, setupMobileBottomNavEvents } from './components/mobileBottomNav.js';
 import { renderAuthModal, setupAuthModalEvents } from './components/authModal.js';
 import { renderEditProductModal, setupEditProductModalEvents } from './components/editProductModal.js';
+import { renderDeleteConfirmModal, renderRestoreProductsModal, setupDeletionModalsEvents } from './components/deletionModals.js';
 
 // Views
 import { renderDashboardView, setupDashboardEvents } from './views/dashboardView.js';
@@ -122,6 +123,8 @@ function renderApp() {
       ${renderNotificationsDrawer()}
       ${renderAuthModal()}
       ${renderEditProductModal()}
+      ${renderDeleteConfirmModal()}
+      ${renderRestoreProductsModal()}
       ${renderMobileBottomNav()}
     </div>
   `;
@@ -132,6 +135,7 @@ function renderApp() {
   setupNotificationsDrawerEvents();
   setupAuthModalEvents();
   setupEditProductModalEvents();
+  setupDeletionModalsEvents();
   setupMobileBottomNavEvents();
 
   if (viewSetupFn) {

@@ -893,6 +893,56 @@ assert(!store.branchSequences.BR002.includes(tempProd.id), "19.12 Product purged
 assert(!store.branchSequences.BR003.includes(tempProd.id), "19.13 Product purged from BR003 sequence");
 assert(!store.branchSequences.BR004.includes(tempProd.id), "19.14 Product purged from BR004 sequence");
 
+// -------------------------------------------------------------
+// POINT 20: RESTORE DELETED PRODUCTS & CONFIRMATION SAFEGUARDS
+// -------------------------------------------------------------
+console.log("\n\x1b[36m▶ TEST SUITE 20: Restore Deleted Products & Confirmation Safeguards\x1b[0m");
+
+// Test 20.1: Deleted product tracked in deletedProducts recycle bin
+assert(store.deletedProducts.some(p => p.id === tempProd.id), "20.1 Deleted product tracked in store.deletedProducts");
+
+// Test 20.2: getDeletedProducts returns deleted product
+const deletedList = store.getDeletedProducts();
+assert(deletedList.some(p => p.id === tempProd.id), "20.2 getDeletedProducts returns deleted product");
+
+// Test 20.3: restoreProduct returns success
+const restoreRes = store.restoreProduct(tempProd.id);
+assert(restoreRes.success === true, "20.3 restoreProduct returns success");
+
+// Test 20.4: Restored product back in store.products
+assert(store.products.some(p => p.id === tempProd.id), "20.4 Restored product back in store.products");
+
+// Test 20.5: Restored product back in BR001 sequence
+assert(store.branchSequences.BR001.includes(tempProd.id), "20.5 Restored product back in BR001 sequence");
+
+// Test 20.6: Restored product back in BR004 sequence
+assert(store.branchSequences.BR004.includes(tempProd.id), "20.6 Restored product back in BR004 sequence");
+
+// Test 20.7: Restored product removed from deleted list
+assert(!store.getDeletedProducts().some(p => p.id === tempProd.id), "20.7 Restored product removed from deletedProducts");
+
+// Test 20.8: Audit log records PRODUCT_RESTORED action
+assert(store.auditLogs[0].action === "PRODUCT_RESTORED", "20.8 Audit log records PRODUCT_RESTORED action");
+
+// Test 20.9: Batch restore: create 2 products, delete both, restore all
+const batchProdA = store.addProduct({ name: "Batch Prod A", category: "Vegetables", unit: "Kg", unitCost: 30 });
+const batchProdB = store.addProduct({ name: "Batch Prod B", category: "Fruits", unit: "Boxes", unitCost: 50 });
+store.deleteProduct(batchProdA.id);
+store.deleteProduct(batchProdB.id);
+assert(store.getDeletedProducts().some(p => p.id === batchProdA.id), "20.9 Batch Prod A in deleted list");
+assert(store.getDeletedProducts().some(p => p.id === batchProdB.id), "20.10 Batch Prod B in deleted list");
+
+// Test 20.11: restoreAllDeletedProducts restores both
+const restoreAllRes = store.restoreAllDeletedProducts();
+assert(restoreAllRes.success === true && restoreAllRes.count >= 2, `20.11 restoreAllDeletedProducts restored count: ${restoreAllRes.count}`);
+assert(store.products.some(p => p.id === batchProdA.id), "20.12 Batch Prod A restored to catalog");
+assert(store.products.some(p => p.id === batchProdB.id), "20.13 Batch Prod B restored to catalog");
+
+// Clean up test batch products
+store.deleteProduct(batchProdA.id);
+store.deleteProduct(batchProdB.id);
+store.deleteProduct(tempProd.id);
+
 // SUMMARY REPORT
 // -------------------------------------------------------------
 console.log('\n============================================================');

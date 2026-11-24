@@ -256,6 +256,16 @@ export function renderDailyStockCheckView() {
         >
           📥 PDF (Optional)
         </button>
+
+        <!-- RESTORE DELETED PRODUCTS BUTTON -->
+        <button 
+          id="btnOpenRestoreDeletedModal" 
+          class="btn btn-secondary btn-sm btn-open-restore-modal"
+          style="font-weight: 800; background: #F8FAFC; color: #334155; border: 1.5px solid #CBD5E1; display: inline-flex; align-items: center; gap: 5px;"
+          title="Restore previously removed products back to catalog"
+        >
+          ♻️ Restore Deleted (<span class="restore-count-badge">${store.getDeletedProducts ? store.getDeletedProducts().length : 0}</span>)
+        </button>
       </div>
     </div>
 
@@ -1125,22 +1135,6 @@ function filterStockCheckDOM(query) {
     });
   });
 
-  // Direct product catalog deletion from stock check list
-  document.querySelectorAll('.btn-direct-delete-product').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      const pId = e.currentTarget.getAttribute('data-product-id');
-      if (!pId) return;
-
-      const prod = store.products.find(p => p.id === pId);
-      const res = store.deleteProduct(pId);
-      if (res.success) {
-        showToast(`"${prod?.name || 'Item'}" permanently removed from catalog`, 'warning');
-      }
-    });
-  });
-
   document.querySelectorAll('.btn-clear-stock-item-mobile').forEach(btn => {
     btn.addEventListener('click', (e) => {
       e.preventDefault();
@@ -1173,22 +1167,6 @@ function filterStockCheckDOM(query) {
       updateLiveCheckSummary();
       const prod = store.products.find(p => p.id === pId);
       showToast(`Deleted "${prod?.name || 'Item'}" from requirements`, 'info');
-    });
-  });
-
-  // Direct product catalog deletion from stock check list
-  document.querySelectorAll('.btn-direct-delete-product').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      const pId = e.currentTarget.getAttribute('data-product-id');
-      if (!pId) return;
-
-      const prod = store.products.find(p => p.id === pId);
-      const res = store.deleteProduct(pId);
-      if (res.success) {
-        showToast(`"${prod?.name || 'Item'}" permanently removed from catalog`, 'warning');
-      }
     });
   });
 
