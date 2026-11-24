@@ -32,6 +32,24 @@ class InventoryStore {
       BR004: [...BASAVANAGAR_SEQUENCE]
     };
 
+    // Purge any deleted product IDs saved in localStorage
+    try {
+      if (typeof localStorage !== 'undefined') {
+        const raw = localStorage.getItem('md_fresh_deleted_product_ids');
+        const deletedIds = raw ? JSON.parse(raw) : [];
+        if (Array.isArray(deletedIds) && deletedIds.length > 0) {
+          this.products = this.products.filter(p => !deletedIds.includes(p.id));
+          Object.keys(this.branchSequences).forEach(bId => {
+            if (Array.isArray(this.branchSequences[bId])) {
+              this.branchSequences[bId] = this.branchSequences[bId].filter(id => !deletedIds.includes(id));
+            }
+          });
+        }
+      }
+    } catch (e) {
+      // ignore
+    }
+
     this.auditLogs = [
       {
         id: 'LOG-001',
@@ -424,12 +442,29 @@ class InventoryStore {
     this.stockCheckDrafts[branchId][productId] = val;
     this.matrixLastRecorded = new Date();
     this.branchLastRecorded[branchId] = new Date();
+
+    // If zeroed or deleted manually, also purge from pending submitted requirements for this branch
+    if (val === 0 && this.requirements) {
+      this.requirements.forEach(req => {
+        if (req.branchId === branchId && (req.status === 'PENDING APPROVAL' || req.status === 'APPROVED')) {
+          if (req.items) {
+            req.items = req.items.filter(it => it.productId !== productId);
+            req.itemCount = req.items.length;
+          }
+        }
+      });
+    }
+
     if (val > 0) {
       this.isReadyForNextDay = false;
     }
     if (shouldNotify) {
       this.notify();
     }
+  }
+
+  deleteBranchRequiredItem(branchId, productId) {
+    return this.updateRequiredQuantity(branchId, productId, 0, true);
   }
 
   getRequiredItemsForBranch(branchId) {
@@ -1104,6 +1139,15 @@ class InventoryStore {
 
     const deleted = this.products.splice(idx, 1)[0];
 
+    // Clean up from branch sequences across all branches
+    if (this.branchSequences) {
+      Object.keys(this.branchSequences).forEach(bId => {
+        if (Array.isArray(this.branchSequences[bId])) {
+          this.branchSequences[bId] = this.branchSequences[bId].filter(id => id !== productId);
+        }
+      });
+    }
+
     // Clean up from drafts
     this.branches.forEach(b => {
       if (this.stockCheckDrafts[b.id] && this.stockCheckDrafts[b.id][productId] !== undefined) {
@@ -1113,6 +1157,39 @@ class InventoryStore {
         delete this.receivingDrafts[b.id][productId];
       }
     });
+
+    // Clean up from requirements
+    if (this.requirements) {
+      this.requirements.forEach(req => {
+        if (req.items) {
+          req.items = req.items.filter(it => it.productId !== productId);
+          req.itemCount = req.items.length;
+        }
+      });
+    }
+
+    // Clean up from purchase orders
+    if (this.purchaseOrders) {
+      this.purchaseOrders.forEach(po => {
+        if (po.items) {
+          po.items = po.items.filter(it => it.productId !== productId);
+        }
+      });
+    }
+
+    // Persist deleted product ID in localStorage so it never resurrects on refresh
+    try {
+      if (typeof localStorage !== 'undefined') {
+        const raw = localStorage.getItem('md_fresh_deleted_product_ids');
+        const deletedIds = raw ? JSON.parse(raw) : [];
+        if (!deletedIds.includes(productId)) {
+          deletedIds.push(productId);
+          localStorage.setItem('md_fresh_deleted_product_ids', JSON.stringify(deletedIds));
+        }
+      }
+    } catch (e) {
+      console.error('Failed to store deleted product ID in localStorage', e);
+    }
 
     // Add audit log
     this.auditLogs.unshift({
@@ -1151,10 +1228,12 @@ class InventoryStore {
         }
       }
 
-      // Check any submitted active requirement manifests
+      // Check submitted active requirement manifests ONLY for products not already in draft
       this.requirements.filter(r => r.branchId === branch.id && (r.status === 'PENDING APPROVAL' || r.status === 'APPROVED')).forEach(req => {
         req.items.forEach(it => {
-          if (!branchItems.some(bi => bi.productName === it.productName)) {
+          // If the product is explicitly in draft (even as 0, meaning deleted/cleared), draft takes precedence!
+          if (draft[it.productId] !== undefined) return;
+          if (!branchItems.some(bi => bi.productName === it.productName || bi.productId === it.productId)) {
             branchItems.push({
               productId: it.productId,
               productName: it.productName,
@@ -1174,29 +1253,22 @@ class InventoryStore {
   // Get requirement for a specific branch & product
   getBranchRequiredQty(branchId, productId) {
     const draft = this.getBranchStockCheck(branchId);
-    if (draft[productId] !== undefined && draft[productId] > 0) {
+    // Direct draft takes absolute precedence (0 means 0: deleted / cleared by user!)
+    if (draft[productId] !== undefined) {
       return draft[productId];
     }
-    // Also check submitted active requirements
+    // Only check submitted active requirements if not present in draft
     const reqs = this.requirements.filter(r => r.branchId === branchId && (r.status === 'PENDING APPROVAL' || r.status === 'APPROVED'));
     for (const r of reqs) {
       const it = r.items.find(i => i.productId === productId);
       if (it && it.qty !== undefined && it.qty > 0) return it.qty;
     }
-    return (draft[productId] !== undefined) ? draft[productId] : 0;
+    return 0;
   }
 
   // Set requirement directly for any branch in matrix
   setBranchRequiredQty(branchId, productId, qty) {
-    if (!this.stockCheckDrafts[branchId]) {
-      this.stockCheckDrafts[branchId] = {};
-    }
-    const parsed = Math.max(0, parseInt(qty, 10) || 0);
-    this.stockCheckDrafts[branchId][productId] = parsed;
-    if (parsed > 0) {
-      this.isReadyForNextDay = false;
-    }
-    this.notify();
+    return this.updateRequiredQuantity(branchId, productId, qty, true);
   }
 
   // Returns formatted rows for the multi-branch master matrix table

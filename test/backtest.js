@@ -845,6 +845,54 @@ assert(store.branchSequences.BR002[0] === testTopProduct.id, "18.17 Priority pro
 assert(store.branchSequences.BR003[0] === testTopProduct.id, "18.18 Priority product placed at serial #1 in BR003");
 assert(store.branchSequences.BR004[0] === testTopProduct.id, "18.19 Priority product placed at serial #1 in BR004");
 
+// -------------------------------------------------------------
+// POINT 19: MANUAL DELETION INTEGRITY & PURGING
+// -------------------------------------------------------------
+console.log("\n\x1b[36m▶ TEST SUITE 19: Manual Deletion Integrity & Purging\x1b[0m");
+
+// Test 19.1: Setting requirement to 0 via updateRequiredQuantity strictly returns 0
+store.updateRequiredQuantity('BR001', 'PRD001', 0);
+assert(store.getBranchRequiredQty('BR001', 'PRD001') === 0, `19.1 getBranchRequiredQty returns 0 when manually zeroed/deleted (got: ${store.getBranchRequiredQty('BR001', 'PRD001')})`);
+
+// Test 19.2: Product does not resurrect in getAllBranchesRequirements when set to 0
+const allReqsAfterZero = store.getAllBranchesRequirements();
+const aspItemsAfterZero = allReqsAfterZero['BR001'] || [];
+assert(!aspItemsAfterZero.some(it => it.productId === 'PRD001'), "19.2 Zeroed/deleted item does not appear in branch requirements list");
+
+// Test 19.3: Product zeroed across all branches is purged from getConsolidatedProcurement
+store.updateRequiredQuantity('BR002', 'PRD001', 0);
+store.updateRequiredQuantity('BR003', 'PRD001', 0);
+store.updateRequiredQuantity('BR004', 'PRD001', 0);
+const consolidatedAfterZero = store.getConsolidatedProcurement();
+assert(!consolidatedAfterZero.some(c => c.product.id === 'PRD001'), "19.3 Product zeroed across all branches is removed from consolidated procurement");
+
+// Test 19.4: deleteBranchRequiredItem sets quantity to 0 and removes from branch requirements
+store.updateRequiredQuantity('BR001', 'PRD002', 15);
+assert(store.getBranchRequiredQty('BR001', 'PRD002') === 15, "19.4 Setup requirement for PRD002");
+store.deleteBranchRequiredItem('BR001', 'PRD002');
+assert(store.getBranchRequiredQty('BR001', 'PRD002') === 0, "19.5 deleteBranchRequiredItem resets quantity to 0");
+const reqsAfterDel = store.getRequiredItemsForBranch('BR001');
+assert(!reqsAfterDel.some(it => it.productId === 'PRD002'), "19.6 Deleted item immediately removed from getRequiredItemsForBranch");
+
+// Test 19.7: deleteProduct cleans from catalog, sequences, purchase orders, and requirements
+const tempProd = store.addProduct({
+  name: "Temporary Test Item",
+  category: "Fruits",
+  unit: "Kg",
+  unitCost: 100
+}, { targetBranch: "ALL", serialNo: 1 });
+
+assert(store.products.some(p => p.id === tempProd.id), "19.7 Temp product added to catalog");
+assert(store.branchSequences.BR001.includes(tempProd.id), "19.8 Temp product in BR001 sequence");
+
+const delProductRes = store.deleteProduct(tempProd.id);
+assert(delProductRes.success === true, "19.9 deleteProduct returns success");
+assert(!store.products.some(p => p.id === tempProd.id), "19.10 Product purged from store.products");
+assert(!store.branchSequences.BR001.includes(tempProd.id), "19.11 Product purged from BR001 sequence");
+assert(!store.branchSequences.BR002.includes(tempProd.id), "19.12 Product purged from BR002 sequence");
+assert(!store.branchSequences.BR003.includes(tempProd.id), "19.13 Product purged from BR003 sequence");
+assert(!store.branchSequences.BR004.includes(tempProd.id), "19.14 Product purged from BR004 sequence");
+
 // SUMMARY REPORT
 // -------------------------------------------------------------
 console.log('\n============================================================');

@@ -5,6 +5,7 @@ import { icon } from '../utils/icons.js';
 import { showToast } from '../utils/toast.js';
 
 let currentEditingProductId = null;
+let editProductDelegatedListenerAttached = false;
 
 export function renderEditProductModal() {
   return `
@@ -278,33 +279,41 @@ export function setupEditProductModalEvents() {
   }
 
   if (btnDelete) {
-    btnDelete.addEventListener('click', () => {
+    btnDelete.addEventListener('click', (e) => {
+      e.preventDefault();
       const pId = document.getElementById('editProdId')?.value;
       const prod = store.products.find(p => p.id === pId);
       if (!prod) return;
 
       const confirmed = typeof window !== 'undefined' && window.confirm
-        ? window.confirm(`Are you sure you want to remove "${prod.name}" (${prod.sku}) from the catalog?`)
+        ? window.confirm(`Are you sure you want to permanently remove "${prod.name}" (${prod.sku}) from catalog?`)
         : true;
 
       if (confirmed) {
-        store.deleteProduct(pId);
-        closeModal();
-        showToast(`Product "${prod.name}" removed from catalog`, 'warning');
+        const res = store.deleteProduct(pId);
+        if (res.success) {
+          closeModal();
+          showToast(`"${prod.name}" removed from catalog and all sequences`, 'warning');
+        } else {
+          showToast(res.message || 'Failed to remove product', 'error');
+        }
       }
     });
   }
 
-  // Global delegated click listener for any button with class .btn-open-edit-product
-  document.addEventListener('click', (e) => {
-    const editBtn = e.target.closest('.btn-open-edit-product');
-    if (editBtn) {
-      e.preventDefault();
-      e.stopPropagation();
-      const pId = editBtn.getAttribute('data-product-id');
-      if (pId) {
-        openEditProductModal(pId);
+  // Global delegated click listener for any button with class .btn-open-edit-product (attach once)
+  if (!editProductDelegatedListenerAttached) {
+    document.addEventListener('click', (e) => {
+      const editBtn = e.target.closest('.btn-open-edit-product');
+      if (editBtn) {
+        e.preventDefault();
+        e.stopPropagation();
+        const pId = editBtn.getAttribute('data-product-id');
+        if (pId) {
+          openEditProductModal(pId);
+        }
       }
-    }
-  });
+    });
+    editProductDelegatedListenerAttached = true;
+  }
 }

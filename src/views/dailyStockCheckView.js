@@ -333,15 +333,26 @@ export function renderDailyStockCheckView() {
                       </div>
                     </td>
                     <td style="text-align: center;">
-                      <button 
-                        type="button" 
-                        class="btn btn-secondary btn-sm btn-open-edit-product" 
-                        data-product-id="${p.id}" 
-                        title="Edit ${p.name} specifications"
-                        style="font-size: 0.78rem; font-weight: 700; padding: 5px 10px; display: inline-flex; align-items: center; gap: 4px;"
-                      >
-                        ${icon('edit', 'icon-xs')} Edit
-                      </button>
+                      <div style="display: inline-flex; align-items: center; justify-content: center; gap: 6px;">
+                        <button 
+                          type="button" 
+                          class="btn btn-secondary btn-sm btn-open-edit-product" 
+                          data-product-id="${p.id}" 
+                          title="Edit ${p.name} specifications"
+                          style="font-size: 0.78rem; font-weight: 700; padding: 5px 10px; display: inline-flex; align-items: center; gap: 4px;"
+                        >
+                          ${icon('edit', 'icon-xs')} Edit
+                        </button>
+                        <button 
+                          type="button" 
+                          class="btn btn-sm btn-clear-stock-item" 
+                          data-product-id="${p.id}" 
+                          title="Delete requirement"
+                          style="font-size: 0.76rem; font-weight: 800; padding: 5px 8px; border: 1.5px solid #FCA5A5; color: #DC2626; background: #FEF2F2; border-radius: 6px; cursor: pointer; display: ${reqQty > 0 ? 'inline-flex' : 'none'}; align-items: center; gap: 3px;"
+                        >
+                          ${icon('trash', 'icon-xs')} Delete
+                        </button>
+                      </div>
                     </td>
                   </tr>
                 `;
@@ -387,21 +398,32 @@ export function renderDailyStockCheckView() {
 
             <div class="mobile-card-row">
               <span class="mobile-card-label">Required to Buy</span>
-              <div class="fast-qty-wrapper ${reqQty > 0 ? 'has-value' : ''}" style="width: 125px; height: 32px; padding: 1px 4px 1px 6px;">
-                <input 
-                  type="number"
-                  inputmode="numeric"
-                  pattern="[0-9]*"
-                  min="0"
-                  max="9999"
-                  step="1"
-                  class="fast-qty-input fast-stock-input-mobile"
-                  data-product-id="${p.id}"
-                  data-index="${index}"
-                  value="${reqQty}"
-                  style="font-size: 0.95rem; width: 48px;"
-                />
-                <span class="fast-qty-unit" style="font-size: 0.66rem; padding: 1px 5px;">${p.unit}</span>
+              <div style="display: flex; align-items: center; gap: 6px;">
+                <div class="fast-qty-wrapper ${reqQty > 0 ? 'has-value' : ''}" style="width: 125px; height: 32px; padding: 1px 4px 1px 6px;">
+                  <input 
+                    type="number"
+                    inputmode="numeric"
+                    pattern="[0-9]*"
+                    min="0"
+                    max="9999"
+                    step="1"
+                    class="fast-qty-input fast-stock-input-mobile"
+                    data-product-id="${p.id}"
+                    data-index="${index}"
+                    value="${reqQty}"
+                    style="font-size: 0.95rem; width: 48px;"
+                  />
+                  <span class="fast-qty-unit" style="font-size: 0.66rem; padding: 1px 5px;">${p.unit}</span>
+                </div>
+                <button 
+                  type="button" 
+                  class="btn-clear-stock-item-mobile" 
+                  data-product-id="${p.id}" 
+                  title="Delete requirement" 
+                  style="background: #FEF2F2; color: #DC2626; border: 1.5px solid #FCA5A5; border-radius: 6px; padding: 0 8px; font-size: 0.72rem; font-weight: 800; cursor: pointer; display: ${reqQty > 0 ? 'inline-flex' : 'none'}; align-items: center; gap: 3px; height: 32px;"
+                >
+                  ${icon('trash', 'icon-xs')} Delete
+                </button>
               </div>
             </div>
 
@@ -471,24 +493,41 @@ export function renderDailyStockCheckView() {
         <div class="modal-body">
           <div style="background-color: var(--md-surface-subtle); border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 16px; display: flex; align-items: center; justify-content: space-between;">
             <span style="font-size: 0.88rem; font-weight: 700; color: var(--md-text-secondary);">Total Required Items:</span>
-            <span style="font-size: 1.15rem; font-weight: 800; color: var(--md-primary);">${totalRequiredCount} requirements</span>
+            <span style="font-size: 1.15rem; font-weight: 800; color: var(--md-primary);" id="reviewModalTotalCountBadge">${totalRequiredCount} requirements</span>
           </div>
 
-          <div style="display: flex; flex-direction: column; gap: 10px; max-height: 320px; overflow-y: auto; padding-right: 4px;">
-            ${requiredProductsList.map(item => `
-              <div style="display: flex; align-items: center; justify-content: space-between; padding: 12px 14px; background: white; border: 1px solid var(--md-border); border-radius: var(--radius-md);">
-                <div style="display: flex; align-items: center; gap: 10px;">
-                  <span style="font-size: 1.25rem;">${item.category === 'Fruits' ? '🍎' : '🥦'}</span>
-                  <div>
-                    <div style="font-weight: 800; font-size: 0.92rem; color: var(--md-text-main);">${item.productName}</div>
+          <div id="reviewModalItemsList" style="display: flex; flex-direction: column; gap: 10px; max-height: 340px; overflow-y: auto; padding-right: 4px;">
+            ${requiredProductsList.length === 0 ? `
+              <div style="text-align: center; padding: 32px 16px; color: var(--md-text-muted);">
+                <div style="font-size: 2rem; margin-bottom: 8px;">✓</div>
+                <div style="font-weight: 800; font-size: 0.95rem; color: var(--md-text-main);">No items requiring purchase</div>
+                <div style="font-size: 0.78rem; margin-top: 4px;">Enter quantities in the list to add items to this order.</div>
+              </div>
+            ` : requiredProductsList.map(item => `
+              <div class="review-item-row" data-product-id="${item.productId}" style="display: flex; align-items: center; justify-content: space-between; padding: 12px 14px; background: white; border: 1.5px solid var(--md-border); border-radius: var(--radius-md); gap: 10px;">
+                <div style="display: flex; align-items: center; gap: 10px; min-width: 0;">
+                  <span style="font-size: 1.25rem; flex-shrink: 0;">${item.category === 'Fruits' ? '🍎' : '🥦'}</span>
+                  <div style="min-width: 0;">
+                    <div style="font-weight: 800; font-size: 0.92rem; color: var(--md-text-main); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${item.productName}</div>
                     <div style="font-size: 0.74rem; color: var(--md-text-muted); font-family: monospace;">${item.sku} &bull; ${item.category}</div>
                   </div>
                 </div>
-                <div style="text-align: right;">
-                  <div style="font-weight: 800; font-size: 1.1rem; color: var(--md-primary);">
-                    ${item.requiredQty} <span style="font-size: 0.82rem; font-weight: 700; color: var(--md-text-secondary);">${item.unit}</span>
+                <div style="display: flex; align-items: center; gap: 10px; flex-shrink: 0;">
+                  <div style="text-align: right;">
+                    <div style="font-weight: 800; font-size: 1.05rem; color: var(--md-primary);">
+                      ${item.requiredQty} <span style="font-size: 0.78rem; font-weight: 700; color: var(--md-text-secondary);">${item.unit}</span>
+                    </div>
+                    <div style="font-size: 0.7rem; color: var(--md-text-muted);">Est. ₹${item.estimatedAmount.toLocaleString('en-IN')}</div>
                   </div>
-                  <div style="font-size: 0.72rem; color: var(--md-text-muted);">Est. ₹${item.estimatedAmount.toLocaleString('en-IN')}</div>
+                  <button 
+                    type="button" 
+                    class="btn btn-sm btn-delete-review-item" 
+                    data-product-id="${item.productId}" 
+                    title="Delete item from requirements" 
+                    style="border: 1.5px solid #FCA5A5; color: #DC2626; background: #FEF2F2; font-weight: 800; padding: 5px 9px; border-radius: 6px; cursor: pointer; display: inline-flex; align-items: center; gap: 3px; font-size: 0.74rem;"
+                  >
+                    ${icon('trash', 'icon-xs')} Delete
+                  </button>
                 </div>
               </div>
             `).join('')}
@@ -908,7 +947,7 @@ function filterStockCheckDOM(query) {
       // Silent store update (allows typing any multi-digit number: 10, 25, 100, etc.)
       store.updateRequiredQuantity(currentBranchId, pId, numVal, false);
 
-      // In-place wrapper style update
+      // In-place wrapper style update & toggle desktop clear button
       const wrapper = e.target.closest('.fast-qty-wrapper');
       if (wrapper) {
         if (numVal > 0) {
@@ -917,6 +956,20 @@ function filterStockCheckDOM(query) {
           wrapper.classList.remove('has-value');
         }
       }
+
+      const tr = e.target.closest('tr');
+      if (tr) {
+        if (numVal > 0) tr.classList.add('row-required-highlight');
+        else tr.classList.remove('row-required-highlight');
+        const clearBtn = tr.querySelector('.btn-clear-stock-item');
+        if (clearBtn) clearBtn.style.display = numVal > 0 ? 'inline-flex' : 'none';
+      }
+
+      // Also sync mobile delete button & value if present
+      const mBtn = document.querySelector(`.btn-clear-stock-item-mobile[data-product-id="${pId}"]`);
+      if (mBtn) mBtn.style.display = numVal > 0 ? 'inline-flex' : 'none';
+      const mInp = document.querySelector(`.fast-stock-input-mobile[data-product-id="${pId}"]`);
+      if (mInp && mInp.value !== e.target.value) mInp.value = e.target.value;
 
       // Update counters in-place
       updateLiveCheckSummary();
@@ -930,6 +983,12 @@ function filterStockCheckDOM(query) {
         store.updateRequiredQuantity(currentBranchId, pId, 0, false);
         const wrapper = e.target.closest('.fast-qty-wrapper');
         if (wrapper) wrapper.classList.remove('has-value');
+        const tr = e.target.closest('tr');
+        if (tr) {
+          tr.classList.remove('row-required-highlight');
+          const clearBtn = tr.querySelector('.btn-clear-stock-item');
+          if (clearBtn) clearBtn.style.display = 'none';
+        }
         updateLiveCheckSummary();
       }
     });
@@ -987,6 +1046,19 @@ function filterStockCheckDOM(query) {
           wrapper.classList.remove('has-value');
         }
       }
+
+      const card = e.target.closest('.mobile-stock-card');
+      if (card) {
+        const clearBtn = card.querySelector('.btn-clear-stock-item-mobile');
+        if (clearBtn) clearBtn.style.display = numVal > 0 ? 'inline-flex' : 'none';
+      }
+
+      // Also sync desktop button & value
+      const dBtn = document.querySelector(`.btn-clear-stock-item[data-product-id="${pId}"]`);
+      if (dBtn) dBtn.style.display = numVal > 0 ? 'inline-flex' : 'none';
+      const dInp = document.querySelector(`.fast-stock-input[data-product-id="${pId}"]`);
+      if (dInp && dInp.value !== e.target.value) dInp.value = e.target.value;
+
       updateLiveCheckSummary();
     });
 
@@ -997,11 +1069,86 @@ function filterStockCheckDOM(query) {
         store.updateRequiredQuantity(currentBranchId, pId, 0, false);
         const wrapper = e.target.closest('.fast-qty-wrapper');
         if (wrapper) wrapper.classList.remove('has-value');
+        const card = e.target.closest('.mobile-stock-card');
+        if (card) {
+          const clearBtn = card.querySelector('.btn-clear-stock-item-mobile');
+          if (clearBtn) clearBtn.style.display = 'none';
+        }
         updateLiveCheckSummary();
       }
     });
 
     input.addEventListener('focus', (e) => e.target.select());
+  });
+
+  // Handle manual deletion of requirement (reset to 0) directly from desktop row or mobile card
+  document.querySelectorAll('.btn-clear-stock-item').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const pId = e.currentTarget.getAttribute('data-product-id');
+      if (!pId) return;
+
+      store.updateRequiredQuantity(currentBranchId, pId, 0, false);
+
+      const tr = e.currentTarget.closest('tr');
+      if (tr) {
+        tr.classList.remove('row-required-highlight');
+        const input = tr.querySelector('.fast-stock-input');
+        if (input) input.value = '0';
+        const wrapper = tr.querySelector('.fast-qty-wrapper');
+        if (wrapper) wrapper.classList.remove('has-value');
+        e.currentTarget.style.display = 'none';
+      }
+
+      const mobileInput = document.querySelector(`.fast-stock-input-mobile[data-product-id="${pId}"]`);
+      if (mobileInput) {
+        mobileInput.value = '0';
+        const mWrapper = mobileInput.closest('.fast-qty-wrapper');
+        if (mWrapper) mWrapper.classList.remove('has-value');
+      }
+      const mobileClearBtn = document.querySelector(`.btn-clear-stock-item-mobile[data-product-id="${pId}"]`);
+      if (mobileClearBtn) mobileClearBtn.style.display = 'none';
+
+      updateLiveCheckSummary();
+      const prod = store.products.find(p => p.id === pId);
+      showToast(`Deleted "${prod?.name || 'Item'}" from requirements`, 'info');
+    });
+  });
+
+  document.querySelectorAll('.btn-clear-stock-item-mobile').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const pId = e.currentTarget.getAttribute('data-product-id');
+      if (!pId) return;
+
+      store.updateRequiredQuantity(currentBranchId, pId, 0, false);
+
+      const card = e.currentTarget.closest('.mobile-stock-card');
+      if (card) {
+        const input = card.querySelector('.fast-stock-input-mobile');
+        if (input) input.value = '0';
+        const wrapper = card.querySelector('.fast-qty-wrapper');
+        if (wrapper) wrapper.classList.remove('has-value');
+        e.currentTarget.style.display = 'none';
+      }
+
+      const desktopInput = document.querySelector(`.fast-stock-input[data-product-id="${pId}"]`);
+      if (desktopInput) {
+        desktopInput.value = '0';
+        const dWrapper = desktopInput.closest('.fast-qty-wrapper');
+        if (dWrapper) dWrapper.classList.remove('has-value');
+        const tr = desktopInput.closest('tr');
+        if (tr) tr.classList.remove('row-required-highlight');
+      }
+      const desktopClearBtn = document.querySelector(`.btn-clear-stock-item[data-product-id="${pId}"]`);
+      if (desktopClearBtn) desktopClearBtn.style.display = 'none';
+
+      updateLiveCheckSummary();
+      const prod = store.products.find(p => p.id === pId);
+      showToast(`Deleted "${prod?.name || 'Item'}" from requirements`, 'info');
+    });
   });
 
   // Mobile "NEXT PRODUCT" buttons
@@ -1023,8 +1170,99 @@ function filterStockCheckDOM(query) {
   const btnCloseReviewModal = document.getElementById('btnCloseReviewModal');
   const btnCancelReview = document.getElementById('btnCancelReview');
 
+  function populateReviewModal() {
+    const listEl = document.getElementById('reviewModalItemsList');
+    const badgeEl = document.getElementById('reviewModalTotalCountBadge');
+    if (!listEl) return;
+
+    const freshReqs = store.getRequiredItemsForBranch(currentBranchId);
+    if (badgeEl) badgeEl.textContent = `${freshReqs.length} requirements`;
+
+    if (freshReqs.length === 0) {
+      listEl.innerHTML = `
+        <div style="text-align: center; padding: 36px 16px; color: var(--md-text-muted);">
+          <div style="font-size: 2.2rem; margin-bottom: 8px;">✓</div>
+          <div style="font-weight: 800; font-size: 1rem; color: var(--md-text-main);">No items requiring purchase</div>
+          <div style="font-size: 0.8rem; margin-top: 4px;">All items have been cleared. Enter quantities in the list to order produce.</div>
+        </div>
+      `;
+      return;
+    }
+
+    listEl.innerHTML = freshReqs.map(item => `
+      <div class="review-item-row" data-product-id="${item.productId}" style="display: flex; align-items: center; justify-content: space-between; padding: 12px 14px; background: white; border: 1.5px solid var(--md-border); border-radius: var(--radius-md); gap: 10px;">
+        <div style="display: flex; align-items: center; gap: 10px; min-width: 0;">
+          <span style="font-size: 1.25rem; flex-shrink: 0;">${item.category === 'Fruits' ? '🍎' : '🥦'}</span>
+          <div style="min-width: 0;">
+            <div style="font-weight: 800; font-size: 0.92rem; color: var(--md-text-main); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${item.productName}</div>
+            <div style="font-size: 0.74rem; color: var(--md-text-muted); font-family: monospace;">${item.sku} &bull; ${item.category}</div>
+          </div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 10px; flex-shrink: 0;">
+          <div style="text-align: right;">
+            <div style="font-weight: 800; font-size: 1.05rem; color: var(--md-primary);">
+              ${item.requiredQty} <span style="font-size: 0.78rem; font-weight: 700; color: var(--md-text-secondary);">${item.unit}</span>
+            </div>
+            <div style="font-size: 0.7rem; color: var(--md-text-muted);">Est. ₹${item.estimatedAmount.toLocaleString('en-IN')}</div>
+          </div>
+          <button 
+            type="button" 
+            class="btn btn-sm btn-delete-review-item" 
+            data-product-id="${item.productId}" 
+            title="Delete item from requirements" 
+            style="border: 1.5px solid #FCA5A5; color: #DC2626; background: #FEF2F2; font-weight: 800; padding: 5px 9px; border-radius: 6px; cursor: pointer; display: inline-flex; align-items: center; gap: 3px; font-size: 0.74rem;"
+          >
+            ${icon('trash', 'icon-xs')} Delete
+          </button>
+        </div>
+      </div>
+    `).join('');
+
+    // Attach deletion handlers inside review modal
+    listEl.querySelectorAll('.btn-delete-review-item').forEach(delBtn => {
+      delBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const pId = e.currentTarget.getAttribute('data-product-id');
+        if (!pId) return;
+
+        store.updateRequiredQuantity(currentBranchId, pId, 0, false);
+
+        // Update main desktop input & wrapper
+        const dInp = document.querySelector(`.fast-stock-input[data-product-id="${pId}"]`);
+        if (dInp) {
+          dInp.value = '0';
+          const w = dInp.closest('.fast-qty-wrapper');
+          if (w) w.classList.remove('has-value');
+          const tr = dInp.closest('tr');
+          if (tr) tr.classList.remove('row-required-highlight');
+          const dBtn = tr?.querySelector('.btn-clear-stock-item');
+          if (dBtn) dBtn.style.display = 'none';
+        }
+
+        // Update main mobile input & wrapper
+        const mInp = document.querySelector(`.fast-stock-input-mobile[data-product-id="${pId}"]`);
+        if (mInp) {
+          mInp.value = '0';
+          const w = mInp.closest('.fast-qty-wrapper');
+          if (w) w.classList.remove('has-value');
+          const mCard = mInp.closest('.mobile-stock-card');
+          const mBtn = mCard?.querySelector('.btn-clear-stock-item-mobile');
+          if (mBtn) mBtn.style.display = 'none';
+        }
+
+        populateReviewModal();
+        updateLiveCheckSummary();
+
+        const prod = store.products.find(p => p.id === pId);
+        showToast(`Deleted "${prod?.name || 'Item'}" from requirements`, 'info');
+      });
+    });
+  }
+
   if (btnReviewRequirements) {
     btnReviewRequirements.addEventListener('click', () => {
+      populateReviewModal();
       if (reviewBackdrop) reviewBackdrop.classList.add('open');
     });
   }
