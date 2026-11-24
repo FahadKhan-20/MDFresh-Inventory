@@ -383,12 +383,13 @@ export function renderDailyStockCheckView() {
                         </button>
                         <button 
                           type="button" 
-                          class="btn btn-sm btn-clear-stock-item" 
+                          class="btn btn-outline-danger btn-sm btn-direct-delete-product" 
                           data-product-id="${p.id}" 
-                          title="Delete requirement"
-                          style="font-size: 0.76rem; font-weight: 800; padding: 5px 8px; border: 1.5px solid #FCA5A5; color: #DC2626; background: #FEF2F2; border-radius: 6px; cursor: pointer; display: ${reqQty > 0 ? 'inline-flex' : 'none'}; align-items: center; gap: 3px;"
+                          data-product-name="${p.name.replace(/"/g, '&quot;')}"
+                          title="Delete ${p.name} from catalog"
+                          style="font-size: 0.78rem; padding: 4px 8px; border: 1.5px solid #FCA5A5; background: #FEF2F2; color: #DC2626; border-radius: 5px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center;"
                         >
-                          ${icon('trash', 'icon-xs')} Delete
+                          🗑️
                         </button>
                       </div>
                     </td>
@@ -1082,8 +1083,6 @@ function filterStockCheckDOM(query) {
       if (tr) {
         if (numVal > 0) tr.classList.add('row-required-highlight');
         else tr.classList.remove('row-required-highlight');
-        const clearBtn = tr.querySelector('.btn-clear-stock-item');
-        if (clearBtn) clearBtn.style.display = numVal > 0 ? 'inline-flex' : 'none';
       }
 
       // Also sync mobile value if present
@@ -1105,8 +1104,6 @@ function filterStockCheckDOM(query) {
         const tr = e.target.closest('tr');
         if (tr) {
           tr.classList.remove('row-required-highlight');
-          const clearBtn = tr.querySelector('.btn-clear-stock-item');
-          if (clearBtn) clearBtn.style.display = 'none';
         }
         updateLiveCheckSummary();
       }
@@ -1166,9 +1163,7 @@ function filterStockCheckDOM(query) {
         }
       }
 
-      // Also sync desktop button & value
-      const dBtn = document.querySelector(`.btn-clear-stock-item[data-product-id="${pId}"]`);
-      if (dBtn) dBtn.style.display = numVal > 0 ? 'inline-flex' : 'none';
+      // Also sync desktop value
       const dInp = document.querySelector(`.fast-stock-input[data-product-id="${pId}"]`);
       if (dInp && dInp.value !== e.target.value) dInp.value = e.target.value;
 
@@ -1207,8 +1202,6 @@ function filterStockCheckDOM(query) {
       if (tr) {
         if (numVal > 0) tr.classList.add('row-required-highlight');
         else tr.classList.remove('row-required-highlight');
-        const clearBtn = tr.querySelector('.btn-clear-stock-item');
-        if (clearBtn) clearBtn.style.display = numVal > 0 ? 'inline-flex' : 'none';
       }
     }
 
@@ -1247,20 +1240,6 @@ function filterStockCheckDOM(query) {
       if (!pId) return;
       const cur = store.getBranchRequiredQty(currentBranchId, pId);
       setProductRequiredQty(pId, Math.max(0, cur - 1));
-    });
-  });
-
-  // Handle manual deletion/clearing of requirement (reset to 0) directly from desktop row
-  document.querySelectorAll('.btn-clear-stock-item').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      const pId = e.currentTarget.getAttribute('data-product-id');
-      if (!pId) return;
-
-      setProductRequiredQty(pId, 0);
-      const prod = store.products.find(p => p.id === pId);
-      showToast(`Cleared requirement for "${prod?.name || 'Item'}"`, 'info');
     });
   });
 
@@ -1349,8 +1328,6 @@ function filterStockCheckDOM(query) {
           if (w) w.classList.remove('has-value');
           const tr = dInp.closest('tr');
           if (tr) tr.classList.remove('row-required-highlight');
-          const dBtn = tr?.querySelector('.btn-clear-stock-item');
-          if (dBtn) dBtn.style.display = 'none';
         }
 
         // Update main mobile input & wrapper

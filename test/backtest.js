@@ -987,6 +987,8 @@ assert(store.getBranchRequiredQty('BR001', 'PRD005') === 0, "21.9 Stepper clampe
 
 // Test 21.10: Redundant inline delete button removed from mobile card stepper row
 assert(!stockCheckHtml.includes('btn-clear-stock-item-mobile'), "21.10 Mobile stock cards omit redundant inline delete button in stepper row");
+assert(!stockCheckHtml.includes('btn-clear-stock-item'), "21.11 Stock check table omits text delete button");
+assert(stockCheckHtml.includes('btn-direct-delete-product'), "21.12 Stock check retains delete trash symbol (🗑️)");
 
 // -------------------------------------------------------------
 // POINT 22: 4-BRANCH SUBMISSION PDF GUARDRAIL
