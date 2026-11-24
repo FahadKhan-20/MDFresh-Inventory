@@ -324,22 +324,44 @@ export function renderDailyStockCheckView() {
                       <span class="pill pill-unit" style="font-weight: 700;">${p.unit}</span>
                     </td>
                     <td>
-                      <!-- FAST NUMERIC INPUT: User ONLY enters numbers; Unit is automatic! -->
-                      <div class="fast-qty-wrapper ${reqQty > 0 ? 'has-value' : ''}">
-                        <input 
-                          type="number"
-                          inputmode="numeric"
-                          pattern="[0-9]*"
-                          min="0"
-                          max="9999"
-                          step="1"
-                          class="fast-qty-input fast-stock-input"
-                          data-product-id="${p.id}"
-                          data-index="${index}"
-                          value="${reqQty}"
-                          aria-label="Required ${p.unit} for ${p.name}"
-                        />
-                        <span class="fast-qty-unit">${p.unit}</span>
+                      <!-- FAST NUMERIC INPUT WITH + / - STEPPERS: User can tap +/- or type directly! -->
+                      <div style="display: inline-flex; align-items: center; gap: 4px;">
+                        <button 
+                          type="button" 
+                          class="btn-qty-step btn-qty-minus" 
+                          data-product-id="${p.id}" 
+                          title="Decrease quantity by 1"
+                          aria-label="Decrease quantity"
+                        >
+                          −
+                        </button>
+
+                        <div class="fast-qty-wrapper ${reqQty > 0 ? 'has-value' : ''}">
+                          <input 
+                            type="number"
+                            inputmode="numeric"
+                            pattern="[0-9]*"
+                            min="0"
+                            max="9999"
+                            step="1"
+                            class="fast-qty-input fast-stock-input"
+                            data-product-id="${p.id}"
+                            data-index="${index}"
+                            value="${reqQty}"
+                            aria-label="Required ${p.unit} for ${p.name}"
+                          />
+                          <span class="fast-qty-unit">${p.unit}</span>
+                        </div>
+
+                        <button 
+                          type="button" 
+                          class="btn-qty-step btn-qty-plus" 
+                          data-product-id="${p.id}" 
+                          title="Increase quantity by 1"
+                          aria-label="Increase quantity"
+                        >
+                          +
+                        </button>
                       </div>
                     </td>
                     <td style="text-align: center;">
@@ -418,7 +440,17 @@ export function renderDailyStockCheckView() {
             <div class="mobile-card-row">
               <span class="mobile-card-label">Required to Buy</span>
               <div style="display: flex; align-items: center; gap: 6px;">
-                <div class="fast-qty-wrapper ${reqQty > 0 ? 'has-value' : ''}" style="width: 125px; height: 32px; padding: 1px 4px 1px 6px;">
+                <button 
+                  type="button" 
+                  class="btn-qty-step btn-qty-minus" 
+                  data-product-id="${p.id}" 
+                  title="Decrease quantity by 1"
+                  aria-label="Decrease quantity"
+                >
+                  −
+                </button>
+
+                <div class="fast-qty-wrapper ${reqQty > 0 ? 'has-value' : ''}" style="width: 110px; height: 32px; padding: 1px 4px 1px 6px;">
                   <input 
                     type="number"
                     inputmode="numeric"
@@ -430,10 +462,21 @@ export function renderDailyStockCheckView() {
                     data-product-id="${p.id}"
                     data-index="${index}"
                     value="${reqQty}"
-                    style="font-size: 0.95rem; width: 48px;"
+                    style="font-size: 0.95rem; width: 44px;"
                   />
                   <span class="fast-qty-unit" style="font-size: 0.66rem; padding: 1px 5px;">${p.unit}</span>
                 </div>
+
+                <button 
+                  type="button" 
+                  class="btn-qty-step btn-qty-plus" 
+                  data-product-id="${p.id}" 
+                  title="Increase quantity by 1"
+                  aria-label="Increase quantity"
+                >
+                  +
+                </button>
+
                 <button 
                   type="button" 
                   class="btn-clear-stock-item-mobile" 
@@ -1100,73 +1143,83 @@ function filterStockCheckDOM(query) {
     input.addEventListener('focus', (e) => e.target.select());
   });
 
-  // Handle manual deletion of requirement (reset to 0) directly from desktop row or mobile card
-  document.querySelectorAll('.btn-clear-stock-item').forEach(btn => {
+  // Unified helper to set required quantity and update desktop and mobile views in-place
+  function setProductRequiredQty(pId, newQty) {
+    const numVal = Math.max(0, parseInt(newQty, 10) || 0);
+    store.updateRequiredQuantity(currentBranchId, pId, numVal, false);
+
+    // Sync desktop elements
+    const desktopInput = document.querySelector(`.fast-stock-input[data-product-id="${pId}"]`);
+    if (desktopInput) {
+      desktopInput.value = numVal;
+      const wrapper = desktopInput.closest('.fast-qty-wrapper');
+      if (wrapper) {
+        if (numVal > 0) wrapper.classList.add('has-value');
+        else wrapper.classList.remove('has-value');
+      }
+      const tr = desktopInput.closest('tr');
+      if (tr) {
+        if (numVal > 0) tr.classList.add('row-required-highlight');
+        else tr.classList.remove('row-required-highlight');
+        const clearBtn = tr.querySelector('.btn-clear-stock-item');
+        if (clearBtn) clearBtn.style.display = numVal > 0 ? 'inline-flex' : 'none';
+      }
+    }
+
+    // Sync mobile elements
+    const mobileInput = document.querySelector(`.fast-stock-input-mobile[data-product-id="${pId}"]`);
+    if (mobileInput) {
+      mobileInput.value = numVal;
+      const mWrapper = mobileInput.closest('.fast-qty-wrapper');
+      if (mWrapper) {
+        if (numVal > 0) mWrapper.classList.add('has-value');
+        else mWrapper.classList.remove('has-value');
+      }
+      const card = mobileInput.closest('.mobile-stock-card');
+      if (card) {
+        const mClearBtn = card.querySelector('.btn-clear-stock-item-mobile');
+        if (mClearBtn) mClearBtn.style.display = numVal > 0 ? 'inline-flex' : 'none';
+      }
+    }
+
+    updateLiveCheckSummary();
+  }
+
+  // Stepper Plus (+) Button - Increment quantity by 1
+  document.querySelectorAll('.btn-qty-plus').forEach(btn => {
     btn.addEventListener('click', (e) => {
       e.preventDefault();
       e.stopPropagation();
       const pId = e.currentTarget.getAttribute('data-product-id');
       if (!pId) return;
-
-      store.updateRequiredQuantity(currentBranchId, pId, 0, false);
-
-      const tr = e.currentTarget.closest('tr');
-      if (tr) {
-        tr.classList.remove('row-required-highlight');
-        const input = tr.querySelector('.fast-stock-input');
-        if (input) input.value = '0';
-        const wrapper = tr.querySelector('.fast-qty-wrapper');
-        if (wrapper) wrapper.classList.remove('has-value');
-        e.currentTarget.style.display = 'none';
-      }
-
-      const mobileInput = document.querySelector(`.fast-stock-input-mobile[data-product-id="${pId}"]`);
-      if (mobileInput) {
-        mobileInput.value = '0';
-        const mWrapper = mobileInput.closest('.fast-qty-wrapper');
-        if (mWrapper) mWrapper.classList.remove('has-value');
-      }
-      const mobileClearBtn = document.querySelector(`.btn-clear-stock-item-mobile[data-product-id="${pId}"]`);
-      if (mobileClearBtn) mobileClearBtn.style.display = 'none';
-
-      updateLiveCheckSummary();
-      const prod = store.products.find(p => p.id === pId);
-      showToast(`Deleted "${prod?.name || 'Item'}" from requirements`, 'info');
+      const cur = store.getBranchRequiredQty(currentBranchId, pId);
+      setProductRequiredQty(pId, cur + 1);
     });
   });
 
-  document.querySelectorAll('.btn-clear-stock-item-mobile').forEach(btn => {
+  // Stepper Minus (-) Button - Decrement quantity by 1 (clamped to 0)
+  document.querySelectorAll('.btn-qty-minus').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const pId = e.currentTarget.getAttribute('data-product-id');
+      if (!pId) return;
+      const cur = store.getBranchRequiredQty(currentBranchId, pId);
+      setProductRequiredQty(pId, Math.max(0, cur - 1));
+    });
+  });
+
+  // Handle manual deletion/clearing of requirement (reset to 0) directly from desktop row or mobile card
+  document.querySelectorAll('.btn-clear-stock-item, .btn-clear-stock-item-mobile').forEach(btn => {
     btn.addEventListener('click', (e) => {
       e.preventDefault();
       e.stopPropagation();
       const pId = e.currentTarget.getAttribute('data-product-id');
       if (!pId) return;
 
-      store.updateRequiredQuantity(currentBranchId, pId, 0, false);
-
-      const card = e.currentTarget.closest('.mobile-stock-card');
-      if (card) {
-        const input = card.querySelector('.fast-stock-input-mobile');
-        if (input) input.value = '0';
-        const wrapper = card.querySelector('.fast-qty-wrapper');
-        if (wrapper) wrapper.classList.remove('has-value');
-        e.currentTarget.style.display = 'none';
-      }
-
-      const desktopInput = document.querySelector(`.fast-stock-input[data-product-id="${pId}"]`);
-      if (desktopInput) {
-        desktopInput.value = '0';
-        const dWrapper = desktopInput.closest('.fast-qty-wrapper');
-        if (dWrapper) dWrapper.classList.remove('has-value');
-        const tr = desktopInput.closest('tr');
-        if (tr) tr.classList.remove('row-required-highlight');
-      }
-      const desktopClearBtn = document.querySelector(`.btn-clear-stock-item[data-product-id="${pId}"]`);
-      if (desktopClearBtn) desktopClearBtn.style.display = 'none';
-
-      updateLiveCheckSummary();
+      setProductRequiredQty(pId, 0);
       const prod = store.products.find(p => p.id === pId);
-      showToast(`Deleted "${prod?.name || 'Item'}" from requirements`, 'info');
+      showToast(`Cleared requirement for "${prod?.name || 'Item'}"`, 'info');
     });
   });
 

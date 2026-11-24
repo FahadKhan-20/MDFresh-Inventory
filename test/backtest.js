@@ -943,6 +943,48 @@ store.deleteProduct(batchProdA.id);
 store.deleteProduct(batchProdB.id);
 store.deleteProduct(tempProd.id);
 
+// -------------------------------------------------------------
+// POINT 21: FAST NUMERIC STEPPER (+/-) CONTROLS
+// -------------------------------------------------------------
+console.log("\n\x1b[36m▶ TEST SUITE 21: Fast Numeric Stepper (+/-) Controls\x1b[0m");
+
+// Test 21.1: renderDailyStockCheckView generates + and - stepper buttons
+const stockCheckHtml = renderDailyStockCheckView();
+assert(stockCheckHtml.includes('btn-qty-plus'), "21.1 Daily Stock Check renders btn-qty-plus buttons");
+assert(stockCheckHtml.includes('btn-qty-minus'), "21.2 Daily Stock Check renders btn-qty-minus buttons");
+
+// Test 21.3: Mobile stock card contains + and - buttons
+const hasMobileSteppers = stockCheckHtml.includes('mobile-card-row') && stockCheckHtml.includes('btn-qty-step');
+assert(hasMobileSteppers, "21.3 Mobile stock cards include +/- quantity stepper buttons");
+
+// Test 21.4: Stepper increment logic (+1)
+store.updateRequiredQuantity('BR001', 'PRD005', 1);
+assert(store.getBranchRequiredQty('BR001', 'PRD005') === 1, "21.4 Initial quantity set to 1");
+const steppedUp = store.getBranchRequiredQty('BR001', 'PRD005') + 1;
+store.updateRequiredQuantity('BR001', 'PRD005', steppedUp);
+assert(store.getBranchRequiredQty('BR001', 'PRD005') === 2, "21.5 Stepper incremented quantity to 2");
+
+// Test 21.6: Multi-step increment (2 -> 5)
+for (let i = 0; i < 3; i++) {
+  const current = store.getBranchRequiredQty('BR001', 'PRD005');
+  store.updateRequiredQuantity('BR001', 'PRD005', current + 1);
+}
+assert(store.getBranchRequiredQty('BR001', 'PRD005') === 5, "21.6 Multi-step incremented quantity to 5");
+
+// Test 21.7: Stepper decrement logic (-1)
+const currentBeforeDec = store.getBranchRequiredQty('BR001', 'PRD005');
+store.updateRequiredQuantity('BR001', 'PRD005', Math.max(0, currentBeforeDec - 1));
+assert(store.getBranchRequiredQty('BR001', 'PRD005') === 4, "21.7 Stepper decremented quantity to 4");
+
+// Test 21.8: Stepper decrement down to 0
+store.updateRequiredQuantity('BR001', 'PRD005', 0);
+assert(store.getBranchRequiredQty('BR001', 'PRD005') === 0, "21.8 Stepper decremented quantity down to 0");
+
+// Test 21.9: Stepper decrement clamped at 0 (never negative)
+const currentZero = store.getBranchRequiredQty('BR001', 'PRD005');
+store.updateRequiredQuantity('BR001', 'PRD005', Math.max(0, currentZero - 1));
+assert(store.getBranchRequiredQty('BR001', 'PRD005') === 0, "21.9 Stepper clamped at 0 without becoming negative");
+
 // SUMMARY REPORT
 // -------------------------------------------------------------
 console.log('\n============================================================');
