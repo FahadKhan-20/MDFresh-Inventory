@@ -175,9 +175,14 @@ export function renderInventoryView() {
                     <td>${statusBadge}</td>
                     <td style="font-size: 0.8rem; color: var(--md-text-muted);">${p.lastUpdated || '2 min ago'}</td>
                     <td>
-                      <button class="btn btn-secondary btn-sm btn-open-product-details" data-product-id="${p.id}">
-                        Details →
-                      </button>
+                      <div style="display: flex; gap: 6px; align-items: center;">
+                        <button type="button" class="btn btn-secondary btn-sm btn-open-edit-product" data-product-id="${p.id}" title="Edit product" style="font-weight: 700; padding: 4px 8px; font-size: 0.78rem;">
+                          ✏️ Edit
+                        </button>
+                        <button class="btn btn-secondary btn-sm btn-open-product-details" data-product-id="${p.id}" style="padding: 4px 8px; font-size: 0.78rem;">
+                          Details →
+                        </button>
+                      </div>
                     </td>
                   </tr>
                 `;
@@ -396,6 +401,12 @@ function filterInventoryDOM(query) {
 
     if (drawerBody) {
       drawerBody.innerHTML = `
+        <div style="margin-bottom: 16px;">
+          <button type="button" class="btn btn-outline-primary btn-sm btn-open-edit-product" data-product-id="${prod.id}" style="width: 100%; font-weight: 800; background: white; border: 1.5px solid var(--md-primary-light-border); padding: 8px 12px; display: flex; align-items: center; justify-content: center; gap: 6px;">
+            ✏️ Edit Product Specifications
+          </button>
+        </div>
+
         <!-- Card 1: Inventory by Branch -->
         <div style="background-color: var(--md-surface-subtle); border-radius: var(--radius-lg); padding: 18px; margin-bottom: 20px; border: 1px solid var(--md-border);">
           <div style="font-size: 0.78rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: var(--md-text-muted); margin-bottom: 12px;">

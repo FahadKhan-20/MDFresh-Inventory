@@ -192,15 +192,16 @@ export function renderDailyStockCheckView() {
           <table class="custom-table" id="stockCheckFastTable">
             <thead>
               <tr>
-                <th style="width: 48%;">PRODUCT</th>
-                <th style="width: 18%;">UNIT</th>
-                <th style="width: 34%;">REQUIRED TO BUY</th>
+                <th style="width: 44%;">PRODUCT</th>
+                <th style="width: 16%;">UNIT</th>
+                <th style="width: 26%;">REQUIRED TO BUY</th>
+                <th style="width: 14%; text-align: center;">ACTION</th>
               </tr>
             </thead>
             <tbody>
               ${filteredProducts.length === 0 ? `
                 <tr>
-                  <td colspan="3" style="text-align: center; padding: 48px; color: var(--md-text-muted);">
+                  <td colspan="4" style="text-align: center; padding: 48px; color: var(--md-text-muted);">
                     <div style="font-size: 2rem; margin-bottom: 8px;">🔍</div>
                     <div style="font-weight: 700; font-size: 1rem; color: var(--md-text-main);">No matching products found</div>
                     <div style="font-size: 0.82rem; margin-top: 4px;">Try adjusting your search query or reset the filters.</div>
@@ -242,6 +243,17 @@ export function renderDailyStockCheckView() {
                         <span class="fast-qty-unit">${p.unit}</span>
                       </div>
                     </td>
+                    <td style="text-align: center;">
+                      <button 
+                        type="button" 
+                        class="btn btn-secondary btn-sm btn-open-edit-product" 
+                        data-product-id="${p.id}" 
+                        title="Edit ${p.name} specifications"
+                        style="font-size: 0.78rem; font-weight: 700; padding: 5px 10px; display: inline-flex; align-items: center; gap: 4px;"
+                      >
+                        ${icon('edit', 'icon-xs')} Edit
+                      </button>
+                    </td>
                   </tr>
                 `;
               }).join('')}
@@ -266,7 +278,18 @@ export function renderDailyStockCheckView() {
                   <div style="font-size: 0.74rem; color: var(--md-text-muted); font-family: monospace;">${p.originalPluName ? `<strong style="color: #0D8244; background: #EAF5EE; padding: 1px 4px; border-radius: 3px; font-size: 0.68rem; margin-right: 4px; border: 1px solid #C6E9D0;">${p.originalPluName}</strong> &bull; ` : ''}${p.sku}</div>
                 </div>
               </div>
-              <span class="pill pill-unit">${p.unit}</span>
+              <div style="display: flex; align-items: center; gap: 6px;">
+                <span class="pill pill-unit">${p.unit}</span>
+                <button 
+                  type="button" 
+                  class="btn-open-edit-product" 
+                  data-product-id="${p.id}" 
+                  title="Edit product" 
+                  style="border: 1px solid var(--md-border); background: white; border-radius: 6px; padding: 4px 8px; font-size: 0.72rem; font-weight: 800; cursor: pointer; color: var(--md-text-main); display: inline-flex; align-items: center; gap: 4px;"
+                >
+                  ✏️ Edit
+                </button>
+              </div>
             </div>
 
             <div class="mobile-card-row">

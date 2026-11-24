@@ -901,6 +901,120 @@ class InventoryStore {
     return p;
   }
 
+  // Update an existing or added product
+  updateProduct(productId, updatedFields = {}) {
+    const prod = this.products.find(p => p.id === productId);
+    if (!prod) return { success: false, message: 'Product not found' };
+
+    const oldName = prod.name;
+
+    if (updatedFields.name !== undefined && updatedFields.name.trim()) prod.name = updatedFields.name.trim();
+    if (updatedFields.variety !== undefined) prod.variety = updatedFields.variety.trim();
+    if (updatedFields.sku !== undefined && updatedFields.sku.trim()) prod.sku = updatedFields.sku.trim();
+    if (updatedFields.category !== undefined) prod.category = updatedFields.category;
+    if (updatedFields.unit !== undefined) prod.unit = updatedFields.unit;
+    if (updatedFields.reorderLevel !== undefined) prod.reorderLevel = Math.max(1, parseInt(updatedFields.reorderLevel, 10) || prod.reorderLevel);
+    if (updatedFields.unitCost !== undefined) prod.unitCost = Math.max(0, parseInt(updatedFields.unitCost, 10) || prod.unitCost);
+    if (updatedFields.supplierName !== undefined) prod.supplierName = updatedFields.supplierName;
+
+    // Detect image/emoji if requested or if name changed significantly
+    if (updatedFields.image !== undefined && updatedFields.image) {
+      prod.image = updatedFields.image;
+    } else if (updatedFields.name) {
+      const nameLower = prod.name.toLowerCase();
+      if (nameLower.includes('apple')) prod.image = '🍎';
+      else if (nameLower.includes('mango')) prod.image = '🥭';
+      else if (nameLower.includes('banana')) prod.image = '🍌';
+      else if (nameLower.includes('tomato')) prod.image = '🍅';
+      else if (nameLower.includes('onion')) prod.image = '🧅';
+      else if (nameLower.includes('potato')) prod.image = '🥔';
+      else if (nameLower.includes('orange')) prod.image = '🍊';
+      else if (nameLower.includes('pomegranate') || nameLower.includes('anar')) prod.image = '🫐';
+      else if (nameLower.includes('watermelon')) prod.image = '🍉';
+      else if (nameLower.includes('coriander') || nameLower.includes('kothmir')) prod.image = '🌿';
+      else if (nameLower.includes('chilli')) prod.image = '🌶️';
+      else if (nameLower.includes('corn')) prod.image = '🌽';
+      else if (nameLower.includes('carrot')) prod.image = '🥕';
+      else if (nameLower.includes('papaya')) prod.image = '🍈';
+      else if (nameLower.includes('grape')) prod.image = '🍇';
+      else if (nameLower.includes('lemon') || nameLower.includes('lime')) prod.image = '🍋';
+      else if (nameLower.includes('cucumber') || nameLower.includes('kheera')) prod.image = '🥒';
+      else if (nameLower.includes('capsicum') || nameLower.includes('pepper')) prod.image = '🫑';
+      else if (nameLower.includes('garlic')) prod.image = '🧄';
+      else if (nameLower.includes('ginger')) prod.image = '🫚';
+      else if (nameLower.includes('strawberry')) prod.image = '🍓';
+      else if (nameLower.includes('avocado')) prod.image = '🥑';
+      else if (nameLower.includes('mushroom')) prod.image = '🍄';
+      else if (nameLower.includes('cabbage') || nameLower.includes('cauliflower')) prod.image = '🥬';
+      else if (prod.category === 'Fruits' && (!prod.image || prod.image === '🥬')) prod.image = '🍎';
+    }
+
+    // Update branch stocks if provided
+    if (updatedFields.stocks && typeof updatedFields.stocks === 'object') {
+      Object.keys(updatedFields.stocks).forEach(bId => {
+        if (prod.stocks[bId] !== undefined) {
+          prod.stocks[bId] = Math.max(0, parseInt(updatedFields.stocks[bId], 10) || 0);
+        }
+      });
+    }
+
+    prod.lastUpdated = 'Just now';
+
+    // Add audit log
+    this.auditLogs.unshift({
+      id: `LOG-${Date.now()}`,
+      timestamp: this.getLiveDateTimeString(new Date(), true),
+      user: this.currentUser?.name || 'Authorized Manager',
+      role: this.currentUser?.role || 'Authorized Manager',
+      action: 'PRODUCT_UPDATED',
+      details: `Product "${oldName}" updated (SKU: ${prod.sku}, Unit: ${prod.unit}, Reorder: ${prod.reorderLevel})`
+    });
+
+    // Add notification
+    this.notifications.unshift({
+      id: `NOTIF-${Date.now()}`,
+      title: 'Product Updated',
+      message: `"${prod.name}" (${prod.sku}) details updated successfully.`,
+      type: 'info',
+      time: 'Just now',
+      unread: true
+    });
+
+    this.notify();
+    return { success: true, product: prod };
+  }
+
+  // Delete product from catalog
+  deleteProduct(productId) {
+    const idx = this.products.findIndex(p => p.id === productId);
+    if (idx === -1) return { success: false, message: 'Product not found' };
+
+    const deleted = this.products.splice(idx, 1)[0];
+
+    // Clean up from drafts
+    this.branches.forEach(b => {
+      if (this.stockCheckDrafts[b.id] && this.stockCheckDrafts[b.id][productId] !== undefined) {
+        delete this.stockCheckDrafts[b.id][productId];
+      }
+      if (this.receivingDrafts[b.id] && this.receivingDrafts[b.id][productId] !== undefined) {
+        delete this.receivingDrafts[b.id][productId];
+      }
+    });
+
+    // Add audit log
+    this.auditLogs.unshift({
+      id: `LOG-${Date.now()}`,
+      timestamp: this.getLiveDateTimeString(new Date(), true),
+      user: this.currentUser?.name || 'Authorized Manager',
+      role: this.currentUser?.role || 'Authorized Manager',
+      action: 'PRODUCT_DELETED',
+      details: `Product "${deleted.name}" (${deleted.sku}) removed from catalog.`
+    });
+
+    this.notify();
+    return { success: true, product: deleted };
+  }
+
   // Get requirements across all 4 branches for combined list & PDF generation
   getAllBranchesRequirements() {
     const result = {};

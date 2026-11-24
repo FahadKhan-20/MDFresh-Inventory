@@ -60,6 +60,15 @@ export function renderProductsView() {
                 <span style="font-weight: 800; color: var(--md-primary);">${totalAllStock} ${p.unit}</span>
               </div>
             </div>
+
+            <button 
+              type="button" 
+              class="btn btn-outline-primary btn-sm btn-open-edit-product" 
+              data-product-id="${p.id}" 
+              style="margin-top: 14px; width: 100%; font-weight: 800; background: white; border: 1.5px solid var(--md-primary-light-border); color: var(--md-primary); display: flex; align-items: center; justify-content: center; gap: 6px;"
+            >
+              ${icon('edit', 'icon-sm')} Edit Product Details
+            </button>
           </div>
         `;
       }).join('')}

@@ -530,6 +530,68 @@ const syncGrnBlob = generateGoodsReceivingPDF(syncRecvResult.report);
 assert(syncGrnBlob !== undefined && syncGrnBlob.type === 'application/pdf', '13.23 GRN PDF generated for synced dispatch');
 
 // -------------------------------------------------------------
+// POINT 14: PRODUCT EDITING (EXISTING & NEWLY ADDED PRODUCTS)
+// -------------------------------------------------------------
+console.log('\n\x1b[36m▶ TEST SUITE 14: Product Editing (Existing & Newly Added Products)\x1b[0m');
+
+// 14.1 Edit an existing product (PRD001 Apple)
+const editExistingRes = store.updateProduct('PRD001', {
+  name: 'Shimla Apple Super Grade',
+  variety: 'Super Royal Red',
+  unit: 'Boxes',
+  reorderLevel: 6,
+  unitCost: 1200,
+  supplierName: 'ABC Fruit Market'
+});
+assert(editExistingRes.success === true, '14.1 updateProduct executes successfully on existing product');
+const updatedApple = store.products.find(p => p.id === 'PRD001');
+assert(updatedApple.name === 'Shimla Apple Super Grade', `14.2 Existing product name updated (got: ${updatedApple.name})`);
+assert(updatedApple.unit === 'Boxes', `14.3 Existing product unit updated (got: ${updatedApple.unit})`);
+assert(updatedApple.reorderLevel === 6, `14.4 Existing product reorder level updated (got: ${updatedApple.reorderLevel})`);
+assert(updatedApple.unitCost === 1200, `14.5 Existing product unit cost updated (got: ${updatedApple.unitCost})`);
+assert(store.auditLogs[0].action === 'PRODUCT_UPDATED', '14.6 Audit log recorded for product update');
+
+// 14.2 Add a new product to catalog
+const newlyAdded = store.addProduct({
+  name: 'Dragon Fruit Pink',
+  category: 'Fruits',
+  unit: 'Boxes',
+  reorderLevel: 5,
+  unitCost: 1500,
+  supplierName: 'ABC Fruit Market'
+});
+assert(newlyAdded && newlyAdded.id, '14.7 New product added with unique ID');
+const newProdId = newlyAdded.id;
+
+// 14.3 Edit the newly added product
+const editAddedRes = store.updateProduct(newProdId, {
+  name: 'Dragon Fruit Premium Red',
+  variety: 'Vietnam Red Flesh',
+  unit: 'Crates',
+  unitCost: 1650,
+  reorderLevel: 8
+});
+assert(editAddedRes.success === true, '14.8 updateProduct executes successfully on newly added product');
+const refetchedNewProd = store.products.find(p => p.id === newProdId);
+assert(refetchedNewProd.name === 'Dragon Fruit Premium Red', `14.9 Added product name updated (got: ${refetchedNewProd.name})`);
+assert(refetchedNewProd.variety === 'Vietnam Red Flesh', `14.10 Added product variety updated (got: ${refetchedNewProd.variety})`);
+assert(refetchedNewProd.unit === 'Crates', `14.11 Added product unit updated to Crates (got: ${refetchedNewProd.unit})`);
+assert(refetchedNewProd.unitCost === 1650, `14.12 Added product unit cost updated (got: ${refetchedNewProd.unitCost})`);
+assert(refetchedNewProd.reorderLevel === 8, `14.13 Added product reorder level updated (got: ${refetchedNewProd.reorderLevel})`);
+
+// 14.4 Update physical stock via stocks map
+store.updateProduct(newProdId, {
+  stocks: { BR001: 15, BR002: 8, BR003: 12, BR004: 6 }
+});
+assert(refetchedNewProd.stocks['BR001'] === 15, '14.14 Stock for Annasandra Palya adjusted');
+assert(refetchedNewProd.stocks['BR002'] === 8, '14.15 Stock for Kodihalli adjusted');
+
+// 14.5 Delete product from catalog
+const delRes = store.deleteProduct(newProdId);
+assert(delRes.success === true, '14.16 deleteProduct executed successfully');
+assert(store.products.find(p => p.id === newProdId) === undefined, '14.17 Deleted product no longer in catalog');
+
+// -------------------------------------------------------------
 // SUMMARY REPORT
 // -------------------------------------------------------------
 console.log('\n============================================================');
