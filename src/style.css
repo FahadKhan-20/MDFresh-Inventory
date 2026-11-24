@@ -1393,69 +1393,73 @@ body {
   color: var(--md-text-main);
 }
 
-/* Mobile Stock Check Cards (for touch targets) */
+/* Mobile Stock Check Cards (Compact & Snappy) */
 .mobile-stock-cards {
   display: none;
   grid-template-columns: 1fr;
-  gap: 12px;
+  gap: 8px;
 }
 
 .mobile-stock-card {
   background: white;
-  border: 1px solid var(--md-border);
-  border-radius: var(--radius-lg);
-  padding: 16px;
-  box-shadow: var(--shadow-sm);
+  border: 1.5px solid var(--md-border);
+  border-radius: var(--radius-md);
+  padding: 8px 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
 }
 
 .mobile-card-top {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 12px;
+  margin-bottom: 5px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--md-surface-subtle);
 }
 
 .mobile-card-product {
-  font-size: 1.05rem;
+  font-size: 0.88rem;
   font-weight: 800;
   color: var(--md-text-main);
+  line-height: 1.2;
 }
 
 .mobile-card-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 8px 0;
+  padding: 3px 0;
   border-top: 1px solid var(--md-surface-subtle);
 }
 
 .mobile-card-label {
-  font-size: 0.8rem;
+  font-size: 0.76rem;
   color: var(--md-text-muted);
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .mobile-card-val {
-  font-size: 0.95rem;
-  font-weight: 700;
+  font-size: 0.88rem;
+  font-weight: 800;
   color: var(--md-text-main);
 }
 
 .mobile-next-btn {
   width: 100%;
-  margin-top: 10px;
-  padding: 10px;
+  margin-top: 4px;
+  padding: 5px 8px;
   background-color: var(--md-surface-subtle);
   color: var(--md-primary);
   border: 1px solid var(--md-primary-light-border);
-  border-radius: var(--radius-md);
+  border-radius: 6px;
   font-weight: 700;
-  font-size: 0.88rem;
+  font-size: 0.74rem;
+  height: 28px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
+  gap: 5px;
 }
 
 /* ==========================================================================
@@ -2900,16 +2904,16 @@ body {
 .mobile-stock-cards {
   display: none;
   flex-direction: column;
-  gap: 12px;
+  gap: 8px;
   margin-bottom: 90px;
 }
 
 .mobile-stock-card {
   background: white;
-  border: 1px solid var(--md-border);
-  border-radius: var(--radius-lg);
-  padding: 14px 16px;
-  box-shadow: var(--shadow-card);
+  border: 1.5px solid var(--md-border);
+  border-radius: var(--radius-md);
+  padding: 8px 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
   transition: all var(--transition-fast);
 }
 
@@ -2921,13 +2925,13 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 10px;
-  padding-bottom: 8px;
+  margin-bottom: 5px;
+  padding-bottom: 4px;
   border-bottom: 1px solid var(--md-surface-subtle);
 }
 
 .mobile-card-product {
-  font-size: 0.98rem;
+  font-size: 0.88rem;
   font-weight: 800;
   color: var(--md-text-main);
   line-height: 1.2;
@@ -2937,8 +2941,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 6px 0;
-  font-size: 0.86rem;
+  padding: 3px 0;
+  font-size: 0.78rem;
 }
 
 .mobile-card-label {

@@ -360,21 +360,25 @@ export function renderDailyStockCheckView() {
         return `
           <div class="mobile-stock-card" data-product-id="${p.id}">
             <div class="mobile-card-top">
-              <div style="display: flex; align-items: center; gap: 10px;">
-                <span style="font-size: 1.5rem;">${p.image}</span>
-                <div>
-                  <div class="mobile-card-product"><span class="pill" style="background: #E0F2FE; color: #0369A1; font-size: 0.72rem; font-weight: 800; padding: 1px 6px; margin-right: 6px; border: 1px solid #BAE6FD;">#${store.getBranchItemSerialNo ? store.getBranchItemSerialNo(currentBranchId, p.id, index) : (index + 1)}</span>${p.name}</div>
-                  <div style="font-size: 0.74rem; color: var(--md-text-muted); font-family: monospace;">${p.originalPluName ? `<strong style="color: #0D8244; background: #EAF5EE; padding: 1px 4px; border-radius: 3px; font-size: 0.68rem; margin-right: 4px; border: 1px solid #C6E9D0;">${p.originalPluName}</strong> &bull; ` : ''}${p.sku}</div>
+              <div style="display: flex; align-items: center; gap: 8px; min-width: 0;">
+                <span style="font-size: 1.25rem; flex-shrink: 0;">${p.image}</span>
+                <div style="min-width: 0;">
+                  <div class="mobile-card-product">
+                    <span class="pill" style="background: #E0F2FE; color: #0369A1; font-size: 0.68rem; font-weight: 800; padding: 1px 5px; margin-right: 5px; border: 1px solid #BAE6FD;">#${store.getBranchItemSerialNo ? store.getBranchItemSerialNo(currentBranchId, p.id, index) : (index + 1)}</span>${p.name}
+                  </div>
+                  <div style="font-size: 0.7rem; color: var(--md-text-muted); font-family: monospace; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                    ${p.originalPluName ? `<strong style="color: #0D8244; background: #EAF5EE; padding: 1px 4px; border-radius: 3px; font-size: 0.65rem; margin-right: 4px; border: 1px solid #C6E9D0;">${p.originalPluName}</strong> &bull; ` : ''}${p.sku}
+                  </div>
                 </div>
               </div>
-              <div style="display: flex; align-items: center; gap: 6px;">
-                <span class="pill pill-unit">${p.unit}</span>
+              <div style="display: flex; align-items: center; gap: 5px; flex-shrink: 0;">
+                <span class="pill pill-unit" style="font-size: 0.68rem; padding: 2px 6px;">${p.unit}</span>
                 <button 
                   type="button" 
                   class="btn-open-edit-product" 
                   data-product-id="${p.id}" 
                   title="Edit product" 
-                  style="border: 1px solid var(--md-border); background: white; border-radius: 6px; padding: 4px 8px; font-size: 0.72rem; font-weight: 800; cursor: pointer; color: var(--md-text-main); display: inline-flex; align-items: center; gap: 4px;"
+                  style="border: 1px solid var(--md-border); background: white; border-radius: 5px; padding: 2px 6px; font-size: 0.68rem; font-weight: 800; cursor: pointer; color: var(--md-text-main); display: inline-flex; align-items: center; gap: 3px;"
                 >
                   ✏️ Edit
                 </button>
@@ -383,7 +387,7 @@ export function renderDailyStockCheckView() {
 
             <div class="mobile-card-row">
               <span class="mobile-card-label">Required to Buy</span>
-              <div class="fast-qty-wrapper ${reqQty > 0 ? 'has-value' : ''}" style="width: 150px;">
+              <div class="fast-qty-wrapper ${reqQty > 0 ? 'has-value' : ''}" style="width: 125px; height: 32px; padding: 1px 4px 1px 6px;">
                 <input 
                   type="number"
                   inputmode="numeric"
@@ -395,8 +399,9 @@ export function renderDailyStockCheckView() {
                   data-product-id="${p.id}"
                   data-index="${index}"
                   value="${reqQty}"
+                  style="font-size: 0.95rem; width: 48px;"
                 />
-                <span class="fast-qty-unit">${p.unit}</span>
+                <span class="fast-qty-unit" style="font-size: 0.66rem; padding: 1px 5px;">${p.unit}</span>
               </div>
             </div>
 
