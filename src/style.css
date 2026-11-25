@@ -4045,3 +4045,93 @@ div[style*="z-index: 999999"] {
     gap: 8px;
   }
 }
+
+/* ==========================================================================
+   DEVELOPER CREDIT & GLOBAL FOOTER STYLES
+   ========================================================================== */
+
+.app-global-footer {
+  margin-top: 40px;
+  padding: 24px 16px 28px;
+  border-top: 1px solid var(--md-border);
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--md-text-muted);
+}
+
+.app-global-footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.footer-separator {
+  color: var(--md-border-strong);
+}
+
+.dev-credit-link {
+  color: var(--md-primary);
+  font-weight: 800;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.15s ease, opacity 0.15s ease;
+  cursor: pointer;
+}
+
+.dev-credit-link:hover {
+  color: var(--md-primary-dark);
+  opacity: 0.85;
+}
+
+.dev-credit-contact-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 9px;
+  background: var(--md-primary-light);
+  border: 1px solid var(--md-primary-light-border);
+  color: var(--md-primary-dark);
+  font-size: 0.72rem;
+  font-weight: 800;
+  border-radius: var(--radius-pill);
+  text-decoration: none;
+  transition: all 0.15s ease;
+}
+
+.dev-credit-contact-badge:hover {
+  background: var(--md-primary);
+  color: white;
+  border-color: var(--md-primary);
+}
+
+.sidebar-developer-credit {
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 1px solid var(--md-border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  font-size: 0.72rem;
+  color: var(--md-text-muted);
+  text-align: center;
+  line-height: 1.35;
+}
+
+.sidebar-developer-credit .dev-credit-link {
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
+
+.sidebar.collapsed .sidebar-developer-credit {
+  display: none !important;
+}
+
+@media (max-width: 860px) {
+  .app-global-footer {
+    padding-bottom: 88px; /* Safe breathing room for mobile sticky review bar & bottom navigation */
+  }
+}

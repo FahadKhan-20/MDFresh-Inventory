@@ -90,6 +90,13 @@ export function renderSidebar() {
             ↪
           </button>
         </div>
+
+        <div class="sidebar-developer-credit">
+          <span>Design &amp; Developed by</span>
+          <a href="mailto:alikhanfahad84@gmail.com?subject=Project%20Inquiry%20via%20MD%20Fresh%20Inventory" class="dev-credit-link" title="Click to contact FAHAD ALI KHAN for projects">
+            FAHAD ALI KHAN ✉️
+          </a>
+        </div>
       </div>
     </aside>
   `;

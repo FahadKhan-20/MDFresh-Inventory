@@ -117,6 +117,18 @@ function renderApp() {
 
         <main class="main-content">
           ${viewHtml}
+
+          <footer class="app-global-footer">
+            <div class="app-global-footer-inner">
+              <span>MD Fresh Enterprise Inventory OS &bull; Bengaluru</span>
+              <span class="footer-separator">&bull;</span>
+              <span>Design &amp; Developed by <a href="mailto:alikhanfahad84@gmail.com?subject=Project%20Inquiry%20via%20MD%20Fresh%20Inventory" class="dev-credit-link" title="Contact FAHAD ALI KHAN for Projects">FAHAD ALI KHAN</a></span>
+              <span class="footer-separator">&bull;</span>
+              <a href="mailto:alikhanfahad84@gmail.com?subject=Project%20Inquiry%20via%20MD%20Fresh%20Inventory" class="dev-credit-contact-badge" title="Click to contact FAHAD ALI KHAN for Projects">
+                ✉️ Contact for Projects
+              </a>
+            </div>
+          </footer>
         </main>
       </div>
 

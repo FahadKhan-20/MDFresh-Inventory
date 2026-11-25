@@ -339,6 +339,7 @@ const { renderSuppliersView } = await import('../src/views/suppliersView.js');
 const { renderReportsView } = await import('../src/views/reportsView.js');
 const { renderAuditLogsView } = await import('../src/views/auditLogsView.js');
 const { renderLoginView } = await import('../src/views/loginView.js');
+const { renderSidebar } = await import('../src/components/sidebar.js');
 
 const views = [
   { name: 'Dashboard View', fn: renderDashboardView },
@@ -1065,6 +1066,20 @@ store.markBranchSubmitted('BR002', true);
 store.markBranchSubmitted('BR003', true);
 store.markBranchSubmitted('BR004', true);
 assert(store.areAllBranchesSubmitted() === true, "22.11 All 4 branches restored to submitted state for production use");
+
+// -------------------------------------------------------------
+// POINT 23: DEVELOPER ATTRIBUTION & PROJECT INQUIRY LINK
+// -------------------------------------------------------------
+console.log("\n\x1b[36m▶ TEST SUITE 23: Developer Attribution & Project Contact Link (FAHAD ALI KHAN)\x1b[0m");
+
+const sidebarHtml = renderSidebar();
+assert(sidebarHtml.includes('Design &amp; Developed by') || sidebarHtml.includes('Design & Developed by'), "23.1 Sidebar renders developer credit header");
+assert(sidebarHtml.includes('FAHAD ALI KHAN'), "23.2 Sidebar credit prominently displays FAHAD ALI KHAN");
+assert(sidebarHtml.includes('mailto:alikhanfahad84@gmail.com'), "23.3 Sidebar credit links directly to alikhanfahad84@gmail.com for project inquiries");
+
+const loginViewHtml = renderLoginView();
+assert(loginViewHtml.includes('FAHAD ALI KHAN'), "23.4 Login view prominently displays developer FAHAD ALI KHAN");
+assert(loginViewHtml.includes('mailto:alikhanfahad84@gmail.com'), "23.5 Login view credit links to alikhanfahad84@gmail.com");
 
 // SUMMARY REPORT
 // -------------------------------------------------------------
