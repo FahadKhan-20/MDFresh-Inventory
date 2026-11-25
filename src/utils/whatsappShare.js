@@ -13,7 +13,8 @@ export function buildWhatsAppOrderMessage() {
   const dateStr = store.getLiveDateString(now);
   const timeStr = store.getLiveTimeString(now, true);
 
-  const totalUnits = consolidated.reduce((acc, it) => acc + (it.totalQty || it.requiredQty || 0), 0);
+  const validConsolidated = (consolidated || []).filter(it => (it.totalQty || it.requiredQty || 0) > 0);
+  const totalUnits = validConsolidated.reduce((acc, it) => acc + (it.totalQty || it.requiredQty || 0), 0);
 
   let msg = `🥬 *MD FRESH — APMC MANDI DAILY PROCUREMENT MANIFEST*\n`;
   msg += `📅 *Date:* ${dateStr} • ${timeStr}\n`;
@@ -24,21 +25,24 @@ export function buildWhatsAppOrderMessage() {
   });
   msg += `━━━━━━━━━━━━━━━━━━━━━\n`;
   msg += `📦 *TOTAL CONSOLIDATED DEMAND:*\n`;
-  msg += `*${consolidated.length} Products* | *${totalUnits} Wholesale Units*\n\n`;
+  msg += `*${validConsolidated.length} Products* | *${totalUnits} Wholesale Units*\n\n`;
 
   msg += `🛒 *APMC WHOLESALE BUYING LIST:*\n`;
   
-  // Format items (vegetables & fruits)
-  consolidated.forEach((it, idx) => {
-    const asp = (it.breakdown && it.breakdown['BR001']) ?? it.branches?.find(b => b.branchId === 'BR001')?.qty ?? 0;
-    const kdh = (it.breakdown && it.breakdown['BR002']) ?? it.branches?.find(b => b.branchId === 'BR002')?.qty ?? 0;
-    const lbs = (it.breakdown && it.breakdown['BR003']) ?? it.branches?.find(b => b.branchId === 'BR003')?.qty ?? 0;
-    const bsv = (it.breakdown && it.breakdown['BR004']) ?? it.branches?.find(b => b.branchId === 'BR004')?.qty ?? 0;
-    const total = it.totalQty || it.requiredQty || 0;
-    const unit = it.unit || 'Units';
-    const name = it.product?.name || it.productName || it.name || 'Item';
-    msg += `${idx + 1}. *${name}*: *${total} ${unit}* (ASP:${asp}, KDH:${kdh}, LBS:${lbs}, BSV:${bsv})\n`;
-  });
+  if (validConsolidated.length === 0) {
+    msg += `_No produce items currently require market purchase._\n`;
+  } else {
+    validConsolidated.forEach((it, idx) => {
+      const asp = (it.breakdown && it.breakdown['BR001']) ?? it.branches?.find(b => b.branchId === 'BR001')?.qty ?? 0;
+      const kdh = (it.breakdown && it.breakdown['BR002']) ?? it.branches?.find(b => b.branchId === 'BR002')?.qty ?? 0;
+      const lbs = (it.breakdown && it.breakdown['BR003']) ?? it.branches?.find(b => b.branchId === 'BR003')?.qty ?? 0;
+      const bsv = (it.breakdown && it.breakdown['BR004']) ?? it.branches?.find(b => b.branchId === 'BR004')?.qty ?? 0;
+      const total = it.totalQty || it.requiredQty || 0;
+      const unit = it.unit || 'Units';
+      const name = it.product?.name || it.productName || it.name || 'Item';
+      msg += `${idx + 1}. *${name}*: *${total} ${unit}* (ASP:${asp}, KDH:${kdh}, LBS:${lbs}, BSV:${bsv})\n`;
+    });
+  }
 
   msg += `\n━━━━━━━━━━━━━━━━━━━━━\n`;
   msg += `📄 *Official APMC Master Manifest PDF is generated and attached.*\n`;

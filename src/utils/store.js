@@ -30,7 +30,7 @@ class InventoryStore {
       if (pA !== pB) return pA - pB;
       return 0;
     });
-    this.requirements = [...INITIAL_REQUIREMENTS];
+    this.requirements = []; // Clean slate for live production
     this.purchaseOrders = [...INITIAL_PURCHASE_ORDERS];
     this.notifications = [...INITIAL_NOTIFICATIONS];
     this.stockMovements = [...INITIAL_STOCK_MOVEMENTS];
@@ -166,22 +166,31 @@ class InventoryStore {
     this.mobileNavOpen = false;
     this.notificationDrawerOpen = false;
 
-    // Daily Stock Check Draft State: branchId -> { productId: requiredQty }
+    // Production Clean Slate: All branch stock check drafts start at clean 0 (empty)
     this.stockCheckDrafts = {
-      BR001: { PRD001: 3, PRD002: 6, PRD003: 2, PRD004: 5, PRD005: 1, PRD006: 4, PRD007: 7, PRD008: 3, PRD009: 6, PRD010: 2, PRD013: 5, PRD017: 1, PRD021: 4, PRD022: 7, PRD023: 3, PRD025: 6, PRD027: 2, PRD028: 5, PRD031: 1, PRD043: 4, PRD045: 7, PRD070: 3, PRD071: 6, PRD076: 2, PRD077: 5, PRD086: 1, PRD088: 4, PRD114: 7, PRD183: 3 },
-      BR002: { PRD001: 5, PRD002: 7, PRD003: 1, PRD004: 3, PRD005: 5, PRD006: 7, PRD007: 1, PRD008: 3, PRD009: 5, PRD010: 7, PRD013: 1, PRD017: 3, PRD021: 5, PRD022: 7, PRD023: 1, PRD025: 3, PRD027: 5, PRD028: 7, PRD031: 1, PRD043: 3, PRD045: 5, PRD070: 7, PRD071: 1, PRD076: 3, PRD077: 5, PRD086: 7, PRD088: 1, PRD114: 3, PRD183: 5 },
-      BR003: { PRD001: 1, PRD002: 5, PRD003: 3, PRD004: 1, PRD005: 5, PRD006: 3, PRD007: 1, PRD008: 5, PRD009: 3, PRD010: 1, PRD013: 5, PRD017: 3, PRD021: 1, PRD022: 5, PRD023: 3, PRD025: 1, PRD027: 5, PRD028: 3, PRD031: 1, PRD043: 5, PRD045: 3, PRD070: 1, PRD071: 5, PRD076: 3, PRD077: 1, PRD086: 5, PRD088: 3, PRD114: 1, PRD183: 5 },
-      BR004: { PRD001: 2, PRD002: 3, PRD003: 4, PRD004: 5, PRD005: 6, PRD006: 7, PRD007: 1, PRD008: 2, PRD009: 3, PRD010: 4, PRD013: 7, PRD017: 4, PRD021: 1, PRD022: 5, PRD023: 2, PRD025: 6, PRD027: 3, PRD028: 7, PRD031: 4, PRD043: 1, PRD045: 5, PRD070: 2, PRD071: 6, PRD076: 3, PRD077: 7, PRD086: 4, PRD088: 1, PRD114: 5, PRD183: 2 }
+      BR001: {},
+      BR002: {},
+      BR003: {},
+      BR004: {}
     };
 
-    // Restore saved stock check drafts from localStorage so manual zeroing/deletions persist
+    // Production Zero-State Initialization Flag (Clean slate for live store operations)
+    const PROD_RELEASE_KEY = 'md_fresh_live_zero_v20261125_01';
     try {
       if (typeof localStorage !== 'undefined') {
-        const savedDrafts = localStorage.getItem('md_fresh_stock_check_drafts');
-        if (savedDrafts) {
-          const parsed = JSON.parse(savedDrafts);
-          if (parsed && typeof parsed === 'object') {
-            this.stockCheckDrafts = parsed;
+        const hasCleaned = localStorage.getItem(PROD_RELEASE_KEY);
+        if (!hasCleaned) {
+          localStorage.removeItem('md_fresh_stock_check_drafts');
+          localStorage.removeItem('md_fresh_branch_submission_status');
+          localStorage.setItem(PROD_RELEASE_KEY, 'CLEAN_ZERO_ACTIVE');
+        } else {
+          // Restore user's live inputs saved today
+          const savedDrafts = localStorage.getItem('md_fresh_stock_check_drafts');
+          if (savedDrafts) {
+            const parsed = JSON.parse(savedDrafts);
+            if (parsed && typeof parsed === 'object') {
+              this.stockCheckDrafts = parsed;
+            }
           }
         }
       }
@@ -215,21 +224,24 @@ class InventoryStore {
     this.currentDate = this.getLiveDateString();
 
     // 4-Branch Daily Requirement Submission Tracking
-    // All 4 branches must submit before APMC Mandi Procurement PDF can be downloaded or opened
+    // All branches start unsubmitted (false) ready for today's live morning audit
     this.branchSubmitted = {
-      BR001: true,
-      BR002: true,
-      BR003: true,
-      BR004: true
+      BR001: false,
+      BR002: false,
+      BR003: false,
+      BR004: false
     };
     this.branchSubmissionDetails = {};
     try {
       if (typeof localStorage !== 'undefined') {
-        const savedSub = localStorage.getItem('md_fresh_branch_submission_status');
-        if (savedSub) {
-          const parsed = JSON.parse(savedSub);
-          if (parsed && typeof parsed === 'object') {
-            this.branchSubmitted = parsed;
+        const hasCleaned = localStorage.getItem('md_fresh_live_zero_v20261125_01');
+        if (hasCleaned) {
+          const savedSub = localStorage.getItem('md_fresh_branch_submission_status');
+          if (savedSub) {
+            const parsed = JSON.parse(savedSub);
+            if (parsed && typeof parsed === 'object') {
+              this.branchSubmitted = parsed;
+            }
           }
         }
       }

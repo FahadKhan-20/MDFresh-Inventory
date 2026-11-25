@@ -203,7 +203,19 @@ function renderMasterTable(pdf, consolidatedItems) {
   let totalBSV = 0;
   let grandTotalUnits = 0;
 
-  consolidatedItems.forEach((item, idx) => {
+  // Strict Demand Filter: ONLY products with actual required quantity (> 0)
+  const validItems = (consolidatedItems || []).filter(item => item && (item.totalQty || item.requiredQty || 0) > 0);
+
+  if (validItems.length === 0) {
+    pdf.ensureSpace(30);
+    pdf.addRect(40, pdf.currentY - 22, 515, 22, { fillColor: [0.98, 0.98, 0.98] });
+    pdf.addText('No produce items currently require market purchase. All retail branch stocks are balanced.', 60, pdf.currentY - 14, { fontSize: 8.5, color: [0.45, 0.45, 0.45] });
+    pdf.addLine(40, pdf.currentY - 22, 555, pdf.currentY - 22, { color: [0.85, 0.88, 0.85], width: 0.5 });
+    pdf.currentY -= 26;
+    return;
+  }
+
+  validItems.forEach((item, idx) => {
     const q1 = getBranchQty(item, 'BR001');
     const q2 = getBranchQty(item, 'BR002');
     const q3 = getBranchQty(item, 'BR003');
@@ -343,7 +355,7 @@ export function generateMasterManifestPDF(data) {
     pdf.addText(`Manager: ${branch.manager} | ${branch.location}`, 300, pdf.currentY - 14, { fontSize: 8, color: [0.85, 0.95, 0.88] });
     pdf.currentY -= 22;
 
-    const bItems = branchRequirements[branch.id] || [];
+    const bItems = (branchRequirements[branch.id] || []).filter(it => it && (it.qty || it.requiredQty || 0) > 0);
 
     if (bItems.length === 0) {
       pdf.addText('No items required for this branch today.', 60, pdf.currentY - 12, { fontSize: 8.5, color: [0.5, 0.5, 0.5] });
@@ -424,7 +436,7 @@ export function generateBranchHeadlinedPDF(data) {
     pdf.addText(`Incharge: ${branch.manager}`, 400, pdf.currentY - 14, { fontSize: 8, color: [0.85, 0.95, 0.88] });
     pdf.currentY -= 22;
 
-    const bItems = branchRequirements[branch.id] || [];
+    const bItems = (branchRequirements[branch.id] || []).filter(it => it && (it.qty || it.requiredQty || 0) > 0);
 
     if (bItems.length === 0) {
       pdf.addText('No requirement submitted for this branch today.', 60, pdf.currentY - 12, { fontSize: 8.5, color: [0.5, 0.5, 0.5] });

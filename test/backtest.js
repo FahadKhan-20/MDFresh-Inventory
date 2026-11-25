@@ -369,7 +369,9 @@ views.forEach((v, i) => {
 // -------------------------------------------------------------
 console.log('\n\x1b[36m▶ TEST SUITE 11: Finalize Order, PDF Download & Next-Day Reset to 0 Workflow\x1b[0m');
 
-// Verify active demand exists before finalize
+// Ensure active multi-item demand exists before finalize
+store.updateRequiredQuantity('BR001', 'PRD001', 10);
+store.updateRequiredQuantity('BR001', 'PRD002', 15);
 const demandBefore = store.getConsolidatedProcurement();
 assert(demandBefore.length > 0, '11.1 Active product requirements exist before finalization');
 
