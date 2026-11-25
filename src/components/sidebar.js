@@ -92,10 +92,15 @@ export function renderSidebar() {
         </div>
 
         <div class="sidebar-developer-credit">
-          <span>Design &amp; Developed by</span>
-          <a href="mailto:alikhanfahad84@gmail.com?subject=Project%20Inquiry%20via%20MD%20Fresh%20Inventory" class="dev-credit-link" title="Click to contact FAHAD ALI KHAN for projects">
-            FAHAD ALI KHAN ✉️
+          <a href="mailto:alikhanfahad84@gmail.com?subject=Project%20Inquiry%20via%20MD%20Fresh%20Inventory" class="dev-credit-avatar-link" title="Click to contact FAHAD ALI KHAN for projects">
+            <img src="/fahad-khan-logo.jpg" alt="FAHAD KHAN Logo" class="dev-credit-logo-img" />
           </a>
+          <div class="sidebar-developer-credit-text">
+            <span>Design &amp; Developed by</span>
+            <a href="mailto:alikhanfahad84@gmail.com?subject=Project%20Inquiry%20via%20MD%20Fresh%20Inventory" class="dev-credit-link" title="Click to contact FAHAD ALI KHAN for projects">
+              FAHAD ALI KHAN ✉️
+            </a>
+          </div>
         </div>
       </div>
     </aside>

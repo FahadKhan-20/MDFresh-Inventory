@@ -1080,6 +1080,8 @@ assert(sidebarHtml.includes('mailto:alikhanfahad84@gmail.com'), "23.3 Sidebar cr
 const loginViewHtml = renderLoginView();
 assert(loginViewHtml.includes('FAHAD ALI KHAN'), "23.4 Login view prominently displays developer FAHAD ALI KHAN");
 assert(loginViewHtml.includes('mailto:alikhanfahad84@gmail.com'), "23.5 Login view credit links to alikhanfahad84@gmail.com");
+assert(sidebarHtml.includes('fahad-khan-logo.jpg'), "23.6 Sidebar credit renders developer brand logo beside credit line");
+assert(loginViewHtml.includes('fahad-khan-logo.jpg'), "23.7 Login view renders developer brand logo beside credit line");
 
 // -------------------------------------------------------------
 // POINT 24: RESPONSIVE MOBILE CARDS IN STOCK RECEIVING PORTAL

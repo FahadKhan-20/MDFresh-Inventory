@@ -188,8 +188,11 @@ export function renderLoginView() {
         <!-- Footer -->
         <div class="auth-footer" style="display: flex; flex-direction: column; gap: 6px; align-items: center;">
           <div style="font-size: 0.8rem; color: var(--md-text-secondary);">MD Fresh Enterprise Inventory OS &bull; Bengaluru</div>
-          <div class="auth-developer-credit" style="font-size: 0.78rem; color: var(--md-text-muted);">
-            Design &amp; Developed by <a href="mailto:alikhanfahad84@gmail.com?subject=Project%20Inquiry%20via%20MD%20Fresh%20Inventory" class="dev-credit-link" style="color: var(--md-primary); font-weight: 800; text-decoration: underline;" title="Contact FAHAD ALI KHAN for Projects">FAHAD ALI KHAN</a>
+          <div class="auth-developer-credit" style="display: flex; align-items: center; gap: 8px; font-size: 0.78rem; color: var(--md-text-muted);">
+            <a href="mailto:alikhanfahad84@gmail.com?subject=Project%20Inquiry%20via%20MD%20Fresh%20Inventory" class="dev-credit-avatar-link" title="Contact FAHAD ALI KHAN for Projects">
+              <img src="/fahad-khan-logo.jpg" alt="FAHAD KHAN Logo" class="dev-credit-logo-img dev-credit-logo-inline" />
+            </a>
+            <span>Design &amp; Developed by <a href="mailto:alikhanfahad84@gmail.com?subject=Project%20Inquiry%20via%20MD%20Fresh%20Inventory" class="dev-credit-link" style="color: var(--md-primary); font-weight: 800; text-decoration: underline;" title="Contact FAHAD ALI KHAN for Projects">FAHAD ALI KHAN</a></span>
           </div>
         </div>
       </div>

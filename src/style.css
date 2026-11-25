@@ -4106,24 +4106,69 @@ div[style*="z-index: 999999"] {
   border-color: var(--md-primary);
 }
 
+.dev-credit-avatar-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  flex-shrink: 0;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.dev-credit-avatar-link:hover {
+  transform: scale(1.08);
+}
+
+.dev-credit-logo-img {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  object-fit: cover;
+  background: #000000;
+  border: 1.5px solid #C5A059;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  display: block;
+}
+
+.dev-credit-logo-inline {
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  border-width: 1px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+}
+
 .sidebar-developer-credit {
   margin-top: 10px;
   padding-top: 8px;
   border-top: 1px solid var(--md-border);
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  gap: 2px;
+  justify-content: center;
+  gap: 10px;
   font-size: 0.72rem;
   color: var(--md-text-muted);
-  text-align: center;
   line-height: 1.35;
+}
+
+.sidebar-developer-credit-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
 }
 
 .sidebar-developer-credit .dev-credit-link {
   font-size: 0.76rem;
   font-weight: 800;
   letter-spacing: 0.02em;
+}
+
+.global-footer-dev-credit {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .sidebar.collapsed .sidebar-developer-credit {
