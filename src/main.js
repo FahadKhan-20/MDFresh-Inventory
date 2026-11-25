@@ -8,6 +8,7 @@ import { renderAuthModal, setupAuthModalEvents } from './components/authModal.js
 import { renderEditProductModal, setupEditProductModalEvents } from './components/editProductModal.js';
 import { renderDeleteConfirmModal, renderRestoreProductsModal, setupDeletionModalsEvents } from './components/deletionModals.js';
 import { initSplashScreen } from './components/splashScreen.js';
+import { initPwaInstall } from './components/pwaInstall.js';
 
 // Views
 import { renderDashboardView, setupDashboardEvents } from './views/dashboardView.js';
@@ -209,6 +210,21 @@ document.addEventListener('DOMContentLoaded', () => {
   startLiveClockTicker();
   purgeNetlifyBadge();
   initSplashScreen();
+  initPwaInstall();
+
+  // Register Service Worker for Chrome PWA mobile app installability
+  if ('serviceWorker' in navigator && (window.location.protocol === 'https:' || window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/sw.js')
+        .then(reg => {
+          console.log('[MD Fresh PWA] Service Worker registered with scope:', reg.scope);
+        })
+        .catch(err => {
+          console.warn('[MD Fresh PWA] Service Worker registration failed:', err);
+        });
+    });
+  }
+
   store.subscribe(() => {
     renderApp();
     purgeNetlifyBadge();

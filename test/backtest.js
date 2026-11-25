@@ -1280,6 +1280,55 @@ assert(typeof initSplashScreen === 'function', "28.4 initSplashScreen controller
 assert(store.isAuthenticated === true, "28.5 Direct entry: user is authenticated by default without login barrier");
 assert(Boolean(store.activeView) && store.activeView !== 'login', "28.6 Direct entry lands on active functional view");
 
+// POINT 29: CHROME PWA & MOBILE APP INSTALLABILITY
+// --------------------------------------------------------------------------
+console.log("\n\x1b[36m▶ TEST SUITE 29: Chrome PWA & Mobile App Installability\x1b[0m");
+
+const manifestPath = path.join(process.cwd(), 'public', 'manifest.json');
+assert(fs.existsSync(manifestPath), "29.1 public/manifest.json file exists on disk");
+
+const manifestContent = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+assert(manifestContent.name && manifestContent.name.includes("MD FRESH"), "29.2 manifest has full name defined");
+assert(manifestContent.short_name === "MD Fresh", "29.3 manifest has short_name defined as MD Fresh");
+assert(manifestContent.display === "standalone", "29.4 manifest display mode is standalone for native app experience");
+assert(manifestContent.start_url === "/", "29.5 manifest start_url is /");
+assert(manifestContent.theme_color === "#0D8244", "29.6 manifest theme_color matches MD Fresh brand emerald");
+assert(Array.isArray(manifestContent.icons) && manifestContent.icons.length >= 2, "29.7 manifest icons array has multiple sizes");
+
+const has192 = manifestContent.icons.some(i => i.sizes === '192x192');
+const has512 = manifestContent.icons.some(i => i.sizes === '512x512');
+const hasMaskable = manifestContent.icons.some(i => i.purpose && i.purpose.includes('maskable'));
+assert(has192 && has512 && hasMaskable, "29.8 manifest includes 192x192, 512x512, and maskable icons for Android Chrome");
+
+const swPath = path.join(process.cwd(), 'public', 'sw.js');
+assert(fs.existsSync(swPath), "29.9 public/sw.js service worker file exists on disk");
+const swContent = fs.readFileSync(swPath, 'utf8');
+assert(swContent.includes('install') && swContent.includes('activate') && swContent.includes('fetch'), "29.10 Service worker has install, activate, and fetch lifecycle listeners");
+
+assert(indexHtmlContent.includes('rel="manifest"') && indexHtmlContent.includes('/manifest.json'), "29.11 index.html links to manifest.json");
+assert(indexHtmlContent.includes('name="theme-color"') && indexHtmlContent.includes('#0D8244'), "29.12 index.html specifies theme-color meta tag");
+assert(indexHtmlContent.includes('rel="apple-touch-icon"'), "29.13 index.html specifies apple-touch-icon for iOS Safari / Chrome");
+
+const { initPwaInstall, triggerPwaInstall, isAppInstalled } = await import('../src/components/pwaInstall.js');
+assert(typeof initPwaInstall === 'function', "29.14 initPwaInstall is exported");
+assert(typeof triggerPwaInstall === 'function', "29.15 triggerPwaInstall is exported");
+assert(typeof isAppInstalled === 'function', "29.16 isAppInstalled is exported");
+
+const topbarModule = await import('../src/components/topbar.js');
+const pwaTopbarHtml = topbarModule.renderTopbar();
+assert(pwaTopbarHtml.includes('btn-pwa-install') && pwaTopbarHtml.includes('Install App'), "29.17 Topbar renders Install App PWA button");
+
+const sidebarModule = await import('../src/components/sidebar.js');
+const pwaSidebarHtml = sidebarModule.renderSidebar();
+assert(pwaSidebarHtml.includes('btn-pwa-install') && pwaSidebarHtml.includes('Install MD Fresh App'), "29.18 Sidebar renders Install App PWA button");
+
+const icon192Path = path.join(process.cwd(), 'public', 'icons', 'icon-192.png');
+const icon512Path = path.join(process.cwd(), 'public', 'icons', 'icon-512.png');
+const appleIconPath = path.join(process.cwd(), 'public', 'apple-touch-icon.png');
+assert(fs.existsSync(icon192Path) && fs.statSync(icon192Path).size > 1000, "29.19 icon-192.png exists with valid size");
+assert(fs.existsSync(icon512Path) && fs.statSync(icon512Path).size > 1000, "29.20 icon-512.png exists with valid size");
+assert(fs.existsSync(appleIconPath) && fs.statSync(appleIconPath).size > 1000, "29.21 apple-touch-icon.png exists with valid size");
+
 // SUMMARY REPORT
 // -------------------------------------------------------------
 console.log('\n============================================================');

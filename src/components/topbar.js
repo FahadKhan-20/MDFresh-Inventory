@@ -1,6 +1,7 @@
 // Minimal Topbar Component for MD Fresh
 import { store } from '../utils/store.js';
 import { icon } from '../utils/icons.js';
+import { triggerPwaInstall } from './pwaInstall.js';
 
 export function renderTopbar() {
   const isAuth = store.isAuthorized;
@@ -26,6 +27,12 @@ export function renderTopbar() {
 
       <!-- Right side: Branch switcher, Date, Auth Mode -->
       <div class="topbar-right">
+        <!-- Install App Button (Desktop & Mobile Chrome) -->
+        <button type="button" id="btnPwaInstallApp" class="btn-pwa-install topbar-install-btn" title="Install MD Fresh on Phone or Desktop" aria-label="Install App">
+          <span class="install-pwa-icon">📲</span>
+          <span class="install-pwa-text">Install App</span>
+        </button>
+
         <!-- Clean Branch Dropdown (The 4 Branches) -->
         <div class="control-chip topbar-branch-chip">
           <span class="topbar-chip-label">Branch:</span>
@@ -70,6 +77,13 @@ export function renderTopbar() {
 }
 
 export function setupTopbarEvents() {
+  const installBtn = document.getElementById('btnPwaInstallApp');
+  if (installBtn) {
+    installBtn.addEventListener('click', () => {
+      triggerPwaInstall();
+    });
+  }
+
   const branchSelect = document.getElementById('globalBranchSelector');
   if (branchSelect) {
     branchSelect.addEventListener('change', (e) => {

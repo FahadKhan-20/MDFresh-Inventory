@@ -1,6 +1,7 @@
 // Minimal Clean Sidebar Component for MD Fresh
 import { store } from '../utils/store.js';
 import { icon } from '../utils/icons.js';
+import { triggerPwaInstall } from './pwaInstall.js';
 
 export function renderSidebar() {
   const activeView = store.activeView;
@@ -91,6 +92,14 @@ export function renderSidebar() {
           </button>
         </div>
 
+        <!-- Install PWA App Button in Sidebar -->
+        <div class="sidebar-pwa-install-wrapper">
+          <button type="button" id="sidebarInstallBtn" class="btn-pwa-install sidebar-install-pwa-btn" title="Install MD Fresh on Phone or Desktop">
+            <span class="install-pwa-icon">📲</span>
+            <span class="sidebar-install-text">Install MD Fresh App</span>
+          </button>
+        </div>
+
         <div class="sidebar-developer-credit">
           <a href="mailto:alikhanfahad84@gmail.com?subject=Project%20Inquiry%20via%20MD%20Fresh%20Inventory" class="dev-credit-avatar-link" title="Click to contact FAHAD ALI KHAN for projects">
             <img src="/fahad-khan-logo.jpg" alt="FAHAD KHAN Logo" class="dev-credit-logo-img" />
@@ -108,6 +117,13 @@ export function renderSidebar() {
 }
 
 export function setupSidebarEvents() {
+  const sidebarInstallBtn = document.getElementById('sidebarInstallBtn');
+  if (sidebarInstallBtn) {
+    sidebarInstallBtn.addEventListener('click', () => {
+      triggerPwaInstall();
+    });
+  }
+
   const toggleBtn = document.getElementById('sidebarCollapseBtn');
   if (toggleBtn) {
     toggleBtn.addEventListener('click', () => {
