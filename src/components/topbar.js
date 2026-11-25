@@ -9,41 +9,35 @@ export function renderTopbar() {
 
   return `
     <header class="topbar">
-      <!-- Left side: Mobile menu & Store info -->
+      <!-- Left side: Mobile menu & Store Branch Selector -->
       <div class="topbar-left">
         <button class="mobile-menu-trigger" id="mobileMenuBtn" aria-label="Toggle mobile menu">
           ${icon('menu', 'icon')}
         </button>
 
-        <div class="topbar-brand-indicator">
-          <span class="topbar-branch-title">
-            ${currentBranch.name}
-          </span>
-          <span class="pill pill-unit topbar-branch-badge">
-            ${currentBranch.code}
-          </span>
+        <div class="topbar-branch-picker" title="Switch Store Branch">
+          <span class="topbar-branch-icon">🏪</span>
+          <div class="topbar-branch-select-box">
+            <span class="topbar-branch-caption">Store:</span>
+            <select id="globalBranchSelector" class="branch-select topbar-branch-select" aria-label="Select Store Branch">
+              ${store.branches.map(b => `
+                <option value="${b.id}" ${b.id === store.currentBranchId ? 'selected' : ''}>
+                  ${b.name} (${b.code})
+                </option>
+              `).join('')}
+            </select>
+          </div>
+          <span class="pill pill-unit topbar-branch-badge">${currentBranch.code}</span>
         </div>
       </div>
 
-      <!-- Right side: Branch switcher, Date, Auth Mode -->
+      <!-- Right side: Install, Date, Auth Mode, Logout -->
       <div class="topbar-right">
         <!-- Install App Button (Desktop & Mobile Chrome) -->
         <button type="button" id="btnPwaInstallApp" class="btn-pwa-install topbar-install-btn" title="Install MD Fresh on Phone or Desktop" aria-label="Install App">
           <span class="install-pwa-icon">📲</span>
           <span class="install-pwa-text">Install App</span>
         </button>
-
-        <!-- Clean Branch Dropdown (The 4 Branches) -->
-        <div class="control-chip topbar-branch-chip">
-          <span class="topbar-chip-label">Branch:</span>
-          <select id="globalBranchSelector" class="branch-select">
-            ${store.branches.map(b => `
-              <option value="${b.id}" ${b.id === store.currentBranchId ? 'selected' : ''}>
-                ${b.name}
-              </option>
-            `).join('')}
-          </select>
-        </div>
 
         <!-- Live Real-Time Date & Clock -->
         <div class="date-indicator topbar-date-indicator">

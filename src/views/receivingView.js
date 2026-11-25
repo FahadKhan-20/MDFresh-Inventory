@@ -126,7 +126,7 @@ export function renderReceivingView() {
       </div>
 
       <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
-        <!-- Branch Selector Dropdown (Quick selection on mobile & desktop) -->
+        <!-- Branch Selector Dropdown Chip -->
         <div class="control-chip receiving-branch-chip" style="background: white; border: 1.5px solid var(--md-border-strong);">
           <span style="color: var(--md-text-muted); font-size: 0.8rem; font-weight: 700;">Branch:</span>
           <select id="receivingBranchSelect" class="branch-select" style="font-weight: 800; font-size: 0.92rem; color: var(--md-primary); outline: none; border: none; background: transparent; cursor: pointer;">

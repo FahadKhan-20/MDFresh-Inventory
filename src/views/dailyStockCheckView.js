@@ -58,43 +58,59 @@ export function renderDailyStockCheckView() {
   const submissionSummary = store.getBranchSubmissionSummary ? store.getBranchSubmissionSummary() : [];
   const submittedCount = submissionSummary.filter(s => s.isSubmitted).length;
 
+  const branchSequenceLabels = {
+    BR001: {
+      title: 'Annasandrapalya Branch Standard Sequence Active',
+      badge: 'ANNASANDRAPALYA SEQUENCE',
+      desc: 'Direct morning store audit sequence: <strong>Vegetables (#1 Beans to #62 Tomato Nati)</strong> &bull; <strong>Fruits (#63 Watermelon Normal to #102 Misri Apple)</strong>.',
+      countNote: '102 Produce Items (62 Veg • 40 Fruits)'
+    },
+    BR002: {
+      title: 'Kodihalli Branch Standard Sequence Active',
+      badge: 'KODIHALLI SEQUENCE',
+      desc: 'Direct morning store audit sequence: <strong>Vegetables (#1 Cucumber to #53 S POTATO)</strong> &bull; <strong>Fruits (#54 Apple Premium to #94 Mangoes)</strong>.',
+      countNote: '94 Produce Items (53 Veg • 41 Fruits)'
+    },
+    BR003: {
+      title: 'LB Shastri Nagar Branch Standard Sequence Active',
+      badge: 'LBS NAGAR SEQUENCE',
+      desc: 'Direct morning store audit sequence: <strong>Vegetables (#1 Beans to #58 Tomato Nati)</strong> &bull; <strong>Fruits (#59 Watermelon Normal to #98 Misri Apple)</strong>.',
+      countNote: '98 Produce Items (58 Veg • 40 Fruits)'
+    },
+    BR004: {
+      title: 'Basavanagar Branch Standard Sequence Active',
+      badge: 'BASAVANAGAR SEQUENCE',
+      desc: 'Direct morning store audit sequence: <strong>Vegetables (#1 Cucumber to #62 Tomato)</strong> &bull; <strong>Fruits (#63 Raw Green Mango to #104 Misri Apple)</strong>.',
+      countNote: '104 Produce Items (62 Veg • 42 Fruits)'
+    }
+  };
+  const seqInfo = branchSequenceLabels[currentBranchId] || {
+    title: `${currentBranch.name} Standard Sequence Active`,
+    badge: `${currentBranch.code} SEQUENCE`,
+    desc: 'Direct morning store audit sequence: <strong>Vegetables</strong> first, followed by <strong>Fruits</strong>.',
+    countNote: `${totalItemsCount} Produce Items`
+  };
+
   return `
     <!-- Top Stock Check Header Card -->
     <div class="stock-check-header-card">
-      <div>
-        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
-          <span style="font-size: 0.76rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: var(--md-primary); background-color: var(--md-primary-light); padding: 2px 8px; border-radius: var(--radius-pill);">
-            FAST NUMERIC ENTRY MODE
-          </span>
-          <span style="font-size: 0.76rem; color: var(--md-text-muted);">Tab or Enter to advance</span>
+      <div class="header-card-left">
+        <div class="header-card-badge-row">
+          <span class="header-card-badge">FAST NUMERIC ENTRY MODE</span>
+          <span class="header-card-hint">Tab or Enter to advance</span>
         </div>
-        <h1 style="font-size: 1.65rem; font-weight: 800; color: var(--md-secondary-dark); letter-spacing: -0.02em;">
-          Daily Stock Check
-        </h1>
-        <p style="font-size: 0.85rem; color: var(--md-text-secondary); margin-top: 2px;">
-          Direct morning count verification for store replenishment & APMC market consolidation.
+        <h1 class="header-card-title">Daily Stock Check</h1>
+        <p class="header-card-subtitle">
+          Direct morning count verification for store replenishment &amp; APMC market consolidation.
         </p>
       </div>
 
-      <!-- Branch & Date Selector Controls -->
-      <div style="display: flex; align-items: center; gap: 14px; flex-wrap: wrap;">
-        <div class="control-chip" style="background: white; border-color: var(--md-border-strong);">
-          <span style="color: var(--md-text-muted); font-size: 0.8rem;">Branch:</span>
-          <select id="stockCheckBranchSelect" class="branch-select" style="font-weight: 800; font-size: 0.95rem; color: var(--md-primary);">
-            ${store.branches.map(b => `<option value="${b.id}" ${b.id === currentBranchId ? 'selected' : ''}>${b.name}</option>`).join('')}
-          </select>
-        </div>
-
-        <div class="date-indicator" style="background: white; font-weight: 700; gap: 8px;">
-          <span class="live-pulse-dot" title="Live Clock Active"></span>
-          <span class="live-clock-display" style="font-family: monospace; font-size: 0.82rem; color: var(--md-secondary-dark);">${store.getLiveDateTimeString(new Date(), true)}</span>
-        </div>
-
-        <!-- Progress Widget -->
-        <div class="progress-widget" style="background: white; padding: 8px 14px; border-radius: var(--radius-md); border: 1px solid var(--md-border);">
+      <!-- Clean Progress Widget on Header Card Right -->
+      <div class="header-card-right">
+        <div class="stock-progress-widget">
           <div class="progress-meta">
-            <span style="color: var(--md-text-secondary);">Progress</span>
-            <span style="color: var(--md-primary); font-weight: 800;">${checkedItemsCount} / ${totalItemsCount} checked</span>
+            <span class="progress-label">Stock Check Progress</span>
+            <span class="progress-count">${checkedItemsCount} / ${totalItemsCount} checked</span>
           </div>
           <div class="progress-bar-track">
             <div class="progress-bar-fill" style="width: ${progressPercent}%;"></div>
@@ -125,88 +141,29 @@ export function renderDailyStockCheckView() {
       </div>
     ` : ''}
 
-    <!-- Kodihalli Sequence Indicator Banner -->
-            ${currentBranchId === "BR001" ? `
-      <div style="background: linear-gradient(135deg, #F0FDF4 0%, #DCFCE7 100%); border: 1.5px solid #86EFAC; border-radius: var(--radius-md); padding: 10px 16px; margin-bottom: 16px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; box-shadow: 0 2px 6px rgba(16, 185, 129, 0.08);">
-        <div style="display: flex; align-items: center; gap: 10px;">
-          <span style="font-size: 1.3rem;">📋</span>
-          <div>
-            <div style="font-weight: 800; font-size: 0.92rem; color: #166534; display: flex; align-items: center; gap: 8px;">
-              <span>Annasandrapalya Branch Standard Sequence Active (102 Produce Items: 62 Veg &bull; 40 Fruits)</span>
-              <span class="pill" style="background: #166534; color: white; font-size: 0.7rem; font-weight: 800; padding: 2px 8px;">ANNASANDRAPALYA SEQUENCE</span>
-            </div>
-            <div style="font-size: 0.78rem; color: #15803D; margin-top: 2px;">
-              Direct morning store audit sequence: <strong>Vegetables (#1 Beans to #62 Tomato Nati)</strong> &bull; <strong>Fruits (#63 Watermelon Normal to #102 Misri Apple)</strong>.
-            </div>
+    <!-- Branch Sequence Indicator Banner -->
+    <div class="stock-sequence-banner">
+      <div class="seq-banner-left">
+        <span class="seq-banner-icon">📋</span>
+        <div class="seq-banner-text">
+          <div class="seq-banner-title">
+            <span>${seqInfo.title}</span>
+            <span class="pill pill-unit seq-pill">${seqInfo.badge}</span>
+          </div>
+          <div class="seq-banner-desc">
+            ${seqInfo.desc}
           </div>
         </div>
-        <div style="font-size: 0.8rem; font-weight: 700; color: #166534;">
-          Ordered strictly #1 Beans to #102 Misri Apple
-        </div>
       </div>
-    ` : ""}
-    ${currentBranchId === "BR004" ? `
-      <div style="background: linear-gradient(135deg, #F0FDF4 0%, #DCFCE7 100%); border: 1.5px solid #86EFAC; border-radius: var(--radius-md); padding: 10px 16px; margin-bottom: 16px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; box-shadow: 0 2px 6px rgba(16, 185, 129, 0.08);">
-        <div style="display: flex; align-items: center; gap: 10px;">
-          <span style="font-size: 1.3rem;">📋</span>
-          <div>
-            <div style="font-weight: 800; font-size: 0.92rem; color: #166534; display: flex; align-items: center; gap: 8px;">
-              <span>Basavanagar Branch Standard Sequence Active (104 Produce Items: 62 Veg &bull; 42 Fruits)</span>
-              <span class="pill" style="background: #166534; color: white; font-size: 0.7rem; font-weight: 800; padding: 2px 8px;">BASAVANAGAR SEQUENCE</span>
-            </div>
-            <div style="font-size: 0.78rem; color: #15803D; margin-top: 2px;">
-              Direct morning store audit sequence: <strong>Vegetables (#1 Cucumber to #62 Tomato)</strong> &bull; <strong>Fruits (#63 Raw Green Mango to #104 Misri Apple)</strong>.
-            </div>
-          </div>
-        </div>
-        <div style="font-size: 0.8rem; font-weight: 700; color: #166534;">
-          Ordered strictly #1 Cucumber to #104 Misri Apple
-        </div>
+      <div class="seq-banner-badge">
+        ${seqInfo.countNote}
       </div>
-    ` : ""}
-    ${currentBranchId === "BR003" ? `
-      <div style="background: linear-gradient(135deg, #F0FDF4 0%, #DCFCE7 100%); border: 1.5px solid #86EFAC; border-radius: var(--radius-md); padding: 10px 16px; margin-bottom: 16px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; box-shadow: 0 2px 6px rgba(16, 185, 129, 0.08);">
-        <div style="display: flex; align-items: center; gap: 10px;">
-          <span style="font-size: 1.3rem;">📋</span>
-          <div>
-            <div style="font-weight: 800; font-size: 0.92rem; color: #166534; display: flex; align-items: center; gap: 8px;">
-              <span>LB Shastri Nagar Branch Standard Sequence Active (103 Produce Items: 62 Veg &bull; 41 Fruits)</span>
-              <span class="pill" style="background: #166534; color: white; font-size: 0.7rem; font-weight: 800; padding: 2px 8px;">LBS NAGAR SEQUENCE</span>
-            </div>
-            <div style="font-size: 0.78rem; color: #15803D; margin-top: 2px;">
-              Direct morning store audit sequence: <strong>Vegetables (#1 Beans to #62 Tomato Nati)</strong> &bull; <strong>Fruits (#63 Robusta to #103 Watermelon Stripes)</strong>.
-            </div>
-          </div>
-        </div>
-        <div style="font-size: 0.8rem; font-weight: 700; color: #166534;">
-          Ordered strictly #1 Beans to #103 Watermelon Stripes
-        </div>
-      </div>
-    ` : ""}
-    ${currentBranchId === "BR002" ? `
-      <div style="background: linear-gradient(135deg, #F0FDF4 0%, #DCFCE7 100%); border: 1.5px solid #86EFAC; border-radius: var(--radius-md); padding: 10px 16px; margin-bottom: 16px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; box-shadow: 0 2px 6px rgba(16, 185, 129, 0.08);">
-        <div style="display: flex; align-items: center; gap: 10px;">
-          <span style="font-size: 1.3rem;">📋</span>
-          <div>
-            <div style="font-weight: 800; font-size: 0.92rem; color: #166534; display: flex; align-items: center; gap: 8px;">
-              <span>Kodihalli Branch Standard Sequence Active (94 Produce Items: 53 Veg &bull; 41 Fruits)</span>
-              <span class="pill" style="background: #166534; color: white; font-size: 0.7rem; font-weight: 800; padding: 2px 8px;">KODIHALLI SEQUENCE</span>
-            </div>
-            <div style="font-size: 0.78rem; color: #15803D; margin-top: 2px;">
-              Direct morning store audit sequence: <strong>Vegetables (#1 Cucumber to #53 S POTATO)</strong> &bull; <strong>Fruits (#54 Apple Premium to #94 Mangoes)</strong>.
-            </div>
-          </div>
-        </div>
-        <div style="font-size: 0.8rem; font-weight: 700; color: #166534;">
-          Ordered strictly #1 Cucumber to #94 Mangoes
-        </div>
-      </div>
-    ` : ""}
+    </div>
 
     <!-- Filters & Action Bar -->
     <div class="filter-bar">
       <!-- Search Input -->
-      <div class="search-input-group" style="flex: 1; max-width: 380px;">
+      <div class="search-input-group filter-search-wrap">
         ${icon('search', 'icon-sm')}
         <input 
           type="text" 
@@ -222,11 +179,11 @@ export function renderDailyStockCheckView() {
         <button class="filter-tab ${activeCategoryFilter === 'All' ? 'active' : ''}" data-cat="All">All</button>
         <button class="filter-tab ${activeCategoryFilter === 'Vegetables' ? 'active' : ''}" data-cat="Vegetables">Vegetables</button>
         <button class="filter-tab ${activeCategoryFilter === 'Fruits' ? 'active' : ''}" data-cat="Fruits">Fruits</button>
-        <button class="filter-tab ${activeCategoryFilter === 'Dairy & Others' ? 'active' : ''}" data-cat="Dairy & Others">Dairy & Others</button>
+        <button class="filter-tab ${activeCategoryFilter === 'Dairy & Others' ? 'active' : ''}" data-cat="Dairy & Others">Dairy &amp; Others</button>
       </div>
 
       <!-- Quick Toggles & Action Buttons -->
-      <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+      <div class="filter-action-group">
         <button 
           id="btnToggleOnlyRequired" 
           class="btn ${filterOnlyRequired ? 'btn-primary' : 'btn-secondary'} btn-sm"
@@ -247,11 +204,11 @@ export function renderDailyStockCheckView() {
         <!-- VIEW ALL BRANCHES COMBINED MATRIX TABLE -->
         <button 
           id="btnGoToAllBranchesMatrix" 
-          class="btn btn-primary btn-sm"
+          class="btn btn-secondary btn-sm"
           style="font-weight: 800;"
           title="View combined tabular list of all 4 branches"
         >
-          ${icon('layers', 'icon-sm')} View All Branches Table
+          ${icon('layers', 'icon-sm')} All Branches Table
         </button>
 
         <!-- DOWNLOAD COMBINED & BRANCH MANIFEST IN PDF (OPTIONAL) -->
@@ -261,17 +218,17 @@ export function renderDailyStockCheckView() {
           style="font-weight: 800; background: ${allBranchesSubmitted ? '#E8F6ED' : '#FEF3C7'}; color: ${allBranchesSubmitted ? '#0D8244' : '#B45309'}; border: 1.5px solid ${allBranchesSubmitted ? '#B7E4C4' : '#FCD34D'}; display: inline-flex; align-items: center; gap: 5px;"
           title="${allBranchesSubmitted ? 'Download complete APMC purchase manifest in PDF' : 'Waiting for all 4 branches to submit requirements before PDF can be exported'}"
         >
-          ${allBranchesSubmitted ? '📥 PDF (Optional)' : `🔒 PDF (${submittedCount}/4 Submitted)`}
+          ${allBranchesSubmitted ? '📥 PDF' : `🔒 PDF (${submittedCount}/4)`}
         </button>
 
         <!-- RESTORE DELETED PRODUCTS BUTTON -->
         <button 
           id="btnOpenRestoreDeletedModal" 
           class="btn btn-secondary btn-sm btn-open-restore-modal"
-          style="font-weight: 800; background: #F8FAFC; color: #334155; border: 1.5px solid #CBD5E1; display: inline-flex; align-items: center; gap: 5px;"
+          style="font-weight: 800; background: #F8FAFC; color: #334155; border: 1.5px solid #CBD5E1; display: ${store.getDeletedProducts && store.getDeletedProducts().length > 0 ? 'inline-flex' : 'none'}; align-items: center; gap: 5px;"
           title="Restore previously removed products back to catalog"
         >
-          ♻️ Restore Deleted (<span class="restore-count-badge">${store.getDeletedProducts ? store.getDeletedProducts().length : 0}</span>)
+          ♻️ Restore (<span class="restore-count-badge">${store.getDeletedProducts ? store.getDeletedProducts().length : 0}</span>)
         </button>
       </div>
     </div>
