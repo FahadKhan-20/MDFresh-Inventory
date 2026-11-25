@@ -19,7 +19,17 @@ class InventoryStore {
   constructor() {
     this.branches = [...INITIAL_BRANCHES];
     this.suppliers = [...INITIAL_SUPPLIERS];
-    this.products = [...INITIAL_PRODUCTS];
+    const catPriority = {
+      'Vegetables': 1,
+      'Fruits': 2,
+      'Dairy & Others': 3
+    };
+    this.products = [...INITIAL_PRODUCTS].sort((a, b) => {
+      const pA = catPriority[a.category] || 99;
+      const pB = catPriority[b.category] || 99;
+      if (pA !== pB) return pA - pB;
+      return 0;
+    });
     this.requirements = [...INITIAL_REQUIREMENTS];
     this.purchaseOrders = [...INITIAL_PURCHASE_ORDERS];
     this.notifications = [...INITIAL_NOTIFICATIONS];
@@ -437,7 +447,7 @@ class InventoryStore {
     }
     if (branchId === "BR004") {
       const idx = seq ? seq.indexOf(productId) : BASAVANAGAR_SEQUENCE.indexOf(productId);
-      if (idx !== -1) return idx < 64 ? "Vegetables" : "Fruits";
+      if (idx !== -1) return idx < 62 ? "Vegetables" : "Fruits";
     }
     const prod = this.products.find(p => p.id === productId);
     return prod ? prod.category : "General";
@@ -480,6 +490,11 @@ class InventoryStore {
 
   sortProductsForBranch(branchId, productList) {
     if (Array.isArray(productList)) {
+      const catPriority = {
+        'Vegetables': 1,
+        'Fruits': 2,
+        'Dairy & Others': 3
+      };
       return [...productList].sort((a, b) => {
         const idA = a.id || a.productId;
         const idB = b.id || b.productId;
@@ -488,7 +503,14 @@ class InventoryStore {
         if (idxA !== idxB) {
           return idxA - idxB;
         }
-        return 0;
+        const catA = this.getProductCategoryForBranch(branchId, idA) || a.category || 'Vegetables';
+        const catB = this.getProductCategoryForBranch(branchId, idB) || b.category || 'Vegetables';
+        const pA = catPriority[catA] || 99;
+        const pB = catPriority[catB] || 99;
+        if (pA !== pB) {
+          return pA - pB;
+        }
+        return (a.name || '').localeCompare(b.name || '');
       });
     }
     return productList;

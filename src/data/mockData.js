@@ -12333,111 +12333,111 @@ export const LBS_NAGAR_SEQUENCE = [
 ];
 
 
-// Official sequence for BASAVANAGAR branch (BR004) - Vegetables first (#1 to #64), then Fruits (#65 to #104)
+// Official sequence for BASAVANAGAR branch (BR004) - Strictly 62 Vegetables first (#1 to #62), then 42 Fruits (#63 to #104)
 export const BASAVANAGAR_SEQUENCE = [
   "PRD023", // 1 Cucumber Local
-  "PRD032", // 2
-  "PRD022", // 3
-  "PRD019", // 4
-  "PRD049", // 5
-  "PRD143", // 6
-  "PRD006", // 7
-  "PRD009", // 8
-  "PRD005", // 9
-  "PRD004", // 10
-  "PRD057", // 11
-  "PRD029", // 12
-  "PRD012", // 13
-  "PRD021", // 14
-  "PRD125", // 15
-  "PRD017", // 16
-  "PRD008", // 17
-  "PRD018", // 18
-  "PRD066", // 19
-  "PRD011", // 20
-  "PRD183", // 21
-  "PRD020", // 22
-  "PRD014", // 23
-  "PRD188", // 24
-  "PRD189", // 25
-  "PRD015", // 26
-  "PRD016", // 27
-  "PRD205", // 28
-  "PRD028", // 29
-  "PRD192", // 30
-  "PRD058", // 31
-  "PRD169", // 32
-  "PRD170", // 33
-  "PRD053", // 34
-  "PRD037", // 35
-  "PRD038", // 36
-  "PRD010", // 37
-  "PRD030", // 38
-  "PRD024", // 39
-  "PRD051", // 40
-  "PRD060", // 41
-  "PRD131", // 42
-  "PRD050", // 43
-  "PRD034", // 44
-  "PRD172", // 45
-  "PRD027", // 46
-  "PRD048", // 47
-  "PRD047", // 48
-  "PRD052", // 49
-  "PRD033", // 50
-  "PRD035", // 51
-  "PRD193", // 52
-  "PRD156", // 53
-  "PRD176", // 54
-  "PRD045", // 55
-  "PRD194", // 56
-  "PRD041", // 57
-  "PRD042", // 58
-  "PRD043", // 59
-  "PRD044", // 60
-  "PRD207", // 61
-  "PRD092", // 62
-  "PRD185", // 63
-  "PRD003", // 64 Tomato Farm
+  "PRD032", // 2 Cauliflower
+  "PRD022", // 3 Cabbage Green
+  "PRD019", // 4 Lauki (Bottle Gourd)
+  "PRD049", // 5 Ridge Gourd (Hirekayi)
+  "PRD143", // 6 S POTATO
+  "PRD006", // 7 Ladies Finger
+  "PRD009", // 8 Green Peas
+  "PRD005", // 9 Green Beans
+  "PRD004", // 10 Carrot
+  "PRD057", // 11 Beetroot
+  "PRD029", // 12 Drumstick
+  "PRD012", // 13 Radish White
+  "PRD021", // 14 Capsicum Green
+  "PRD125", // 15 Parval (Pointed Gourd)
+  "PRD017", // 16 Amla
+  "PRD008", // 17 Long Beans
+  "PRD018", // 18 Avarakkai
+  "PRD066", // 19 Double Beans (Lima)
+  "PRD011", // 20 Nookkol
+  "PRD183", // 21 Small Karela (S.Karela)
+  "PRD020", // 22 Bitter Gourd
+  "PRD014", // 23 Small Brinjal Green
+  "PRD188", // 24 Small Brinjal Purple
+  "PRD189", // 25 Long Brinjal Purple
+  "PRD015", // 26 Long Brinjal Green
+  "PRD016", // 27 Bharta Green
+  "PRD205", // 28 Bharta Black
+  "PRD028", // 29 Green Chilli
+  "PRD192", // 30 Big Chilli
+  "PRD058", // 31 Bhajji Chilly
+  "PRD169", // 32 Matki Falli (Moth Pods)
+  "PRD170", // 33 Sem
+  "PRD053", // 34 Avarakkai
+  "PRD037", // 35 Kovakkai / Kundru (Tindora)
+  "PRD038", // 36 Snake Gourd (Padavalakai)
+  "PRD010", // 37 Chow Chow
+  "PRD030", // 38 Raw Green Papaya
+  "PRD024", // 39 Raw Banana (Cooking)
+  "PRD051", // 40 Banana Stem
+  "PRD060", // 41 Banana Flower (Vazhaipoo)
+  "PRD050", // 42 Jackfruit (Raw / Ripe)
+  "PRD034", // 43 Arvi
+  "PRD172", // 44 Tapioca (Kappa / Cassava)
+  "PRD027", // 45 Ginger
+  "PRD048", // 46 White Pumpkin (Ash Gourd)
+  "PRD047", // 47 Yellow Pumpkin
+  "PRD052", // 48 Elephant Foot Yam (Suran)
+  "PRD033", // 49 Sambar Cucumber
+  "PRD035", // 50 Small Onion (Shallots)
+  "PRD193", // 51 Kandrela
+  "PRD156", // 52 Turmeric Raw (Haldi)
+  "PRD176", // 53 Karamani (Cowpea Pods)
+  "PRD045", // 54 Coriander (Kothmir)
+  "PRD194", // 55 Naati
+  "PRD041", // 56 Curry Leaf
+  "PRD042", // 57 Pudina (Mint)
+  "PRD043", // 58 Palak (Spinach)
+  "PRD044", // 59 Methi (Fenugreek)
+  "PRD207", // 60 Bhajji Chilly
+  "PRD185", // 61 N TOMATO
+  "PRD003", // 62 Tomato Farm
+  "PRD131", // 63 Raw Green Mango
+  "PRD092", // 64 Banana Robusta
   "PRD088", // 65 Watermelon Normal
-  "PRD089", // 66
-  "PRD078", // 67
-  "PRD085", // 68
-  "PRD104", // 69
-  "PRD179", // 70
-  "PRD180", // 71
-  "PRD076", // 72
-  "PRD097", // 73
-  "PRD218", // 74
-  "PRD094", // 75
-  "PRD166", // 76
-  "PRD216", // 77
-  "PRD199", // 78
-  "PRD157", // 79
-  "PRD173", // 80
-  "PRD198", // 81
-  "PRD081", // 82
-  "PRD080", // 83
-  "PRD079", // 84
-  "PRD217", // 85
-  "PRD084", // 86
-  "PRD197", // 87
-  "PRD077", // 88
-  "PRD103", // 89
-  "PRD090", // 90
-  "PRD099", // 91
-  "PRD212", // 92
-  "PRD174", // 93
-  "PRD075", // 94
-  "PRD196", // 95
-  "PRD208", // 96
-  "PRD071", // 97
-  "PRD209", // 98
-  "PRD210", // 99
-  "PRD073", // 100
-  "PRD211", // 101
-  "PRD201", // 102
-  "PRD070", // 103
+  "PRD089", // 66 Watermelon Stripes
+  "PRD078", // 67 Papaya Ripe (Red Lady)
+  "PRD085", // 68 Apple Premium
+  "PRD104", // 69 Madrin
+  "PRD179", // 70 CITRUS
+  "PRD180", // 71 MADRIN
+  "PRD076", // 72 Mosambi Sweet Lime
+  "PRD097", // 73 Muskmelon Farm
+  "PRD218", // 74 Muskmelon Nati
+  "PRD094", // 75 Apple Premium
+  "PRD166", // 76 Chiku (Sapota)
+  "PRD216", // 77 Thai Guava
+  "PRD199", // 78 Nati Gauva
+  "PRD157", // 79 BAERY
+  "PRD173", // 80 Dragon Fruit Red
+  "PRD198", // 81 Dragon Fruit White
+  "PRD081", // 82 Grapes Green Thompson
+  "PRD080", // 83 Grapes Black Seedless
+  "PRD079", // 84 Grapes Red Globe Imported
+  "PRD217", // 85 Golden Kiwi
+  "PRD084", // 86 Kiwi Fruit
+  "PRD197", // 87 Pomegranate Big
+  "PRD077", // 88 Anar (Pomegranate)
+  "PRD103", // 89 Plum Black
+  "PRD090", // 90 Pear Green
+  "PRD099", // 91 Butter Fruit (Avocado)
+  "PRD212", // 92 Butter Fruit Imported
+  "PRD174", // 93 Persimmon Fruit
+  "PRD075", // 94 Apple Royal Gala
+  "PRD196", // 95 Pink Lady
+  "PRD208", // 96 Turkey Apple
+  "PRD071", // 97 Apple Washington
+  "PRD209", // 98 Rocket Apple
+  "PRD210", // 99 Alibinder
+  "PRD073", // 100 Apple Green (Granny Smith)
+  "PRD211", // 101 Iran Apple
+  "PRD201", // 102 Kashmiri Apple
+  "PRD070", // 103 Apple Indian (Shimla)
   "PRD202"  // 104 Misri Apple
 ];
 

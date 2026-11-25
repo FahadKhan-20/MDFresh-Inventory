@@ -199,7 +199,7 @@ export function renderReceivingView() {
           </div>
         </div>
         <div style="font-size: 0.8rem; font-weight: 700; color: #166534;">
-          #1 Beans through #100 Misri Apple
+          #1 Beans through #102 Misri Apple
         </div>
       </div>
     ` : ""}
@@ -209,16 +209,16 @@ export function renderReceivingView() {
           <span style="font-size: 1.3rem;">🚚</span>
           <div>
             <div style="font-weight: 800; font-size: 0.92rem; color: #166534; display: flex; align-items: center; gap: 8px;">
-              <span>Basavanagar Dock Receiving Sequence Active (101 Produce Items: 63 Veg &bull; 38 Fruits)</span>
+              <span>Basavanagar Dock Receiving Sequence Active (104 Produce Items: 62 Veg &bull; 42 Fruits)</span>
               <span class="pill" style="background: #166534; color: white; font-size: 0.7rem; font-weight: 800; padding: 2px 8px;">BASAVANAGAR SEQUENCE</span>
             </div>
             <div style="font-size: 0.78rem; color: #15803D; margin-top: 2px;">
-              Arriving crates are ordered strictly in the official Basavanagar stock receiving list order.
+              Arriving crates are ordered strictly in the official Basavanagar stock receiving list order: <strong>Vegetables (#1 to #62)</strong> then <strong>Fruits (#63 to #104)</strong>.
             </div>
           </div>
         </div>
         <div style="font-size: 0.8rem; font-weight: 700; color: #166534;">
-          #1 Cucumber through #101 Misri Apple
+          #1 Cucumber through #104 Misri Apple
         </div>
       </div>
     ` : ""}
@@ -228,16 +228,16 @@ export function renderReceivingView() {
           <span style="font-size: 1.3rem;">🚚</span>
           <div>
             <div style="font-weight: 800; font-size: 0.92rem; color: #166534; display: flex; align-items: center; gap: 8px;">
-              <span>LB Shastri Nagar Dock Receiving Sequence Active (102 Produce Items: 62 Veg &bull; 40 Fruits)</span>
+              <span>LB Shastri Nagar Dock Receiving Sequence Active (103 Produce Items: 62 Veg &bull; 41 Fruits)</span>
               <span class="pill" style="background: #166534; color: white; font-size: 0.7rem; font-weight: 800; padding: 2px 8px;">LBS NAGAR SEQUENCE</span>
             </div>
             <div style="font-size: 0.78rem; color: #15803D; margin-top: 2px;">
-              Arriving crates are ordered strictly in the official LB Shastri Nagar stock receiving list order.
+              Arriving crates are ordered strictly in the official LB Shastri Nagar stock receiving list order: <strong>Vegetables (#1 to #62)</strong> then <strong>Fruits (#63 to #103)</strong>.
             </div>
           </div>
         </div>
         <div style="font-size: 0.8rem; font-weight: 700; color: #166534;">
-          #1 Beans through #102 Watermellon
+          #1 Beans through #103 Watermelon Stripes
         </div>
       </div>
     ` : ""}
@@ -247,16 +247,16 @@ export function renderReceivingView() {
           <span style="font-size: 1.3rem;">🚚</span>
           <div>
             <div style="font-weight: 800; font-size: 0.92rem; color: #166534; display: flex; align-items: center; gap: 8px;">
-              <span>Kodihalli Dock Receiving Sequence Active (93 Produce Items)</span>
+              <span>Kodihalli Dock Receiving Sequence Active (94 Produce Items: 53 Veg &bull; 41 Fruits)</span>
               <span class="pill" style="background: #166534; color: white; font-size: 0.7rem; font-weight: 800; padding: 2px 8px;">KODIHALLI SEQUENCE</span>
             </div>
             <div style="font-size: 0.78rem; color: #15803D; margin-top: 2px;">
-              Arriving crates are ordered strictly in the official Kodihalli stock receiving list order.
+              Arriving crates are ordered strictly in the official Kodihalli stock receiving list order: <strong>Vegetables (#1 to #53)</strong> then <strong>Fruits (#54 to #94)</strong>.
             </div>
           </div>
         </div>
         <div style="font-size: 0.8rem; font-weight: 700; color: #166534;">
-          #1 Cucumber through #93 Mangoes
+          #1 Cucumber through #94 Mangoes
         </div>
       </div>
     ` : ""}

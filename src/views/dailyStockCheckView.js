@@ -150,11 +150,11 @@ export function renderDailyStockCheckView() {
           <span style="font-size: 1.3rem;">📋</span>
           <div>
             <div style="font-weight: 800; font-size: 0.92rem; color: #166534; display: flex; align-items: center; gap: 8px;">
-              <span>Basavanagar Branch Standard Sequence Active (104 Produce Items: 64 Veg &bull; 40 Fruits)</span>
+              <span>Basavanagar Branch Standard Sequence Active (104 Produce Items: 62 Veg &bull; 42 Fruits)</span>
               <span class="pill" style="background: #166534; color: white; font-size: 0.7rem; font-weight: 800; padding: 2px 8px;">BASAVANAGAR SEQUENCE</span>
             </div>
             <div style="font-size: 0.78rem; color: #15803D; margin-top: 2px;">
-              Direct morning store audit sequence: <strong>Vegetables (#1 Cucumber to #64 Tomato Farm)</strong> &bull; <strong>Fruits (#65 Watermelon Normal to #104 Misri Apple)</strong>.
+              Direct morning store audit sequence: <strong>Vegetables (#1 Cucumber to #62 Tomato)</strong> &bull; <strong>Fruits (#63 Raw Green Mango to #104 Misri Apple)</strong>.
             </div>
           </div>
         </div>
@@ -188,11 +188,11 @@ export function renderDailyStockCheckView() {
           <span style="font-size: 1.3rem;">📋</span>
           <div>
             <div style="font-weight: 800; font-size: 0.92rem; color: #166534; display: flex; align-items: center; gap: 8px;">
-              <span>Kodihalli Branch Standard Sequence Active (94 Produce Items)</span>
+              <span>Kodihalli Branch Standard Sequence Active (94 Produce Items: 53 Veg &bull; 41 Fruits)</span>
               <span class="pill" style="background: #166534; color: white; font-size: 0.7rem; font-weight: 800; padding: 2px 8px;">KODIHALLI SEQUENCE</span>
             </div>
             <div style="font-size: 0.78rem; color: #15803D; margin-top: 2px;">
-              Direct morning store audit sequence: <strong>Vegetables</strong> &bull; <strong>Leafy Greens</strong> &bull; <strong>Fruits</strong>.
+              Direct morning store audit sequence: <strong>Vegetables (#1 Cucumber to #53 S POTATO)</strong> &bull; <strong>Fruits (#54 Apple Premium to #94 Mangoes)</strong>.
             </div>
           </div>
         </div>

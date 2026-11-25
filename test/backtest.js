@@ -729,8 +729,8 @@ assert(Array.isArray(BASAVANAGAR_SEQUENCE) && BASAVANAGAR_SEQUENCE.length === 10
 // Test 17.2 to 17.5: Daily Stock Check sorting for Basavanagar (Vegetables first, then Fruits)
 const sortedBSV = store.sortProductsForBranch("BR004", store.products);
 assert(sortedBSV[0].id === "PRD023", `17.2 Item #1 in Basavanagar Daily Stock Check is Cucumber (got: ${sortedBSV[0]?.name})`);
-assert(sortedBSV[63].id === "PRD003", `17.3 Item #64 in Basavanagar Daily Stock Check is Tomato farm (got: ${sortedBSV[63]?.name})`);
-assert(sortedBSV[64].id === "PRD088", `17.4 Item #65 in Basavanagar Daily Stock Check is Watermelon (got: ${sortedBSV[64]?.name})`);
+assert(sortedBSV[61].id === "PRD003", `17.3 Item #62 in Basavanagar Daily Stock Check is Tomato farm (got: ${sortedBSV[61]?.name})`);
+assert(sortedBSV[62].id === "PRD131", `17.4 Item #63 in Basavanagar Daily Stock Check is Raw Green Mango (got: ${sortedBSV[62]?.name})`);
 assert(sortedBSV[103].id === "PRD202", `17.5 Item #104 in Basavanagar Daily Stock Check is Misri Apple (got: ${sortedBSV[103]?.name})`);
 
 // Test 17.6: All 104 items strictly follow Basavanagar sequence
@@ -758,11 +758,11 @@ for (let i = 0; i < 104; i++) {
 }
 assert(all101RecvMatch === true, "17.10 All 104 items strictly follow sequence in Basavanagar Stock Receiving");
 
-// Test 17.11 & 17.12: Categorization verification for Basavanagar (64 Veg / 40 Fruits)
+// Test 17.11 & 17.12: Categorization verification for Basavanagar (62 Veg / 42 Fruits)
 const bsvFruitList = sortedBSV.filter(p => store.getProductCategoryForBranch("BR004", p.id) === "Fruits");
 const bsvVegList = sortedBSV.filter(p => store.getProductCategoryForBranch("BR004", p.id) === "Vegetables");
-assert(bsvVegList.slice(0, 64).every((p, idx) => p.id === BASAVANAGAR_SEQUENCE[idx]), "17.11 Basavanagar first 64 items are categorized as Vegetables in exact sequence");
-assert(bsvFruitList.slice(0, 40).every((p, idx) => p.id === BASAVANAGAR_SEQUENCE[64 + idx]), "17.12 Basavanagar remaining 40 items are categorized as Fruits in exact sequence");
+assert(bsvVegList.slice(0, 62).every((p, idx) => p.id === BASAVANAGAR_SEQUENCE[idx]), "17.11 Basavanagar first 62 items are categorized as Vegetables in exact sequence");
+assert(bsvFruitList.slice(0, 42).every((p, idx) => p.id === BASAVANAGAR_SEQUENCE[62 + idx]), "17.12 Basavanagar remaining 42 items are categorized as Fruits in exact sequence");
 
 
 // -------------------------------------------------------------
@@ -1000,6 +1000,24 @@ const reqMatrixHtml = renderRequirementsView();
 const reqVegIdx = reqMatrixHtml.indexOf('data-cat="Vegetables"');
 const reqFruIdx = reqMatrixHtml.indexOf('data-cat="Fruits"');
 assert(reqVegIdx !== -1 && reqFruIdx !== -1 && reqVegIdx < reqFruIdx, "21.14 Vegetables filter tab precedes Fruits in Requirements Matrix");
+
+// Test 21.15: Across ALL 4 branches, sequence produce has Vegetables first and Fruits second
+const branchSeqMap = {
+  'BR001': store.branchSequences.BR001,
+  'BR002': store.branchSequences.BR002,
+  'BR003': store.branchSequences.BR003,
+  'BR004': store.branchSequences.BR004
+};
+for (const [bId, seq] of Object.entries(branchSeqMap)) {
+  let fruitStarted = false;
+  let vegAfterFruit = false;
+  for (const pId of seq) {
+    const cat = store.getProductCategoryForBranch(bId, pId);
+    if (cat === 'Vegetables' && fruitStarted) vegAfterFruit = true;
+    if (cat === 'Fruits') fruitStarted = true;
+  }
+  assert(!vegAfterFruit, `21.15 Branch ${bId} has strictly all Vegetables first, followed by Fruits in sequence`);
+}
 
 // -------------------------------------------------------------
 // POINT 22: 4-BRANCH SUBMISSION PDF GUARDRAIL
