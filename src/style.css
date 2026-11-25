@@ -723,8 +723,9 @@ div[style*="z-index: 999999"] {
 .topbar-right {
   display: flex;
   align-items: center;
-  gap: 10px;
-  flex-shrink: 0;
+  gap: 8px;
+  flex-shrink: 1;
+  min-width: 0;
 }
 
 .topbar-auth-pill-wrapper {
@@ -5142,22 +5143,39 @@ html[data-splash='playing'] [data-brand-logo] { visibility: hidden; }
   flex-wrap: wrap;
 }
 
-/* Sticky Action Buttons */
+/* Sticky Action Buttons & Defensive Border Containment */
+.sticky-bar-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  max-width: 100%;
+}
+
 .btn-sticky-action {
   font-weight: 800;
-  padding: 10px 18px;
-  font-size: 0.88rem;
+  padding: 8px 13px;
+  font-size: 0.82rem;
   border-radius: var(--radius-md);
   white-space: nowrap;
+  flex-shrink: 1;
 }
 
 .btn-sticky-primary {
   box-shadow: 0 2px 8px rgba(13, 130, 68, 0.25);
 }
 
+@media (max-width: 1280px) {
+  .btn-sticky-action {
+    padding: 7px 11px;
+    font-size: 0.78rem;
+  }
+}
+
 /* All 4 Branches Finalized Command Banner */
 .all-branches-finalized-banner {
   animation: bannerFadeSlide 0.3s ease-out;
+  overflow: hidden;
 }
 
 @keyframes bannerFadeSlide {
@@ -5173,14 +5191,54 @@ html[data-splash='playing'] [data-brand-logo] { visibility: hidden; }
 
 .branch-progress-tracker-bar {
   transition: all 0.2s ease;
+  overflow: hidden;
 }
 
+/* Responsive Topbar Rules to Prevent Button Overflow */
+@media (max-width: 1240px) {
+  .topbar-date-indicator {
+    display: none !important;
+  }
+}
+
+@media (max-width: 860px) {
+  .topbar-final-actions {
+    display: none !important;
+  }
+}
+
+/* Requirements action buttons responsive containment */
+.req-action-buttons {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  max-width: 100%;
+}
+
+.req-btn-action {
+  white-space: nowrap;
+  font-size: 0.8rem;
+  padding: 8px 12px;
+}
+
+/* Modal containment rules */
 @media (max-width: 640px) {
   #confirmModalBackdrop .modal-content {
     max-width: 95vw !important;
   }
   #confirmModalBackdrop .modal-body {
     padding: 20px 12px !important;
+  }
+  #downloadPdfModalBackdrop .modal-content {
+    max-width: 95vw !important;
+  }
+  .pdf-modal-card-actions {
+    width: 100%;
+  }
+  .pdf-modal-card-actions button {
+    flex: 1 1 140px;
+    justify-content: center;
   }
 }
 

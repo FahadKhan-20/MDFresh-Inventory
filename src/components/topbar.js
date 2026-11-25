@@ -39,12 +39,14 @@ export function renderTopbar() {
       <div class="topbar-right">
         ${allSubmitted ? `
           <!-- Instant Topbar Actions when All 4 Branches are Finalized -->
-          <button type="button" id="btnTopbarDownloadPdf" class="btn btn-sm topbar-pdf-btn" style="background: #0D8244; color: white; font-weight: 800; border: none; border-radius: var(--radius-pill); padding: 5px 12px; display: inline-flex; align-items: center; gap: 5px; font-size: 0.78rem; cursor: pointer; box-shadow: 0 2px 6px rgba(13, 130, 68, 0.25);" title="Download Finalized 4-Branch Master Manifest PDF">
-            📥 Master PDF
-          </button>
-          <button type="button" id="btnTopbarShareWhatsApp" class="btn btn-sm topbar-wa-btn" style="background: #25D366; color: white; font-weight: 800; border: none; border-radius: var(--radius-pill); padding: 5px 12px; display: inline-flex; align-items: center; gap: 5px; font-size: 0.78rem; cursor: pointer; box-shadow: 0 2px 6px rgba(37, 211, 102, 0.25);" title="Share Finalized Order on WhatsApp">
-            📱 WhatsApp
-          </button>
+          <div class="topbar-final-actions" style="display: inline-flex; align-items: center; gap: 6px; flex-shrink: 0;">
+            <button type="button" id="btnTopbarDownloadPdf" class="btn btn-sm topbar-pdf-btn" style="background: #0D8244; color: white; font-weight: 800; border: none; border-radius: var(--radius-pill); padding: 5px 11px; display: inline-flex; align-items: center; gap: 4px; font-size: 0.76rem; cursor: pointer; box-shadow: 0 2px 6px rgba(13, 130, 68, 0.25); white-space: nowrap;" title="Download Finalized 4-Branch Master Manifest PDF">
+              📥 Master PDF
+            </button>
+            <button type="button" id="btnTopbarShareWhatsApp" class="btn btn-sm topbar-wa-btn" style="background: #25D366; color: white; font-weight: 800; border: none; border-radius: var(--radius-pill); padding: 5px 11px; display: inline-flex; align-items: center; gap: 4px; font-size: 0.76rem; cursor: pointer; box-shadow: 0 2px 6px rgba(37, 211, 102, 0.25); white-space: nowrap;" title="Share Finalized Order on WhatsApp">
+              📱 WhatsApp
+            </button>
+          </div>
         ` : ''}
 
         <!-- Install App Button (Desktop & Mobile Chrome) -->

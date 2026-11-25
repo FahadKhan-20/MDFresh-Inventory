@@ -88,10 +88,10 @@ export function renderRequirementsView() {
       <!-- Action Buttons & PDF Download (Optional) -->
       <div class="req-action-buttons">
         <button class="btn req-btn-action" id="btnFinalizeAndResetForNextDay" style="font-weight: 800; background: #0D8244; color: white; border: none; box-shadow: var(--shadow-sm);" title="Finalize today's order, export PDF, and reset all product quantities to 0 for next day">
-          ✨ Finalize & Reset for Next Day
+          ✨ Finalize & Reset
         </button>
         <button class="btn btn-secondary req-btn-action" id="btnDownloadReqPdf" style="font-weight: 800; border: 1.5px solid #B7E4C4; background: #E8F6ED; color: #0D8244;" title="Download local PDF manifest for phone or PC">
-          📥 Download PDF (Optional)
+          📥 Download PDF
         </button>
         ${store.areAllBranchesSubmitted() ? `
           <button class="btn btn-whatsapp req-btn-action" id="btnShareWhatsAppFromReq" style="font-weight: 800;" title="Share complete 4-branch procurement manifest on WhatsApp">
@@ -99,7 +99,7 @@ export function renderRequirementsView() {
           </button>
         ` : ''}
         <button class="btn btn-outline-secondary req-btn-action" id="btnPrintMatrixBtn" style="font-weight: 700; background: white;" title="Print clean tabular view">
-          🖨️ Print View
+          🖨️ Print
         </button>
         <button class="btn btn-primary req-btn-action req-btn-primary" id="btnGoToProcurementFromReq" style="font-weight: 800;">
           ${icon('procurement', 'icon-sm')} Consolidate in Mandi →

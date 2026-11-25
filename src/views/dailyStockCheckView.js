@@ -121,34 +121,34 @@ export function renderDailyStockCheckView() {
 
     <!-- 4-Branch Submission Status & Finalized Command Banner -->
     ${allBranchesSubmitted ? `
-      <div class="all-branches-finalized-banner" style="background: linear-gradient(135deg, #ECFDF5 0%, #D1FAE5 100%); border: 2px solid #10B981; border-radius: var(--radius-lg); padding: 16px 20px; margin-bottom: 16px; box-shadow: 0 4px 16px rgba(16, 185, 129, 0.15);">
-        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;">
-          <div style="display: flex; align-items: center; gap: 12px;">
-            <div style="width: 44px; height: 44px; border-radius: 50%; background: #0D8244; color: white; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; flex-shrink: 0; box-shadow: 0 4px 10px rgba(13, 130, 68, 0.25);">
+      <div class="all-branches-finalized-banner" style="background: linear-gradient(135deg, #ECFDF5 0%, #D1FAE5 100%); border: 2px solid #10B981; border-radius: var(--radius-lg); padding: 14px 18px; margin-bottom: 16px; box-shadow: 0 4px 16px rgba(16, 185, 129, 0.15); overflow: hidden;">
+        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; width: 100%;">
+          <div style="display: flex; align-items: center; gap: 12px; flex: 1 1 280px; min-width: 0;">
+            <div style="width: 40px; height: 40px; border-radius: 50%; background: #0D8244; color: white; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; flex-shrink: 0; box-shadow: 0 3px 8px rgba(13, 130, 68, 0.25);">
               🎉
             </div>
-            <div>
+            <div style="min-width: 0;">
               <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
-                <span class="pill" style="background: #166534; color: white; font-weight: 800; font-size: 0.74rem; padding: 3px 10px; letter-spacing: 0.04em;">
+                <span class="pill" style="background: #166534; color: white; font-weight: 800; font-size: 0.72rem; padding: 2px 8px; letter-spacing: 0.04em;">
                   4 / 4 BRANCHES 100% SUBMITTED
                 </span>
-                <span style="font-weight: 800; font-size: 1.1rem; color: #064E3B;">
+                <span style="font-weight: 800; font-size: 1.05rem; color: #064E3B;">
                   Consolidated APMC Mandi Order Finalized
                 </span>
               </div>
-              <div style="font-size: 0.82rem; color: #047857; margin-top: 3px;">
+              <div style="font-size: 0.8rem; color: #047857; margin-top: 2px;">
                 All 4 shops' requirements are locked and consolidated. Ready to download Master PDF or share with procurement on WhatsApp.
               </div>
             </div>
           </div>
-          <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
-            <button class="btn btn-primary" id="btnBannerDownloadPdf" style="background: #0D8244; font-weight: 800; padding: 10px 18px; font-size: 0.92rem; box-shadow: 0 2px 8px rgba(13, 130, 68, 0.25); cursor: pointer;">
+          <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap; max-width: 100%;">
+            <button class="btn btn-primary" id="btnBannerDownloadPdf" style="background: #0D8244; font-weight: 800; padding: 8px 15px; font-size: 0.86rem; box-shadow: 0 2px 8px rgba(13, 130, 68, 0.25); cursor: pointer; white-space: nowrap;">
               📥 Download Master PDF
             </button>
-            <button class="btn btn-whatsapp" id="btnBannerShareWhatsApp" style="font-weight: 800; padding: 10px 18px; font-size: 0.92rem; cursor: pointer;">
+            <button class="btn btn-whatsapp" id="btnBannerShareWhatsApp" style="font-weight: 800; padding: 8px 15px; font-size: 0.86rem; cursor: pointer; white-space: nowrap;">
               📱 Share on WhatsApp
             </button>
-            <button class="btn btn-secondary" id="btnBannerViewMatrix" style="font-weight: 800; background: white; border: 1.5px solid #A7F3D0; color: #065F46; cursor: pointer;">
+            <button class="btn btn-secondary" id="btnBannerViewMatrix" style="font-weight: 800; background: white; border: 1.5px solid #A7F3D0; color: #065F46; cursor: pointer; padding: 8px 14px; font-size: 0.86rem; white-space: nowrap;">
               👁️ View Matrix Table
             </button>
           </div>
@@ -535,19 +535,19 @@ export function renderDailyStockCheckView() {
           </div>
         </div>
 
-        <div class="sticky-bar-actions" style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
-          <button class="btn btn-secondary btn-lg" id="btnStickyGoToMatrix" style="font-weight: 800; border: 1.5px solid var(--md-border); background: white; color: var(--md-secondary-dark);" title="View all branches combined tabular matrix">
-            ${icon('layers', 'icon-sm')} View All Branches Table
+        <div class="sticky-bar-actions">
+          <button class="btn btn-secondary btn-sticky-action" id="btnStickyGoToMatrix" title="View all branches combined tabular matrix">
+            ${icon('layers', 'icon-sm')} All Branches Table
           </button>
-          <button class="btn btn-secondary btn-lg" id="btnStickyDownloadPdf" style="font-weight: 800; border: 1.5px solid ${allBranchesSubmitted ? '#B7E4C4' : '#FCD34D'}; background: ${allBranchesSubmitted ? '#E8F6ED' : '#FEF3C7'}; color: ${allBranchesSubmitted ? '#0D8244' : '#B45309'};">
-            ${allBranchesSubmitted ? '📥 PDF (Optional)' : `🔒 PDF (${submittedCount}/4 Submitted)`}
+          <button class="btn btn-secondary btn-sticky-action" id="btnStickyDownloadPdf" style="border: 1.5px solid ${allBranchesSubmitted ? '#B7E4C4' : '#FCD34D'}; background: ${allBranchesSubmitted ? '#E8F6ED' : '#FEF3C7'}; color: ${allBranchesSubmitted ? '#0D8244' : '#B45309'};">
+            ${allBranchesSubmitted ? '📥 Download Master PDF' : `🔒 PDF (${submittedCount}/4 Submitted)`}
           </button>
           ${allBranchesSubmitted ? `
-            <button class="btn btn-whatsapp btn-lg" id="btnStickyShareWhatsApp" style="font-weight: 800;" title="Share complete 4-branch procurement manifest on WhatsApp">
+            <button class="btn btn-whatsapp btn-sticky-action" id="btnStickyShareWhatsApp" title="Share complete 4-branch procurement manifest on WhatsApp">
               📱 WhatsApp Share
             </button>
           ` : ''}
-          <button class="btn btn-primary btn-lg" id="btnReviewRequirements" style="cursor: pointer;" title="Review branch requirements before submitting">
+          <button class="btn btn-primary btn-sticky-action btn-sticky-primary" id="btnReviewRequirements" style="cursor: pointer;" title="Review branch requirements before submitting">
             ${icon('requirements', 'icon-sm')} Review Requirements (${totalRequiredCount})
           </button>
         </div>
@@ -854,22 +854,22 @@ export function renderDailyStockCheckView() {
           <div style="display: grid; grid-template-columns: 1fr; gap: 12px; margin-bottom: 20px;">
             
             <!-- Option 1: Master Manifest (Combined + Branch Headlined) -->
-            <div style="background: ${allBranchesSubmitted ? 'linear-gradient(135deg, #064E3B, #0D8244)' : '#64748B'}; border-radius: var(--radius-md); padding: 18px; color: white; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;">
-              <div>
+            <div style="background: ${allBranchesSubmitted ? 'linear-gradient(135deg, #064E3B, #0D8244)' : '#64748B'}; border-radius: var(--radius-md); padding: 16px 18px; color: white; display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap;">
+              <div style="flex: 1 1 240px; min-width: 0;">
                 <div style="font-size: 0.72rem; font-weight: 800; text-transform: uppercase; background: rgba(255,255,255,0.2); display: inline-block; padding: 2px 8px; border-radius: 4px; margin-bottom: 4px;">
                   ${allBranchesSubmitted ? 'RECOMMENDED COMPLETE DOCUMENT' : 'LOCKED — WAITING FOR ALL BRANCHES'}
                 </div>
-                <h4 style="font-size: 1.1rem; font-weight: 800;">Complete Master Manifest (PDF)</h4>
-                <p style="font-size: 0.8rem; color: #D1EADE; margin-top: 2px;">
+                <h4 style="font-size: 1.05rem; font-weight: 800;">Complete Master Manifest (PDF)</h4>
+                <p style="font-size: 0.8rem; color: #D1EADE; margin-top: 2px; line-height: 1.35;">
                   Includes Combined Total List at top + All 4 Branch Headlined Sections below.
                 </p>
               </div>
-              <div style="display: flex; gap: 8px; flex-shrink: 0; flex-wrap: wrap;">
-                <button type="button" class="btn btn-primary btn-lg" id="btnDownloadMasterPdf" ${!allBranchesSubmitted ? 'disabled style="background: rgba(255,255,255,0.5); color: #334155; font-weight: 800; border: none; flex-shrink: 0; cursor: not-allowed; opacity: 0.75;"' : 'style="background: white; color: #064E3B; font-weight: 800; border: none; flex-shrink: 0;"'}>
+              <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap; max-width: 100%;">
+                <button type="button" class="btn btn-primary" id="btnDownloadMasterPdf" ${!allBranchesSubmitted ? 'disabled style="background: rgba(255,255,255,0.5); color: #334155; font-weight: 800; border: none; cursor: not-allowed; opacity: 0.75; padding: 10px 16px; font-size: 0.9rem; white-space: nowrap;"' : 'style="background: white; color: #064E3B; font-weight: 800; border: none; padding: 10px 16px; font-size: 0.9rem; white-space: nowrap;"'}>
                   ${!allBranchesSubmitted ? '🔒 Waiting for 4/4 Branches' : '📥 Download PDF'}
                 </button>
                 ${allBranchesSubmitted ? `
-                  <button type="button" class="btn btn-whatsapp btn-lg" id="btnShareWhatsAppOption1" style="font-weight: 800; flex-shrink: 0;" title="Share complete manifest on WhatsApp">
+                  <button type="button" class="btn btn-whatsapp" id="btnShareWhatsAppOption1" style="font-weight: 800; padding: 10px 16px; font-size: 0.9rem; white-space: nowrap;" title="Share complete manifest on WhatsApp">
                     📱 WhatsApp
                   </button>
                 ` : ''}
@@ -877,7 +877,7 @@ export function renderDailyStockCheckView() {
             </div>
 
             <!-- Option 2 & 3: Split downloads -->
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px;">
               <div style="background: white; border: 1.5px solid var(--md-border); border-radius: var(--radius-md); padding: 16px; display: flex; flex-direction: column; justify-content: space-between;">
                 <div>
                   <div style="font-size: 0.72rem; font-weight: 700; color: #0D8244; text-transform: uppercase;">Mandi Buyer Sheet</div>
@@ -1444,11 +1444,11 @@ function filterStockCheckDOM(query) {
                 </p>
 
                 <!-- Prominent Action Buttons: PDF Download & WhatsApp Share -->
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 18px;">
-                  <button class="btn btn-whatsapp btn-lg" id="btnConfirmedModalShareWhatsApp" style="background: #25D366; color: white; font-weight: 900; padding: 12px 16px; font-size: 0.95rem; border-radius: var(--radius-md); border: none; box-shadow: 0 4px 12px rgba(37, 211, 102, 0.25); display: flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer;">
+                <div style="display: flex; gap: 10px; margin-bottom: 18px; flex-wrap: wrap;">
+                  <button class="btn btn-whatsapp" id="btnConfirmedModalShareWhatsApp" style="flex: 1 1 220px; background: #25D366; color: white; font-weight: 900; padding: 12px 16px; font-size: 0.92rem; border-radius: var(--radius-md); border: none; box-shadow: 0 4px 12px rgba(37, 211, 102, 0.25); display: flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer;">
                     📱 Share on WhatsApp (All 4 Branches)
                   </button>
-                  <button class="btn btn-primary btn-lg" id="btnConfirmedModalDownloadPdf" style="background: #0D8244; color: white; font-weight: 900; padding: 12px 16px; font-size: 0.95rem; border-radius: var(--radius-md); box-shadow: 0 4px 12px rgba(13, 130, 68, 0.25); display: flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer;">
+                  <button class="btn btn-primary" id="btnConfirmedModalDownloadPdf" style="flex: 1 1 220px; background: #0D8244; color: white; font-weight: 900; padding: 12px 16px; font-size: 0.92rem; border-radius: var(--radius-md); box-shadow: 0 4px 12px rgba(13, 130, 68, 0.25); display: flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer;">
                     📥 Download Master PDF Manifest
                   </button>
                 </div>
