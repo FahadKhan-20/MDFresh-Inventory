@@ -1329,6 +1329,20 @@ assert(fs.existsSync(icon192Path) && fs.statSync(icon192Path).size > 1000, "29.1
 assert(fs.existsSync(icon512Path) && fs.statSync(icon512Path).size > 1000, "29.20 icon-512.png exists with valid size");
 assert(fs.existsSync(appleIconPath) && fs.statSync(appleIconPath).size > 1000, "29.21 apple-touch-icon.png exists with valid size");
 
+// 29.22: Exact dimensions check for Android WebAPK minting
+const b512 = fs.readFileSync(icon512Path);
+const w512 = b512.readUInt32BE(16);
+const h512 = b512.readUInt32BE(20);
+assert(w512 === 512 && h512 === 512, "29.22 icon-512.png has exact 512x512 dimensions for Android Chrome WebAPK");
+
+const b192 = fs.readFileSync(icon192Path);
+const w192 = b192.readUInt32BE(16);
+const h192 = b192.readUInt32BE(20);
+assert(w192 === 192 && h192 === 192, "29.23 icon-192.png has exact 192x192 dimensions");
+
+assert(indexHtmlContent.includes("navigator.serviceWorker.register('/sw.js'"), "29.24 index.html registers Service Worker early in head");
+assert(indexHtmlContent.includes("beforeinstallprompt"), "29.25 index.html captures beforeinstallprompt early");
+
 // SUMMARY REPORT
 // -------------------------------------------------------------
 console.log('\n============================================================');

@@ -4538,3 +4538,222 @@ html[data-splash='playing'] [data-brand-logo] { visibility: hidden; }
     font-size: 0.75rem;
   }
 }
+
+/* Floating Mobile Install Banner */
+.pwa-mobile-banner {
+  position: fixed;
+  bottom: 70px;
+  left: 12px;
+  right: 12px;
+  background: #FFFFFF;
+  border: 1.5px solid rgba(13, 130, 68, 0.3);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  border-radius: var(--radius-lg);
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  z-index: 150;
+  animation: pwaSlideUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@media (min-width: 861px) {
+  .pwa-mobile-banner {
+    left: auto;
+    right: 24px;
+    bottom: 24px;
+    max-width: 360px;
+  }
+}
+
+@keyframes pwaSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.pwa-banner-content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.pwa-banner-logo {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  object-fit: cover;
+  flex-shrink: 0;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.pwa-banner-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.pwa-banner-title {
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: var(--md-text-main);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.pwa-banner-subtitle {
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--md-text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.pwa-banner-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.pwa-banner-install-btn {
+  background: var(--md-primary);
+  color: #FFFFFF;
+  border: none;
+  border-radius: var(--radius-full);
+  padding: 7px 14px;
+  font-size: 0.8125rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  box-shadow: 0 2px 6px rgba(13, 130, 68, 0.3);
+}
+
+.pwa-banner-install-btn:hover {
+  background: var(--md-primary-dark);
+}
+
+.pwa-banner-close-btn {
+  background: transparent;
+  border: none;
+  font-size: 1.25rem;
+  color: var(--md-text-muted);
+  cursor: pointer;
+  padding: 4px;
+  line-height: 1;
+}
+
+/* PWA Guided Install Modal */
+.pwa-guide-backdrop {
+  z-index: 9999;
+}
+
+.pwa-guide-card {
+  max-width: 420px;
+  width: 90%;
+  padding: 24px;
+  border-radius: var(--radius-xl);
+  background: #FFFFFF;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+}
+
+.pwa-guide-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.pwa-guide-logo-wrap {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  overflow: hidden;
+  flex-shrink: 0;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.12);
+}
+
+.pwa-guide-logo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.pwa-guide-title {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--md-text-main);
+  margin: 0;
+}
+
+.pwa-guide-subtitle {
+  font-size: 0.8125rem;
+  color: var(--md-text-muted);
+  margin: 2px 0 0 0;
+}
+
+.pwa-step-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.pwa-step-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.pwa-step-badge {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #E8F7EE;
+  color: var(--md-primary);
+  font-weight: 800;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: 1.5px solid rgba(13, 130, 68, 0.2);
+}
+
+.pwa-step-info strong {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--md-text-main);
+  margin-bottom: 2px;
+}
+
+.pwa-step-info p {
+  font-size: 0.8125rem;
+  color: var(--md-text-muted);
+  margin: 0;
+  line-height: 1.4;
+}
+
+.pwa-guide-footer {
+  display: flex;
+  justify-content: stretch;
+}
+
+.pwa-guide-ack-btn {
+  width: 100%;
+  padding: 12px;
+  font-size: 0.95rem;
+  font-weight: 800;
+  border-radius: var(--radius-md);
+}

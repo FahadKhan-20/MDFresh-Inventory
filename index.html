@@ -25,6 +25,26 @@
   <link rel="apple-touch-icon" sizes="192x192" href="/icons/icon-192.png">
   <link rel="apple-touch-icon" sizes="512x512" href="/icons/icon-512.png">
 
+  <!-- Instant PWA Install Listener & Service Worker Registration (Critical for Mobile Chrome) -->
+  <script>
+    // Early capture before deferred scripts execute
+    window.addEventListener('beforeinstallprompt', function(e) {
+      e.preventDefault();
+      window.deferredPrompt = e;
+      window.dispatchEvent(new CustomEvent('md-fresh-pwa-ready'));
+    });
+
+    if ('serviceWorker' in navigator && (window.location.protocol === 'https:' || window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')) {
+      navigator.serviceWorker.register('/sw.js', { scope: '/' })
+        .then(function(reg) {
+          console.log('[MD Fresh PWA] SW registered immediately:', reg.scope);
+        })
+        .catch(function(err) {
+          console.warn('[MD Fresh PWA] SW registration failed:', err);
+        });
+    }
+  </script>
+
   <!-- Suppress and purge any Netlify edge-injected floating badge / overlays -->
   <script>
     (function() {
