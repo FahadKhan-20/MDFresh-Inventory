@@ -1094,6 +1094,35 @@ assert(recvViewHtml.includes('btn-recv-step-minus') && recvViewHtml.includes('bt
 assert(recvViewHtml.includes('btn-match-expected'), "24.5 Mobile receiving cards include 1-tap = Match expected button");
 assert(recvViewHtml.includes('receiving-table-view'), "24.6 Desktop table encapsulated in receiving-table-view for responsive switching");
 
+// POINT 25: MULTI-BRANCH NAVIGATION & DEDICATED MANIFESTS IN STOCK RECEIVING
+// --------------------------------------------------------------------------
+console.log("\n\x1b[36m▶ TEST SUITE 25: Multi-Branch Navigation & Dedicated Manifests in Stock Receiving\x1b[0m");
+
+const recvInitialHtml = renderReceivingView();
+assert(recvInitialHtml.includes('receivingBranchSelect'), "25.1 Receiving view renders branch selector dropdown chip (#receivingBranchSelect)");
+assert(recvInitialHtml.includes('receiving-branch-tabs'), "25.2 Receiving view renders responsive 4-branch switcher tabs");
+assert(recvInitialHtml.includes('data-branch-id="BR001"'), "25.3 Branch tabs include Annasandrapalya (BR001)");
+assert(recvInitialHtml.includes('data-branch-id="BR002"'), "25.4 Branch tabs include Kodihalli (BR002)");
+assert(recvInitialHtml.includes('data-branch-id="BR003"'), "25.5 Branch tabs include LB Shastri Nagar (BR003)");
+assert(recvInitialHtml.includes('data-branch-id="BR004"'), "25.6 Branch tabs include Basavanagar (BR004)");
+
+// Test branch item loading for all 4 branches
+const branchesToTest = [
+  { id: 'BR001', name: 'Annasandrapalya' },
+  { id: 'BR002', name: 'Kodihalli' },
+  { id: 'BR003', name: 'LB Shastri Nagar' },
+  { id: 'BR004', name: 'Basavanagar' }
+];
+
+for (const b of branchesToTest) {
+  store.setBranch(b.id);
+  const branchRecvHtml = renderReceivingView();
+  assert(!branchRecvHtml.includes('No Scheduled Deliveries'), `25.7 ${b.name} (${b.id}) receiving view displays delivery manifest without "No Scheduled Deliveries" error`);
+  assert(branchRecvHtml.includes('mobile-receiving-card'), `25.8 ${b.name} (${b.id}) renders mobile delivery item cards`);
+}
+// Restore branch to BR001
+store.setBranch('BR001');
+
 // SUMMARY REPORT
 // -------------------------------------------------------------
 console.log('\n============================================================');

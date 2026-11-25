@@ -4175,7 +4175,82 @@ div[style*="z-index: 999999"] {
   background: #F8FAFF;
 }
 
+/* Receiving Branch Switcher Navigation Tabs */
+.receiving-branch-tabs {
+  background: white;
+  border: 1.5px solid var(--md-border);
+  border-radius: var(--radius-lg);
+  padding: 6px;
+  margin-bottom: 20px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+.receiving-branch-tab-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 14px;
+  border-radius: var(--radius-md);
+  border: 1.5px solid transparent;
+  background: transparent;
+  color: var(--md-text-main);
+  font-weight: 800;
+  font-size: 0.92rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.receiving-branch-tab-btn:hover {
+  background: var(--md-surface-subtle);
+  border-color: var(--md-border);
+}
+
+.receiving-branch-tab-btn.active {
+  background: var(--md-primary);
+  color: white;
+  border-color: var(--md-primary-dark);
+  box-shadow: 0 2px 6px rgba(13, 130, 68, 0.25);
+}
+
+.receiving-branch-tab-btn .branch-tab-name {
+  font-weight: 800;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.receiving-branch-tab-btn .branch-code-pill {
+  font-size: 0.7rem;
+  background: var(--md-surface-subtle);
+  color: var(--md-text-secondary);
+  font-weight: 800;
+  padding: 2px 6px;
+  border-radius: var(--radius-pill);
+}
+
+.receiving-branch-tab-btn.active .branch-code-pill {
+  background: rgba(255, 255, 255, 0.25);
+  color: white;
+}
+
 @media (max-width: 860px) {
+  .receiving-branch-tabs {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 8px !important;
+    padding: 8px !important;
+    margin-bottom: 16px !important;
+  }
+  .receiving-branch-tab-btn {
+    padding: 10px 8px !important;
+    font-size: 0.86rem !important;
+    gap: 6px !important;
+  }
   .receiving-stat-grid {
     grid-template-columns: repeat(2, 1fr) !important;
     gap: 10px !important;
@@ -4194,5 +4269,25 @@ div[style*="z-index: 999999"] {
   }
   .receiving-confirm-bar button {
     width: 100% !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .receiving-branch-tabs {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 6px !important;
+    padding: 6px !important;
+  }
+  .receiving-branch-tab-btn {
+    padding: 8px 6px !important;
+    font-size: 0.78rem !important;
+    gap: 4px !important;
+  }
+  .receiving-branch-tab-btn .branch-tab-icon {
+    font-size: 0.95rem;
+  }
+  .receiving-branch-tab-btn .branch-code-pill {
+    font-size: 0.65rem !important;
+    padding: 1px 4px !important;
   }
 }

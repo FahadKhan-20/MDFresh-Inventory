@@ -11,7 +11,7 @@ let lastKnownDispatchPOId = null;
 let extraItemsMap = {}; // { [branchId]: [ { productId, productName, sku, image, category, unit, unitCost } ] }
 
 export function renderReceivingView() {
-  const currentBranchId = selectedBranchId || store.currentBranchId || 'BR001';
+  const currentBranchId = store.currentBranchId || selectedBranchId || 'BR001';
   selectedBranchId = currentBranchId;
 
   const branch = store.branches.find(b => b.id === currentBranchId) || store.branches[0];
@@ -22,30 +22,24 @@ export function renderReceivingView() {
     selectedPOId = store.latestDispatchPOId || (poList[0] ? poList[0].id : null);
     lastKnownDispatchPOId = store.latestDispatchPOId;
   }
-  // Prioritize Kodihalli comprehensive delivery PO when on Kodihalli branch
-        if (currentBranchId === "BR001" && (!selectedPOId || selectedPOId === "PO-20261003-0001") && !store.latestDispatchPOId) {
-    const aspPo = poList.find(p => p.id === "PO-20261003-ASP01");
-    if (aspPo) {
-      selectedPOId = aspPo.id;
+  // Branch-specific PO map for baseline manifests
+  const branchPOMap = {
+    "BR001": "PO-20261003-ASP01",
+    "BR002": "PO-20261003-KDH01",
+    "BR003": "PO-20261003-LBS01",
+    "BR004": "PO-20261003-BSV01"
+  };
+
+  if (!store.latestDispatchPOId) {
+    const targetBranchPO = branchPOMap[currentBranchId];
+    if (targetBranchPO && poList.some(p => p.id === targetBranchPO)) {
+      const isOtherBranchDedicatedPO = Object.values(branchPOMap).includes(selectedPOId) && selectedPOId !== targetBranchPO;
+      if (!selectedPOId || selectedPOId === "PO-20261003-0001" || isOtherBranchDedicatedPO) {
+        selectedPOId = targetBranchPO;
+      }
     }
-  }
-  if (currentBranchId === "BR004" && (!selectedPOId || selectedPOId === "PO-20261003-0001") && !store.latestDispatchPOId) {
-    const bsvPo = poList.find(p => p.id === "PO-20261003-BSV01");
-    if (bsvPo) {
-      selectedPOId = bsvPo.id;
-    }
-  }
-  if (currentBranchId === "BR003" && (!selectedPOId || selectedPOId === "PO-20261003-0001") && !store.latestDispatchPOId) {
-    const lbsPo = poList.find(p => p.id === "PO-20261003-LBS01");
-    if (lbsPo) {
-      selectedPOId = lbsPo.id;
-    }
-  }
-  if (currentBranchId === "BR002" && (!selectedPOId || selectedPOId === "PO-20261003-0001") && !store.latestDispatchPOId) {
-    const kdhPo = poList.find(p => p.id === "PO-20261003-KDH01");
-    if (kdhPo) {
-      selectedPOId = kdhPo.id;
-    }
+  } else {
+    selectedPOId = store.latestDispatchPOId;
   }
 
   const currentPO = (selectedPOId && poList.find(p => p.id === selectedPOId)) || poList[0];
@@ -132,6 +126,14 @@ export function renderReceivingView() {
       </div>
 
       <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+        <!-- Branch Selector Dropdown (Quick selection on mobile & desktop) -->
+        <div class="control-chip receiving-branch-chip" style="background: white; border: 1.5px solid var(--md-border-strong);">
+          <span style="color: var(--md-text-muted); font-size: 0.8rem; font-weight: 700;">Branch:</span>
+          <select id="receivingBranchSelect" class="branch-select" style="font-weight: 800; font-size: 0.92rem; color: var(--md-primary); outline: none; border: none; background: transparent; cursor: pointer;">
+            ${store.branches.map(b => `<option value="${b.id}" ${b.id === currentBranchId ? 'selected' : ''}>${b.name} (${b.code})</option>`).join('')}
+          </select>
+        </div>
+
         <span class="pill ${!hasVariances ? 'pill-healthy' : shortageItemsCount > 0 ? 'pill-low' : 'pill-unit'}" style="font-size: 0.85rem; padding: 6px 14px; font-weight: 800;">
           ${!hasVariances ? '✓ ' + deliveryStatus : '⚠️ ' + deliveryStatus}
         </span>
@@ -139,18 +141,19 @@ export function renderReceivingView() {
     </div>
 
     <!-- 4 Branch Switcher Navigation Tabs -->
-    <div style="background: white; border: 1.5px solid var(--md-border); border-radius: var(--radius-lg); padding: 6px; margin-bottom: 20px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px;">
-      ${store.branches.map((b, idx) => {
+    <div class="receiving-branch-tabs">
+      ${store.branches.map((b) => {
         const isActive = b.id === currentBranchId;
         return `
           <button 
-            class="receiving-branch-tab-btn" 
+            type="button"
+            class="receiving-branch-tab-btn ${isActive ? 'active' : ''}" 
             data-branch-id="${b.id}"
-            style="display: flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 14px; border-radius: var(--radius-md); border: none; background: ${isActive ? 'var(--md-primary)' : 'transparent'}; color: ${isActive ? 'white' : 'var(--md-text-main)'}; font-weight: 800; font-size: 0.92rem; cursor: pointer; transition: all 0.2s ease;"
+            title="Switch to ${b.name} (${b.code})"
           >
-            <span style="font-size: 1.1rem;">🏢</span>
-            <span>${b.name}</span>
-            <span class="pill" style="font-size: 0.7rem; background: ${isActive ? 'rgba(255,255,255,0.25)' : 'var(--md-surface-subtle)'}; color: ${isActive ? 'white' : 'var(--md-text-secondary)'};">
+            <span class="branch-tab-icon">🏢</span>
+            <span class="branch-tab-name">${b.name}</span>
+            <span class="branch-code-pill pill ${isActive ? 'pill-active' : ''}">
               ${b.code}
             </span>
           </button>
@@ -735,6 +738,17 @@ export function setupReceivingEvents() {
       store.notify();
     });
   });
+
+  // 1b. Branch Selector Dropdown
+  const branchSelect = document.getElementById('receivingBranchSelect');
+  if (branchSelect) {
+    branchSelect.addEventListener('change', (e) => {
+      const bId = e.target.value;
+      selectedBranchId = bId;
+      store.setBranch(bId);
+      store.notify();
+    });
+  }
 
   // 2. Dispatch PO Selector
   const poSelect = document.getElementById('receivingDispatchSelect');
