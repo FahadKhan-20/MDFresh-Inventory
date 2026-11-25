@@ -1081,6 +1081,19 @@ const loginViewHtml = renderLoginView();
 assert(loginViewHtml.includes('FAHAD ALI KHAN'), "23.4 Login view prominently displays developer FAHAD ALI KHAN");
 assert(loginViewHtml.includes('mailto:alikhanfahad84@gmail.com'), "23.5 Login view credit links to alikhanfahad84@gmail.com");
 
+// -------------------------------------------------------------
+// POINT 24: RESPONSIVE MOBILE CARDS IN STOCK RECEIVING PORTAL
+// -------------------------------------------------------------
+console.log("\n\x1b[36m▶ TEST SUITE 24: Responsive Mobile Cards in Stock Receiving Portal\x1b[0m");
+
+const recvViewHtml = renderReceivingView();
+assert(recvViewHtml.includes('mobile-receiving-cards'), "24.1 Receiving view renders dedicated mobile-receiving-cards container");
+assert(recvViewHtml.includes('mobile-receiving-card'), "24.2 Receiving view renders individual mobile-receiving-card elements");
+assert(recvViewHtml.includes('mobile-recv-next-btn'), "24.3 Mobile receiving cards include NEXT PRODUCT quick touch buttons");
+assert(recvViewHtml.includes('btn-recv-step-minus') && recvViewHtml.includes('btn-recv-step-plus'), "24.4 Mobile receiving cards include plus and minus stepper buttons");
+assert(recvViewHtml.includes('btn-match-expected'), "24.5 Mobile receiving cards include 1-tap = Match expected button");
+assert(recvViewHtml.includes('receiving-table-view'), "24.6 Desktop table encapsulated in receiving-table-view for responsive switching");
+
 // SUMMARY REPORT
 // -------------------------------------------------------------
 console.log('\n============================================================');

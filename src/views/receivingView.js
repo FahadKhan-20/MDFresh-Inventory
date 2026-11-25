@@ -282,7 +282,7 @@ export function renderReceivingView() {
     </div>
 
     <!-- Live Variance Summary Stats Cards -->
-    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px;">
+    <div class="receiving-stat-grid">
       <!-- Expected Items -->
       <div class="stat-card" style="background: white; border: 1.5px solid var(--md-border); border-radius: var(--radius-md); padding: 16px 18px;">
         <div style="font-size: 0.75rem; font-weight: 800; text-transform: uppercase; color: var(--md-text-muted); letter-spacing: 0.04em;">
@@ -355,7 +355,7 @@ export function renderReceivingView() {
     </div>
 
     <!-- Receiving Table (Desktop & Tablet) -->
-    <div class="content-card" style="margin-bottom: 24px;">
+    <div class="content-card receiving-table-view" style="margin-bottom: 24px;">
       <div class="card-header" style="background: var(--md-surface-subtle); border-bottom: 1px solid var(--md-border);">
         <div class="card-header-left">
           ${icon('receiving', 'icon')}
@@ -502,8 +502,122 @@ export function renderReceivingView() {
       </div>
     </div>
 
+    <!-- Mobile Receiving Cards (Responsive Dock Unloading - Eliminates Horizontal Scroll) -->
+    <div class="mobile-receiving-cards" style="margin-bottom: 24px;">
+      ${receivingRows.length === 0 ? `
+        <div style="text-align: center; padding: 40px 16px; background: white; border-radius: var(--radius-md); border: 1.5px solid var(--md-border);">
+          <div style="font-size: 2.2rem; margin-bottom: 8px;">📦</div>
+          <div style="font-weight: 800; font-size: 1.05rem; color: var(--md-secondary-dark);">
+            No Scheduled Deliveries for ${branch.name}
+          </div>
+          <div style="font-size: 0.85rem; color: var(--md-text-muted); margin-top: 4px;">
+            0 crates were ordered for ${branch.name} in this manifest.
+          </div>
+        </div>
+      ` : receivingRows.map((row, idx) => {
+        const seqIdx = store.getBranchItemSequenceIndex(currentBranchId, row.productId);
+        const seqBadge = seqIdx < 999 ? `<span class="pill" style="background: #E0F2FE; color: #0369A1; font-size: 0.68rem; font-weight: 800; padding: 1px 5px; margin-right: 5px; border: 1px solid #BAE6FD;">#${seqIdx + 1}</span>` : '';
+        
+        let diffBadge = '';
+        let cardVarianceClass = '';
+        if (row.difference < 0) {
+          cardVarianceClass = 'has-shortage';
+          diffBadge = `<span class="pill" style="background: #FEE2E2; color: #DC2626; border: 1px solid #FCA5A5; font-weight: 800; font-size: 0.72rem; padding: 2px 6px;">▼ ${row.difference} Short</span>`;
+        } else if (row.difference > 0) {
+          cardVarianceClass = 'has-surplus';
+          diffBadge = `<span class="pill" style="background: #DBEAFE; color: #1D4ED8; border: 1px solid #93C5FD; font-weight: 800; font-size: 0.72rem; padding: 2px 6px;">▲ +${row.difference} Extra</span>`;
+        } else {
+          diffBadge = `<span class="pill" style="background: #E8F6ED; color: #0D8244; border: 1px solid #A7E0BE; font-weight: 800; font-size: 0.72rem; padding: 2px 6px;">✓ Exact (0)</span>`;
+        }
+
+        return `
+          <div class="mobile-receiving-card ${cardVarianceClass}" data-product-id="${row.productId}">
+            <div class="mobile-card-top">
+              <div style="display: flex; align-items: center; gap: 8px; min-width: 0;">
+                <span style="font-size: 1.25rem; flex-shrink: 0;">${row.image}</span>
+                <div style="min-width: 0;">
+                  <div class="mobile-card-product">
+                    ${seqBadge}${row.productName}
+                  </div>
+                  <div style="font-size: 0.7rem; color: var(--md-text-muted); font-family: monospace; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                    ${row.sku} &bull; ${row.category}
+                  </div>
+                </div>
+              </div>
+              <div style="display: flex; align-items: center; gap: 5px; flex-shrink: 0;">
+                <span class="pill pill-unit" style="font-size: 0.68rem; padding: 2px 6px;">${row.unit}</span>
+                ${diffBadge}
+              </div>
+            </div>
+
+            <!-- Row 1: Ordered / Expected & Fast Match Action -->
+            <div class="mobile-card-row">
+              <span class="mobile-card-label">Ordered (Expected)</span>
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 1.05rem; font-weight: 900; color: var(--md-secondary-dark);">${row.ordered} <span style="font-size: 0.75rem; font-weight: 700; color: var(--md-text-muted);">${row.unit}</span></span>
+                <button 
+                  type="button" 
+                  class="btn btn-secondary btn-sm btn-match-expected" 
+                  data-product-id="${row.productId}"
+                  data-expected="${row.ordered}"
+                  title="Match ordered count"
+                  style="font-size: 0.72rem; padding: 2px 8px; font-weight: 800; height: 26px; border: 1px solid var(--md-border);"
+                >
+                  = Match
+                </button>
+              </div>
+            </div>
+
+            <!-- Row 2: Stock Received Stepper Input -->
+            <div class="mobile-card-row">
+              <span class="mobile-card-label">Received (Unloaded)</span>
+              <div style="display: flex; align-items: center; gap: 6px;">
+                <button 
+                  type="button" 
+                  class="btn-recv-step-minus" 
+                  data-product-id="${row.productId}"
+                  style="width: 34px; height: 34px; border-radius: var(--radius-sm); border: 1.5px solid var(--md-border); background: white; font-weight: 800; font-size: 1.15rem; cursor: pointer; display: flex; align-items: center; justify-content: center;"
+                  aria-label="Decrease received count"
+                >−</button>
+
+                <div class="fast-qty-wrapper ${row.received > 0 ? 'has-value' : ''}" style="width: 110px; height: 34px; padding: 1px 4px 1px 6px;">
+                  <input 
+                    type="number"
+                    inputmode="numeric"
+                    pattern="[0-9]*"
+                    min="0"
+                    max="9999"
+                    step="1"
+                    class="fast-qty-input receiving-stepper-input receiving-stepper-input-mobile"
+                    data-product-id="${row.productId}"
+                    data-index="${idx}"
+                    value="${row.received}"
+                    style="font-size: 0.95rem; width: 44px;"
+                    aria-label="Received quantity for ${row.productName}"
+                  />
+                  <span class="fast-qty-unit" style="font-size: 0.66rem; padding: 1px 5px;">${row.unit}</span>
+                </div>
+
+                <button 
+                  type="button" 
+                  class="btn-recv-step-plus" 
+                  data-product-id="${row.productId}"
+                  style="width: 34px; height: 34px; border-radius: var(--radius-sm); border: 1.5px solid var(--md-border); background: white; font-weight: 800; font-size: 1.15rem; cursor: pointer; display: flex; align-items: center; justify-content: center;"
+                  aria-label="Increase received count"
+                >+</button>
+              </div>
+            </div>
+
+            <button class="mobile-next-btn mobile-recv-next-btn" data-next-index="${idx + 1}">
+              NEXT PRODUCT ${icon('arrowRight', 'icon-sm')}
+            </button>
+          </div>
+        `;
+      }).join('')}
+    </div>
+
     <!-- Confirm Unloading Footer Bar -->
-    <div style="background: white; border: 1.5px solid var(--md-border); border-radius: var(--radius-lg); padding: 22px 26px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; box-shadow: var(--shadow-sm);">
+    <div class="receiving-confirm-bar" style="background: white; border: 1.5px solid var(--md-border); border-radius: var(--radius-lg); padding: 22px 26px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; box-shadow: var(--shadow-sm);">
       <div>
         <div style="font-weight: 900; font-size: 1.15rem; color: var(--md-secondary-dark);">
           Complete Morning Unloading for ${branch.name}
@@ -666,28 +780,48 @@ export function setupReceivingEvents() {
   // 5. Input Stepper [+] and [-] buttons
   document.querySelectorAll('.btn-recv-step-minus').forEach(btn => {
     btn.addEventListener('click', (e) => {
+      e.preventDefault();
       const pId = e.currentTarget.getAttribute('data-product-id');
-      const input = document.querySelector(`.receiving-stepper-input[data-product-id="${pId}"]`);
-      if (input) {
-        const cur = Math.max(0, (parseInt(input.value, 10) || 0) - 1);
-        input.value = cur;
-        if (!store.receivingDrafts[currentBranchId]) store.receivingDrafts[currentBranchId] = {};
-        store.receivingDrafts[currentBranchId][pId] = cur;
-        store.notify();
-      }
+      if (!pId) return;
+      if (!store.receivingDrafts[currentBranchId]) store.receivingDrafts[currentBranchId] = {};
+      const incoming = store.getBranchIncomingOrder(currentBranchId, selectedPOId);
+      const it = incoming.find(x => x.productId === pId);
+      const cur = store.receivingDrafts[currentBranchId][pId] !== undefined
+        ? (parseInt(store.receivingDrafts[currentBranchId][pId], 10) || 0)
+        : (it ? it.orderedQty : 0);
+      const nextVal = Math.max(0, cur - 1);
+      store.receivingDrafts[currentBranchId][pId] = nextVal;
+      store.notify();
     });
   });
 
   document.querySelectorAll('.btn-recv-step-plus').forEach(btn => {
     btn.addEventListener('click', (e) => {
+      e.preventDefault();
       const pId = e.currentTarget.getAttribute('data-product-id');
-      const input = document.querySelector(`.receiving-stepper-input[data-product-id="${pId}"]`);
-      if (input) {
-        const cur = (parseInt(input.value, 10) || 0) + 1;
-        input.value = cur;
-        if (!store.receivingDrafts[currentBranchId]) store.receivingDrafts[currentBranchId] = {};
-        store.receivingDrafts[currentBranchId][pId] = cur;
-        store.notify();
+      if (!pId) return;
+      if (!store.receivingDrafts[currentBranchId]) store.receivingDrafts[currentBranchId] = {};
+      const incoming = store.getBranchIncomingOrder(currentBranchId, selectedPOId);
+      const it = incoming.find(x => x.productId === pId);
+      const cur = store.receivingDrafts[currentBranchId][pId] !== undefined
+        ? (parseInt(store.receivingDrafts[currentBranchId][pId], 10) || 0)
+        : (it ? it.orderedQty : 0);
+      const nextVal = cur + 1;
+      store.receivingDrafts[currentBranchId][pId] = nextVal;
+      store.notify();
+    });
+  });
+
+  // Mobile "NEXT PRODUCT" buttons in Receiving view
+  document.querySelectorAll('.mobile-recv-next-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const nextIdx = parseInt(e.currentTarget.getAttribute('data-next-index'), 10);
+      const nextInput = document.querySelector(`.receiving-stepper-input-mobile[data-index="${nextIdx}"]`);
+      if (nextInput) {
+        nextInput.focus();
+        nextInput.select();
+        nextInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }
     });
   });

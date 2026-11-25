@@ -4135,3 +4135,64 @@ div[style*="z-index: 999999"] {
     padding-bottom: 88px; /* Safe breathing room for mobile sticky review bar & bottom navigation */
   }
 }
+
+/* ==========================================================================
+   STOCK RECEIVING (UNLOADING DOCK) RESPONSIVE MOBILE CARDS
+   ========================================================================== */
+
+.receiving-stat-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.receiving-table-view {
+  display: block;
+}
+
+.mobile-receiving-cards {
+  display: none;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+.mobile-receiving-card {
+  background: white;
+  border: 1.5px solid var(--md-border);
+  border-radius: var(--radius-md);
+  padding: 10px 14px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.mobile-receiving-card.has-shortage {
+  border-color: #FCA5A5;
+  background: #FFFDFD;
+}
+
+.mobile-receiving-card.has-surplus {
+  border-color: #93C5FD;
+  background: #F8FAFF;
+}
+
+@media (max-width: 860px) {
+  .receiving-stat-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 10px !important;
+    margin-bottom: 16px !important;
+  }
+  .receiving-table-view {
+    display: none !important;
+  }
+  .mobile-receiving-cards {
+    display: flex !important;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .receiving-confirm-bar {
+    padding: 16px 14px !important;
+  }
+  .receiving-confirm-bar button {
+    width: 100% !important;
+  }
+}
