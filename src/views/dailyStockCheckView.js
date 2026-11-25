@@ -544,54 +544,51 @@ export function renderDailyStockCheckView() {
 
     <!-- Review Requirements Modal / Sheet -->
     <div id="reviewModalBackdrop" class="modal-backdrop">
-      <div class="modal-content">
+      <div class="modal-content review-modal-content">
         <div class="modal-header">
           <div>
             <h3 class="modal-title">Review Stock Requirements</h3>
             <span style="font-size: 0.78rem; color: var(--md-text-muted);">
-              MD Fresh — ${currentBranch.name} &bull; <span class="live-clock-display">${store.getLiveDateTimeString(new Date(), false)}</span>
+              MD Fresh &bull; ${currentBranch.name} &bull; <span class="live-clock-display">${store.getLiveDateTimeString(new Date(), false)}</span>
             </span>
           </div>
-          <button type="button" class="btn-close-modal" id="btnCloseReviewModal" style="background:none; border:none; cursor:pointer; color:var(--md-text-secondary);">${icon('x', 'icon')}</button>
+          <button type="button" class="btn-close-modal" id="btnCloseReviewModal" aria-label="Close review dialog" style="background:none; border:none; cursor:pointer; color:var(--md-text-secondary);">${icon('x', 'icon')}</button>
         </div>
 
-        <div class="modal-body">
-          <div style="background-color: var(--md-surface-subtle); border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 16px; display: flex; align-items: center; justify-content: space-between;">
-            <span style="font-size: 0.88rem; font-weight: 700; color: var(--md-text-secondary);">Total Required Items:</span>
-            <span style="font-size: 1.15rem; font-weight: 800; color: var(--md-primary);" id="reviewModalTotalCountBadge">${totalRequiredCount} requirements</span>
+        <div class="modal-body review-modal-body">
+          <div class="review-modal-summary-bar">
+            <span class="review-summary-label">Items to Order:</span>
+            <span class="review-summary-badge" id="reviewModalTotalCountBadge">${totalRequiredCount} items</span>
           </div>
 
-          <div id="reviewModalItemsList" style="display: flex; flex-direction: column; gap: 10px; max-height: 340px; overflow-y: auto; padding-right: 4px;">
+          <div id="reviewModalItemsList" class="review-items-container">
             ${requiredProductsList.length === 0 ? `
-              <div style="text-align: center; padding: 32px 16px; color: var(--md-text-muted);">
-                <div style="font-size: 2rem; margin-bottom: 8px;">✓</div>
-                <div style="font-weight: 800; font-size: 0.95rem; color: var(--md-text-main);">No items requiring purchase</div>
-                <div style="font-size: 0.78rem; margin-top: 4px;">Enter quantities in the list to add items to this order.</div>
+              <div class="review-empty-state">
+                <div class="review-empty-icon">✓</div>
+                <div class="review-empty-title">No items requiring purchase</div>
+                <div class="review-empty-desc">Enter quantities in the stock list to add items to this order.</div>
               </div>
             ` : requiredProductsList.map(item => `
-              <div class="review-item-row" data-product-id="${item.productId}" style="display: flex; align-items: center; justify-content: space-between; padding: 12px 14px; background: white; border: 1.5px solid var(--md-border); border-radius: var(--radius-md); gap: 10px;">
-                <div style="display: flex; align-items: center; gap: 10px; min-width: 0;">
-                  <span style="font-size: 1.25rem; flex-shrink: 0;">${item.category === 'Fruits' ? '🍎' : '🥦'}</span>
-                  <div style="min-width: 0;">
-                    <div style="font-weight: 800; font-size: 0.92rem; color: var(--md-text-main); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${item.productName}</div>
-                    <div style="font-size: 0.74rem; color: var(--md-text-muted); font-family: monospace;">${item.sku} &bull; ${item.category}</div>
+              <div class="review-item-row" data-product-id="${item.productId}">
+                <div class="review-item-main">
+                  <span class="review-item-icon" aria-hidden="true">${item.category === 'Fruits' ? '🍎' : '🥦'}</span>
+                  <div class="review-item-text">
+                    <div class="review-item-title">${item.productName}</div>
+                    <div class="review-item-meta">${item.category}</div>
                   </div>
                 </div>
-                <div style="display: flex; align-items: center; gap: 10px; flex-shrink: 0;">
-                  <div style="text-align: right;">
-                    <div style="font-weight: 800; font-size: 1.05rem; color: var(--md-primary);">
-                      ${item.requiredQty} <span style="font-size: 0.78rem; font-weight: 700; color: var(--md-text-secondary);">${item.unit}</span>
-                    </div>
-                    <div style="font-size: 0.7rem; color: var(--md-text-muted);">Est. ₹${item.estimatedAmount.toLocaleString('en-IN')}</div>
-                  </div>
+                <div class="review-item-actions">
+                  <span class="review-qty-pill">
+                    <strong>${item.requiredQty}</strong> <small>${item.unit}</small>
+                  </span>
                   <button 
                     type="button" 
-                    class="btn btn-sm btn-delete-review-item" 
+                    class="btn-delete-review-item" 
                     data-product-id="${item.productId}" 
-                    title="Delete item from requirements" 
-                    style="border: 1.5px solid #FCA5A5; color: #DC2626; background: #FEF2F2; font-weight: 800; padding: 5px 9px; border-radius: 6px; cursor: pointer; display: inline-flex; align-items: center; gap: 3px; font-size: 0.74rem;"
+                    title="Remove ${item.productName}" 
+                    aria-label="Remove ${item.productName}"
                   >
-                    ${icon('trash', 'icon-xs')} Delete
+                    ${icon('trash', 'icon-xs')}
                   </button>
                 </div>
               </div>
@@ -1289,43 +1286,40 @@ function filterStockCheckDOM(query) {
     if (!listEl) return;
 
     const freshReqs = store.getRequiredItemsForBranch(currentBranchId);
-    if (badgeEl) badgeEl.textContent = `${freshReqs.length} requirements`;
+    if (badgeEl) badgeEl.textContent = `${freshReqs.length} items`;
 
     if (freshReqs.length === 0) {
       listEl.innerHTML = `
-        <div style="text-align: center; padding: 36px 16px; color: var(--md-text-muted);">
-          <div style="font-size: 2.2rem; margin-bottom: 8px;">✓</div>
-          <div style="font-weight: 800; font-size: 1rem; color: var(--md-text-main);">No items requiring purchase</div>
-          <div style="font-size: 0.8rem; margin-top: 4px;">All items have been cleared. Enter quantities in the list to order produce.</div>
+        <div class="review-empty-state">
+          <div class="review-empty-icon">✓</div>
+          <div class="review-empty-title">No items requiring purchase</div>
+          <div class="review-empty-desc">All items have been cleared. Enter quantities in the stock list to order produce.</div>
         </div>
       `;
       return;
     }
 
     listEl.innerHTML = freshReqs.map(item => `
-      <div class="review-item-row" data-product-id="${item.productId}" style="display: flex; align-items: center; justify-content: space-between; padding: 12px 14px; background: white; border: 1.5px solid var(--md-border); border-radius: var(--radius-md); gap: 10px;">
-        <div style="display: flex; align-items: center; gap: 10px; min-width: 0;">
-          <span style="font-size: 1.25rem; flex-shrink: 0;">${item.category === 'Fruits' ? '🍎' : '🥦'}</span>
-          <div style="min-width: 0;">
-            <div style="font-weight: 800; font-size: 0.92rem; color: var(--md-text-main); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${item.productName}</div>
-            <div style="font-size: 0.74rem; color: var(--md-text-muted); font-family: monospace;">${item.sku} &bull; ${item.category}</div>
+      <div class="review-item-row" data-product-id="${item.productId}">
+        <div class="review-item-main">
+          <span class="review-item-icon" aria-hidden="true">${item.category === 'Fruits' ? '🍎' : '🥦'}</span>
+          <div class="review-item-text">
+            <div class="review-item-title">${item.productName}</div>
+            <div class="review-item-meta">${item.category}</div>
           </div>
         </div>
-        <div style="display: flex; align-items: center; gap: 10px; flex-shrink: 0;">
-          <div style="text-align: right;">
-            <div style="font-weight: 800; font-size: 1.05rem; color: var(--md-primary);">
-              ${item.requiredQty} <span style="font-size: 0.78rem; font-weight: 700; color: var(--md-text-secondary);">${item.unit}</span>
-            </div>
-            <div style="font-size: 0.7rem; color: var(--md-text-muted);">Est. ₹${item.estimatedAmount.toLocaleString('en-IN')}</div>
-          </div>
+        <div class="review-item-actions">
+          <span class="review-qty-pill">
+            <strong>${item.requiredQty}</strong> <small>${item.unit}</small>
+          </span>
           <button 
             type="button" 
-            class="btn btn-sm btn-delete-review-item" 
+            class="btn-delete-review-item" 
             data-product-id="${item.productId}" 
-            title="Delete item from requirements" 
-            style="border: 1.5px solid #FCA5A5; color: #DC2626; background: #FEF2F2; font-weight: 800; padding: 5px 9px; border-radius: 6px; cursor: pointer; display: inline-flex; align-items: center; gap: 3px; font-size: 0.74rem;"
+            title="Remove ${item.productName}" 
+            aria-label="Remove ${item.productName}"
           >
-            ${icon('trash', 'icon-xs')} Delete
+            ${icon('trash', 'icon-xs')}
           </button>
         </div>
       </div>

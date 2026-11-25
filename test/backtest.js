@@ -1407,6 +1407,15 @@ assert(dlBlob && dlBlob.size > 1000, "30.8 Download PDF blob generates with cont
 assert(waBlob && waBlob.size > 1000, "30.9 WhatsApp PDF blob generates with content");
 assert(dlBlob.size === waBlob.size, "30.10 Downloaded PDF and WhatsApp PDF are identical in byte size");
 
+// 30.11: Review Stock Requirements modal typography and price elimination
+const dscModuleForReview = await import('../src/views/dailyStockCheckView.js');
+store.setBranch('BR001');
+store.updateRequiredQuantity('BR001', testProd1.id, 10, false);
+const reviewDscHtml = dscModuleForReview.renderDailyStockCheckView();
+assert(!reviewDscHtml.includes('Est. ₹'), "30.11 Review modal eliminates all unnecessary price displays ('Est. ₹')");
+assert(reviewDscHtml.includes('review-qty-pill'), "30.12 Review modal renders clean quantity pills");
+assert(reviewDscHtml.includes('review-item-title'), "30.13 Review modal renders clean non-truncated product title typography");
+
 // SUMMARY REPORT
 // -------------------------------------------------------------
 console.log('\n============================================================');
