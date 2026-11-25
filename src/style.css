@@ -4336,3 +4336,25 @@ div[style*="z-index: 999999"] {
     padding: 1px 4px !important;
   }
 }
+
+/* WhatsApp Share Button */
+.btn-whatsapp {
+  background: #25D366 !important;
+  color: white !important;
+  border: none !important;
+  font-weight: 800;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(37, 211, 102, 0.25);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  border-radius: var(--radius-md);
+}
+
+.btn-whatsapp:hover {
+  background: #1EBE5D !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(37, 211, 102, 0.35);
+}

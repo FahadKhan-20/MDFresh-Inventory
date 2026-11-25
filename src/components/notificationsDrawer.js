@@ -1,3 +1,5 @@
+import { shareOrderOnWhatsApp } from '../utils/whatsappShare.js';
+import { generateMasterManifestPDF, downloadBlob } from '../utils/pdfGenerator.js';
 // Notifications Drawer Component for MD Fresh
 import { store } from '../utils/store.js';
 import { icon } from '../utils/icons.js';
@@ -41,6 +43,16 @@ export function renderNotificationsDrawer() {
                 <span class="pill pill-unit" style="font-size: 0.68rem;">${n.branch}</span>
               </div>
               <p class="notif-item-msg">${n.message}</p>
+              ${n.action === 'SHARE_WHATSAPP' ? `
+                <div style="margin: 8px 0; display: flex; gap: 8px; flex-wrap: wrap;">
+                  <button class="btn btn-sm btn-primary btn-notif-dl-pdf" style="font-size: 0.72rem; padding: 4px 10px; font-weight: 800;">
+                    📥 Download PDF
+                  </button>
+                  <button class="btn btn-sm btn-whatsapp btn-notif-wa-share" style="font-size: 0.72rem; padding: 4px 10px; font-weight: 800;">
+                    📱 WhatsApp
+                  </button>
+                </div>
+              ` : ''}
               <div class="notif-item-time">${n.time}</div>
             </div>
           `).join('')}
@@ -67,6 +79,30 @@ export function setupNotificationsDrawerEvents() {
       store.notify();
     });
   }
+
+  document.querySelectorAll('.btn-notif-dl-pdf').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const liveDate = store.getLiveDateString();
+      const liveTimestamp = store.getLiveDateTimeString(new Date(), true);
+      const data = {
+        date: liveTimestamp,
+        branches: store.branches,
+        consolidatedItems: store.getConsolidatedProcurement(),
+        branchRequirements: store.getAllBranchesRequirements()
+      };
+      const blob = generateMasterManifestPDF(data);
+      const filenameDate = liveDate.replace(/ /g, '_');
+      downloadBlob(blob, `MD_Fresh_Master_Manifest_${filenameDate}.pdf`);
+    });
+  });
+
+  document.querySelectorAll('.btn-notif-wa-share').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      shareOrderOnWhatsApp();
+    });
+  });
 
   if (backdrop) {
     backdrop.addEventListener('click', (e) => {

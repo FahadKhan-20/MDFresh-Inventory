@@ -1,3 +1,4 @@
+import { shareOrderOnWhatsApp } from '../utils/whatsappShare.js';
 // Daily Stock Check View - Optimized for Blazing Fast Numeric Entry
 import { store } from '../utils/store.js';
 import { icon } from '../utils/icons.js';
@@ -529,8 +530,13 @@ export function renderDailyStockCheckView() {
           <button class="btn btn-secondary btn-lg" id="btnStickyDownloadPdf" style="font-weight: 800; border: 1.5px solid ${allBranchesSubmitted ? '#B7E4C4' : '#FCD34D'}; background: ${allBranchesSubmitted ? '#E8F6ED' : '#FEF3C7'}; color: ${allBranchesSubmitted ? '#0D8244' : '#B45309'};">
             ${allBranchesSubmitted ? '📥 PDF (Optional)' : `🔒 PDF (${submittedCount}/4 Submitted)`}
           </button>
-          <button class="btn btn-primary btn-lg" id="btnReviewRequirements" ${totalRequiredCount === 0 ? 'disabled style="opacity: 0.6;"' : ''}>
-            ${icon('requirements', 'icon-sm')} Review Requirements (${totalRequiredCount})
+          ${allBranchesSubmitted ? `
+            <button class="btn btn-whatsapp btn-lg" id="btnStickyShareWhatsApp" style="font-weight: 800;" title="Share complete 4-branch procurement manifest on WhatsApp">
+              📱 WhatsApp Share
+            </button>
+          ` : ''}
+          <button class="btn btn-primary btn-lg" id="btnReviewRequirements" ${totalRequiredCount === 0 ? 'disabled style="opacity: 0.5; cursor: not-allowed; background: #94A3B8; border-color: #94A3B8;" title="Add product quantities to unlock review"' : 'style="cursor: pointer;" title="Review branch requirements before submitting"'}>
+            ${totalRequiredCount === 0 ? '🔒 Review Requirements (Locked)' : `${icon('requirements', 'icon-sm')} Review Requirements (${totalRequiredCount})`}
           </button>
         </div>
       </div>
@@ -802,17 +808,19 @@ export function renderDailyStockCheckView() {
           ` : `
             <div style="background: #F0FDF4; border: 1.5px solid #86EFAC; border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 16px; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;">
               <div style="display: flex; align-items: center; gap: 10px;">
-                <span style="font-size: 1.3rem;">✅</span>
+                <span style="font-size: 1.4rem;">🎉</span>
                 <div>
                   <div style="font-weight: 800; font-size: 0.95rem; color: #166534;">
-                    All 4 Branches Submitted &amp; Verified
+                    All 4 Shops' Items Have Been Listed &amp; Verified!
                   </div>
                   <div style="font-size: 0.76rem; color: #15803D;">
-                    Annasandrapalya &bull; Kodihalli &bull; LBS Nagar &bull; Basavanagar are all ready for consolidated Mandi purchasing.
+                    Annasandrapalya &bull; Kodihalli &bull; LBS Nagar &bull; Basavanagar are all ready. Please download the PDF and share it on WhatsApp.
                   </div>
                 </div>
               </div>
-              <span class="pill" style="background: #166534; color: white; font-weight: 800; font-size: 0.72rem; padding: 3px 8px;">4 / 4 READY</span>
+              <button class="btn btn-whatsapp" id="btnShareWhatsAppInPdfModal" style="padding: 8px 16px; font-weight: 800; font-size: 0.85rem;" title="Share complete manifest on WhatsApp">
+                📱 Share on WhatsApp
+              </button>
             </div>
           `}
 
@@ -838,9 +846,16 @@ export function renderDailyStockCheckView() {
                   Includes Combined Total List at top + All 4 Branch Headlined Sections below.
                 </p>
               </div>
-              <button class="btn btn-primary btn-lg" id="btnDownloadMasterPdf" ${!allBranchesSubmitted ? 'disabled style="background: rgba(255,255,255,0.5); color: #334155; font-weight: 800; border: none; flex-shrink: 0; cursor: not-allowed; opacity: 0.75;"' : 'style="background: white; color: #064E3B; font-weight: 800; border: none; flex-shrink: 0;"'}>
-                ${!allBranchesSubmitted ? '🔒 Waiting for 4/4 Branches' : '📥 Download PDF'}
-              </button>
+              <div style="display: flex; gap: 8px; flex-shrink: 0; flex-wrap: wrap;">
+                <button class="btn btn-primary btn-lg" id="btnDownloadMasterPdf" ${!allBranchesSubmitted ? 'disabled style="background: rgba(255,255,255,0.5); color: #334155; font-weight: 800; border: none; flex-shrink: 0; cursor: not-allowed; opacity: 0.75;"' : 'style="background: white; color: #064E3B; font-weight: 800; border: none; flex-shrink: 0;"'}>
+                  ${!allBranchesSubmitted ? '🔒 Waiting for 4/4 Branches' : '📥 Download PDF'}
+                </button>
+                ${allBranchesSubmitted ? `
+                  <button class="btn btn-whatsapp btn-lg" id="btnShareWhatsAppOption1" style="font-weight: 800; flex-shrink: 0;" title="Share complete manifest on WhatsApp">
+                    📱 WhatsApp
+                  </button>
+                ` : ''}
+              </div>
             </div>
 
             <!-- Option 2 & 3: Split downloads -->
@@ -1046,14 +1061,31 @@ function filterStockCheckDOM(query) {
 
     const btnReview = document.getElementById('btnReviewRequirements');
     if (btnReview) {
-      btnReview.innerHTML = `${icon('requirements', 'icon-sm')} Review Requirements (${requiredCount})`;
       if (requiredCount === 0) {
         btnReview.setAttribute('disabled', 'true');
-        btnReview.style.opacity = '0.6';
+        btnReview.style.opacity = '0.5';
+        btnReview.style.cursor = 'not-allowed';
+        btnReview.style.background = '#94A3B8';
+        btnReview.style.borderColor = '#94A3B8';
+        btnReview.title = 'Add at least 1 product quantity to unlock review';
+        btnReview.innerHTML = '🔒 Review Requirements (Locked)';
       } else {
         btnReview.removeAttribute('disabled');
         btnReview.style.opacity = '1';
+        btnReview.style.cursor = 'pointer';
+        btnReview.style.background = 'var(--md-primary)';
+        btnReview.style.borderColor = 'var(--md-primary)';
+        btnReview.title = 'Review branch requirements before submitting';
+        btnReview.innerHTML = `${icon('requirements', 'icon-sm')} Review Requirements (${requiredCount})`;
       }
+    }
+
+    const toggleActionText = document.getElementById('toggleArrowActionText');
+    if (toggleActionText) {
+      toggleActionText.innerHTML = requiredCount === 0 ? '🔒 Locked' : 'Review List';
+    }
+    if (collapsedLabel) {
+      collapsedLabel.textContent = requiredCount === 0 ? '0 items • Add product to unlock review' : `${requiredCount} products require purchase`;
     }
   }
 
@@ -1376,13 +1408,153 @@ function filterStockCheckDOM(query) {
       const newReq = store.submitDailyStockRequirement(currentBranchId);
       if (newReq) {
         if (reviewBackdrop) reviewBackdrop.classList.remove('open');
-        if (confirmedRefCode) {
-          confirmedRefCode.textContent = newReq.reference;
+
+        const allBranchesDone = store.areAllBranchesSubmitted();
+        const modalBody = document.querySelector('#confirmModalBackdrop .modal-body');
+
+        if (modalBody) {
+          if (allBranchesDone) {
+            modalBody.innerHTML = `
+              <div style="width: 64px; height: 64px; border-radius: 50%; background: #DCFCE7; color: #16A34A; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; border: 2.5px solid #86EFAC; font-size: 2rem;">
+                🎉
+              </div>
+              <div class="pill" style="background: #166534; color: white; font-weight: 800; font-size: 0.76rem; padding: 4px 12px; margin-bottom: 10px; display: inline-block;">
+                4 / 4 SHOPS COMPLETED
+              </div>
+              <h3 style="font-size: 1.35rem; font-weight: 900; color: #14532D; margin-bottom: 8px;">
+                All 4 Shops' Items Have Been Listed!
+              </h3>
+              <p style="font-size: 0.88rem; color: #166534; margin-bottom: 18px; line-height: 1.5;">
+                <strong>${currentBranch.name}</strong> was the final branch to complete requirements. The official APMC Mandi purchase order PDF is now <strong>UNLOCKED</strong>! Please download the PDF and share it with procurement.
+              </p>
+
+              <!-- Prominent Action Buttons: PDF Download & WhatsApp Share -->
+              <div style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px;">
+                <button class="btn btn-primary btn-lg" id="btnConfirmedModalDownloadPdf" style="background: #0D8244; color: white; font-weight: 900; padding: 13px 20px; font-size: 1rem; border-radius: var(--radius-md); box-shadow: 0 4px 12px rgba(13, 130, 68, 0.25); display: flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer;">
+                  📥 Download Master PDF Manifest
+                </button>
+                <button class="btn btn-whatsapp btn-lg" id="btnConfirmedModalShareWhatsApp" style="background: #25D366; color: white; font-weight: 900; padding: 13px 20px; font-size: 1rem; border-radius: var(--radius-md); border: none; box-shadow: 0 4px 12px rgba(37, 211, 102, 0.25); display: flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer;">
+                  📱 Share on WhatsApp (All 4 Branches)
+                </button>
+              </div>
+
+              <div style="background-color: var(--md-surface-subtle); border: 1.5px dashed #86EFAC; border-radius: var(--radius-md); padding: 12px 14px; margin-bottom: 20px; text-align: left;">
+                <div style="font-size: 0.72rem; font-weight: 700; text-transform: uppercase; color: var(--md-text-muted); letter-spacing: 0.05em;">
+                  OFFICIAL REFERENCE &amp; TIMESTAMP
+                </div>
+                <div style="font-size: 1.15rem; font-weight: 800; font-family: monospace; color: var(--md-primary); margin-top: 2px;">
+                  ${newReq.reference}
+                </div>
+                <div style="font-size: 0.75rem; color: var(--md-text-muted); margin-top: 2px;">
+                  Branch: <strong>${currentBranch.name}</strong> &bull; Recorded Live: <strong>${newReq.timestamp}</strong>
+                </div>
+              </div>
+
+              <div style="display: flex; gap: 10px;">
+                <button class="btn btn-secondary" style="flex: 1; font-weight: 800;" id="btnViewRequirementsPage">
+                  View All Branches Table
+                </button>
+                <button class="btn btn-outline-secondary" style="flex: 1; font-weight: 800;" id="btnFinishStockCheck">
+                  Done
+                </button>
+              </div>
+            `;
+
+            const btnDl = document.getElementById('btnConfirmedModalDownloadPdf');
+            if (btnDl) {
+              btnDl.addEventListener('click', () => {
+                const liveDate = store.getLiveDateString();
+                const liveTimestamp = store.getLiveDateTimeString(new Date(), true);
+                const data = {
+                  date: liveTimestamp,
+                  branches: store.branches,
+                  consolidatedItems: store.getConsolidatedProcurement(),
+                  branchRequirements: store.getAllBranchesRequirements()
+                };
+                const blob = generateMasterManifestPDF(data);
+                const filenameDate = liveDate.replace(/ /g, '_');
+                downloadBlob(blob, `MD_Fresh_Master_Manifest_${filenameDate}.pdf`);
+                store.finalizeOrderAndResetForNextDay({ source: 'CONFIRM_MODAL_AUTO_FINALIZE' });
+                showToast('APMC Master Manifest PDF downloaded successfully! Updated in Stock Receiving Portal.', 'success');
+              });
+            }
+
+            const btnWa = document.getElementById('btnConfirmedModalShareWhatsApp');
+            if (btnWa) {
+              btnWa.addEventListener('click', () => {
+                shareOrderOnWhatsApp();
+              });
+            }
+          } else {
+            const summary = store.getBranchSubmissionSummary();
+            const doneCount = summary.filter(s => s.isSubmitted).length;
+            const pendingNames = store.getPendingBranches().map(b => b.name).join(', ');
+            modalBody.innerHTML = `
+              <div style="width: 54px; height: 54px; border-radius: 50%; background-color: var(--md-primary-light); color: var(--md-primary); display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; border: 1.5px solid var(--md-primary-light-border);">
+                ${icon('check', 'icon-lg')}
+              </div>
+              <h3 style="font-size: 1.35rem; font-weight: 800; color: var(--md-secondary-dark); margin-bottom: 8px;">
+                Stock Requirement Submitted Successfully
+              </h3>
+              <p style="font-size: 0.88rem; color: var(--md-text-secondary); margin-bottom: 16px;">
+                Your morning stock verification has been locked and routed to the central APMC market procurement desk.
+              </p>
+
+              <div style="background: #FFFBEB; border: 1.5px solid #FCD34D; border-radius: var(--radius-md); padding: 12px 14px; margin-bottom: 18px; text-align: left;">
+                <div style="font-weight: 800; font-size: 0.82rem; color: #92400E; display: flex; align-items: center; justify-content: space-between;">
+                  <span>🔒 PDF Locked (${doneCount}/4 Branches Submitted)</span>
+                  <span class="pill" style="background: #FEF3C7; color: #B45309; font-size: 0.68rem;">WAITING FOR ${4 - doneCount} MORE</span>
+                </div>
+                <div style="font-size: 0.74rem; color: #B45309; margin-top: 4px;">
+                  Waiting for: <strong>${pendingNames}</strong>. PDF download and WhatsApp export unlock automatically once the 4th branch completes.
+                </div>
+              </div>
+
+              <div style="background-color: var(--md-surface-subtle); border: 1.5px dashed var(--md-primary-light-border); border-radius: var(--radius-md); padding: 12px 14px; margin-bottom: 20px; text-align: left;">
+                <div style="font-size: 0.72rem; font-weight: 700; text-transform: uppercase; color: var(--md-text-muted); letter-spacing: 0.05em;">
+                  OFFICIAL REFERENCE CODE
+                </div>
+                <div style="font-size: 1.15rem; font-weight: 800; font-family: monospace; color: var(--md-primary); margin-top: 2px;">
+                  ${newReq.reference}
+                </div>
+                <div style="font-size: 0.75rem; color: var(--md-text-muted); margin-top: 2px;">
+                  Branch: <strong>${currentBranch.name}</strong> &bull; Recorded Live: <strong>${newReq.timestamp}</strong>
+                </div>
+              </div>
+
+              <div style="display: flex; gap: 10px;">
+                <button class="btn btn-secondary" style="flex: 1;" id="btnViewRequirementsPage">
+                  View All Branches Table
+                </button>
+                <button class="btn btn-primary" style="flex: 1;" id="btnFinishStockCheck">
+                  Done
+                </button>
+              </div>
+            `;
+          }
+
+          const btnViewReq = document.getElementById('btnViewRequirementsPage');
+          if (btnViewReq) {
+            btnViewReq.addEventListener('click', () => {
+              if (confirmBackdrop) confirmBackdrop.classList.remove('open');
+              store.setView('requirements');
+            });
+          }
+          const btnFinish = document.getElementById('btnFinishStockCheck');
+          if (btnFinish) {
+            btnFinish.addEventListener('click', () => {
+              if (confirmBackdrop) confirmBackdrop.classList.remove('open');
+              store.notify();
+            });
+          }
         }
-        const confirmedTimeEl = document.getElementById('confirmedTimestampDisplay');
-        if (confirmedTimeEl) {
-          confirmedTimeEl.innerHTML = `Branch: <strong>${currentBranch.name}</strong> &bull; Recorded Live: <strong>${newReq.timestamp}</strong>`;
+
+        if (allBranchesDone) {
+          showToast("🎉 All 4 shops' items have been listed! PDF download is unlocked. Please download and share on WhatsApp.", "success");
+        } else {
+          showToast(`Submitted requirements for ${currentBranch.name}!`, 'success');
         }
+
         if (confirmBackdrop) confirmBackdrop.classList.add('open');
       }
     });
@@ -1420,6 +1592,11 @@ function filterStockCheckDOM(query) {
 
   if (btnToggleSticky && stickyBar) {
     btnToggleSticky.addEventListener('click', () => {
+      const curCount = store.getRequiredItemsForBranch(currentBranchId).length;
+      if (curCount === 0) {
+        showToast('🔒 Review is locked! Add a quantity for at least 1 product first.', 'info');
+        return;
+      }
       const isCurrentlyCollapsed = stickyBar.classList.contains('is-collapsed');
       if (isCurrentlyCollapsed) {
         stickyBar.classList.remove('is-collapsed');
@@ -1553,6 +1730,28 @@ function filterStockCheckDOM(query) {
 
   const getFileDate = () => store.getLiveDateString().replace(/ /g, '_');
 
+  // WhatsApp Share Buttons
+  const btnStickyWA = document.getElementById('btnStickyShareWhatsApp');
+  if (btnStickyWA) {
+    btnStickyWA.addEventListener('click', () => {
+      shareOrderOnWhatsApp();
+    });
+  }
+
+  const btnPdfModalWA = document.getElementById('btnShareWhatsAppInPdfModal');
+  if (btnPdfModalWA) {
+    btnPdfModalWA.addEventListener('click', () => {
+      shareOrderOnWhatsApp();
+    });
+  }
+
+  const btnOpt1WA = document.getElementById('btnShareWhatsAppOption1');
+  if (btnOpt1WA) {
+    btnOpt1WA.addEventListener('click', () => {
+      shareOrderOnWhatsApp();
+    });
+  }
+
   // Quick submit branch verification button inside PDF modal
   document.querySelectorAll('.btn-quick-submit-branch').forEach(btn => {
     btn.addEventListener('click', (e) => {
@@ -1562,7 +1761,11 @@ function filterStockCheckDOM(query) {
       if (bId) {
         store.markBranchSubmitted(bId, true);
         const b = store.branches.find(br => br.id === bId);
-        showToast(`Marked ${b ? b.name : bId} requirements as submitted!`, 'success');
+        if (store.areAllBranchesSubmitted()) {
+          showToast("🎉 All 4 shops' items have been listed! PDF download is unlocked. Please download and share on WhatsApp.", "success");
+        } else {
+          showToast(`Marked ${b ? b.name : bId} requirements as submitted!`, 'success');
+        }
       }
     });
   });

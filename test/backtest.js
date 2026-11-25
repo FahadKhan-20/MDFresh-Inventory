@@ -2,6 +2,7 @@
 import { store } from '../src/utils/store.js';
 import { INITIAL_PRODUCTS, INITIAL_BRANCHES } from '../src/data/mockData.js';
 import { generateMasterManifestPDF, generateCombinedListOnlyPDF, generateBranchHeadlinedPDF, generateGoodsReceivingPDF } from '../src/utils/pdfGenerator.js';
+import { buildWhatsAppOrderMessage } from '../src/utils/whatsappShare.js';
 import fs from 'fs';
 import path from 'path';
 
@@ -1124,6 +1125,42 @@ for (const b of branchesToTest) {
 }
 // Restore branch to BR001
 store.setBranch('BR001');
+
+// POINT 26: PRODUCT ADDITION REVIEW UNLOCK, 4-BRANCH PDF UNLOCK & WHATSAPP SHARE
+// -----------------------------------------------------------------------------
+console.log("\n\x1b[36m▶ TEST SUITE 26: Product Addition Review Unlock, 4-Branch PDF Unlock & WhatsApp Share\x1b[0m");
+
+// 26.1: When 0 products are added, Review button is locked
+store.setBranch('BR001');
+store.products.forEach(p => store.updateRequiredQuantity('BR001', p.id, 0, false));
+const dscZeroHtml = renderDailyStockCheckView();
+assert(dscZeroHtml.includes('Review Requirements (Locked)') && dscZeroHtml.includes('disabled'), "26.1 When 0 products are added, Review Requirements button is locked");
+
+// 26.2: When products are added (> 0), Review button unlocks
+store.updateRequiredQuantity('BR001', store.products[0].id, 5, false);
+store.updateRequiredQuantity('BR001', store.products[1].id, 8, false);
+const dscActiveHtml = renderDailyStockCheckView();
+assert(!dscActiveHtml.includes('Review Requirements (Locked)'), "26.2 When products are added (> 0), Review Requirements button unlocks");
+assert(dscActiveHtml.includes('Review Requirements (2)'), "26.2b Review Requirements shows active product count (2)");
+
+// 26.3: WhatsApp message generator builds formatted manifest with all 4 branches
+const waMsg = buildWhatsAppOrderMessage();
+assert(waMsg.includes('MD FRESH — APMC MANDI DAILY PROCUREMENT MANIFEST'), "26.3 WhatsApp summary contains official APMC heading");
+assert(waMsg.includes('ALL 4 BRANCHES'), "26.4 WhatsApp summary highlights 4-branch consolidated status");
+assert(waMsg.includes('ANNASANDRAPALYA') || waMsg.includes('KODIHALLI') || waMsg.includes('Annasandra Palya'), "26.5 WhatsApp summary lists branch items breakdown");
+
+// 26.4: Notification created when all 4 branches submitted
+store.branchSubmitted = { 'BR001': true, 'BR002': true, 'BR003': true, 'BR004': false };
+store.markBranchSubmitted('BR004', true);
+assert(store.areAllBranchesSubmitted() === true, "26.6 Final branch submission sets areAllBranchesSubmitted to true");
+const all4Notif = store.notifications.find(n => n.title && n.title.includes("All 4 Shops' Items Have Been Listed"));
+assert(Boolean(all4Notif), "26.7 System creates notification 'All 4 Shops Items Have Been Listed' for 4th branch submission");
+assert(all4Notif && all4Notif.action === 'SHARE_WHATSAPP', "26.8 4th branch notification carries SHARE_WHATSAPP action");
+
+// 26.5: View templates render WhatsApp share buttons
+assert(dscActiveHtml.includes('btn-whatsapp') || dscActiveHtml.includes('WhatsApp'), "26.9 Daily Stock Check renders WhatsApp share option");
+const reqViewHtml = renderRequirementsView();
+assert(reqViewHtml.includes('btn-whatsapp') || reqViewHtml.includes('WhatsApp'), "26.10 Requirements Matrix renders WhatsApp share option");
 
 // SUMMARY REPORT
 // -------------------------------------------------------------

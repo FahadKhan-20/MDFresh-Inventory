@@ -659,6 +659,22 @@ class InventoryStore {
       branch: branch.name
     });
 
+    // If this submission completes all 4 branches, send high-priority alert to download PDF & share on WhatsApp
+    if (this.areAllBranchesSubmitted()) {
+      const alreadyHasAll4 = this.notifications.some(n => n.title && n.title.includes("All 4 Shops' Items Have Been Listed"));
+      if (!alreadyHasAll4) {
+        this.notifications.unshift({
+          id: `NOTIF-${Date.now()}-ALL4`,
+          title: "🎉 All 4 Shops' Items Have Been Listed!",
+          message: "All 4 retail stores (Annasandrapalya, Kodihalli, LB Shastri Nagar, Basavanagar) have completed and submitted their morning stock requirements! PDF download is now unlocked. Please download the purchase order PDF and share it on WhatsApp.",
+          type: 'success',
+          time: 'Just now',
+          unread: true,
+          action: 'SHARE_WHATSAPP'
+        });
+      }
+    }
+
     this.notify();
     return newReq;
   }
@@ -853,6 +869,21 @@ class InventoryStore {
         action: 'BRANCH_REQUIREMENT_VERIFIED',
         details: `Confirmed ${branchName} requirements submitted for today's APMC Mandi purchase order.`
       });
+
+      if (this.areAllBranchesSubmitted()) {
+        const alreadyHasAll4 = this.notifications.some(n => n.title && n.title.includes("All 4 Shops' Items Have Been Listed"));
+        if (!alreadyHasAll4) {
+          this.notifications.unshift({
+            id: `NOTIF-${Date.now()}-ALL4`,
+            title: "🎉 All 4 Shops' Items Have Been Listed!",
+            message: "All 4 retail stores (Annasandrapalya, Kodihalli, LB Shastri Nagar, Basavanagar) have completed and submitted their morning stock requirements! PDF download is now unlocked. Please download the purchase order PDF and share it on WhatsApp.",
+            type: 'success',
+            time: 'Just now',
+            unread: true,
+            action: 'SHARE_WHATSAPP'
+          });
+        }
+      }
     }
 
     try {

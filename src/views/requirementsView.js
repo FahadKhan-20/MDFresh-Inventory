@@ -1,3 +1,4 @@
+import { shareOrderOnWhatsApp } from '../utils/whatsappShare.js';
 // Requirements View Component for MD Fresh
 // Multi-Branch Requirements Master Table (Proper Tabular Form across all 4 branches)
 import { store } from '../utils/store.js';
@@ -92,6 +93,11 @@ export function renderRequirementsView() {
         <button class="btn btn-secondary req-btn-action" id="btnDownloadReqPdf" style="font-weight: 800; border: 1.5px solid #B7E4C4; background: #E8F6ED; color: #0D8244;" title="Download local PDF manifest for phone or PC">
           📥 Download PDF (Optional)
         </button>
+        ${store.areAllBranchesSubmitted() ? `
+          <button class="btn btn-whatsapp req-btn-action" id="btnShareWhatsAppFromReq" style="font-weight: 800;" title="Share complete 4-branch procurement manifest on WhatsApp">
+            📱 WhatsApp Share
+          </button>
+        ` : ''}
         <button class="btn btn-outline-secondary req-btn-action" id="btnPrintMatrixBtn" style="font-weight: 700; background: white;" title="Print clean tabular view">
           🖨️ Print View
         </button>
@@ -850,6 +856,13 @@ function filterMatrixDOM(query) {
   }
 
   // Optional PDF download & automatic reset
+  const btnShareReq = document.getElementById('btnShareWhatsAppFromReq');
+  if (btnShareReq) {
+    btnShareReq.addEventListener('click', () => {
+      shareOrderOnWhatsApp();
+    });
+  }
+
   const btnDlReq = document.getElementById('btnDownloadReqPdf');
   if (btnDlReq) {
     btnDlReq.addEventListener('click', () => {
