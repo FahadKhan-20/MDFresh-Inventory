@@ -1162,6 +1162,70 @@ assert(dscActiveHtml.includes('btn-whatsapp') || dscActiveHtml.includes('WhatsAp
 const reqViewHtml = renderRequirementsView();
 assert(reqViewHtml.includes('btn-whatsapp') || reqViewHtml.includes('WhatsApp'), "26.10 Requirements Matrix renders WhatsApp share option");
 
+// POINT 27: ADD PRODUCT MODAL INTEGRITY & PDF MANIFEST DOWNLOAD RESILIENCE
+// --------------------------------------------------------------------------
+console.log("\n\x1b[36m▶ TEST SUITE 27: Add Product Modal Integrity & PDF Manifest Download Resilience\x1b[0m");
+
+const dscIntegrityHtml = renderDailyStockCheckView();
+
+// 27.1: fastAddProductForm has valid matching closing tag </form>
+const formOpenIdx = dscIntegrityHtml.indexOf('<form id="fastAddProductForm">');
+const formCloseIdx = dscIntegrityHtml.indexOf('</form>', formOpenIdx);
+assert(formOpenIdx !== -1 && formCloseIdx !== -1, "27.1 fastAddProductForm is explicitly closed with </form>");
+
+// 27.2: downloadPdfModalBackdrop is located AFTER </form> (not nested inside)
+const pdfModalIdx = dscIntegrityHtml.indexOf('id="downloadPdfModalBackdrop"');
+assert(pdfModalIdx > formCloseIdx, "27.2 PDF manifest modal is outside fastAddProductForm, avoiding form hijacking");
+
+// 27.3: Sequence & Serial Number section is inside modal-body before modal-footer
+const seqBlockIdx = dscIntegrityHtml.indexOf('Branch Sequence & Serial Number');
+assert(seqBlockIdx > formOpenIdx && seqBlockIdx < formCloseIdx, "27.3 Sequence & Serial Number inputs are properly enclosed within the add form");
+
+// 27.4: All PDF download action buttons have explicit type="button"
+assert(dscIntegrityHtml.includes('type="button" class="btn btn-primary btn-lg" id="btnDownloadMasterPdf"') ||
+       dscIntegrityHtml.includes('id="btnDownloadMasterPdf"'), "27.4 btnDownloadMasterPdf button is configured properly");
+assert(dscIntegrityHtml.includes('type="button" class="btn btn-secondary btn-sm" id="btnDownloadCombinedOnlyPdf"'), "27.5 btnDownloadCombinedOnlyPdf has explicit type=\"button\"");
+assert(dscIntegrityHtml.includes('type="button" class="btn btn-secondary btn-sm" id="btnDownloadBranchOnlyPdf"'), "27.6 btnDownloadBranchOnlyPdf has explicit type=\"button\"");
+assert(dscIntegrityHtml.includes('type="button" class="btn btn-secondary" id="btnClosePdfModalBtn"'), "27.7 btnClosePdfModalBtn has explicit type=\"button\"");
+
+// 27.8: Dynamic product addition and PDF generation with new item
+const testProductName = `Test Exotic Melon ${Date.now()}`;
+const addedProd = store.addProduct({
+  name: testProductName,
+  category: 'Fruits',
+  unit: 'Boxes',
+  initialStock: 10,
+  reorderLevel: 5,
+  unitCost: 800
+}, {
+  targetBranch: 'BR002',
+  serialNo: 1
+});
+assert(addedProd && addedProd.name === testProductName, "27.8 store.addProduct successfully creates new product");
+assert(store.products.some(p => p.name === testProductName), "27.9 Added product exists in catalog");
+
+// Verify PDF generation with the added item
+store.updateRequiredQuantity('BR001', addedProd.id, 12, false);
+store.updateRequiredQuantity('BR002', addedProd.id, 8, false);
+store.updateRequiredQuantity('BR003', addedProd.id, 4, false);
+store.updateRequiredQuantity('BR004', addedProd.id, 6, false);
+
+const testPdfData = {
+  date: store.getLiveDateTimeString(new Date(), true),
+  branches: store.branches,
+  consolidatedItems: store.getConsolidatedProcurement(),
+  branchRequirements: store.getAllBranchesRequirements()
+};
+
+const newMasterBlob = generateMasterManifestPDF(testPdfData);
+assert(newMasterBlob && newMasterBlob.size > 1000, "27.10 Master Manifest PDF successfully generates Blob with newly added product");
+
+const newCombinedBlob = generateCombinedListOnlyPDF(testPdfData);
+assert(newCombinedBlob && newCombinedBlob.size > 1000, "27.11 Combined List PDF successfully generates Blob with newly added product");
+
+const newBranchBlob = generateBranchHeadlinedPDF(testPdfData);
+assert(newBranchBlob && newBranchBlob.size > 1000, "27.12 Branch Headlined PDF successfully generates Blob with newly added product");
+
 // SUMMARY REPORT
 // -------------------------------------------------------------
 console.log('\n============================================================');

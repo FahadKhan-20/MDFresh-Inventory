@@ -701,15 +701,6 @@ export function renderDailyStockCheckView() {
                 <input type="number" id="fapReorderLevel" min="1" value="4" style="width:100%; padding:9px 12px; border:1px solid var(--md-border); border-radius:var(--radius-md); font-size:0.95rem; font-weight:700; outline:none;" />
               </div>
             </div>
-          </div>
-
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" id="btnCancelFastAdd">Cancel</button>
-            <button type="submit" class="btn btn-primary" style="font-weight: 800; padding: 10px 20px;">
-              ${icon('check', 'icon-sm')} Save & Add to Stock Check
-            </button>
-          </div>
-                  </div>
 
             <!-- Sequence & Serial Number Placement -->
             <div style="background: #F8FAFC; border: 1.5px solid #E2E8F0; border-radius: var(--radius-md); padding: 12px; margin-top: 2px;">
@@ -736,7 +727,15 @@ export function renderDailyStockCheckView() {
                 Specify position (e.g. #1 for top, or #20). Existing items shift automatically.
               </div>
             </div>
-        <div class="modal-footer">
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" id="btnCancelFastAdd">Cancel</button>
+            <button type="submit" class="btn btn-primary" style="font-weight: 800; padding: 10px 20px;">
+              ${icon('check', 'icon-sm')} Save & Add to Stock Check
+            </button>
+          </div>
+        </form>
       </div>
     </div>
 
@@ -755,7 +754,7 @@ export function renderDailyStockCheckView() {
               </span>
             </div>
           </div>
-          <button id="btnClosePdfModal" style="background:none; border:none; cursor:pointer; color:var(--md-text-secondary);">${icon('x', 'icon')}</button>
+          <button type="button" id="btnClosePdfModal" style="background:none; border:none; cursor:pointer; color:var(--md-text-secondary);">${icon('x', 'icon')}</button>
         </div>
 
         <div class="modal-body" style="padding: 20px 24px;">
@@ -818,7 +817,7 @@ export function renderDailyStockCheckView() {
                   </div>
                 </div>
               </div>
-              <button class="btn btn-whatsapp" id="btnShareWhatsAppInPdfModal" style="padding: 8px 16px; font-weight: 800; font-size: 0.85rem;" title="Share complete manifest on WhatsApp">
+              <button type="button" class="btn btn-whatsapp" id="btnShareWhatsAppInPdfModal" style="padding: 8px 16px; font-weight: 800; font-size: 0.85rem;" title="Share complete manifest on WhatsApp">
                 📱 Share on WhatsApp
               </button>
             </div>
@@ -847,11 +846,11 @@ export function renderDailyStockCheckView() {
                 </p>
               </div>
               <div style="display: flex; gap: 8px; flex-shrink: 0; flex-wrap: wrap;">
-                <button class="btn btn-primary btn-lg" id="btnDownloadMasterPdf" ${!allBranchesSubmitted ? 'disabled style="background: rgba(255,255,255,0.5); color: #334155; font-weight: 800; border: none; flex-shrink: 0; cursor: not-allowed; opacity: 0.75;"' : 'style="background: white; color: #064E3B; font-weight: 800; border: none; flex-shrink: 0;"'}>
+                <button type="button" class="btn btn-primary btn-lg" id="btnDownloadMasterPdf" ${!allBranchesSubmitted ? 'disabled style="background: rgba(255,255,255,0.5); color: #334155; font-weight: 800; border: none; flex-shrink: 0; cursor: not-allowed; opacity: 0.75;"' : 'style="background: white; color: #064E3B; font-weight: 800; border: none; flex-shrink: 0;"'}>
                   ${!allBranchesSubmitted ? '🔒 Waiting for 4/4 Branches' : '📥 Download PDF'}
                 </button>
                 ${allBranchesSubmitted ? `
-                  <button class="btn btn-whatsapp btn-lg" id="btnShareWhatsAppOption1" style="font-weight: 800; flex-shrink: 0;" title="Share complete manifest on WhatsApp">
+                  <button type="button" class="btn btn-whatsapp btn-lg" id="btnShareWhatsAppOption1" style="font-weight: 800; flex-shrink: 0;" title="Share complete manifest on WhatsApp">
                     📱 WhatsApp
                   </button>
                 ` : ''}
@@ -868,7 +867,7 @@ export function renderDailyStockCheckView() {
                     Consolidated total bulk quantities across all branches for APMC bidding.
                   </p>
                 </div>
-                <button class="btn btn-secondary btn-sm" id="btnDownloadCombinedOnlyPdf" ${!allBranchesSubmitted ? 'disabled style="margin-top: 12px; font-weight: 700; opacity: 0.6; cursor: not-allowed;"' : 'style="margin-top: 12px; font-weight: 700;"'}>
+                <button type="button" class="btn btn-secondary btn-sm" id="btnDownloadCombinedOnlyPdf" ${!allBranchesSubmitted ? 'disabled style="margin-top: 12px; font-weight: 700; opacity: 0.6; cursor: not-allowed;"' : 'style="margin-top: 12px; font-weight: 700;"'}>
                   ${!allBranchesSubmitted ? '🔒 Need 4/4 Branches' : '📥 Download Combined PDF'}
                 </button>
               </div>
@@ -881,7 +880,7 @@ export function renderDailyStockCheckView() {
                     Delivery checklist headlined by Annasandrapalya, Kodihalli, LBS Nagar & Basavanagar.
                   </p>
                 </div>
-                <button class="btn btn-secondary btn-sm" id="btnDownloadBranchOnlyPdf" ${!allBranchesSubmitted ? 'disabled style="margin-top: 12px; font-weight: 700; opacity: 0.6; cursor: not-allowed;"' : 'style="margin-top: 12px; font-weight: 700;"'}>
+                <button type="button" class="btn btn-secondary btn-sm" id="btnDownloadBranchOnlyPdf" ${!allBranchesSubmitted ? 'disabled style="margin-top: 12px; font-weight: 700; opacity: 0.6; cursor: not-allowed;"' : 'style="margin-top: 12px; font-weight: 700;"'}>
                   ${!allBranchesSubmitted ? '🔒 Need 4/4 Branches' : '📥 Download Branch List PDF'}
                 </button>
               </div>
@@ -909,7 +908,7 @@ export function renderDailyStockCheckView() {
         </div>
 
         <div class="modal-footer">
-          <button class="btn btn-secondary" id="btnClosePdfModalBtn">Close</button>
+          <button type="button" class="btn btn-secondary" id="btnClosePdfModalBtn">Close</button>
         </div>
       </div>
     </div>
@@ -1689,6 +1688,7 @@ function filterStockCheckDOM(query) {
 
       fastAddForm.reset();
       if (fastAddModal) fastAddModal.classList.remove('open');
+      showToast(`Added "${name}" to product catalog!`, 'success');
     });
   }
 
