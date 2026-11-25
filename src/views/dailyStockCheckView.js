@@ -535,8 +535,8 @@ export function renderDailyStockCheckView() {
               📱 WhatsApp Share
             </button>
           ` : ''}
-          <button class="btn btn-primary btn-lg" id="btnReviewRequirements" ${totalRequiredCount === 0 ? 'disabled style="opacity: 0.5; cursor: not-allowed; background: #94A3B8; border-color: #94A3B8;" title="Add product quantities to unlock review"' : 'style="cursor: pointer;" title="Review branch requirements before submitting"'}>
-            ${totalRequiredCount === 0 ? '🔒 Review Requirements (Locked)' : `${icon('requirements', 'icon-sm')} Review Requirements (${totalRequiredCount})`}
+          <button class="btn btn-primary btn-lg" id="btnReviewRequirements" style="cursor: pointer;" title="Review branch requirements before submitting">
+            ${icon('requirements', 'icon-sm')} Review Requirements (${totalRequiredCount})
           </button>
         </div>
       </div>
@@ -1060,31 +1060,21 @@ function filterStockCheckDOM(query) {
 
     const btnReview = document.getElementById('btnReviewRequirements');
     if (btnReview) {
-      if (requiredCount === 0) {
-        btnReview.setAttribute('disabled', 'true');
-        btnReview.style.opacity = '0.5';
-        btnReview.style.cursor = 'not-allowed';
-        btnReview.style.background = '#94A3B8';
-        btnReview.style.borderColor = '#94A3B8';
-        btnReview.title = 'Add at least 1 product quantity to unlock review';
-        btnReview.innerHTML = '🔒 Review Requirements (Locked)';
-      } else {
-        btnReview.removeAttribute('disabled');
-        btnReview.style.opacity = '1';
-        btnReview.style.cursor = 'pointer';
-        btnReview.style.background = 'var(--md-primary)';
-        btnReview.style.borderColor = 'var(--md-primary)';
-        btnReview.title = 'Review branch requirements before submitting';
-        btnReview.innerHTML = `${icon('requirements', 'icon-sm')} Review Requirements (${requiredCount})`;
-      }
+      btnReview.removeAttribute('disabled');
+      btnReview.style.opacity = '1';
+      btnReview.style.cursor = 'pointer';
+      btnReview.style.background = 'var(--md-primary)';
+      btnReview.style.borderColor = 'var(--md-primary)';
+      btnReview.title = 'Review branch requirements before submitting';
+      btnReview.innerHTML = `${icon('requirements', 'icon-sm')} Review Requirements (${requiredCount})`;
     }
 
     const toggleActionText = document.getElementById('toggleArrowActionText');
     if (toggleActionText) {
-      toggleActionText.innerHTML = requiredCount === 0 ? '🔒 Locked' : 'Review List';
+      toggleActionText.innerHTML = 'Review List';
     }
     if (collapsedLabel) {
-      collapsedLabel.textContent = requiredCount === 0 ? '0 items • Add product to unlock review' : `${requiredCount} products require purchase`;
+      collapsedLabel.textContent = `${requiredCount} products require purchase`;
     }
   }
 
@@ -1591,11 +1581,6 @@ function filterStockCheckDOM(query) {
 
   if (btnToggleSticky && stickyBar) {
     btnToggleSticky.addEventListener('click', () => {
-      const curCount = store.getRequiredItemsForBranch(currentBranchId).length;
-      if (curCount === 0) {
-        showToast('🔒 Review is locked! Add a quantity for at least 1 product first.', 'info');
-        return;
-      }
       const isCurrentlyCollapsed = stickyBar.classList.contains('is-collapsed');
       if (isCurrentlyCollapsed) {
         stickyBar.classList.remove('is-collapsed');

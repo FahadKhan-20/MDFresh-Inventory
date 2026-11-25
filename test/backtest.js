@@ -1126,22 +1126,27 @@ for (const b of branchesToTest) {
 // Restore branch to BR001
 store.setBranch('BR001');
 
-// POINT 26: PRODUCT ADDITION REVIEW UNLOCK, 4-BRANCH PDF UNLOCK & WHATSAPP SHARE
+// POINT 26: UNLOCKED REVIEW REQUIREMENTS, 4-BRANCH PDF UNLOCK AT LAST & WHATSAPP SHARE
 // -----------------------------------------------------------------------------
-console.log("\n\x1b[36m▶ TEST SUITE 26: Product Addition Review Unlock, 4-Branch PDF Unlock & WhatsApp Share\x1b[0m");
+console.log("\n\x1b[36m▶ TEST SUITE 26: Unlocked Review Requirements, 4-Branch PDF Unlock at Last & WhatsApp Share\x1b[0m");
 
-// 26.1: When 0 products are added, Review button is locked
+// 26.1: Review Requirements button is always accessible and never locked/disabled, even with 0 products
 store.setBranch('BR001');
 store.products.forEach(p => store.updateRequiredQuantity('BR001', p.id, 0, false));
 const dscZeroHtml = renderDailyStockCheckView();
-assert(dscZeroHtml.includes('Review Requirements (Locked)') && dscZeroHtml.includes('disabled'), "26.1 When 0 products are added, Review Requirements button is locked");
+assert(dscZeroHtml.includes('id="btnReviewRequirements"') && !dscZeroHtml.includes('Review Requirements (Locked)') && !dscZeroHtml.includes('disabled'), "26.1 Review Requirements button is accessible and never locked even with 0 products");
+assert(dscZeroHtml.includes('Review Requirements (0)'), "26.1b Review Requirements shows (0) items and remains clickable");
 
-// 26.2: When products are added (> 0), Review button unlocks
+// 26.2: When products are added (> 0), Review button tracks product count
 store.updateRequiredQuantity('BR001', store.products[0].id, 5, false);
 store.updateRequiredQuantity('BR001', store.products[1].id, 8, false);
 const dscActiveHtml = renderDailyStockCheckView();
-assert(!dscActiveHtml.includes('Review Requirements (Locked)'), "26.2 When products are added (> 0), Review Requirements button unlocks");
-assert(dscActiveHtml.includes('Review Requirements (2)'), "26.2b Review Requirements shows active product count (2)");
+assert(dscActiveHtml.includes('Review Requirements (2)'), "26.2 Review Requirements shows active product count (2)");
+assert(dscActiveHtml.includes('id="btnReviewRequirements"') && !dscActiveHtml.includes('disabled'), "26.2b Review Requirements button is fully clickable with added products");
+
+// 26.2c: PDF Download remains locked until the last (all 4 branches submitted)
+store.branchSubmitted = { 'BR001': false, 'BR002': false, 'BR003': false, 'BR004': false };
+assert(store.areAllBranchesSubmitted() === false, "26.2c PDF download is locked initially when branches have not submitted");
 
 // 26.3: WhatsApp message generator builds formatted manifest with all 4 branches
 const waMsg = buildWhatsAppOrderMessage();
