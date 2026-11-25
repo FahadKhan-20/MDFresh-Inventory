@@ -201,7 +201,7 @@ export function renderInventoryView() {
             <h3 class="modal-title">Manual Add Product to Catalog</h3>
             <span style="font-size: 0.78rem; color: var(--md-text-muted);">Add new fruit or vegetable to MD Fresh network</span>
           </div>
-          <button id="btnCloseInvAddModal" style="background:none; border:none; cursor:pointer; color:var(--md-text-secondary);">${icon('x', 'icon')}</button>
+          <button type="button" id="btnCloseInvAddModal" style="background:none; border:none; cursor:pointer; color:var(--md-text-secondary);">${icon('x', 'icon')}</button>
         </div>
 
         <form id="invAddProductForm">

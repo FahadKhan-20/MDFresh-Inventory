@@ -641,7 +641,7 @@ export function renderRequirementsView() {
             <h3 class="modal-title" id="reqModalTitle">Requirement Breakdown</h3>
             <span style="font-size: 0.76rem; color: var(--md-text-muted);" id="reqModalSubtitle">Manifest</span>
           </div>
-          <button id="btnCloseReqModal" style="background:none; border:none; cursor:pointer; color:var(--md-text-secondary);">${icon('x', 'icon')}</button>
+          <button type="button" id="btnCloseReqModal" style="background:none; border:none; cursor:pointer; color:var(--md-text-secondary);">${icon('x', 'icon')}</button>
         </div>
 
         <div class="modal-body" id="reqModalBody">
@@ -649,7 +649,7 @@ export function renderRequirementsView() {
         </div>
 
         <div class="modal-footer" id="reqModalFooter">
-          <button class="btn btn-secondary" id="btnCloseReqModalBtn">Close</button>
+          <button type="button" class="btn btn-secondary" id="btnCloseReqModalBtn">Close</button>
         </div>
       </div>
     </div>

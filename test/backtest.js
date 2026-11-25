@@ -2,7 +2,7 @@
 import { store } from '../src/utils/store.js';
 import { INITIAL_PRODUCTS, INITIAL_BRANCHES } from '../src/data/mockData.js';
 import { generateMasterManifestPDF, generateCombinedListOnlyPDF, generateBranchHeadlinedPDF, generateGoodsReceivingPDF } from '../src/utils/pdfGenerator.js';
-import { buildWhatsAppOrderMessage } from '../src/utils/whatsappShare.js';
+import { buildWhatsAppOrderMessage, shareOrderOnWhatsApp } from '../src/utils/whatsappShare.js';
 import fs from 'fs';
 import path from 'path';
 
@@ -1161,6 +1161,36 @@ assert(all4Notif && all4Notif.action === 'SHARE_WHATSAPP', "26.8 4th branch noti
 assert(dscActiveHtml.includes('btn-whatsapp') || dscActiveHtml.includes('WhatsApp'), "26.9 Daily Stock Check renders WhatsApp share option");
 const reqViewHtml = renderRequirementsView();
 assert(reqViewHtml.includes('btn-whatsapp') || reqViewHtml.includes('WhatsApp'), "26.10 Requirements Matrix renders WhatsApp share option");
+
+// 26.6: WhatsApp Share attaches PDF file via Web Share API
+assert(typeof shareOrderOnWhatsApp === 'function', "26.11 shareOrderOnWhatsApp is defined and callable");
+
+let sharedPayload = null;
+const originalNav = globalThis.navigator;
+
+Object.defineProperty(globalThis, 'navigator', {
+  value: {
+    canShare: (opts) => Boolean(opts && opts.files && opts.files.length > 0),
+    share: async (payload) => {
+      sharedPayload = payload;
+    }
+  },
+  configurable: true,
+  writable: true
+});
+
+await shareOrderOnWhatsApp();
+assert(sharedPayload !== null, "26.12 shareOrderOnWhatsApp triggers Web Share API");
+assert(sharedPayload && sharedPayload.files && sharedPayload.files.length === 1, "26.13 shareOrderOnWhatsApp attaches exactly 1 PDF file");
+assert(sharedPayload && sharedPayload.files[0].name.endsWith('.pdf'), "26.14 Attached file has .pdf extension");
+assert(sharedPayload && sharedPayload.files[0].type === 'application/pdf', "26.15 Attached file has application/pdf MIME type");
+
+// Restore original navigator
+Object.defineProperty(globalThis, 'navigator', {
+  value: originalNav,
+  configurable: true,
+  writable: true
+});
 
 // POINT 27: ADD PRODUCT MODAL INTEGRITY & PDF MANIFEST DOWNLOAD RESILIENCE
 // --------------------------------------------------------------------------

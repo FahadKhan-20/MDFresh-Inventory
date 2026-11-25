@@ -1,5 +1,7 @@
 // WhatsApp Share Utility for MD Fresh Inventory
 import { store } from './store.js';
+import { generateMasterManifestPDF, downloadBlob } from './pdfGenerator.js';
+import { showToast } from './toast.js';
 
 /**
  * Builds a clean, professional APMC Mandi procurement summary formatted for WhatsApp.
@@ -39,18 +41,79 @@ export function buildWhatsAppOrderMessage() {
   });
 
   msg += `\n━━━━━━━━━━━━━━━━━━━━━\n`;
-  msg += `📄 *Official APMC Master Manifest PDF is generated and verified.*\n`;
+  msg += `📄 *Official APMC Master Manifest PDF is generated and attached.*\n`;
   msg += `🌐 *Live Portal:* https://mdfreshiv.netlify.app/\n`;
 
   return msg;
 }
 
 /**
- * Triggers WhatsApp share via web/app URL.
+ * Triggers WhatsApp share with actual PDF document attachment.
+ * On mobile/modern browsers: uses Web Share API Level 2 to share the PDF file directly to WhatsApp.
+ * On desktop/fallback browsers: downloads the PDF blob to the device and opens WhatsApp with the text summary.
  */
-export function shareOrderOnWhatsApp() {
+export async function shareOrderOnWhatsApp() {
   const message = buildWhatsAppOrderMessage();
+  const now = new Date();
+  const dateStr = store.getLiveDateString(now).replace(/ /g, '_');
+  const filename = `MD_Fresh_Master_Manifest_${dateStr}.pdf`;
+
+  // Gather complete dataset for PDF generation
+  const data = {
+    date: store.getLiveDateTimeString(now, true),
+    branches: store.branches,
+    consolidatedItems: store.getConsolidatedProcurement(),
+    branchRequirements: store.getAllBranchesRequirements()
+  };
+
+  let pdfBlob = null;
+  try {
+    pdfBlob = generateMasterManifestPDF(data);
+  } catch (err) {
+    console.error('Failed to generate PDF for WhatsApp share:', err);
+  }
+
+  // 1. Try modern Web Share API Level 2 (files sharing)
+  // Supported in modern mobile browsers (Chrome Android, Safari iOS, etc.)
+  if (pdfBlob && typeof navigator !== 'undefined' && typeof File !== 'undefined' && typeof navigator.canShare === 'function') {
+    try {
+      const file = new File([pdfBlob], filename, { type: 'application/pdf' });
+      if (navigator.canShare({ files: [file] })) {
+        await navigator.share({
+          title: 'MD Fresh APMC Procurement Manifest',
+          text: message,
+          files: [file]
+        });
+        if (typeof showToast === 'function') {
+          showToast('PDF manifest shared to WhatsApp successfully!', 'success');
+        }
+        return;
+      }
+    } catch (shareErr) {
+      if (shareErr.name === 'AbortError') {
+        // User cancelled the native share sheet
+        return;
+      }
+      console.warn('Native file share failed, falling back to download & WhatsApp link:', shareErr);
+    }
+  }
+
+  // 2. Fallback: Automatically download the PDF to device so the user has the file
+  if (pdfBlob && typeof downloadBlob === 'function') {
+    try {
+      downloadBlob(pdfBlob, filename);
+      if (typeof showToast === 'function') {
+        showToast('PDF downloaded! Opening WhatsApp to send manifest...', 'info');
+      }
+    } catch (dlErr) {
+      console.warn('Blob download fallback error:', dlErr);
+    }
+  }
+
+  // 3. Open WhatsApp with formatted text manifest
   const encoded = encodeURIComponent(message);
   const waUrl = `https://api.whatsapp.com/send?text=${encoded}`;
-  window.open(waUrl, '_blank');
+  if (typeof window !== 'undefined') {
+    window.open(waUrl, '_blank');
+  }
 }

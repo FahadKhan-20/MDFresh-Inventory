@@ -87,7 +87,7 @@ export function renderProductsView() {
             <h3 class="modal-title">Create New MD Fresh Product</h3>
             <span style="font-size: 0.76rem; color: var(--md-text-muted);">Add inventory item to Bangalore retail network</span>
           </div>
-          <button id="btnCloseNewProdModal" style="background:none; border:none; cursor:pointer; color:var(--md-text-secondary);">${icon('x', 'icon')}</button>
+          <button type="button" id="btnCloseNewProdModal" style="background:none; border:none; cursor:pointer; color:var(--md-text-secondary);">${icon('x', 'icon')}</button>
         </div>
 
         <form id="newProductForm">

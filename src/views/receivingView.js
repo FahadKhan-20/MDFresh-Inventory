@@ -645,7 +645,7 @@ export function renderReceivingView() {
               For unexpected crates or products delivered by the truck for ${branch.name}
             </span>
           </div>
-          <button id="btnCloseExtraModal" style="background:none; border:none; cursor:pointer; color:var(--md-text-secondary);">${icon('x', 'icon')}</button>
+          <button type="button" id="btnCloseExtraModal" style="background:none; border:none; cursor:pointer; color:var(--md-text-secondary);">${icon('x', 'icon')}</button>
         </div>
 
         <form id="addExtraItemForm">

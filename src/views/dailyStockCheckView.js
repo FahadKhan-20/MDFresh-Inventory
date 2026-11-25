@@ -552,7 +552,7 @@ export function renderDailyStockCheckView() {
               MD Fresh — ${currentBranch.name} &bull; <span class="live-clock-display">${store.getLiveDateTimeString(new Date(), false)}</span>
             </span>
           </div>
-          <button class="btn-close-modal" id="btnCloseReviewModal" style="background:none; border:none; cursor:pointer; color:var(--md-text-secondary);">${icon('x', 'icon')}</button>
+          <button type="button" class="btn-close-modal" id="btnCloseReviewModal" style="background:none; border:none; cursor:pointer; color:var(--md-text-secondary);">${icon('x', 'icon')}</button>
         </div>
 
         <div class="modal-body">
@@ -600,8 +600,8 @@ export function renderDailyStockCheckView() {
         </div>
 
         <div class="modal-footer">
-          <button class="btn btn-secondary" id="btnCancelReview">Cancel</button>
-          <button class="btn btn-primary btn-lg" id="btnSubmitStockRequirement" style="font-weight: 800;">
+          <button type="button" class="btn btn-secondary" id="btnCancelReview">Cancel</button>
+          <button type="button" class="btn btn-primary btn-lg" id="btnSubmitStockRequirement" style="font-weight: 800;">
             ${icon('check', 'icon-sm')} SUBMIT REQUIREMENT
           </button>
         </div>
@@ -635,10 +635,10 @@ export function renderDailyStockCheckView() {
           </div>
 
           <div style="display: flex; gap: 10px;">
-            <button class="btn btn-secondary" style="flex: 1;" id="btnViewRequirementsPage">
+            <button type="button" class="btn btn-secondary" style="flex: 1;" id="btnViewRequirementsPage">
               Go to Requirements
             </button>
-            <button class="btn btn-primary" style="flex: 1;" id="btnFinishStockCheck">
+            <button type="button" class="btn btn-primary" style="flex: 1;" id="btnFinishStockCheck">
               Done
             </button>
           </div>
@@ -656,7 +656,7 @@ export function renderDailyStockCheckView() {
               Manual entry for ${currentBranch.name} & other outlets
             </span>
           </div>
-          <button id="btnCloseFastAddModal" style="background:none; border:none; cursor:pointer; color:var(--md-text-secondary);">${icon('x', 'icon')}</button>
+          <button type="button" id="btnCloseFastAddModal" style="background:none; border:none; cursor:pointer; color:var(--md-text-secondary);">${icon('x', 'icon')}</button>
         </div>
 
         <form id="fastAddProductForm">
