@@ -5154,3 +5154,33 @@ html[data-splash='playing'] [data-brand-logo] { visibility: hidden; }
 .btn-sticky-primary {
   box-shadow: 0 2px 8px rgba(13, 130, 68, 0.25);
 }
+
+/* All 4 Branches Finalized Command Banner */
+.all-branches-finalized-banner {
+  animation: bannerFadeSlide 0.3s ease-out;
+}
+
+@keyframes bannerFadeSlide {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.branch-progress-tracker-bar {
+  transition: all 0.2s ease;
+}
+
+@media (max-width: 640px) {
+  #confirmModalBackdrop .modal-content {
+    max-width: 95vw !important;
+  }
+  #confirmModalBackdrop .modal-body {
+    padding: 20px 12px !important;
+  }
+}
+

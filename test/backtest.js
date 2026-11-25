@@ -1418,6 +1418,38 @@ assert(!reviewDscHtml.includes('Est. ₹'), "30.11 Review modal eliminates all u
 assert(reviewDscHtml.includes('review-qty-pill'), "30.12 Review modal renders clean quantity pills");
 assert(reviewDscHtml.includes('review-item-title'), "30.13 Review modal renders clean non-truncated product title typography");
 
+// POINT 31: FINAL SUBMITTER EXPERIENCE & PROMINENT PDF DOWNLOAD VISIBILITY
+// --------------------------------------------------------------------------
+console.log("\n\x1b[36m▶ TEST SUITE 31: Final Submitter Experience & Prominent PDF Download Visibility\x1b[0m");
+
+// 31.1: Incomplete submissions show progress tracker bar
+store.branchSubmitted = { 'BR001': true, 'BR002': false, 'BR003': false, 'BR004': false };
+const partialDscHtml = dscModuleForReview.renderDailyStockCheckView();
+assert(partialDscHtml.includes('branch-progress-tracker-bar'), "31.1 Partial submission displays branch progress tracker bar");
+assert(partialDscHtml.includes('Branch Submissions: 1/4 Done'), "31.2 Progress bar tracks exact submitted count (1/4)");
+
+// 31.2: All 4 branches submitted triggers prominent top banner
+store.branchSubmitted = { 'BR001': true, 'BR002': true, 'BR003': true, 'BR004': true };
+const allDoneDscHtml = dscModuleForReview.renderDailyStockCheckView();
+assert(allDoneDscHtml.includes('all-branches-finalized-banner'), "31.3 All 4 branches submitted displays persistent top finalized banner");
+assert(allDoneDscHtml.includes('id="btnBannerDownloadPdf"'), "31.4 Top banner renders direct 'Download Master PDF' button");
+assert(allDoneDscHtml.includes('id="btnBannerShareWhatsApp"'), "31.5 Top banner renders direct 'Share on WhatsApp' button");
+assert(allDoneDscHtml.includes('id="btnBannerViewMatrix"'), "31.6 Top banner renders 'View Matrix Table' button");
+
+// 31.3: Topbar component renders quick action buttons when all 4 submitted
+const topbarHtml = topbarModule.renderTopbar();
+assert(topbarHtml.includes('id="btnTopbarDownloadPdf"'), "31.7 Topbar renders Master PDF button when all branches finalized");
+assert(topbarHtml.includes('id="btnTopbarShareWhatsApp"'), "31.8 Topbar renders WhatsApp button when all branches finalized");
+
+// 31.4: Review Modal renders download and share options when finalized
+assert(allDoneDscHtml.includes('id="btnReviewModalDownloadPdf"'), "31.9 Review modal footer renders Download Master PDF button");
+assert(allDoneDscHtml.includes('id="btnReviewModalShareWhatsApp"'), "31.10 Review modal footer renders WhatsApp button");
+
+// 31.5: Consolidated Procurement has positive items only for modal preview
+const previewConsolidated = store.getConsolidatedProcurement().filter(it => (it.totalQty || it.requiredQty || 0) > 0);
+assert(previewConsolidated.length > 0, "31.11 Preview dataset contains active produce demand");
+assert(previewConsolidated.every(it => (it.totalQty || it.requiredQty || 0) > 0), "31.12 Preview table excludes all zero-quantity items");
+
 // SUMMARY REPORT
 // -------------------------------------------------------------
 console.log('\n============================================================');

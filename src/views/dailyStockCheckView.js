@@ -119,6 +119,61 @@ export function renderDailyStockCheckView() {
       </div>
     </div>
 
+    <!-- 4-Branch Submission Status & Finalized Command Banner -->
+    ${allBranchesSubmitted ? `
+      <div class="all-branches-finalized-banner" style="background: linear-gradient(135deg, #ECFDF5 0%, #D1FAE5 100%); border: 2px solid #10B981; border-radius: var(--radius-lg); padding: 16px 20px; margin-bottom: 16px; box-shadow: 0 4px 16px rgba(16, 185, 129, 0.15);">
+        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;">
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <div style="width: 44px; height: 44px; border-radius: 50%; background: #0D8244; color: white; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; flex-shrink: 0; box-shadow: 0 4px 10px rgba(13, 130, 68, 0.25);">
+              🎉
+            </div>
+            <div>
+              <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                <span class="pill" style="background: #166534; color: white; font-weight: 800; font-size: 0.74rem; padding: 3px 10px; letter-spacing: 0.04em;">
+                  4 / 4 BRANCHES 100% SUBMITTED
+                </span>
+                <span style="font-weight: 800; font-size: 1.1rem; color: #064E3B;">
+                  Consolidated APMC Mandi Order Finalized
+                </span>
+              </div>
+              <div style="font-size: 0.82rem; color: #047857; margin-top: 3px;">
+                All 4 shops' requirements are locked and consolidated. Ready to download Master PDF or share with procurement on WhatsApp.
+              </div>
+            </div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+            <button class="btn btn-primary" id="btnBannerDownloadPdf" style="background: #0D8244; font-weight: 800; padding: 10px 18px; font-size: 0.92rem; box-shadow: 0 2px 8px rgba(13, 130, 68, 0.25); cursor: pointer;">
+              📥 Download Master PDF
+            </button>
+            <button class="btn btn-whatsapp" id="btnBannerShareWhatsApp" style="font-weight: 800; padding: 10px 18px; font-size: 0.92rem; cursor: pointer;">
+              📱 Share on WhatsApp
+            </button>
+            <button class="btn btn-secondary" id="btnBannerViewMatrix" style="font-weight: 800; background: white; border: 1.5px solid #A7F3D0; color: #065F46; cursor: pointer;">
+              👁️ View Matrix Table
+            </button>
+          </div>
+        </div>
+      </div>
+    ` : `
+      <div class="branch-progress-tracker-bar" style="background: #F8FAFC; border: 1.5px solid #E2E8F0; border-radius: var(--radius-md); padding: 10px 16px; margin-bottom: 14px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
+        <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+          <span style="font-size: 0.76rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: var(--md-text-secondary);">
+            Branch Submissions: ${submittedCount}/4 Done
+          </span>
+          <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+            ${submissionSummary.map(s => `
+              <span class="pill" style="font-size: 0.72rem; font-weight: 700; ${s.isSubmitted ? 'background: #DCFCE7; color: #166534; border: 1px solid #86EFAC;' : 'background: #F1F5F9; color: #64748B; border: 1px solid #CBD5E1;'}">
+                ${s.isSubmitted ? '✓' : '⏳'} ${s.branchName}
+              </span>
+            `).join('')}
+          </div>
+        </div>
+        <div style="font-size: 0.76rem; color: var(--md-text-muted);">
+          PDF and WhatsApp share unlock automatically when all 4 branches submit.
+        </div>
+      </div>
+    `}
+
     <!-- Next Day Ready & Stock Receiving Sync Banner -->
     ${store.isReadyForNextDay ? `
       <div style="background: linear-gradient(135deg, #ECFDF5 0%, #E6F7EF 100%); border: 1.5px solid #10B981; border-radius: var(--radius-md); padding: 12px 18px; margin-bottom: 16px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; box-shadow: 0 2px 6px rgba(16, 185, 129, 0.08);">
@@ -553,8 +608,18 @@ export function renderDailyStockCheckView() {
           </div>
         </div>
 
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" id="btnCancelReview">Cancel</button>
+        <div class="modal-footer" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
+          <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+            <button type="button" class="btn btn-secondary" id="btnCancelReview">Cancel</button>
+            ${allBranchesSubmitted ? `
+              <button type="button" class="btn btn-outline-secondary" id="btnReviewModalDownloadPdf" style="font-weight: 800; border: 1.5px solid #B7E4C4; color: #0D8244; background: #E8F6ED;" title="Download Master PDF">
+                📥 Master PDF
+              </button>
+              <button type="button" class="btn btn-whatsapp" id="btnReviewModalShareWhatsApp" style="font-weight: 800;" title="Share on WhatsApp">
+                📱 WhatsApp
+              </button>
+            ` : ''}
+          </div>
           <button type="button" class="btn btn-primary btn-lg" id="btnSubmitStockRequirement" style="font-weight: 800;">
             ${icon('check', 'icon-sm')} SUBMIT REQUIREMENT
           </button>
@@ -1350,42 +1415,119 @@ function filterStockCheckDOM(query) {
         if (reviewBackdrop) reviewBackdrop.classList.remove('open');
 
         const allBranchesDone = store.areAllBranchesSubmitted();
+        const modalBackdrop = document.getElementById('confirmModalBackdrop');
+        const modalContent = modalBackdrop ? modalBackdrop.querySelector('.modal-content') : null;
         const modalBody = document.querySelector('#confirmModalBackdrop .modal-body');
 
         if (modalBody) {
           if (allBranchesDone) {
+            if (modalContent) {
+              modalContent.style.maxWidth = '720px';
+            }
+            const consolidated = store.getConsolidatedProcurement();
+            const validConsolidated = (consolidated || []).filter(item => (item.totalQty || item.requiredQty || 0) > 0);
+            const totalUnits = validConsolidated.reduce((acc, it) => acc + (it.totalQty || it.requiredQty || 0), 0);
+
             modalBody.innerHTML = `
-              <div style="width: 64px; height: 64px; border-radius: 50%; background: #DCFCE7; color: #16A34A; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; border: 2.5px solid #86EFAC; font-size: 2rem;">
-                🎉
-              </div>
-              <div class="pill" style="background: #166534; color: white; font-weight: 800; font-size: 0.76rem; padding: 4px 12px; margin-bottom: 10px; display: inline-block;">
-                4 / 4 SHOPS COMPLETED
-              </div>
-              <h3 style="font-size: 1.35rem; font-weight: 900; color: #14532D; margin-bottom: 8px;">
-                All 4 Shops' Items Have Been Listed!
-              </h3>
-              <p style="font-size: 0.88rem; color: #166534; margin-bottom: 18px; line-height: 1.5;">
-                <strong>${currentBranch.name}</strong> was the final branch to complete requirements. The official APMC Mandi purchase order PDF is now <strong>UNLOCKED</strong>! Please download the PDF and share it with procurement.
-              </p>
+              <div style="text-align: center; margin-bottom: 16px;">
+                <div style="width: 60px; height: 60px; border-radius: 50%; background: #DCFCE7; color: #16A34A; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; border: 2.5px solid #86EFAC; font-size: 1.8rem;">
+                  🎉
+                </div>
+                <div class="pill" style="background: #166534; color: white; font-weight: 800; font-size: 0.76rem; padding: 4px 14px; margin-bottom: 8px; display: inline-block; letter-spacing: 0.04em;">
+                  4 / 4 SHOPS 100% COMPLETED
+                </div>
+                <h3 style="font-size: 1.35rem; font-weight: 900; color: #14532D; margin-bottom: 6px;">
+                  All 4 Shops' Items Have Been Listed!
+                </h3>
+                <p style="font-size: 0.86rem; color: #166534; margin-bottom: 16px; line-height: 1.4;">
+                  <strong>${currentBranch.name}</strong> was the final branch. The official APMC Mandi purchase order PDF is now <strong>UNLOCKED</strong>! Review the consolidated list below, then download the PDF or share directly on WhatsApp.
+                </p>
 
-              <!-- Prominent Action Buttons: PDF Download & WhatsApp Share -->
-              <div style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px;">
-                <button class="btn btn-primary btn-lg" id="btnConfirmedModalDownloadPdf" style="background: #0D8244; color: white; font-weight: 900; padding: 13px 20px; font-size: 1rem; border-radius: var(--radius-md); box-shadow: 0 4px 12px rgba(13, 130, 68, 0.25); display: flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer;">
-                  📥 Download Master PDF Manifest
-                </button>
-                <button class="btn btn-whatsapp btn-lg" id="btnConfirmedModalShareWhatsApp" style="background: #25D366; color: white; font-weight: 900; padding: 13px 20px; font-size: 1rem; border-radius: var(--radius-md); border: none; box-shadow: 0 4px 12px rgba(37, 211, 102, 0.25); display: flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer;">
-                  📱 Share on WhatsApp (All 4 Branches)
-                </button>
+                <!-- Prominent Action Buttons: PDF Download & WhatsApp Share -->
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 18px;">
+                  <button class="btn btn-whatsapp btn-lg" id="btnConfirmedModalShareWhatsApp" style="background: #25D366; color: white; font-weight: 900; padding: 12px 16px; font-size: 0.95rem; border-radius: var(--radius-md); border: none; box-shadow: 0 4px 12px rgba(37, 211, 102, 0.25); display: flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer;">
+                    📱 Share on WhatsApp (All 4 Branches)
+                  </button>
+                  <button class="btn btn-primary btn-lg" id="btnConfirmedModalDownloadPdf" style="background: #0D8244; color: white; font-weight: 900; padding: 12px 16px; font-size: 0.95rem; border-radius: var(--radius-md); box-shadow: 0 4px 12px rgba(13, 130, 68, 0.25); display: flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer;">
+                    📥 Download Master PDF Manifest
+                  </button>
+                </div>
               </div>
 
-              <div style="background-color: var(--md-surface-subtle); border: 1.5px dashed #86EFAC; border-radius: var(--radius-md); padding: 12px 14px; margin-bottom: 20px; text-align: left;">
-                <div style="font-size: 0.72rem; font-weight: 700; text-transform: uppercase; color: var(--md-text-muted); letter-spacing: 0.05em;">
+              <!-- Replicating the Reviewed and Submitted List -->
+              <div style="text-align: left; background: #F8FAFC; border: 1.5px solid #E2E8F0; border-radius: var(--radius-md); padding: 14px; margin-bottom: 18px;">
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; flex-wrap: wrap; gap: 6px;">
+                  <div style="font-size: 0.8rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: var(--md-secondary-dark);">
+                    📋 Consolidated Requirements Preview (${validConsolidated.length} Products &bull; ${totalUnits} Units)
+                  </div>
+                  <span class="pill" style="background: #E8F6ED; color: #0D8244; font-size: 0.7rem; font-weight: 800;">
+                    REPLICATING OFFICIAL PDF MANIFEST
+                  </span>
+                </div>
+
+                <div style="max-height: 220px; overflow-y: auto; border: 1px solid #CBD5E1; border-radius: var(--radius-sm); background: white;">
+                  <table style="width: 100%; border-collapse: collapse; font-size: 0.78rem; text-align: left;">
+                    <thead style="background: #F1F5F9; position: sticky; top: 0; z-index: 1;">
+                      <tr style="border-bottom: 1.5px solid #CBD5E1; color: var(--md-text-secondary); font-size: 0.7rem; text-transform: uppercase;">
+                        <th style="padding: 6px 8px;">#</th>
+                        <th style="padding: 6px 8px;">Produce Item</th>
+                        <th style="padding: 6px 8px; text-align: center;">Unit</th>
+                        <th style="padding: 6px 6px; text-align: right;">ASP</th>
+                        <th style="padding: 6px 6px; text-align: right;">KDH</th>
+                        <th style="padding: 6px 6px; text-align: right;">LBS</th>
+                        <th style="padding: 6px 6px; text-align: right;">BSV</th>
+                        <th style="padding: 6px 8px; text-align: right; background: #E2EFE7; font-weight: 800; color: #064E3B;">TOTAL</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      ${validConsolidated.length === 0 ? `
+                        <tr>
+                          <td colspan="8" style="padding: 14px; text-align: center; color: var(--md-text-muted);">
+                            No items requiring purchase across all 4 branches.
+                          </td>
+                        </tr>
+                      ` : validConsolidated.map((it, idx) => {
+                        const asp = (it.breakdown && it.breakdown['BR001']) ?? it.branches?.find(b => b.branchId === 'BR001')?.qty ?? 0;
+                        const kdh = (it.breakdown && it.breakdown['BR002']) ?? it.branches?.find(b => b.branchId === 'BR002')?.qty ?? 0;
+                        const lbs = (it.breakdown && it.breakdown['BR003']) ?? it.branches?.find(b => b.branchId === 'BR003')?.qty ?? 0;
+                        const bsv = (it.breakdown && it.breakdown['BR004']) ?? it.branches?.find(b => b.branchId === 'BR004')?.qty ?? 0;
+                        const name = it.product?.name || it.name || 'Item';
+                        const cat = it.product?.category || it.category || '';
+                        const iconEmoji = cat === 'Fruits' ? '🍎' : '🥦';
+                        return `
+                          <tr style="border-bottom: 1px solid #F1F5F9; ${idx % 2 === 1 ? 'background: #FAFBFB;' : ''}">
+                            <td style="padding: 5px 8px; color: var(--md-text-muted); font-size: 0.7rem;">${idx + 1}</td>
+                            <td style="padding: 5px 8px; font-weight: 700; color: var(--md-text-main);">
+                              <span>${iconEmoji}</span> ${name}
+                            </td>
+                            <td style="padding: 5px 8px; text-align: center; color: var(--md-text-secondary); font-size: 0.72rem;">${it.unit}</td>
+                            <td style="padding: 5px 6px; text-align: right; font-family: monospace; ${asp > 0 ? 'font-weight: 700; color: var(--md-text-main);' : 'color: #CBD5E1;'}">${asp > 0 ? asp : '-'}</td>
+                            <td style="padding: 5px 6px; text-align: right; font-family: monospace; ${kdh > 0 ? 'font-weight: 700; color: var(--md-text-main);' : 'color: #CBD5E1;'}">${kdh > 0 ? kdh : '-'}</td>
+                            <td style="padding: 5px 6px; text-align: right; font-family: monospace; ${lbs > 0 ? 'font-weight: 700; color: var(--md-text-main);' : 'color: #CBD5E1;'}">${lbs > 0 ? lbs : '-'}</td>
+                            <td style="padding: 5px 6px; text-align: right; font-family: monospace; ${bsv > 0 ? 'font-weight: 700; color: var(--md-text-main);' : 'color: #CBD5E1;'}">${bsv > 0 ? bsv : '-'}</td>
+                            <td style="padding: 5px 8px; text-align: right; font-family: monospace; font-weight: 900; background: #E8F6ED; color: #0D8244;">${it.totalQty || it.requiredQty}</td>
+                          </tr>
+                        `;
+                      }).join('')}
+                    </tbody>
+                    <tfoot style="background: #F8FAFC; border-top: 1.5px solid #CBD5E1; font-weight: 800;">
+                      <tr>
+                        <td colspan="7" style="padding: 6px 8px; text-align: right; color: var(--md-text-main); font-size: 0.76rem; text-transform: uppercase;">Grand Total Units:</td>
+                        <td style="padding: 6px 8px; text-align: right; font-family: monospace; font-size: 0.9rem; background: #D1FAE5; color: #065F46;">${totalUnits}</td>
+                      </tr>
+                    </tfoot>
+                  </table>
+                </div>
+              </div>
+
+              <div style="background-color: var(--md-surface-subtle); border: 1.5px dashed #86EFAC; border-radius: var(--radius-md); padding: 10px 14px; margin-bottom: 18px; text-align: left;">
+                <div style="font-size: 0.7rem; font-weight: 700; text-transform: uppercase; color: var(--md-text-muted); letter-spacing: 0.05em;">
                   OFFICIAL REFERENCE &amp; TIMESTAMP
                 </div>
-                <div style="font-size: 1.15rem; font-weight: 800; font-family: monospace; color: var(--md-primary); margin-top: 2px;">
+                <div style="font-size: 1.1rem; font-weight: 800; font-family: monospace; color: var(--md-primary); margin-top: 2px;">
                   ${newReq.reference}
                 </div>
-                <div style="font-size: 0.75rem; color: var(--md-text-muted); margin-top: 2px;">
+                <div style="font-size: 0.74rem; color: var(--md-text-muted); margin-top: 2px;">
                   Branch: <strong>${currentBranch.name}</strong> &bull; Recorded Live: <strong>${newReq.timestamp}</strong>
                 </div>
               </div>
@@ -1425,6 +1567,9 @@ function filterStockCheckDOM(query) {
               });
             }
           } else {
+            if (modalContent) {
+              modalContent.style.maxWidth = '480px';
+            }
             const summary = store.getBranchSubmissionSummary();
             const doneCount = summary.filter(s => s.isSubmitted).length;
             const pendingNames = store.getPendingBranches().map(b => b.name).join(', ');
@@ -1753,6 +1898,49 @@ function filterStockCheckDOM(query) {
       downloadBlob(blob, `MD_Fresh_Branch_Headlined_${getFileDate()}.pdf`);
       if (pdfModal) pdfModal.classList.remove('open');
       showToast('Branch Dispatch List PDF downloaded successfully!', 'success');
+    });
+  }
+
+  // Persistent Top Banner actions (When all 4 branches are submitted)
+  const btnBannerDl = document.getElementById('btnBannerDownloadPdf');
+  if (btnBannerDl) {
+    btnBannerDl.addEventListener('click', () => {
+      const data = getPdfData();
+      const blob = generateMasterManifestPDF(data);
+      downloadBlob(blob, `MD_Fresh_Master_Manifest_${getFileDate()}.pdf`);
+      showToast('Master Manifest PDF downloaded successfully!', 'success');
+    });
+  }
+
+  const btnBannerWA = document.getElementById('btnBannerShareWhatsApp');
+  if (btnBannerWA) {
+    btnBannerWA.addEventListener('click', () => {
+      shareOrderOnWhatsApp();
+    });
+  }
+
+  const btnBannerMatrix = document.getElementById('btnBannerViewMatrix');
+  if (btnBannerMatrix) {
+    btnBannerMatrix.addEventListener('click', () => {
+      store.setView('requirements');
+    });
+  }
+
+  // Review Modal direct download and WhatsApp actions
+  const btnReviewDl = document.getElementById('btnReviewModalDownloadPdf');
+  if (btnReviewDl) {
+    btnReviewDl.addEventListener('click', () => {
+      const data = getPdfData();
+      const blob = generateMasterManifestPDF(data);
+      downloadBlob(blob, `MD_Fresh_Master_Manifest_${getFileDate()}.pdf`);
+      showToast('Master Manifest PDF downloaded successfully!', 'success');
+    });
+  }
+
+  const btnReviewWA = document.getElementById('btnReviewModalShareWhatsApp');
+  if (btnReviewWA) {
+    btnReviewWA.addEventListener('click', () => {
+      shareOrderOnWhatsApp();
     });
   }
 }
