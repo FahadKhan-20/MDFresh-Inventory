@@ -148,10 +148,10 @@ class InventoryStore {
         };
         this.activeView = this.isAuthorized ? 'requirements' : 'stock-check';
       } catch (e) {
-        this.isAuthenticated = false;
+        this.isAuthenticated = true;
       }
     } else {
-      this.isAuthenticated = false;
+      this.isAuthenticated = true;
       this.currentUser = {
         name: 'MD FRESH STAFF',
         email: 'staff@mdfresh.in',
@@ -159,6 +159,7 @@ class InventoryStore {
         branch: 'ANNASANDRAPALYA',
         avatar: 'MS'
       };
+      this.activeView = 'stock-check';
     }
 
     this.sidebarCollapsed = false;

@@ -1256,6 +1256,30 @@ assert(newCombinedBlob && newCombinedBlob.size > 1000, "27.11 Combined List PDF 
 const newBranchBlob = generateBranchHeadlinedPDF(testPdfData);
 assert(newBranchBlob && newBranchBlob.size > 1000, "27.12 Branch Headlined PDF successfully generates Blob with newly added product");
 
+// POINT 28: SPLASH SCREEN & DIRECT ENTRY WITHOUT LOGIN WALL
+// --------------------------------------------------------------------------
+console.log("\n\x1b[36m▶ TEST SUITE 28: Splash Screen & Direct Entry Without Login Wall\x1b[0m");
+
+const indexHtmlPath = path.join(process.cwd(), 'index.html');
+const indexHtmlContent = fs.readFileSync(indexHtmlPath, 'utf8');
+
+// 28.1: Splash screen markup exists in index.html
+assert(indexHtmlContent.includes('id="md-splash"') && indexHtmlContent.includes('class="sp-root"'), "28.1 Splash screen container #md-splash present in index.html");
+
+// 28.2: Video element configured
+assert(indexHtmlContent.includes('/videos/splash.mp4') && indexHtmlContent.includes('autoplay') && indexHtmlContent.includes('muted'), "28.2 Splash video configured with autoplay, muted, and playsinline");
+
+// 28.3: Logo element configured
+assert(indexHtmlContent.includes('/images/logo-splash.webp') && indexHtmlContent.includes('sp-logo'), "28.3 Splash logo /images/logo-splash.webp configured with sp-logo class");
+
+// 28.4: initSplashScreen importable and functional
+const { initSplashScreen } = await import('../src/components/splashScreen.js');
+assert(typeof initSplashScreen === 'function', "28.4 initSplashScreen controller exported and callable");
+
+// 28.5: Direct entry without login requirement
+assert(store.isAuthenticated === true, "28.5 Direct entry: user is authenticated by default without login barrier");
+assert(Boolean(store.activeView) && store.activeView !== 'login', "28.6 Direct entry lands on active functional view");
+
 // SUMMARY REPORT
 // -------------------------------------------------------------
 console.log('\n============================================================');

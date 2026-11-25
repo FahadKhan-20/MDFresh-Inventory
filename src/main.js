@@ -7,6 +7,7 @@ import { renderMobileBottomNav, setupMobileBottomNavEvents } from './components/
 import { renderAuthModal, setupAuthModalEvents } from './components/authModal.js';
 import { renderEditProductModal, setupEditProductModalEvents } from './components/editProductModal.js';
 import { renderDeleteConfirmModal, renderRestoreProductsModal, setupDeletionModalsEvents } from './components/deletionModals.js';
+import { initSplashScreen } from './components/splashScreen.js';
 
 // Views
 import { renderDashboardView, setupDashboardEvents } from './views/dashboardView.js';
@@ -36,13 +37,8 @@ function renderApp() {
   const selEnd = isTextInput ? activeEl.selectionEnd : null;
   const activeVal = isTextInput ? activeEl.value : null;
 
-  if (!store.isAuthenticated) {
-    appRoot.innerHTML = renderLoginView();
-    setupLoginEvents();
-    return;
-  }
-
-  const currentView = store.activeView;
+  // Direct entry without login wall - opens website immediately
+  const currentView = store.activeView || 'stock-check';
 
   // Decide view content
   let viewHtml = '';
@@ -212,6 +208,7 @@ document.addEventListener('DOMContentLoaded', () => {
   renderApp();
   startLiveClockTicker();
   purgeNetlifyBadge();
+  initSplashScreen();
   store.subscribe(() => {
     renderApp();
     purgeNetlifyBadge();

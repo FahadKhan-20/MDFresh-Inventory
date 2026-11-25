@@ -26,7 +26,7 @@ export function renderSidebar() {
     <aside class="sidebar ${isCollapsed ? 'collapsed' : ''} ${isMobileOpen ? 'mobile-open' : ''}" id="appSidebar">
       <!-- Minimalist Brand Header with ESTD 2019 -->
       <div class="sidebar-header">
-        <div class="brand-wrapper" id="brandLogoHome">
+        <div class="brand-wrapper" id="brandLogoHome" data-brand-logo>
           <img src="/logo.png?v=3" alt="MD Fresh" class="brand-logo-img" />
           <div class="brand-text">
             <span class="brand-title">MD FRESH</span>
