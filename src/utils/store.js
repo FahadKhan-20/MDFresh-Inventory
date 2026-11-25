@@ -437,7 +437,7 @@ class InventoryStore {
     }
     if (branchId === "BR004") {
       const idx = seq ? seq.indexOf(productId) : BASAVANAGAR_SEQUENCE.indexOf(productId);
-      if (idx !== -1) return idx < 40 ? "Fruits" : "Vegetables";
+      if (idx !== -1) return idx < 64 ? "Vegetables" : "Fruits";
     }
     const prod = this.products.find(p => p.id === productId);
     return prod ? prod.category : "General";

@@ -209,7 +209,7 @@ export function renderReceivingView() {
           <span style="font-size: 1.3rem;">🚚</span>
           <div>
             <div style="font-weight: 800; font-size: 0.92rem; color: #166534; display: flex; align-items: center; gap: 8px;">
-              <span>Basavanagar Dock Receiving Sequence Active (101 Produce Items: 38 Fruits &bull; 63 Veg)</span>
+              <span>Basavanagar Dock Receiving Sequence Active (101 Produce Items: 63 Veg &bull; 38 Fruits)</span>
               <span class="pill" style="background: #166534; color: white; font-size: 0.7rem; font-weight: 800; padding: 2px 8px;">BASAVANAGAR SEQUENCE</span>
             </div>
             <div style="font-size: 0.78rem; color: #15803D; margin-top: 2px;">
@@ -218,7 +218,7 @@ export function renderReceivingView() {
           </div>
         </div>
         <div style="font-size: 0.8rem; font-weight: 700; color: #166534;">
-          #1 Watermelon through #101 Tomato Farm
+          #1 Cucumber through #101 Misri Apple
         </div>
       </div>
     ` : ""}

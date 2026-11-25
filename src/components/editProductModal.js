@@ -61,8 +61,8 @@ export function renderEditProductModal() {
               <div>
                 <label style="display:block; font-size: 0.78rem; font-weight: 700; margin-bottom: 4px; color: var(--md-text-main);">Category *</label>
                 <select id="editProdCategory" style="width:100%; padding:9px 12px; border:1px solid var(--md-border); border-radius:var(--radius-md); font-weight:700; outline:none;">
-                  <option value="Fruits">Fruits</option>
                   <option value="Vegetables">Vegetables</option>
+                  <option value="Fruits">Fruits</option>
                   <option value="Dairy & Others">Dairy & Others</option>
                 </select>
               </div>

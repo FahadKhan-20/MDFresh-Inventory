@@ -77,8 +77,8 @@ export function renderInventoryView() {
         <span>Category:</span>
         <select id="invCategoryFilter" class="branch-select">
           <option value="All" ${inventoryCategoryFilter === 'All' ? 'selected' : ''}>All Categories</option>
-          <option value="Fruits" ${inventoryCategoryFilter === 'Fruits' ? 'selected' : ''}>Fruits</option>
           <option value="Vegetables" ${inventoryCategoryFilter === 'Vegetables' ? 'selected' : ''}>Vegetables</option>
+          <option value="Fruits" ${inventoryCategoryFilter === 'Fruits' ? 'selected' : ''}>Fruits</option>
         </select>
       </div>
 
@@ -215,8 +215,8 @@ export function renderInventoryView() {
               <div>
                 <label style="display:block; font-size: 0.78rem; font-weight: 700; margin-bottom: 4px;">Category *</label>
                 <select id="invApCategory" style="width:100%; padding:8px 12px; border:1.5px solid var(--md-border); border-radius:var(--radius-md); outline:none; font-size: 0.88rem; background: white;">
+                  <option value="Vegetables" selected>Vegetables</option>
                   <option value="Fruits">Fruits</option>
-                  <option value="Vegetables">Vegetables</option>
                 </select>
               </div>
 

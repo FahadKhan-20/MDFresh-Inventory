@@ -726,14 +726,14 @@ import { BASAVANAGAR_SEQUENCE } from "../src/data/mockData.js";
 // Test 17.1: Basavanagar Sequence length
 assert(Array.isArray(BASAVANAGAR_SEQUENCE) && BASAVANAGAR_SEQUENCE.length === 104, `17.1 Basavanagar sequence contains exactly 104 items (got: ${BASAVANAGAR_SEQUENCE?.length})`);
 
-// Test 17.2 to 17.5: Daily Stock Check sorting for Basavanagar
+// Test 17.2 to 17.5: Daily Stock Check sorting for Basavanagar (Vegetables first, then Fruits)
 const sortedBSV = store.sortProductsForBranch("BR004", store.products);
-assert(sortedBSV[0].id === "PRD088", `17.2 Item #1 in Basavanagar Daily Stock Check is Watermelon (got: ${sortedBSV[0]?.name})`);
-assert(sortedBSV[39].id === "PRD202", `17.3 Item #40 in Basavanagar Daily Stock Check is Misri Apple (got: ${sortedBSV[39]?.name})`);
-assert(sortedBSV[40].id === "PRD023", `17.4 Item #41 in Basavanagar Daily Stock Check is Cucumber (got: ${sortedBSV[40]?.name})`);
-assert(sortedBSV[103].id === "PRD003", `17.5 Item #104 in Basavanagar Daily Stock Check is Tomato farm (got: ${sortedBSV[103]?.name})`);
+assert(sortedBSV[0].id === "PRD023", `17.2 Item #1 in Basavanagar Daily Stock Check is Cucumber (got: ${sortedBSV[0]?.name})`);
+assert(sortedBSV[63].id === "PRD003", `17.3 Item #64 in Basavanagar Daily Stock Check is Tomato farm (got: ${sortedBSV[63]?.name})`);
+assert(sortedBSV[64].id === "PRD088", `17.4 Item #65 in Basavanagar Daily Stock Check is Watermelon (got: ${sortedBSV[64]?.name})`);
+assert(sortedBSV[103].id === "PRD202", `17.5 Item #104 in Basavanagar Daily Stock Check is Misri Apple (got: ${sortedBSV[103]?.name})`);
 
-// Test 17.6: All 101 items strictly follow Basavanagar sequence
+// Test 17.6: All 104 items strictly follow Basavanagar sequence
 let all101Match = true;
 for (let i = 0; i < 104; i++) {
   if (sortedBSV[i].id !== BASAVANAGAR_SEQUENCE[i]) {
@@ -746,8 +746,8 @@ assert(all101Match === true, "17.6 All 104 items strictly follow sequence in Bas
 // Test 17.7: Stock Receiving for Basavanagar
 const bsvIncoming = store.getBranchIncomingOrder("BR004", "PO-20261003-BSV01");
 assert(bsvIncoming.length === 104, `17.7 Basavanagar receiving delivery has 104 items (got: ${bsvIncoming.length})`);
-assert(bsvIncoming[0].productId === "PRD088", `17.8 Basavanagar Receiving item #1 is Watermelon (got: ${bsvIncoming[0]?.productName})`);
-assert(bsvIncoming[103].productId === "PRD003", `17.9 Basavanagar Receiving item #104 is Tomato farm (got: ${bsvIncoming[103]?.productName})`);
+assert(bsvIncoming[0].productId === "PRD023", `17.8 Basavanagar Receiving item #1 is Cucumber (got: ${bsvIncoming[0]?.productName})`);
+assert(bsvIncoming[103].productId === "PRD202", `17.9 Basavanagar Receiving item #104 is Misri Apple (got: ${bsvIncoming[103]?.productName})`);
 
 let all101RecvMatch = true;
 for (let i = 0; i < 104; i++) {
@@ -758,11 +758,11 @@ for (let i = 0; i < 104; i++) {
 }
 assert(all101RecvMatch === true, "17.10 All 104 items strictly follow sequence in Basavanagar Stock Receiving");
 
-// Test 17.11 & 17.12: Categorization verification for Basavanagar (38 Fruits / 63 Veg)
+// Test 17.11 & 17.12: Categorization verification for Basavanagar (64 Veg / 40 Fruits)
 const bsvFruitList = sortedBSV.filter(p => store.getProductCategoryForBranch("BR004", p.id) === "Fruits");
 const bsvVegList = sortedBSV.filter(p => store.getProductCategoryForBranch("BR004", p.id) === "Vegetables");
-assert(bsvFruitList.slice(0, 40).every((p, idx) => p.id === BASAVANAGAR_SEQUENCE[idx]), "17.11 Basavanagar first 40 items are categorized as Fruits in exact sequence");
-assert(bsvVegList.slice(0, 64).every((p, idx) => p.id === BASAVANAGAR_SEQUENCE[40 + idx]), "17.12 Basavanagar remaining 64 items are categorized as Vegetables in exact sequence");
+assert(bsvVegList.slice(0, 64).every((p, idx) => p.id === BASAVANAGAR_SEQUENCE[idx]), "17.11 Basavanagar first 64 items are categorized as Vegetables in exact sequence");
+assert(bsvFruitList.slice(0, 40).every((p, idx) => p.id === BASAVANAGAR_SEQUENCE[64 + idx]), "17.12 Basavanagar remaining 40 items are categorized as Fruits in exact sequence");
 
 
 // -------------------------------------------------------------
@@ -989,6 +989,17 @@ assert(store.getBranchRequiredQty('BR001', 'PRD005') === 0, "21.9 Stepper clampe
 assert(!stockCheckHtml.includes('btn-clear-stock-item-mobile'), "21.10 Mobile stock cards omit redundant inline delete button in stepper row");
 assert(!stockCheckHtml.includes('btn-clear-stock-item'), "21.11 Stock check table omits text delete button");
 assert(stockCheckHtml.includes('btn-direct-delete-product'), "21.12 Stock check retains delete trash symbol (🗑️)");
+
+// Test 21.13: Vegetables category tab precedes Fruits in Daily Stock Check
+const vegCatIdx = stockCheckHtml.indexOf('data-cat="Vegetables"');
+const fruCatIdx = stockCheckHtml.indexOf('data-cat="Fruits"');
+assert(vegCatIdx !== -1 && fruCatIdx !== -1 && vegCatIdx < fruCatIdx, "21.13 Vegetables filter tab precedes Fruits in Daily Stock Check");
+
+// Test 21.14: Vegetables category tab precedes Fruits in Requirements Matrix
+const reqMatrixHtml = renderRequirementsView();
+const reqVegIdx = reqMatrixHtml.indexOf('data-cat="Vegetables"');
+const reqFruIdx = reqMatrixHtml.indexOf('data-cat="Fruits"');
+assert(reqVegIdx !== -1 && reqFruIdx !== -1 && reqVegIdx < reqFruIdx, "21.14 Vegetables filter tab precedes Fruits in Requirements Matrix");
 
 // -------------------------------------------------------------
 // POINT 22: 4-BRANCH SUBMISSION PDF GUARDRAIL

@@ -187,8 +187,8 @@ export function renderRequirementsView() {
           <!-- Category Tabs -->
           <div class="filter-tabs">
             <button class="filter-tab ${matrixCategoryFilter === 'All' ? 'active' : ''}" data-cat="All">All</button>
-            <button class="filter-tab ${matrixCategoryFilter === 'Fruits' ? 'active' : ''}" data-cat="Fruits">Fruits</button>
             <button class="filter-tab ${matrixCategoryFilter === 'Vegetables' ? 'active' : ''}" data-cat="Vegetables">Vegetables</button>
+            <button class="filter-tab ${matrixCategoryFilter === 'Fruits' ? 'active' : ''}" data-cat="Fruits">Fruits</button>
             <button class="filter-tab ${matrixCategoryFilter === 'Dairy & Others' ? 'active' : ''}" data-cat="Dairy & Others">Dairy & Others</button>
           </div>
 

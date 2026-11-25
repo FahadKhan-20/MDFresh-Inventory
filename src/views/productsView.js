@@ -108,8 +108,8 @@ export function renderProductsView() {
               <div>
                 <label style="display:block; font-size: 0.78rem; font-weight: 700; margin-bottom: 4px;">Category *</label>
                 <select id="npCategory" style="width:100%; padding:8px 12px; border:1px solid var(--md-border); border-radius:var(--radius-md); outline:none;">
+                  <option value="Vegetables" selected>Vegetables</option>
                   <option value="Fruits">Fruits</option>
-                  <option value="Vegetables">Vegetables</option>
                 </select>
               </div>
 

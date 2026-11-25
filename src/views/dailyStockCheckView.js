@@ -150,16 +150,16 @@ export function renderDailyStockCheckView() {
           <span style="font-size: 1.3rem;">📋</span>
           <div>
             <div style="font-weight: 800; font-size: 0.92rem; color: #166534; display: flex; align-items: center; gap: 8px;">
-              <span>Basavanagar Branch Standard Sequence Active (104 Produce Items: 40 Fruits &bull; 64 Veg)</span>
+              <span>Basavanagar Branch Standard Sequence Active (104 Produce Items: 64 Veg &bull; 40 Fruits)</span>
               <span class="pill" style="background: #166534; color: white; font-size: 0.7rem; font-weight: 800; padding: 2px 8px;">BASAVANAGAR SEQUENCE</span>
             </div>
             <div style="font-size: 0.78rem; color: #15803D; margin-top: 2px;">
-              Direct morning store audit sequence: <strong>Fruits (#1 Watermelon to #38 Misri Apple)</strong> &bull; <strong>Vegetables (#39 Cucumber to #101 Tomato Farm)</strong>.
+              Direct morning store audit sequence: <strong>Vegetables (#1 Cucumber to #64 Tomato Farm)</strong> &bull; <strong>Fruits (#65 Watermelon Normal to #104 Misri Apple)</strong>.
             </div>
           </div>
         </div>
         <div style="font-size: 0.8rem; font-weight: 700; color: #166534;">
-          Ordered strictly #1 Watermelon Normal to #104 Tomato Farm
+          Ordered strictly #1 Cucumber to #104 Misri Apple
         </div>
       </div>
     ` : ""}
@@ -219,8 +219,8 @@ export function renderDailyStockCheckView() {
       <!-- Categories Tabs -->
       <div class="filter-tabs">
         <button class="filter-tab ${activeCategoryFilter === 'All' ? 'active' : ''}" data-cat="All">All</button>
-        <button class="filter-tab ${activeCategoryFilter === 'Fruits' ? 'active' : ''}" data-cat="Fruits">Fruits</button>
         <button class="filter-tab ${activeCategoryFilter === 'Vegetables' ? 'active' : ''}" data-cat="Vegetables">Vegetables</button>
+        <button class="filter-tab ${activeCategoryFilter === 'Fruits' ? 'active' : ''}" data-cat="Fruits">Fruits</button>
         <button class="filter-tab ${activeCategoryFilter === 'Dairy & Others' ? 'active' : ''}" data-cat="Dairy & Others">Dairy & Others</button>
       </div>
 
@@ -664,8 +664,8 @@ export function renderDailyStockCheckView() {
               <div>
                 <label style="display:block; font-size: 0.78rem; font-weight: 700; margin-bottom: 4px;">Category *</label>
                 <select id="fapCategory" style="width:100%; padding:9px 12px; border:1px solid var(--md-border); border-radius:var(--radius-md); font-weight:600; outline:none;">
+                  <option value="Vegetables" selected>Vegetables</option>
                   <option value="Fruits">Fruits</option>
-                  <option value="Vegetables">Vegetables</option>
                 </select>
               </div>
 
