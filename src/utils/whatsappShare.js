@@ -42,7 +42,7 @@ export function buildWhatsAppOrderMessage() {
 
   msg += `\n━━━━━━━━━━━━━━━━━━━━━\n`;
   msg += `📄 *Official APMC Master Manifest PDF is generated and attached.*\n`;
-  msg += `🌐 *Live Portal:* https://mdfreshiv.netlify.app/\n`;
+  msg += `🌐 *Live Portal:* https://md-fresh-inventory.vercel.app/\n`;
 
   return msg;
 }

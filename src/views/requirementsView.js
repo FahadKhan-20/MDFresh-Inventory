@@ -850,8 +850,7 @@ function filterMatrixDOM(query) {
       const blob = generateMasterManifestPDF(data);
       const filenameDate = liveDate.replace(/ /g, '_');
       downloadBlob(blob, `MD_Fresh_Master_Manifest_${filenameDate}.pdf`);
-      store.finalizeOrderAndResetForNextDay({ source: 'REQUIREMENTS_PAGE_FINALIZE' });
-      showToast('Daily order finalized & PDF generated! Updated in Stock Receiving Portal & reset for tomorrow.', 'success');
+      showToast('Daily order Master Manifest PDF generated & downloaded successfully!', 'success');
     });
   }
 
@@ -882,8 +881,7 @@ function filterMatrixDOM(query) {
       const blob = generateMasterManifestPDF(data);
       const filenameDate = liveDate.replace(/ /g, '_');
       downloadBlob(blob, `MD_Fresh_Master_Manifest_${filenameDate}.pdf`);
-      store.finalizeOrderAndResetForNextDay({ source: 'REQUIREMENTS_PAGE_PDF' });
-      showToast('Master Manifest PDF downloaded! Updated in Stock Receiving Portal & reset for tomorrow.', 'success');
+      showToast('Master Manifest PDF downloaded successfully!', 'success');
     });
   }
 

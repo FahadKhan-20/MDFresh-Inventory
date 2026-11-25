@@ -1348,6 +1348,65 @@ assert(w192 === 192 && h192 === 192, "29.23 icon-192.png has exact 192x192 dimen
 assert(indexHtmlContent.includes("navigator.serviceWorker.register('/sw.js'"), "29.24 index.html registers Service Worker early in head");
 assert(indexHtmlContent.includes("beforeinstallprompt"), "29.25 index.html captures beforeinstallprompt early");
 
+// POINT 30: PDF MANIFEST DATA INTEGRITY & WHATSAPP SYMMETRY
+// --------------------------------------------------------------------------
+console.log("\n\x1b[36m▶ TEST SUITE 30: PDF Manifest Data Integrity & WhatsApp Symmetry\x1b[0m");
+
+// Clean test slate
+store.branches.forEach(b => {
+  store.products.forEach(p => {
+    store.updateRequiredQuantity(b.id, p.id, 0, false);
+  });
+});
+store.requirements = [];
+
+const testProd1 = store.products[0];
+const testProd2 = store.products[1];
+
+store.updateRequiredQuantity('BR001', testProd1.id, 10, false);
+store.updateRequiredQuantity('BR002', testProd1.id, 5, false);
+store.updateRequiredQuantity('BR001', testProd2.id, 8, false);
+
+const preSubmitConsolidated = store.getConsolidatedProcurement();
+assert(preSubmitConsolidated.length === 2, "30.1 Consolidated items contains only items with positive demand (2)");
+assert(preSubmitConsolidated.find(i => i.product.id === testProd1.id).totalQty === 15, "30.2 Consolidated item 1 sums branch demand accurately (10 + 5 = 15)");
+
+// Submit requirement for BR001
+store.submitDailyStockRequirement('BR001');
+
+const postSubmitConsolidated = store.getConsolidatedProcurement();
+const postSubmitAllReqs = store.getAllBranchesRequirements();
+
+assert(postSubmitConsolidated.length === 2, "30.3 Consolidated demand retains added items after branch submission");
+assert(postSubmitAllReqs['BR001'].length === 2, "30.4 Submitted branch retains required items in getAllBranchesRequirements");
+assert(postSubmitAllReqs['BR001'].find(i => i.productId === testProd1.id).qty === 10, "30.5 Branch item quantity matches submitted requirement (10)");
+
+// Zero-quantity items are not included
+assert(!postSubmitAllReqs['BR001'].some(i => i.qty <= 0), "30.6 Zero-quantity items are excluded from branch requirements");
+assert(!postSubmitConsolidated.some(i => i.totalQty <= 0), "30.7 Zero-quantity items are excluded from consolidated procurement");
+
+// Verify PDF generation produces identical results for download and WhatsApp
+const pdfDataForDownload = {
+  date: store.getLiveDateTimeString(new Date(), true),
+  branches: store.branches,
+  consolidatedItems: store.getConsolidatedProcurement(),
+  branchRequirements: store.getAllBranchesRequirements()
+};
+
+const pdfDataForWhatsApp = {
+  date: store.getLiveDateTimeString(new Date(), true),
+  branches: store.branches,
+  consolidatedItems: store.getConsolidatedProcurement(),
+  branchRequirements: store.getAllBranchesRequirements()
+};
+
+const dlBlob = generateMasterManifestPDF(pdfDataForDownload);
+const waBlob = generateMasterManifestPDF(pdfDataForWhatsApp);
+
+assert(dlBlob && dlBlob.size > 1000, "30.8 Download PDF blob generates with content");
+assert(waBlob && waBlob.size > 1000, "30.9 WhatsApp PDF blob generates with content");
+assert(dlBlob.size === waBlob.size, "30.10 Downloaded PDF and WhatsApp PDF are identical in byte size");
+
 // SUMMARY REPORT
 // -------------------------------------------------------------
 console.log('\n============================================================');

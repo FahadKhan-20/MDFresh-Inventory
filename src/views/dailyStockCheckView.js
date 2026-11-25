@@ -1463,8 +1463,7 @@ function filterStockCheckDOM(query) {
                 const blob = generateMasterManifestPDF(data);
                 const filenameDate = liveDate.replace(/ /g, '_');
                 downloadBlob(blob, `MD_Fresh_Master_Manifest_${filenameDate}.pdf`);
-                store.finalizeOrderAndResetForNextDay({ source: 'CONFIRM_MODAL_AUTO_FINALIZE' });
-                showToast('APMC Master Manifest PDF downloaded successfully! Updated in Stock Receiving Portal.', 'success');
+                showToast('APMC Master Manifest PDF downloaded successfully! Ready to share or dispatch.', 'success');
               });
             }
 
@@ -1767,9 +1766,8 @@ function filterStockCheckDOM(query) {
       const data = getPdfData();
       const blob = generateMasterManifestPDF(data);
       downloadBlob(blob, `MD_Fresh_Master_Manifest_${getFileDate()}.pdf`);
-      store.finalizeOrderAndResetForNextDay({ source: 'DAILY_STOCK_CHECK_MASTER_PDF' });
       if (pdfModal) pdfModal.classList.remove('open');
-      showToast('Master Manifest PDF downloaded! Incoming dispatch updated in Stock Receiving Portal & reset for tomorrow.', 'success');
+      showToast('Master Manifest PDF downloaded successfully!', 'success');
     });
   }
 
@@ -1785,9 +1783,8 @@ function filterStockCheckDOM(query) {
       const data = getPdfData();
       const blob = generateCombinedListOnlyPDF(data);
       downloadBlob(blob, `MD_Fresh_Combined_Total_${getFileDate()}.pdf`);
-      store.finalizeOrderAndResetForNextDay({ source: 'DAILY_STOCK_CHECK_COMBINED_PDF' });
       if (pdfModal) pdfModal.classList.remove('open');
-      showToast('Combined Wholesale Buyer PDF downloaded! Incoming dispatch updated in Stock Receiving Portal & reset for tomorrow.', 'success');
+      showToast('Combined Wholesale Buyer PDF downloaded successfully!', 'success');
     });
   }
 
@@ -1803,9 +1800,8 @@ function filterStockCheckDOM(query) {
       const data = getPdfData();
       const blob = generateBranchHeadlinedPDF(data);
       downloadBlob(blob, `MD_Fresh_Branch_Headlined_${getFileDate()}.pdf`);
-      store.finalizeOrderAndResetForNextDay({ source: 'DAILY_STOCK_CHECK_BRANCH_PDF' });
       if (pdfModal) pdfModal.classList.remove('open');
-      showToast('Branch Dispatch List PDF downloaded! Incoming dispatch updated in Stock Receiving Portal & reset for tomorrow.', 'success');
+      showToast('Branch Dispatch List PDF downloaded successfully!', 'success');
     });
   }
 }

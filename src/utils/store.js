@@ -643,12 +643,13 @@ class InventoryStore {
       // ignore
     }
 
-    // Reset this branch's active input drafts to 0 so inputs become clean 0
-    if (this.stockCheckDrafts[branchId]) {
-      this.products.forEach(p => {
-        this.stockCheckDrafts[branchId][p.id] = 0;
-      });
+    // Keep submitted branch draft in sync with submitted items
+    if (!this.stockCheckDrafts[branchId]) {
+      this.stockCheckDrafts[branchId] = {};
     }
+    items.forEach(it => {
+      this.stockCheckDrafts[branchId][it.productId] = it.requiredQty;
+    });
 
     this.notifications.unshift({
       id: `NOTIF-${Date.now()}`,
@@ -973,7 +974,14 @@ class InventoryStore {
       }
     });
 
-    return Object.values(consolidated);
+    // Sort: Vegetables first, then Fruits, then sequence / name
+    return Object.values(consolidated).sort((a, b) => {
+      const catA = a.product.category || '';
+      const catB = b.product.category || '';
+      if (catA === 'Vegetables' && catB !== 'Vegetables') return -1;
+      if (catA !== 'Vegetables' && catB === 'Vegetables') return 1;
+      return (a.product.sequenceNumber || 999) - (b.product.sequenceNumber || 999) || (a.product.name || '').localeCompare(b.product.name || '');
+    });
   }
 
   getConsolidatedRequirements() {
@@ -1564,39 +1572,26 @@ class InventoryStore {
     const result = {};
     this.branches.forEach(branch => {
       const branchItems = [];
-      const draft = this.getBranchStockCheck(branch.id);
 
-      // Check current draft entries
-      for (const [prodId, qty] of Object.entries(draft)) {
+      this.products.forEach(prod => {
+        const qty = this.getBranchRequiredQty(branch.id, prod.id);
         if (qty > 0) {
-          const prod = this.products.find(p => p.id === prodId);
-          if (prod) {
-            branchItems.push({
-              productId: prod.id,
-              productName: prod.name,
-              sku: prod.sku,
-              unit: prod.unit,
-              qty
-            });
-          }
+          branchItems.push({
+            productId: prod.id,
+            productName: prod.name,
+            sku: prod.sku,
+            unit: prod.unit,
+            qty,
+            category: prod.category
+          });
         }
-      }
+      });
 
-      // Check submitted active requirement manifests ONLY for products not already in draft
-      this.requirements.filter(r => r.branchId === branch.id && (r.status === 'PENDING APPROVAL' || r.status === 'APPROVED')).forEach(req => {
-        req.items.forEach(it => {
-          // If the product is explicitly in draft (even as 0, meaning deleted/cleared), draft takes precedence!
-          if (draft[it.productId] !== undefined) return;
-          if (!branchItems.some(bi => bi.productName === it.productName || bi.productId === it.productId)) {
-            branchItems.push({
-              productId: it.productId,
-              productName: it.productName,
-              sku: it.productId,
-              unit: it.unit,
-              qty: it.qty
-            });
-          }
-        });
+      // Sort branch items: Vegetables first, then Fruits
+      branchItems.sort((a, b) => {
+        if (a.category === 'Vegetables' && b.category !== 'Vegetables') return -1;
+        if (a.category !== 'Vegetables' && b.category === 'Vegetables') return 1;
+        return (a.productName || '').localeCompare(b.productName || '');
       });
 
       result[branch.id] = branchItems;
@@ -1607,16 +1602,19 @@ class InventoryStore {
   // Get requirement for a specific branch & product
   getBranchRequiredQty(branchId, productId) {
     const draft = this.getBranchStockCheck(branchId);
-    // Direct draft takes absolute precedence (0 means 0: deleted / cleared by user!)
-    if (draft[productId] !== undefined) {
+    if (draft && draft[productId] !== undefined && draft[productId] > 0) {
       return draft[productId];
     }
-    // Only check submitted active requirements if not present in draft
-    const reqs = this.requirements.filter(r => r.branchId === branchId && (r.status === 'PENDING APPROVAL' || r.status === 'APPROVED'));
+
+    // Check submitted active requirements
+    const reqs = (this.requirements || []).filter(r => r.branchId === branchId && (r.status === 'PENDING APPROVAL' || r.status === 'APPROVED'));
     for (const r of reqs) {
-      const it = r.items.find(i => i.productId === productId);
-      if (it && it.qty !== undefined && it.qty > 0) return it.qty;
+      const it = (r.items || []).find(i => i.productId === productId);
+      if (it && it.qty !== undefined && it.qty > 0) {
+        return it.qty;
+      }
     }
+
     return 0;
   }
 
